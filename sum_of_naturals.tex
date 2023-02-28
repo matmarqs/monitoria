@@ -1,0 +1,114 @@
+\documentclass[a4paper,fleqn,12pt]{article}
+\input{preamble}
+
+\title{\Huge{\textbf{Soma estranha?}}}
+\author{Mateus Marques}
+
+\begin{document}
+
+\maketitle
+
+\section{Questão 1}
+
+Seja \(X\) a soma infinita
+$$
+X = 1 - 1 + 1 - 1 + 1 - 1 + \ldots + 1 - 1 + \ldots
+$$
+
+Se olharmos bem o padrão acima, temos
+$$
+X = 1 - (1 - 1 + 1 - 1 + \ldots + 1 - 1 + \ldots).
+$$
+
+Só que o termo em parênteses é o próprio \(X\)! Portanto:
+$$
+X = 1 - X.
+$$
+Com isso, resolvemos para \(X\) e obtemos \(X = 1/2\).
+
+Você concorda com a dedução acima?
+\begin{itemize}
+\item Sim. (Correto)
+\item Não. (Correto)
+\end{itemize}
+
+\section{Questão 2}
+
+Agora é sua vez de encontrar o valor para uma soma estranha. Seja \(Y\) a soma infinita
+$$
+Y = 1 - 2 + 3 - 4 + 5 - 6 + 7 - 8 + \ldots
+$$
+
+Se somarmos \(Y + X\) \textit{de maneira esperta} \textbf{termo a termo na mesma vertical}, temos
+$$
+\begin{cases}
+\quad \quad \quad Y = 1 - 2 + 3 - 4 + 5 - 6 + 7 - 8 + \ldots \\
+\quad + \\
+\quad \quad \quad X = 0 + 1 - 1 + 1 - 1 + 1 - 1 + 1 - \ldots \\
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ \\
+\quad Y+X = 1 - 1 + 2 - 3 + 4 - 5 + 6 - 7 + \ldots
+\end{cases}
+$$
+Existe um padrão em
+$$
+Y+X = 1 - 1 + 2 - 3 + 4 - 5 + 6 - 7 + \ldots
+$$
+em que você pode substituir uma parte da soma da direita por \(Y\). Fazendo isso e, dado que nós já sabemos o valor de \(X = 1/2\), que valor você descobre para \(Y\)?
+\begin{itemize}
+\item \(Y = -\infty\)
+\item \(Y = +\infty\)
+\item \(Y = 1/2\)
+\item \(Y = 1/4\) (Correto)
+\item \(Y = -1\)
+\end{itemize}
+
+\section{Questão 3}
+
+Agora, vamos somar todos os números naturais!
+$$
+Z = 1 + 2 + 3 + 4 + 5 + 6 + 7 + 8 + \ldots.
+$$
+
+Se eu te dissesse que o valor de \(Z\) é diferente de infinito \(+\infty\), você acreditaria?
+\begin{itemize}
+\item Sim. (Correto)
+\item Não. (Correto)
+\end{itemize}
+
+\section{Questão 4}
+
+Se subtrairmos \(Z - Y\) \textbf{termo a termo na mesma vertical}, temos
+$$
+\begin{cases}
+\quad \quad \quad Z = 1 + 2 + 3 + 4 + 5 + \; 6 \; + 7 + \, 8 \; + \ldots \\
+\quad - \\
+\quad \quad \quad Y = 1 - 2 + 3 - 4 + 5 - \, 6 \; + 7 - \, 8 \; - \ldots \\
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ \\
+\quad Z-Y = 0 + 4 + 0 + 8 + 0 + 12 + 0 + 16 + \ldots
+\end{cases}
+$$
+
+Assim, obtemos
+$$
+Z - Y = 4 + 8 + 12 + 16 + \ldots
+$$
+Você consegue enxergar o padrão acima na soma da direita? É possível substituir essa soma infinita por alguma das variáveis (\(X\), \(Y\) ou \(Z\)) que já encontramos. Substitua corretamente o padrão. Que valor você encontra para \(Z\)?
+\begin{itemize}
+\item \(Z = +\infty\)
+\item \(Z = \pi\)
+\item \(Z = 1\)
+\item \(Z = -1/4\)
+\item \(Z = -1/12\) (Correto)
+\end{itemize}
+
+\section{Questão 5}
+
+A vida faz sentido?
+\begin{itemize}
+\item Sim.
+\item Não. (Correto)
+\end{itemize}
+
+
+
+\end{document}

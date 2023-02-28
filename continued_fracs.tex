@@ -1,0 +1,52 @@
+\documentclass[a4paper,fleqn,12pt]{article}
+\input{preamble}
+
+\title{\Huge{\textbf{Frações contínuas}}}
+\author{Mateus Marques}
+
+\begin{document}
+
+\maketitle
+
+Este é um exercício guiado, o que significa que te guiarei em cada ponto... O objetivo é lhe introduzir a um tipo de fração bem peculiar, chamada fração contínua.
+
+Para começar, vamos nos exercitar com frações comuns. Escreva todas suas respostas de maneira numérica, utilizando o ponto "." como marcador decimal. Por favor não utilize calculadora... Uma dica é: primeiro transforme a expressão em uma fração "bonitinha", como por exemplo $\displaystyle{1 + \frac{1}{3 + \frac{2}{7}} = 1 + \frac{1}{\frac{21 + 2}{7}} = 1 + \frac{7}{23} = \frac{30}{23}}$, e depois faça a divisão na mão.
+
+Quanto é $\displaystyle{1 + \frac{1}{2 + \frac{1}{2}}}$ ?
+
+Agora, quanto é $\displaystyle{1 + \frac{1}{2 + \frac{1}{2 + \frac{1}{2 + \frac{1}{2}}}}}$ aproximadamente? (escreva a resposta com pelo menos 4 casas decimais)?
+
+
+Vamos continuar só mais um pouco...
+
+Quanto é $\displaystyle{1 + \frac{1}{2 + \frac{1}{2 + \frac{1}{2 + \frac{1}{2 + \frac{1}{2 + \frac{1}{2 + \frac{1}{2}}}}}}}}$ ? (resposta com pelo menos 5 casas decimais)
+
+
+Por acaso você conhece esse número $1.4142...$ que as respostas anteriores são próximas? Lembra da $\sqrt{2}$?
+
+
+Por que será? Vou te explicar. Vamos supor que fizéssemos esse processo até o infinito. Ou seja, queremos calcular
+
+$$ \displaystyle{ x = 1 + \frac{1}{2 + \frac{1}{2 + \frac{1}{2 + \, \cdots}}} } $$
+
+Se passarmos o $1$ para o outro lado, e chamando $y = x-1$, temos o seguinte
+
+$$ \displaystyle{ y = x-1 = \frac{1}{2 + \frac{1}{2 + \frac{1}{2 + \, \cdots}}} } $$
+
+Mas perceba que o padrão $\displaystyle{\frac{1}{2 + \frac{1}{2 + \, \cdots}}}$ se repete (para sempre). Então, ao pensarmos um pouco, temos a seguinte recursão:
+
+$$ \displaystyle{ y = \frac{1}{2 + y} } $$
+
+Resolvendo para $y$ (utilizando Bháskara, lembre que $\displaystyle{ax^2 + bx + c = 0 \Rightarrow x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}}$)
+
+$$ \displaystyle{ y^2 + 2y - 1 = 0 \Rightarrow y = \sqrt{2} - 1 } $$
+
+Lembrando que $ \displaystyle{ y = x-1 \Rightarrow x = y + 1 } $, obtemos que $x = \sqrt{2}$.
+
+Agora eu te desafio a resolver uma fração contínua! Leve sua solução para monitoria e podemos discuti-la!
+
+Qual é o valor de
+
+$ \displaystyle{ x = 1 + \frac{1}{1 + \frac{1}{1 + \frac{1}{1 + \, \cdots}}} ? } $
+
+\end{document}

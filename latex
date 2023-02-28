@@ -1,0 +1,19 @@
+#!/bin/sh
+
+myremove () {
+    [ -f "$1" ] && rm -f "$1"
+}
+
+for arg in "$@"; do
+    echo "compiling $arg..."
+    [ "$arg" != "preamble.tex" ] && lualatex -shell-escape "$arg"
+    myremove "${arg%.tex}.aux"
+    myremove "${arg%.tex}.bbl"
+    myremove "${arg%.tex}.blg"
+    myremove "${arg%.tex}.dvi"
+    myremove "${arg%.tex}.fdb_latexmk"
+    myremove "${arg%.tex}.fls"
+    myremove "${arg%.tex}.log"
+    myremove "${arg%.tex}.out"
+    myremove "${arg%.tex}.toc"
+done

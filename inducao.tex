@@ -1,0 +1,59 @@
+\documentclass[a4paper,fleqn,12pt]{article}
+\input{preamble}
+
+\title{\Huge{\textbf{Indução}}}
+\author{Mateus Marques}
+
+\begin{document}
+
+\maketitle
+
+Neste exercício exploraremos o \textbf{Princípio da Indução}. O raciocínio é bem simples. Quando você vê um padrão que funciona para vários números, como por exemplo 1, 2, 3, 4 e 5, você começa a suspeitar que esse padrão deve valer para todos os números!
+
+O exemplo mais clássico é o da soma dos $n$ primeiros números naturais. Temos que
+$$
+1 = \frac{1 \cdot 2}{2}
+$$
+$$
+1 + 2 = 3 = \frac{2 \cdot 3}{2}
+$$
+$$
+1 + 2 + 3 = 6 = \frac{3 \cdot 4}{2}
+$$
+$$
+1 + 2 + 3 + 4 = 10 = \frac{4 \cdot 5}{2}
+$$
+
+Se extrapolarmos esse padrão, provavelmente é verdade que
+$$
+1 + 2 + 3 + 4 + \cdots + 99 + 100 = \frac{100 \cdot 101}{2} = 5050,
+$$
+certo?
+
+Só que inferir certo padrão para todos os números naturais, baseando-se somente na observação desse padrão para apenas alguns pode levar a conclusões falsas.
+
+Por exemplo, vamos explorar o padrão $2^{2^n} + 1$ para os primeiros números naturais. Temos que
+$$
+2^{2^1} + 1 = 3
+$$
+
+$$
+2^{2^2} + 1 = 5
+$$
+
+$$
+2^{2^3} + 1 = 17
+$$
+
+$$
+2^{2^4} + 1 = 257
+$$
+
+$$
+2^{2^5} + 1 = 65537
+$$
+
+(Perguntar se eles são primos)
+
+
+\end{document}
