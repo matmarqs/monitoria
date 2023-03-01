@@ -8,52 +8,173 @@
 
 \maketitle
 
-Neste exercício exploraremos o \textbf{Princípio da Indução}. O raciocínio é bem simples. Quando você vê um padrão que funciona para vários números, como por exemplo 1, 2, 3, 4 e 5, você começa a suspeitar que esse padrão deve valer para todos os números!
+\section{Questão 1}
 
-O exemplo mais clássico é o da soma dos $n$ primeiros números naturais. Temos que
+
+Neste exercício exploraremos o \textit{Princípio da Indução Finita}.
+
+O raciocínio é assim: quando você vê um padrão que funciona para alguns números, por exemplo 1, 2, 3 e 4, você começa a suspeitar que esse padrão deve valer para todos os números, certo?
+
+Por exemplo, defina os números $F_n = 2^{2^n} + 1$, para $n \geq 0$ inteiro.
+
+Temos que $F_0 = 2^{2^0} + 1 = 2^1 + 1 = 3$ é primo.
+
+\n
+
+Quanto é $F_1$?
+
+Ele é primo?
+\begin{itemize}
+\item Sim.
+\item Não.
+\end{itemize}
+
+\n
+
+Quanto é $F_2$?
+
+Ele é primo?
+\begin{itemize}
+\item Sim.
+\item Não.
+\end{itemize}
+
+\n
+
+Quanto é $F_3$?
+
+Ele é primo?
+\begin{itemize}
+\item Sim.
+\item Não.
+\end{itemize}
+
+\n
+
+Quanto é $F_4$?
+
+Ele é primo?
+\begin{itemize}
+\item Sim.
+\item Não.
+\end{itemize}
+
+\n
+
+Então deve ser verdade que $F_n$ é primo para todo $n$ natural, correto?
+\begin{itemize}
+\item Sim. Esta indução é verdadeira.
+\item Não. Esta indução é falsa.
+\end{itemize}
+
+
+\section{Questão 2}
+
+Fermat acreditava que sim, que todos os números $F_n$ eram primos (hoje eles são chamados de \textit{números de Fermat}, \url{https://en.wikipedia.org/wiki/Fermat_number}), porém o próximo $F_5 = 4294967297 = 641 \times 6700417$ \textbf{não é primo}. Na realidade, até hoje (1\textsuperscript{\b{o}} de março de 2023) não se sabe se existe outro número de Fermat que seja primo além de $F_0, F_1, F_2, F_3$ e $F_4$. Note que a sequência $F_n = 2^{2^n} + 1$ cresce MUITO RÁPIDO, por exemplo:
+
+$$ F_6 = 18446744073709551617, $$
+
+$$ F_7 = 340282366920938463463374607431768211457. $$
+
+\n\n
+
+
+O \textit{Princípio da Indução Finita} serve para não cometermos o mesmo erro que o pobre Fermat. A coisa funciona assim:
+
+\n
+
+Seja $P(n)$ uma propriedade sobre um número inteiro $n$, que pode ser verdadeira ou falsa. Por exemplo:
+\begin{itemize}
+\item $P(n) =$ ``O número $F_n$ é primo''. Nesse caso $P(n)$ é verdadeira para $n = 0, 1, 2, 3$ e $4$, mas é falsa para $n = 5$.
+\item $P(n) =$ ``A realidade física tem $n$ dimensões''. Nesse caso talvez $P(3)$ ou $P(4)$ (pelo espaço-tempo da teoria da relatividade) sejam verdadeiras. Mas talvez $P(26)$ seja verdadeira por causa da teoria das cordas.
+\item $P(n) =$ ``A soma $1 + 2 + 3 + \cdots + n$ dos $n$ primeiros números naturais vale $\frac{n(n+1)}{2}$''. Nesse caso $P(n)$ é verdadeira para todo $n$, e você vai provar isso no final com o \textit{Princípio da Indução Finita}.
+\end{itemize}
+
+\n
+
+Se os dois seguintes itens forem verdadeiros sobre $P(n)$,
+\begin{enumerate}
+\item (``Base da Indução'') $P(1)$ é verdade.
+\item (``Passo de Indução'') Para todo $k$ natural vale que: se $P(k)$ for verdade, então $P(k+1)$ também é verdade.
+\end{enumerate}
+
+Então $P(n)$ é verdadeira para todos os números naturais.
+
+\n\n
+
+Por quê? Bem, o raciocínio é recursivo:
+\begin{itemize}
+\item $P(1)$ é verdade (pela ``Base da Indução''). Apliquemos então o ``Passo da Indução'': Como $P(1)$ é verdade, então $P(2)$ também é verdade.
+\item $P(2)$ é verdade pelo item anterior. Então, pelo ``Passo da Indução'', como $P(2)$ é verdade, então $P(3)$ também é verdade.
+\item $P(3)$ é verdade pelo item anterior. Então, pelo ``Passo da Indução'', como $P(3)$ é verdade, então $P(4)$ também é verdade.
+\item ...
+\end{itemize}
+
+E assim por diante, podemos concluir que a ``Base da Indução'' juntamente com o ``Passo da Indução'' estabelecem que $P(n)$ é verdadeira para todo $n$ natural.
+
+\n
+
+Então, se desejamos \textit{provar} que $P(n)$ é verdadeira para todo $n$, basta que provemos a ``Base da Indução'' e o ``Passo da Indução''.
+
+\n\n
+
+Por exemplo, vamos provar que $1^2 + 2^2 + 3^2 + \cdots + n^2 = n(n+1)(2n+1)/6$ por \textit{indução}.
 $$
-1 = \frac{1 \cdot 2}{2}
-$$
-$$
-1 + 2 = 3 = \frac{2 \cdot 3}{2}
-$$
-$$
-1 + 2 + 3 = 6 = \frac{3 \cdot 4}{2}
-$$
-$$
-1 + 2 + 3 + 4 = 10 = \frac{4 \cdot 5}{2}
+P(n) = \text{``a soma }Q_n = 1^2 + 2^2 + 3^2 + \cdots + n^2 \text{ é igual a }\frac{n(n+1)(2n+1)}{6}\text{''}
 $$
 
-Se extrapolarmos esse padrão, provavelmente é verdade que
+\begin{itemize}
+\item Base da Indução: é verdade que $1^2 = \frac{1 \cdot (1 + 1) (2 \cdot 1 + 1)}{6}$, logo $P(1)$ é verdadeira.
+\item Passo da Indução: Quponha que $P(k)$ seja verdadeira. Isto é $Q_k = 1^2 + 2^2 + 3^2 + \cdots + k^2 = k(k+1)(2k+1)/6$. Calculemos então a soma $Q_{k+1}$
 $$
-1 + 2 + 3 + 4 + \cdots + 99 + 100 = \frac{100 \cdot 101}{2} = 5050,
+Q_{k+1} = \Big( 1^2 + 2^2 + 3^2 + \cdots + k^2 \Big) + (k+1)^2 = Q_k + (k+1)^2.
 $$
-certo?
+Nós podemos $Q_k$, pois admitimos $P(k)$ verdadeira como hipótese. Portanto
+$$
+Q_{k+1} = \frac{k(k+1)(2k+1)}{6} + (k+1)^2 = \frac{(k+1)}{6} \Big( k(2k+1) + 6(k+1) \Big)
+$$
+$$
+= \frac{(k+1)}{6} \Big( 2k^2 + 7k + 6 \Big) = \frac{(k+1)(k+2)(2k+3)}{6} \implies
+$$
+$$
+\boxed{ Q_{k+1} = \frac{(k+1)\big[(k+1)+2\big]\big[2(k+1)+1\big]}{6}. }
+$$
+Mas a igualdade destacada acima é justamente a propriedade $P(k+1)$. Portanto, completamos a prova do passo de indução. Mostramos que $P(k)$ verdadeira $\implies P(k+1)$ verdadeira.
 
-Só que inferir certo padrão para todos os números naturais, baseando-se somente na observação desse padrão para apenas alguns pode levar a conclusões falsas.
+Isso \textit{prova} que $1^2 + 2^2 + 3^2 + \cdots + n^2 = n(n+1)(2n+1)/6$ pelo \textit{Princípio da Indução}.
+\end{itemize}
 
-Por exemplo, vamos explorar o padrão $2^{2^n} + 1$ para os primeiros números naturais. Temos que
-$$
-2^{2^1} + 1 = 3
-$$
+\n\n
 
-$$
-2^{2^2} + 1 = 5
-$$
+Agora é sua vez. Prove \textit{por indução} que $S_n = 1 + 2 + 3 + \cdots + n = \frac{n(n+1)}{2}$, repetindo o raciocínio acima.
 
-$$
-2^{2^3} + 1 = 17
-$$
+\n
 
-$$
-2^{2^4} + 1 = 257
-$$
+Você consegue utilizar o desenho abaixo para explicar o porquê de $1 + 2 + 3 + \cdots + n = \frac{n(n+1)}{2}$?
 
-$$
-2^{2^5} + 1 = 65537
-$$
+\section{Questão 3}
 
-(Perguntar se eles são primos)
+(Apostol) Descreva a falácia na seguinte ``prova'' por indução:
+
+\n\n
+
+\textit{Afirmação.} $P(n) =$ ``Para qualquer conjunto de $n$ garotas loiras, se pelo menos uma das garotas tem olhos azuis, então todas as $n$ garotas têm olhos azuis.''
+
+\n
+
+\textit{Prova.}
+
+Base da Indução: Vemos que $P(1)$ é verdade, pois para o conjunto de apenas uma garota, é óbvio que uma delas tendo olhos azuis implica que todas (somente esta uma garota) têm olhos azuis.
+
+Passo da Indução: O passo de $P(k) \implies P(k+1)$ pode ser ilustrado indo de $k = 3$ para $k = 4$. Assuma que $P(3)$ seja verdadeira e sejam $G_1, G_2, G_3$ e $G_4$ as quatro garotas loiras tais que pelo menos uma delas, por exemplo $G_1$, tenha olhos azuis. Considerando $G_1$, $G_2$ e $G_3$ em um conjunto e usando $P(3)$, temos que $G_2$ e $G_3$ também têm olhos azuis. Repetindo agora esse processo para $G_1$, $G_2$ e $G_4$, por $P(3)$ novamente, vemos que $G_4$ também tem olhos azuis. Assim, todas as quatro garotas têm olhos azuis. Isso demonstra $P(3) \implies P(4)$. Um argumento similar nos permite fazer o passo da indução de $k$ para $k+1$ em geral.
+
+\n
+
+Se a prova acima estiver correta, isso significa que todas as garotas loiras têm olhos azuis. Então, o que está errado na prova?
+
+
+
+
 
 
 \end{document}
