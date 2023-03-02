@@ -1,3 +1,20 @@
 #!/bin/sh
 
-rm -f *.pdf
+myremove () {
+    [ -f "$1" ] && rm -f "$1"
+}
+
+FILES=$(find . -name "*.tex")
+
+for arg in $FILES; do
+    myremove "${arg%.tex}.pdf"
+    myremove "${arg%.tex}.aux"
+    myremove "${arg%.tex}.bbl"
+    myremove "${arg%.tex}.blg"
+    myremove "${arg%.tex}.dvi"
+    myremove "${arg%.tex}.fdb_latexmk"
+    myremove "${arg%.tex}.fls"
+    myremove "${arg%.tex}.log"
+    myremove "${arg%.tex}.out"
+    myremove "${arg%.tex}.toc"
+done
