@@ -1,0 +1,156 @@
+\documentclass[a4paper,fleqn,12pt]{article}
+\input{preamble}
+
+\title{\Huge{\textbf{Singleton Solid State}}}
+\author{Mateus Marques}
+
+\begin{document}
+
+\maketitle
+
+\section{Metais}
+
+Algumas propriedades de metais:
+\begin{itemize}
+\item É favorável por elementos repetidos (apenas um mesmo tipo de átomo).
+\item Têm preferência pela parte da esquerda da tabela periódica. Assim, um átomo de metal é mais ou menos um núcleo tipo gás nobre com um número pequeno de elétrons fracamente vinculados ao seu redor.
+\item Metais se formam em estruturas cristalinas com um número relativamente grande de nearest neighbors $n_{\text{nn}} \sim 12$, enquanto que sistemas de ligações iônicas e covalentes tem $n_{\text{nn}} \sim 4, 6$. O número grande de nearest neighbors e o pequeno número de elétrons de valência $\sim 1$ em metais implica que os elétrons externos ocupam um espaço um tanto uniforme entre os núcleos iônicos. Isso também sugere que as ligações metálicas são um tanto não-direcionais, o que é sustentado pela maleabilidade dos metais.
+\item Existe muito espaço vazio em metais. Isso faz com que os metais sejam estáveis. Os elétrons preferem se espalhar dentro desse volume vazio do que se confinar em um único átomo.
+\end{itemize}
+Assim, a imagem de um metal seria um array de pequenos núcleos iônicos bem espaçados com os elétrons de valência espalhados pelo volume entre eles.
+
+\subsection{Drude dude}
+
+Primeira tentativa de usar a ideia de um ``gás de elétrons'' livres se movendo entre núcleos positivos para explicar a propriedade dos metais. As suposições do \textit{modelo de Drude} são:
+\begin{itemize}
+\item Elétron não interage com elétron. Uma colisão indica que um elétron é espalhado (apenas) por um núcleo iônico.
+\item Entre colisões, elétrons não interagem entre si (\textit{independent electron approximation}) nem com íons (\textit{free electron approximation}).
+\item Colisões são instantâneas e resultam em mudanças no momento do elétron.
+\item Um elétron sofre uma colisão com probabilidade por unidade de tempo $1/\tau$ (\textit{relaxation-time approximation}, $1/\tau$ é o \textit{scattering rate}).
+\item Os elétrons atingem equilíbrio térmico com o ambiente apenas por meio de colisões.
+\end{itemize}
+
+Temos que $\J = -ne \v = - \frac{ne}{m_e} \p$, onde $\p$ é o momento médio do elétron. A probabilidade de colisão durante $\delta t$ é $\delta t / \tau$. Assim, a contribuição para um elétron que não colide é
+$$
+\p(t+\delta t) = \qty(1 - \frac{\delta t}{\tau})
+\qty(\p(t) + \vb{f}(t) \delta t + O(\delta t^2)).
+$$
+
+Agora, a conribuição para os elétrons \textit{que colidem} é da ordem de $\delta t^2$. Isso pela probabilidade $\delta t / \tau$ de colidir e porque o novo momento será proporcional a $\vb{f}(t) \delta t$ (cada colisão randomiza o momento do elétron, levando a média para zero). Obtemos assim
+$$
+\dv{\p}{t} = - \frac{\p(t)}{\tau} + \vb{f}(t).
+$$
+
+Pela lei de Ohm $\J = \sigma \E$, $\vb{f} = -e \E$ e também colocando $\dv{\p}{t} = 0$ para obter soluções estáticas ($\p$ é o momento médio, lembre-se disso), obtemos que
+\begin{equation} \label{eq:drude-sigma}
+\sigma = \frac{n e^2 \tau}{m_e},
+\end{equation}
+que é a condutividade no \textit{modelo de Drude}.
+
+No contexto desse modelo, os elétrons são partículas de um gás clássico, de maneira que possuem energia cinética média $\frac{1}{2} m_e \ev{v^2} = \frac{3}{2} k_B T$.
+
+\subsubsection{Falhas no modelo de Drude}
+
+Por tratarem os elétrons como partículas em um gás clássico, a capacidade térmica também é de um gás clássico:
+$$
+C_{\text{el}} = \frac{3}{2} n k_B,
+$$
+que é independente da temperatura. Experimentalmente, a baixas temperaturas a capacidade térmicad dos metais segue uma relação da forma $C = \gamma T + \alpha T^3$, onde o termo $T^3$ é a componente dos fônons (modelo de Debye).
+
+Existem outras falhas no modelo de Drude, como o \textit{número de Lorenz}
+$$
+L = \frac{\kappa}{\sigma T} = \frac{3 k_B^2}{2e^2} \approx 1.1 \times 10^{-8} W \Omega \unit{K}^{-2},
+$$
+que à temperatura ambiente é de acordo com o valor experimental $\sim 2.5 \times 10^{-8} W \Omega \unit{K}^{-2}$, mas para metais abaixo da temperatura ambiente o modelo de Drude não é compatível.
+
+Outra falha é o \textit{efeito Hall}, onde o modelo de Drude prevê o \textit{coeficiente de Hall}
+$$
+R_{\text{H}} = \frac{E_y}{J_x B} = - \frac{1}{n e},
+$$
+só que, em vários casos temos que $R_{\text{H}}$ é positivo para certos materiais.
+
+\subsection{Sommerfeld}
+
+O modelo de Sommerfeld consiste em tratar os elétrons no metal como não-interagentes (sob um potencial de fundo constante $V_0$) e obedecendo à estatística de Fermi-Dirac $f(E, T) = \frac{1}{e^{(E-\mu)/k_B T} + 1}$.
+
+O número de estados contidos em um volume $V_{kj}$ (dimensão $j$) no espaço dos momentos $k$ é
+$$
+N = \qty(\frac{1}{2\pi})^j V_{kj} V_{rj}.
+$$
+
+Pelo potencial de fundo $V_0$ ser considerado constante, podemos colocar $E = 0$ no nível $V_0$, de maneira que
+$$
+E(\k) = \frac{\hbar^2 k^2}{2 m_e}.
+$$
+
+Assim, temos que $N$ depende da vetor de onda de Fermi
+$$
+N = 2 \, \qty(\frac{1}{2\pi})^3 \, \frac{4}{3} \pi k_F^3 V_{r3},
+$$
+onde o fator $2$ é incluído pela degenerescência no spin $1/2$. Agora, definindo $\boxed{ n = N / V_{r3} }$, temos
+$$
+k_F = (3 \pi^2 n)^{1/3},
+$$
+e a energia correspondente é a energia de Fermi
+$$
+E_F = \frac{\hbar^2 k_F^2}{2 m_e} = \frac{\hbar^2}{2m_e} (3\pi^2 n)^{1/3},
+$$
+que nada mais é do que o potencial químico à temperatura $T = 0$, ou seja, $E_F = \mu(T = 0)$.
+
+Definimos $g(E) = \dv{n}{E} = \dv{n}{k} \dv{k}{E}$, de maneira que $g(E) \dd{E}$ é o número de elétrons por unidade de volume no $r-$space com energias entre $E$ e $E + \dd{E}$. Para $E \approx E_F$, temos que
+$$
+\ln(E_F) = \frac{2}{3} \ln(n) + \cte \implies \dv{n}{E_F} = g(E_F) = \frac{3}{2} \frac{n}{E_F}.
+$$
+
+Fazendo uns cálculos, segue que
+$$
+U(T = 0) = \int_0^{E_F} E g(E) \dd{E} = \frac{E_F^{5/2}}{5\pi^2} \qty(\frac{2m_e}{\hbar^2})^{3/2}.
+$$
+
+Para temperatura finita $T$, temos que usar a \textit{expansão de Sommerfeld}:
+$$
+U(T) = \int_0^\infty E g(E) f(E, T) \dd{E} = \frac{1}{2\pi^2}
+\qty(\frac{2m_e}{\hbar^2})^{3/2}
+\int_0^\infty \frac{E^{3/2}}{e^{(E-\mu)/k_B T}+1} \dd{E}.
+$$
+
+Depois de umas contas obtemos
+$$
+U(T) = U(0) + \frac{n \pi^2 k_B^2 T^2}{4 E_F},
+$$
+de maneira que
+$$
+C_{\text{el}} = \pdv{U}{T} = \frac{1}{2} \pi^2 n \frac{k_B^2 T}{E_F} \propto T.
+$$
+
+\subsubsection{Sucessos e falhas do modelo de Sommerfeld}
+
+Sommerfeld explica com sucesso
+\begin{itemize}
+\item a dependência da temperatura e a magnitude de $C_{\text{el}}$;
+\item a dependência aproximada da temperatura e magnitude das condutividades térmicas e elétricas dos metais, e a razão de Wiedemann-Franz;
+\item o fato da susceptibilidade magnética ser independente da temperatura.
+\item a dependência da temperatura e a magnitude de $C_{\text{el}}$.
+\end{itemize}
+
+Sommerfeld não consegue explicar
+\begin{itemize}
+\item o coeficiente de Hall de vários metais (ele também prevê $R_{\text{H}} = - 1/ne$);
+\item a magnetoresistência dos metais;
+\item a potência térmica;
+\item o formato das superfícies de Fermi de vários metais;
+\item o fato de que alguns materiais são isolantes ou supercondutores.
+\end{itemize}
+
+\subsection{Exercícios}
+
+Fiz os exercícios 1.1 e 1.2, excluindo os numéricos. Depois fazer o resto.
+
+\pagebreak
+
+\section{Teorema de Bloch}
+
+<++>
+
+
+\end{document}
