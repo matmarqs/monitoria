@@ -1,0 +1,102 @@
+\documentclass[a4paper,12pt]{article}
+\input{preamble}
+
+\title{\Huge{\textbf{Lista 1}}}
+\author{Mateus Marques}
+
+\begin{document}
+
+\maketitle
+
+
+\section{Teoria de perturbação degenerada}
+
+A hamiltoniana perturbada é dada por $H = H_0 + \lambda V$. Seja $\ket{n \alpha_n}$ os autovetores de $H$ com autovalores $E_n$ (onde $\alpha_n$ indexa a degenerescência da energia $E_n$) que formam uma base no espaço de Hilbert $\s{H}$. Seja $\s{H}_n$ o subespaço degenerado de energia $E_n$. Podemos dividir o espaço total numa soma direta $\s{H} = \s{H}_n \oplus \s{H}_n^\perp$, onde $\s{H}_n^\perp$ é o espaço ortogonal a $\s{H}_n$. Em termos de projeções, definimos
+$$
+P = \sum_{\alpha_n} \ketbra{n \alpha_n} \e
+Q = \sum_{m \neq n} \sum_{\alpha_m} \ketbra{m \alpha_m}, \text{ com }
+P + Q = 1, PQ = QP = 0,
+$$
+onde $P$ projeta em $\s{H}_n$ e $Q$ projeta em $\s{H}_n^\perp$.
+
+Queremos encontrar um novo autovalor $E(\lambda)$ da hamiltoniana perturbada $H_0 + \lambda V$ que nasce da degenerescência em $E_n$, ou seja $\displaystyle{\lim_{\lambda \to 0} E(\lambda) = E_n}$. Temos que
+
+\begin{equation} \label{eq:pertub}
+(E - H_0) \ket{\psi} = \lambda V \ket{\psi}.
+\end{equation}
+
+Considere o operador $R$, que é a inversa de $(E - H_0)$ dentro do subespaço $\s{H}_n^\perp$
+$$
+R = \sum_{m \neq n} \sum_{\alpha_m} \frac{\ketbra{m \alpha_m}}{E - E_m}.
+$$
+
+Note que $R$ satisfaz $R (E - H_0) = (E - H_0) R = Q$. Aplicando $R$ dos dois lados de \ref{eq:pertub}:
+$$
+Q \ket{\psi} = \lambda R V \ket{\psi}.
+$$
+
+Portanto, temos
+\begin{equation} \label{eq:root}
+\ket{\psi} = P \ket{\psi} + Q \ket{\psi} =
+P \ket{\psi} + \lambda R V \ket{\psi}.
+\end{equation}
+
+Através de \ref{eq:root}, podemos obter uma equação perturbativa para $\ket{\psi}$ em função de $P \ket{\psi}$:
+\begin{equation} \label{eq:recorr}
+\ket{\psi} = P \ket{\psi} + \lambda R V P \ket{\psi} + \lambda^2 R V R V P \ket{\psi} + O(\lambda^3).
+\end{equation}
+
+Agora, temos que $P \ket{\psi}$ se escreve da forma
+$$
+P \ket{\psi} = \sum_{\alpha_n} \ket{n \alpha_n} \braket{n\alpha_n}{\psi} =
+\sum_{\alpha_n} c_{\alpha_n} \ket{n \alpha_n}, \text{ com } c_{\alpha_n} = \braket{n\alpha_n}{\psi}.
+$$
+
+Aplicando $\bra{n \alpha_n}$ na equação \ref{eq:pertub} e substituindo \ref{eq:recorr} até primeira ordem $\lambda$, temos
+$$
+(E - E_n) c_{\alpha_n} = \lambda \mel{n \alpha_n}{V}{\psi} =
+\lambda \bra{n \alpha_n} V \Bigg\{ 1 + \lambda R V + O(\lambda^2) \Bigg\} P \ket{\psi} =
+$$
+$$
+=
+\lambda \bra{n \alpha_n} V \Bigg\{ 1 + \lambda R V + O(\lambda^2) \Bigg\} \sum_{\beta_n} c_{\beta_n} \ket{n \beta_n} \implies
+$$
+\begin{equation} \label{eq:sol1}
+(E - E_n) c_{\alpha_n} =
+\sum_{\beta_n} \Bigg\{
+\lambda \mel{n \alpha_n}{V}{n \beta_n} + \lambda^2 \sum_{\substack{m \neq n \\ \gamma_m}}
+\frac{\mel{n \alpha_n}{V}{m \gamma_m} \mel{m \gamma_m}{V}{n \beta_n}}{E_n - E_m} + O(\lambda^3)
+\Bigg\} c_{\beta_n},
+\end{equation}
+onde expandimos
+$$
+R = \sum_{m \neq n} \sum_{\alpha_m} \frac{\ketbra{m \alpha_m}}{\textcolor{red}{E} - E_m}
+= \sum_{m \neq n} \sum_{\alpha_m} \frac{\ketbra{m \alpha_m}}{\textcolor{red}{E_n} - E_m} + O(\lambda).
+$$
+
+Agora basta que analisemos a equação \ref{eq:sol1}. Perceba que temos liberdade para escolher $\ket{n \alpha_n}$ como bem entendermos (dentro do subespaço degenerado $\s{H}_n$). Em particular, escolhamos $\ket{n \alpha_n}$ de maneira que $\displaystyle{\lim_{\lambda \to 0} P \ket{\psi} (\lambda) = \ket{n \alpha_n}}$. Dessa maneira, temos que os coeficientes $c_{\beta_n}(\lambda)$ obedecem
+\begin{equation} \label{eq:coeff}
+c_{\beta_n}(\lambda) = \delta_{\alpha_n \beta_n} + O(\lambda).
+\end{equation}
+
+Substituindo \ref{eq:coeff} na equação \ref{eq:sol1}, obtemos a correção de segunda ordem de $E$ (proporcional a $\lambda^2$) como
+$$
+E^{(2)} = \sum_{\substack{m \neq n \\ \gamma_m}} \frac{\abs{\mel{n \alpha_n}{V}{m \gamma_m}}^2}{E_n - E_m}.
+\quad \qedsymbol
+$$
+
+Observação: É claro que em teoria de perturbação degenerada existem \textit{splittings} que acontecem em primeira e segunda ordem. De certa maneira, estamos ignorando esses splittings e focando em obter a energia média em segunda ordem.
+
+
+
+\pagebreak
+
+
+
+\section{Operadores de criação e aniquilação}
+
+
+
+
+
+\end{document}

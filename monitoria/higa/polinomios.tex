@@ -83,39 +83,93 @@ Isso nos deixa com o quociente $\boxed{q(x) = 6x + 4}$ e o resto foi o que sobro
 
 \pagebreak
 
+\section{Funções horárias}
+
+Se a função horária de um objeto é dada por uma função $s(t)$, temos que a velocidade média do objeto entre os instantes $t+\Delta t$ e $t$ é dada por:
+$$
+v_{\text{média}} (t+\Delta t, t) = \frac{s(t+\Delta t) - s(t)}{\Delta t}.
+$$
+
+Se calcularmos a velocidade média num intervalo $\Delta t$ muito curto, teremos uma boa aproximação para a velocidade \textbf{instantânea} $v(t)$ do corpo em movimento. De fato,
+$$
+v(t) = \lim_{\Delta t \to 0} \frac{s(t+\Delta t) - s(t)}{\Delta t} = \lim_{\Delta t \to 0} v_{\text{média}} (t+\Delta t, t).
+$$
+
+Assim, temos que $v(t)$ é a derivada da função $s(t)$ e escrevemos
+$$
+v(t) = s'(t) \quad \text{ou} \quad v(t) = \frac{ds}{dt}(t).
+$$
+
+Suponha que o movimento de um corpo seja descrito por $s(t) = t^3 - 5 t^2 + 4t$, sendo a unidade de tempo em segundos e a unidade de comprimento em metros.
+
+\begin{itemize}
+\item Em quais instantes o corpo parou?
+\item Em qual instante $t_m$ a velocidade média com relação ao início do movimento em $t = 0$ é igual à velocidade instantânea?
+\item Para quais intervalos de tempo a distância do corpo com relação ao ponto $s = 0$ é maior que $20 \unit{m}$?
+\end{itemize}
+
+
+\pagebreak
+
+\section{Soma de inteiros}
+
+Talvez você tenha aprendido progressões aritméticas no colégio, de maneira que seja familiar o fato
+$$
+0 + 1 + 2 + 3 + \ldots + n = \frac{n(n+1)}{2} = \frac{1}{2} n^2 + \frac{1}{2} n.
+$$
+
+Uma maneira de mostrar isso é pensar que, como estamos somando $n$ inteiros, sendo que cada um tem uma ordem polinomial de no máximo $n$, então o resultado deve ser um polinômio de ordem $n^2$. Denotando
+$$
+f(n) = 0 + 1 + 2 + 3 + \ldots + n,
+$$
+temos se $f(n)$ é um polinômio de ordem 2, então $f(x) = a x^2 + b x + c$. Mas pela definição de $f(n)$ temos que
+$$
+f(0) = 0 = c,
+$$
+$$
+f(1) = 0 + 1 = a + b + c,
+$$
+$$
+f(2) = 0 + 1 + 2 = 4 a + 2 b + c.
+$$
+
+Resolva as três equações acima para $a, b$ e $c$! Você deve obter $c = 0$, $a = \frac{1}{2}$ e $b = \frac{1}{2}$, que é o mesmo resultado que se obtém com progressões aritméticas.
+
+\n
+
+Utilize o mesmo raciocínio para os casos mais difíceis:
+
+\begin{itemize}
+\item Descubra uma fórmula para $0^2 + 1^2 + 2^2 + 3^2 + \ldots + n^2$. Essa fórmula deve ser uma polinômio de qual grau? Com essa fórmula calcule $1^2 + 2^2 + 3^2 + \ldots + 100^2$ com a sua mão.
+\item Descubra $0^3 + 1^3 + 2^3 + 3^3 + \ldots + n^3$. Deve ser um polinômio de qual grau? Calcule $1^3 + 2^3 + \ldots + 1000^3$ com a sua mão.
+\end{itemize}
+
+
+\pagebreak
+
 \section{Mapa Logístico}
 
-\subsection{Questão}
-
-Queremos modelar o crescimento de uma população $x_n$ ao longo dos meses $n$.
-
-\subsection{Questão}
-
-Qual o máximo de $x_{n+1}$?
-
-\subsection{Questão}
-
-Resolver o problema de ponto fixo $f(x) = x$, com $f(x) = rx(1-x)$.
-
-\subsection{Questão}
-
-Resolver o problema de ponto fixo $f(f(x)) = x$.
-
-
-\subsection{Questão}
-
-Caso $r = 2$. Prove por indução que
+Uma maneira de modelar o crescimento de uma população $x_n$ ao longo dos meses $n$ é pelo crescimento exponencial. A ideia é que o próximo mês terá uma população $x_{n+1}$ proporcional à população $x_n$ do mês anterior. Matematicamente,
 $$
-x_n = \frac{1}{2} \Big[ 1 - (1-2x_0)^{2^n} \Big]
+x_{n+1} = r x_n,
 $$
+onde $r$ é a taxa de natalidade da população. Mas veja que esse modelo de crescimento populacional faz com que a população cresça indefinidamente, pois só existe natalidade e nunca mortalidade. Assim, um modelo um pouco melhor consiste em adicionar um fator $(1 - x_n)$ na relação acima, que simula a mortalidade da população quando $x_n$ fica próximo de $1$ (aqui o $1$ significa a população máxima que pode ser atingida).
 
-Caso $r = 4$. Prove por indução que
+Nosso modelo de evolução populacional é então dado por
 $$
-x_n = \sin[2](2^n \pi \theta),
+x_{n+1} = r x_n (1 - x_n),
 $$
-onde $\theta = \frac{1}{\pi} \sin[-1](\sqrt{x_0})$.
+que é conhecido como \textbf{mapa logístico}. Denote $f(x) = r x ( 1 - x )$ e suponha que $0 < r \leq 4$ para toda esta questão.
 
+\n
 
+\begin{enumerate}
+\item Qual o máximo de $x_{n+1}$?
+\item Suponha que a população convirja para uma população limite $x$. Para achar $x$, deve-se resolver a equação de ponto fixo $f(x) = x$. Pense porque basta resolver essa equação. Qual o valor de $x$ como função de $r$?
+\item Agora suponha que a população no limite $n \to \infty$ oscile entre dois valores $x_1$ e $x_2$. Para achar $x_1$ e $x_2$ basta resolver a equação $f(f(x)) = x$. Por quê? Qual os valores de $x_1$ e $x_2$ em função de $r$?
+\end{enumerate}
+
+Dica: para resolver $f(f(x)) = x$, note que as raízes de $f(x) = x$ também são raízes de $f(f(x)) = x$. Assim, ao achar as raízes de $f(x) = x$ no item 2, você pode dividir o polinômio $p(x) = f(f(x)) - x$ por essas raízes para diminuir a ordem da equação polinomial $f(f(x)) = x$.
 
 
 \end{document}
