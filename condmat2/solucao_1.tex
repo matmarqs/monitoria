@@ -1,4 +1,4 @@
-\documentclass[a4paper,12pt]{article}
+\documentclass[a4paper,10pt]{article}
 \input{preamble}
 
 \title{\Huge{\textbf{Lista 1}}}
@@ -95,7 +95,87 @@ Observação: É claro que em teoria de perturbação degenerada existem \textit
 
 \section{Operadores de criação e aniquilação}
 
-oi
+Os operadores bosônicos satisfazem $[a_i, a_j] = [a_i^\dagger, a_j^\dagger] = 0$ e $[a_i, a_j^\dagger] = \delta_{ij}$. Usarei bastante a propriedade básica do comutador $[A, BC] = [A, B] C + B [A, C]$.
+
+\n
+
+(a) Definindo $\nn_j = a_j^\d a_j$, temos então
+$$
+[a_j^\d, \nn_j] = [a_j^\d, a_j^\d a_j] = a_j^\d \cancelto{\boxed{= -1}}{[a_j^\d, a_j]} + \cancelto{0}{[a_j^\d,a_j^\d]} a_j = - a_j^\d.
+$$
+
+$$
+[a_j, \nn_j] = [a_j, a_j^\d a_j] = a_j^\d \cancelto{0}{[a_j, a_j]} + \cancelto{\boxed{=1}}{[a_j,a_j^\d]} a_j = a_j.
+$$
+
+\n
+
+(b) Temos
+$$
+[a_i, (a_j^\d a_k^\d) (a_l a_m) ] = [a_i, a_j^\d a_k^\d] a_l a_m + a_j^\d a_k^\d \cancelto{0}{[a_i, a_l a_m]} =
+$$
+$$
+(\cancelto{\boxed{= \delta_{ij}}}{[a_i, a_j^\d]} a_k^\d + a_j^\d \cancelto{\boxed{= \delta_{ik}}}{[a_i, a_k^\d]}) a_l a_m =
+\delta_{ij} a_k^\d a_l a_m  +  \delta_{ik} a_j^\d a_m a_l.
+$$
+
+\n
+
+Para operadores fermiônicos temos $\{c_i, c_j\} = \{c_i^\dagger, c_j^\dagger\} = 0$ e $\{c_i, c_j^\dagger\} = \delta_{ij}$. Também usarei a propriedade elementar do (anti)comutador $[A, BC] = \{A, B\} C - B \{A, C\}$.
+
+\n
+
+(c) Temos então
+$$
+[c_j^\d, \nn_j] = [ c_j^\d, c_j^\d c_j ] = \cancelto{0}{\{c_j^\d, c_j^\d\}} c_j - c_j^\d \cancelto{\boxed{=1}}{\{c_j^\d, c_j\}} = - c_j^\d.
+$$
+$$
+[c_j, \nn_j] = [ c_j, c_j^\d c_j ] = \cancelto{\boxed{=1}}{\{c_j, c_j^\d\}} c_j - c_j^\d \cancelto{0}{\{c_j, c_j\}} = c_j.
+$$
+
+\n
+
+(d) Expandindo o comutador em dois comutadores:
+$$
+[c_i, (c_j^\d c_k^\d) (c_l c_m)] = [ c_i, c_j^\d c_k^\d ] c_l c_m - c_j^\d c_k^\d \cancelto{0}{[ c_i, c_l c_m ]} =
+$$
+E agora em anticomutadores:
+$$
+= (\{c_i, c_j^\d\} c_k^\d - c_j^\d \{c_i, c_k^\d\}) c_l c_m = (\delta_{ij} c_k^\d - c_j^\d \delta_{ik}) c_l c_m
+= \delta_{ij} c_k^\d c_l c_m + \delta_{ik} c_j^\d c_m c_l.
+$$
+
+\n
+
+(e) Para a última relação, veja que $i \neq j$ (sítios distintos) e que basta considerar o caso $n_i = n_j = 1$, pois o caso $n_i = 0$ ou $n_j = 0$ é trivial, já que ambos os lados da relação dão zero ($c_i$ ou $c_j$ aniquilará $\ket{n_i n_j}$). Assim, no caso $n_i = n_j = 1$ nós temos
+$$
+\ev{c_k^\d c_l^\d c_i c_j}{n_i n_j} = \ev{c_j (c_i c_k^\d c_l^\d c_i c_j) c_i^\d c_j^\d}{00}
+$$
+
+Usando $(c_i c_k^\d) c_l^\d = (\delta_{ki} - c_k^\d c_i) c_l^\d = \delta_{ki} c_l^\d - c_k^\d (c_i c_l^\d) = \delta_{ki} c_l^\d - \delta_{li} c_k^\d - c_k^\d c_l c_i$, temos
+$$
+c_j (c_i c_k^\d c_l^\d) c_i c_j c_i^\d c_j^\d =
+c_j (\delta_{ki} c_l^\d - \delta_{li} c_k^\d - c_k^\d c_l \cancelto{\boxed{c_i^2 = 0}}{c_i}) \textcolor{red}{c_i c_j} c_i^\d c_j^\d =
+\textcolor{red}{-} (\delta_{ki} c_j c_l^\d - \delta_{li} c_j c_k^\d ) \textcolor{red}{c_j c_i} c_i^\d c_j^\d =
+$$
+$$
+- \Big(\delta_{ki} (\delta_{lj} - c_l^\d \cancelto{\boxed{c_j^2 = 0}}{c_j}) - \delta_{li} (\delta_{kj} - c_k^\d \cancelto{\boxed{c_j^2 = 0}}{c_j}) \Big)
+c_j c_i c_i^\d c_j^\d =
+(\delta_{kj} \delta_{li} - \delta_{ki} \delta_{lj} ) c_j c_i c_i^\d c_j^\d =
+$$
+$$
+= (\delta_{kj} \delta_{li} - \delta_{ki} \delta_{lj} ) c_j (1 - \nn_i) c_j^\d =
+(\delta_{kj} \delta_{li} - \delta_{ki} \delta_{lj} ) (1 - \nn_i) (1 - \nn_j).
+$$
+
+Portanto
+$$
+\ev{c_k^\d c_l^\d c_i c_j}{n_i n_j} = (\delta_{kj} \delta_{li} - \delta_{ki} \delta_{lj} ) \ev{(1 - \nn_i) (1 - \nn_j)}{00}
+= \delta_{kj} \delta_{li} - \delta_{ki} \delta_{lj} = (\delta_{kj} \delta_{li} - \delta_{ki} \delta_{lj}) n_i n_j,
+$$
+pois $n_i = n_j = 1$. Assim, temos que a relação é válida para todos $n_i, n_j \in \{0, 1\}$.
+
+
 
 
 \pagebreak
