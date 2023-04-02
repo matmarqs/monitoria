@@ -35,6 +35,7 @@
 \newcommand{\Q}{\mathbb{Q}}
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\C}{\mathbb{C}}
+\renewcommand{\S}{\hat{S}}
 %\renewcommand{\H}{\s{H}}
 
 \newcommand{\nn}{\hat{n}}
@@ -51,7 +52,7 @@
 \newcommand{\q}{\vb{q}}
 \newcommand{\F}{\vb{F}}
 
-\newcommand{\s}[1]{\mathcal{#1}}
+\newcommand{\s}{\sigma}
 %\newcommand{\prodint}[2]{\left\langle #1 , #2 \right\rangle}
 \newcommand{\cc}[1]{\overline{#1}}
 \newcommand{\Eval}[3]{\eval{\left( #1 \right)}_{#2}^{#3}}
@@ -68,10 +69,10 @@
 
 \setlength{\droptitle}{-7em}
 
-%\theoremstyle{plain}
-%\newtheorem{theorem}{Teorema}[section]
+\theoremstyle{plain}
+\newtheorem{theorem}{Teorema}[section]
 %\newtheorem{defi}[theorem]{Definição}
-%\newtheorem{lemma}[theorem]{Lema}
+\newtheorem{lemma}[theorem]{Lema}
 %\newtheorem{corol}[theorem]{Corolário}
 %\newtheorem{prop}[theorem]{Proposição}
 %\newtheorem{example}{Exemplo}
@@ -96,10 +97,10 @@
 %  {\renewcommand\theinnerthm{#1}\innerthm}
 %  {\endinnerthm}
 %
-%\newtheorem{innerlema}{Lema}
-%\newenvironment{leminha}[1]
-%  {\renewcommand\theinnerlema{#1}\innerlema}
-%  {\endinnerlema}
+\newtheorem{innerlema}{Lema}
+\newenvironment{lema}[1]
+  {\renewcommand\theinnerlema{#1}\innerlema}
+  {\endinnerlema}
 %
 %\theoremstyle{remark}
 %\newtheorem*{hint}{Dica}

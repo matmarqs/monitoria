@@ -1,7 +1,7 @@
 \documentclass[a4paper,10pt]{article}
 \input{preamble}
 
-\title{\Huge{\textbf{Lista 1}}}
+\title{\Huge{\textbf{Lista 1 - Matéria Condensada 2}}}
 \author{Mateus Marques}
 
 \begin{document}
@@ -11,13 +11,13 @@
 
 \section{Teoria de perturbação degenerada}
 
-A hamiltoniana perturbada é dada por $H = H_0 + \lambda V$. Seja $\ket{n \alpha_n}$ os autovetores de $H$ com autovalores $E_n$ (onde $\alpha_n$ indexa a degenerescência da energia $E_n$) que formam uma base no espaço de Hilbert $\s{H}$. Seja $\s{H}_n$ o subespaço degenerado de energia $E_n$. Podemos dividir o espaço total numa soma direta $\s{H} = \s{H}_n \oplus \s{H}_n^\perp$, onde $\s{H}_n^\perp$ é o espaço ortogonal a $\s{H}_n$. Em termos de projeções, definimos
+A hamiltoniana perturbada é dada por $H = H_0 + \lambda V$. Seja $\ket{n \alpha_n}$ os autovetores de $H$ com autovalores $E_n$ (onde $\alpha_n$ indexa a degenerescência da energia $E_n$) que formam uma base no espaço de Hilbert $\mathcal{H}$. Seja $\mathcal{H}_n$ o subespaço degenerado de energia $E_n$. Podemos dividir o espaço total numa soma direta $\mathcal{H} = \mathcal{H}_n \oplus \mathcal{H}_n^\perp$, onde $\mathcal{H}_n^\perp$ é o espaço ortogonal a $\mathcal{H}_n$. Em termos de projeções, definimos
 $$
 P = \sum_{\alpha_n} \ketbra{n \alpha_n} \e
 Q = \sum_{m \neq n} \sum_{\alpha_m} \ketbra{m \alpha_m}, \text{ com }
 P + Q = 1, PQ = QP = 0,
 $$
-onde $P$ projeta em $\s{H}_n$ e $Q$ projeta em $\s{H}_n^\perp$.
+onde $P$ projeta em $\mathcal{H}_n$ e $Q$ projeta em $\mathcal{H}_n^\perp$.
 
 Queremos encontrar um novo autovalor $E(\lambda)$ da hamiltoniana perturbada $H_0 + \lambda V$ que nasce da degenerescência em $E_n$, ou seja $\displaystyle{\lim_{\lambda \to 0} E(\lambda) = E_n}$. Temos que
 
@@ -25,7 +25,7 @@ Queremos encontrar um novo autovalor $E(\lambda)$ da hamiltoniana perturbada $H_
 (E - H_0) \ket{\psi} = \lambda V \ket{\psi}.
 \end{equation}
 
-Considere o operador $R$, que é a inversa de $(E - H_0)$ dentro do subespaço $\s{H}_n^\perp$
+Considere o operador $R$, que é a inversa de $(E - H_0)$ dentro do subespaço $\mathcal{H}_n^\perp$
 $$
 R = \sum_{m \neq n} \sum_{\alpha_m} \frac{\ketbra{m \alpha_m}}{E - E_m}.
 $$
@@ -74,7 +74,7 @@ R = \sum_{m \neq n} \sum_{\alpha_m} \frac{\ketbra{m \alpha_m}}{\textcolor{red}{E
 = \sum_{m \neq n} \sum_{\alpha_m} \frac{\ketbra{m \alpha_m}}{\textcolor{red}{E_n} - E_m} + O(\lambda).
 $$
 
-Agora basta que analisemos a equação \ref{eq:sol1}. Perceba que temos liberdade para escolher $\ket{n \alpha_n}$ como bem entendermos (dentro do subespaço degenerado $\s{H}_n$). Em particular, escolhamos $\ket{n \alpha_n}$ de maneira que $\displaystyle{\lim_{\lambda \to 0} P \ket{\psi} (\lambda) = \ket{n \alpha_n}}$. Dessa maneira, temos que os coeficientes $c_{\beta_n}(\lambda)$ obedecem
+Agora basta que analisemos a equação \ref{eq:sol1}. Perceba que temos liberdade para escolher $\ket{n \alpha_n}$ como bem entendermos (dentro do subespaço degenerado $\mathcal{H}_n$). Em particular, escolhamos $\ket{n \alpha_n}$ de maneira que $\displaystyle{\lim_{\lambda \to 0} P \ket{\psi} (\lambda) = \ket{n \alpha_n}}$. Dessa maneira, temos que os coeficientes $c_{\beta_n}(\lambda)$ obedecem
 \begin{equation} \label{eq:coeff}
 c_{\beta_n}(\lambda) = \delta_{\alpha_n \beta_n} + O(\lambda).
 \end{equation}
@@ -184,6 +184,138 @@ pois $n_i = n_j = 1$. Assim, temos que a relação é válida para todos $n_i, n
 
 \section{Interação de spin gerada pela repulsão Coulombiana}
 
+(a) Como $U$ não depende do spin, temos que
+$$
+\mel{i\s_1, k \s_2}{U}{j \s_3, m \s_4} =
+\braket{\s_1, \s_2}{\s_3, \s_4} \mel{ik}{U}{jm} =
+\delta_{\s_1 \s_3} \delta_{\s_2, \s_4} \mel{ik}{U}{jm}.
+$$
+
+Assim, claramente temos
+$$
+I = \frac{1}{2} \sum_{ijkm} \sum_{\s_1\s_2\s_3\s_4}
+\mel{i\s_1, k \s_2}{U}{j \s_3, m \s_4} c_{i\s_1}^\d c_{k\s_2}^\d c_{m\s_4} c_{j\s_3}=
+$$
+$$
+\frac{1}{2} \sum_{ijkm} \sum_{\s_1\s_2}
+\mel{ik}{U}{jm} c_{i\s_1}^\d c_{k\s_2}^\d c_{m\s_2} c_{j\s_1}
+$$
+
+Renomeando os índices $k = i'$, $m = j'$, $\s_1 = \s$ e $\s_2 = \s'$, obtemos
+$$
+I =
+\frac{1}{2} \sum_{ii'jj'} \sum_{\s\s'}
+\mel{ii'}{U}{jj'} c_{i\s}^\d c_{i'\s'}^\d c_{j'\s'} c_{j\s}.
+$$
+
+\n
+
+(b) A contribuição direta $I_0$ é dada por
+$$
+I_0 =
+\frac{1}{2} \sum_{\substack{i = j \\ i' = j' \\ i \neq i'}}
+\sum_{\s\s'} \mel{ii'}{U}{jj'} c_{i\s}^\d c_{i'\s'}^\d c_{j'\s'} c_{j\s} =
+\frac{1}{2} \sum_{i \neq i'} \sum_{\s\s'}
+\mel{ii'}{U}{ii'} c_{i\s}^\d c_{i'\s'}^\d c_{i'\s'} c_{i\s} =
+$$
+$$
+= \frac{1}{2} \sum_{i \neq i'}
+\mel{ii'}{U}{ii'} \sum_{\s\s'} \nn_{i\s} \nn_{i'\s'} =
+\sum_{i \neq i'}
+\qty[ \textcolor{blue}{ \frac{1}{2} \mel{ii'}{U}{ii'} \nn_{i} \nn_{i'} } ].
+$$
+
+(c) O termo de troca $I_{X}$ é
+$$
+I_{X} =
+\frac{1}{2} \sum_{\substack{j = i' \\ j' = i \\ i \neq i'}}
+\sum_{\s\s'} \mel{ii'}{U}{jj'} c_{i\s}^\d c_{i'\s'}^\d c_{j'\s'} c_{j\s} =
+\frac{1}{2} \sum_{i \neq i'} \sum_{\s\s'}
+\mel{ii'}{U}{i'i} c_{i\s}^\d c_{i'\s'}^\d c_{i\s'} c_{i'\s} =
+$$
+$$
+= \sum_{i \neq i'}
+\mel{ii'}{U}{i'i} \frac{1}{2} \sum_{\s\s'} c_{i\s}^\d c_{i'\s'}^\d c_{i\s'} c_{i'\s}.
+$$
+
+Agora calcularemos $\vb{S}_i \vdot \vb{S}_{i'}$. Para isso, utilizarei a seguinte propriedade das matrizes de Pauli:
+\begin{lema}{1}
+Vale a seguinte relação de completeza das matrizes de Pauli:
+$$
+\bm{\s}_{\alpha \beta} \vdot \bm{\s}_{\gamma \delta} =
+\sum_{k} \s_{\alpha \beta}^k \s_{\gamma \delta}^k =
+2 \delta_{\alpha \delta} \delta_{\beta \gamma} - \delta_{\alpha \beta} \delta_{\gamma \delta}.
+$$
+\end{lema}
+
+\begin{proof}
+Dada uma matriz $M$ complexa $2 \times 2$ arbitrária, temos que $M = a_0 I + \sum_{k} a_k \s^k$, com $a_0, a_k \in \C$. Lembrando as propriedades básicas de traço $\tr(\s^k) = 0$ e $\tr(\s^j \s^k) = 2 \delta_{jk}$, temos que
+$$
+a_0 = \frac{1}{2} \tr(M) =
+\frac{1}{2} \sum_{\gamma} M_{\gamma \gamma} =
+\frac{1}{2} \sum_{\gamma \delta} \delta_{\gamma \delta} M_{\delta \gamma}
+$$
+$$
+a_k = \frac{1}{2} \tr(\s^k M) =
+\frac{1}{2} \sum_{\gamma} (\s^k M)_{\gamma \gamma} =
+\frac{1}{2} \sum_{\gamma \delta}
+\s^k_{\gamma \delta} M_{\delta \gamma}
+$$
+
+Substituindo $a_0, a_k$ e inserindo alguns $\delta$'s de Kronecker, temos
+$$
+2 M_{\alpha \beta} = 2 a_0 \delta_{\alpha \beta} + \sum_{k} 2 a_k \s^k_{\alpha \beta}
+\implies
+2 \sum_{\gamma \delta} \delta_{\alpha \delta} \delta_{\beta \gamma} M_{\delta \gamma}=
+2 M_{\alpha \beta} =
+\sum_{\gamma \delta} \delta_{\alpha \beta} \delta_{\gamma \delta} M_{\delta \gamma} +
+\sum_{k} \s^k_{\alpha \beta}
+\sum_{\gamma \delta} \s^k_{\gamma \delta} M_{\delta \gamma} \implies
+$$
+$$
+\sum_{\gamma \delta} \qty(
+2 \delta_{\alpha \delta} \delta_{\beta \gamma}
+- \delta_{\alpha \beta} \delta_{\gamma \delta}
+- \sum_{k} \s^k_{\alpha \beta} \s^k_{\gamma \delta}
+) M_{\delta \gamma} = 0, \quad \ptodo M.
+$$
+
+Como a equação acima vale para toda matriz $M$, temos que a expressão dentro do parênteses deve ser zero.
+\end{proof}
+
+Temos então
+$$
+\vb{S}_i \vdot \vb{S}_{i'} =
+\frac{1}{4} \sum_{\alpha \beta \gamma \delta}
+c_{i\alpha}^\d c_{i\beta} c_{i'\gamma}^\d c_{i'\delta}
+\qty( \sum_{k} \s^k_{\alpha \beta} \s^k_{\gamma \delta} )
+= \frac{1}{4} \sum_{\alpha \beta \gamma \delta}
+c_{i\alpha}^\d c_{i\beta} c_{i'\gamma}^\d c_{i'\delta}
+\Big( 2 \delta_{\alpha \delta} \delta_{\beta \gamma}
+- \delta_{\alpha \beta} \delta_{\gamma \delta} \Big) =
+$$
+$$
+= \frac{1}{4} \qty( 2 \sum_{\alpha \beta}
+c_{i\alpha}^\d c_{i\beta} c_{i'\beta}^\d c_{i'\alpha}
+- \sum_{\alpha \gamma}
+c_{i\alpha}^\d c_{i\alpha} c_{i'\gamma}^\d c_{i'\gamma}
+)
+= - \frac{1}{2} \sum_{\s \s'}
+c_{i\s}^\d c_{i'\s'}^\d c_{i\s'} c_{i'\s} -
+\frac{1}{4} \nn_i \nn_{i'}.
+$$
+
+Portanto
+$$
+I_X =
+\sum_{i \neq i'}
+\mel{ii'}{U}{i'i} \frac{1}{2} \sum_{\s\s'} c_{i\s}^\d c_{i'\s'}^\d c_{i\s'} c_{i'\s}=
+\sum_{i \neq i'}
+\qty{ \textcolor{blue}{ - \mel{ii'}{U}{i'i} \qty(
+\vb{S}_i \vdot \vb{S}_{i'} + \frac{1}{4} \nn_i \nn_{i'} ) } }.
+$$
+
+A expressão acima para $I_X$ explica a regra de Hund que vemos na Química do Ensino Médio. Já que $U = e^2 / 4 \pi r > 0$, temos que $\mel{ii'}{U}{i'i} \geq 0$. Assim, para minimizar o termo de trocar $I_X$, é necessário que os spins $\vb{S}_i$ se alinhem. Por isso, ao preencher os elétrons nos orbitais, é energeticamente favorável primeiro preencher cada orbital com o mesmo alinhamento de spin, que é a regra de Hund essencialmente.
 
 
 \pagebreak
@@ -191,6 +323,115 @@ pois $n_i = n_j = 1$. Assim, temos que a relação é válida para todos $n_i, n
 
 
 \section{Representação de spins em termos de férmions e bósons}
+
+Não escreverei o índice $i$ do sítio, pois todos os operadores aqui farão referência ao mesmo sítio $i$ fixo.
+
+\n
+
+(a) Neste item provarei que $[ \S^a, \S^b ] = i \eps_{abc} \S^c$ usando a representação fermiônica de Abrikosov.
+$$
+[ \S^a, \S^b ] =
+\frac{1}{4} \sum_{\alpha \beta \gamma \delta}
+\s^a_{\alpha \beta} \s^b_{\gamma \delta}
+[ c_\alpha^\d c_\beta, c_\gamma^\d c_\delta ].
+$$
+
+Por propriedades do (anti)comutador temos
+$$
+[ c_\alpha^\d c_\beta, c_\gamma^\d c_\delta ] =
+c_\alpha^\d [ c_\beta, c_\gamma^\d c_\delta ] +
+[ c_\alpha^\d , c_\gamma^\d c_\delta ] c_\beta =
+$$
+$$
+= c_\alpha^\d \Big( \{ c_\beta, c_\gamma^\d \} c_\delta -
+c_\gamma \cancelto{0}{\{c_\beta, c_\delta\}} \Big) +
+\Big( \cancelto{0}{\{ c_\alpha^\d , c_\gamma^\d \}} c_\delta -
+c_\gamma^\d \{c_\alpha^\d, c_\delta\} \Big) c_\beta =
+\delta_{\beta \gamma} c_\alpha^\d c_\delta -
+\delta_{\alpha\delta} c_\gamma^\d c_\beta.
+$$
+
+Continuando:
+$$
+[ \S^a, \S^b ] =
+\frac{1}{4} \sum_{\alpha \beta \gamma \delta}
+\s^a_{\alpha \beta} \s^b_{\gamma \delta}
+\Big( \delta_{\beta \gamma} c_\alpha^\d c_\delta -
+\delta_{\alpha\delta} c_\gamma^\d c_\beta \Big) =
+$$
+$$
+\frac{1}{4} \qty{ \sum_{\alpha \delta} c_\alpha^\d c_\delta
+\sum_{\beta} \s^a_{\alpha \beta} \s^b_{\beta \delta}
+-
+\sum_{\beta \gamma} c_\gamma^\d c_\beta
+\sum_{\alpha} \s^b_{\gamma \alpha} \s^a_{\alpha \beta}
+} =
+$$
+$$
+= \frac{1}{4} \qty{ \sum_{\alpha \delta} c_\alpha^\d c_\delta
+(\s^a \s^b)_{\alpha \delta}
+-
+\sum_{\beta \gamma} c_\gamma^\d c_\beta
+(\s^b \s^a)_{\gamma \beta}
+} =
+$$
+trocando $\delta$ por $\beta$ na primeira somatória e $\gamma$ por $\alpha$ na segunda, e depois usando que $[\s^a, \s^b] = 2i \eps_{abc} \s^c$:
+$$
+= \frac{1}{4} \qty{ \sum_{\alpha \beta} c_\alpha^\d c_\beta
+(\s^a \s^b)_{\alpha \beta}
+-
+\sum_{\alpha \beta} c_\alpha^\d c_\beta
+(\s^b \s^a)_{\alpha \beta}
+} =
+\frac{1}{4} \sum_{\alpha \beta} c_\alpha^\d c_\beta
+\Big(
+(\s^a \s^b)_{\alpha \beta}
+-
+(\s^b \s^a)_{\alpha \beta} \Big) =
+$$
+$$
+= \frac{1}{4} \sum_{\alpha \beta} c_\alpha^\d c_\beta
+[\s^a , \s^b]_{\alpha \beta} =
+i \eps_{abc} \, \frac{1}{2} \sum_{\alpha \beta}
+c_\alpha^\d \s^c_{\alpha \beta} c_\beta = i \eps_{abc} \S^c.
+$$
+
+\n
+
+(b) Neste item provarei que $[\S^z, \S^\pm] = \pm \S^\pm$ e $[\S^+, \S^-] = 2 \S^z$, que são as relações de comutação usuais para os operadores $\S^\pm, \S^z$. Denote $\nn = a^\d a$ e $F(\nn) = \qty(2S - \nn)^{1/2}$ para facilitar a notação.
+$$
+[\S^z, \S^+] = [ \cancelto{0}{S} - \nn , F(\nn) a] =
+- \Big(
+\cancelto{0}{[ \nn, F(\nn) ]} a + F(\nn) [ \nn, a ]
+\Big) =
+F(\nn) a = \S^+.
+$$
+$$
+[\S^z, \S^-] = [ \cancelto{0}{S} - \nn , a^\d F(\nn)] =
+- \Big(
+[ \nn, a^\d ] F(\nn) + a^\d \cancelto{0}{[ \nn, F(\nn) ]}
+\Big) =
+- a^\d F(\nn) = - \S^-.
+$$
+$$
+[\S^+, \S^-] = [ F(\nn) a, a^\d F(\nn) ] =
+F(\nn) a a^\d F(\nn) - a^\d F(\nn)^2 a =
+$$
+$$
+= F(\nn) (1 + \nn) F(\nn) - a^\d (2S - \nn) a =
+$$
+$$
+= 2S - \nn + \cancel{2S \nn} - \nn^2 - \cancel{2S \nn} + (a^\d \nn) a =
+$$
+$$
+= 2S - \nn - \nn^2 + (-a^\d + \nn a^\d) a =
+$$
+$$
+= 2S - \nn - \cancel{\nn^2} - \nn + \cancel{\nn^2} =
+$$
+$$
+= 2 (S - \nn) = 2 \S^z.
+$$
 
 
 
@@ -200,6 +441,67 @@ pois $n_i = n_j = 1$. Assim, temos que a relação é válida para todos $n_i, n
 
 \section{Termodinâmica para bósons livres}
 
+
+(a) A matriz densidade do sistema é $\hat{\rho} = \frac{e^{-\beta(\hat{H} - \mu \hat{N})}}{Z}$, com $Z = \tr(e^{-\beta(\hat{H} - \mu \hat{N})})$. Assim
+$$
+Z = \sum_{n_1 = 0}^{\infty} \cdots \sum_{n_N = 0}^{\infty}
+e^{-\beta \sum_{j} (\eps_j - \mu) n_j} =
+\prod_j \qty[ \sum_{n_j = 0}^{\infty}
+\qty( e^{-\beta (\eps_j - \mu)} )^{n_j} ] =
+\prod_j \frac{1}{1 - e^{-\beta(\eps_j - \mu)}},
+$$
+mas note que a série da P.G. acima só converge se $\mu < \eps_j, \ptodo j$. Temos
+$$
+\ln Z = - \sum_{j} \ln( 1 - e^{-\beta (\eps_j - \mu)} ),
+$$
+$$
+\pdv{Z}{\eps_j} = \sum_{n_1 = 0}^{\infty} \cdots \sum_{n_N = 0}^{\infty}
+(- \beta n_j) e^{-\beta \sum_{j} (\eps_j - \mu) n_j} =
+- \beta \tr( \nn_j e^{-\beta(\hat{H} - \mu \hat{N})} ) \implies
+$$
+$$
+\frac{1}{Z} \pdv{Z}{\eps_j} = - \beta \tr(\nn_j \hat{\rho}) = - \beta \ev{\nn_j}
+\implies
+\boxed{ \ev{\nn_j} = - \frac{1}{\beta} \pdv{\ln Z}{\eps_j}. }
+$$
+
+Portanto
+$$
+\ev{\nn_j} = - \frac{1}{\beta} \cdot
+\frac{ - \beta e^{-\beta(\eps_j - \mu)}}{1 - e^{-\beta(\eps_j - \mu)}} \implies
+\boxed{ \ev{\nn_j} = \frac{1}{e^{\beta (\eps_j - \mu)} - 1}. }
+$$
+
+Quando $\eps_j \to \mu^+$, note que $\ev{\nn_j} \to +\infty$. Diferentemente dos férmions, a distribuição $\ev{\nn_j}$ dos bósons tem $-1$ no denominador ao invés de um $+1$.
+
+\n
+
+(b) Primeiramente, como a relação de dispersão é $\eps(k) = ck$ onde $k$ é uma variável contínua com $0 \leq k \leq K$ ($K$ é um cutoff máximo), temos que $\mu < \eps(k) = ck, \ptodo k \implies \mu = 0$.
+
+Fazendo a substituição $\sum_{j} = \frac{L}{2\pi} \int_0^K \dd{k}$, a energia interna $U$ é dada por
+$$
+U = \ev{\hat{H}} = \sum_{j} \eps_j \ev{\nn_j} =
+\frac{L}{2\pi} \int_0^K \dd{k} \frac{c k}{e^{\beta ck} - 1} =
+$$
+$$
+= \frac{L}{2\pi \beta^2 c} \int_0^K \frac{\beta c k}{e^{\beta ck} - 1} \beta c \dd{k} \implies
+U = \frac{L}{2\pi \beta^2 c} \int_0^{\beta c K} \frac{x}{e^{x} - 1} \dd{x}.
+$$
+
+No limite em que $T \to 0$, temos que $\beta \to \infty$ e
+$$
+U \approx \frac{L}{2\pi \beta^2 c} \int_0^\infty \frac{x}{e^x - 1} \dd{x} =
+\frac{L}{2\pi \beta^2 c} \cdot \frac{\pi^2}{6} =
+\frac{k_{\text{B}}^2 L \pi}{12 c} \, T^2,
+$$
+onde calculei a integral $\int_0^\infty \frac{x}{e^x - 1} \dd{x} = \frac{\pi^2}{6}$ no Mathematica.
+
+\n
+
+Finalmente, no limite $T \to 0$:
+$$
+c_v = \pdv{U}{T} \approx \frac{\pi L \, k_{\text{B}}^2}{6 c} \, T.
+$$
 
 
 \end{document}
