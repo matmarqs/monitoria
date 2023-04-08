@@ -12,6 +12,137 @@
 
 \maketitle
 
+\section{Polinômio Característico de uma Matriz}
+
+
+Dada uma matriz $A$ de tamanho $2 \times 2$, seu determinante $\det(A)$ é um número que é calculado da seguinte forma
+$$
+A =
+\begin{pmatrix}
+a & b \\
+c & d
+\end{pmatrix}
+\implies
+\det(A) =
+\begin{vmatrix}
+\textcolor{red}{a} & \textcolor{blue}{b} \\
+\textcolor{blue}{c} & \textcolor{red}{d}
+\end{vmatrix}
+= \textcolor{red}{ad} - \textcolor{blue}{bc}.
+$$
+
+O polinômio característico $p_A(x)$ de uma matriz $A$ é definido como o determinante da matriz $(A - x I)$, onde $I$ é a matriz identidade:
+$$
+p_A(x) = \det(A - xI) =
+\begin{vmatrix}
+\textcolor{red}{a-x} & \textcolor{blue}{b} \\
+\textcolor{blue}{c} & \textcolor{red}{d-x}
+\end{vmatrix}
+= \textcolor{red}{(a-x)(d-x)} - \textcolor{blue}{bc}
+= x^2 - (a + d) x + (ad - bc)
+$$
+$$
+\implies p_A(x) = x^2 - (a+d)x + (ad - bc).
+$$
+
+
+Calcule os polinômios característicos das seguintes matrizes:
+\begin{itemize}
+\item $\displaystyle{A = \begin{pmatrix} 1 & 1 \\ 0 & 1 \end{pmatrix}}$.
+\item $\displaystyle{B = \begin{pmatrix} -2 & -2 \\ -2 & -2 \end{pmatrix}}$.
+\item $\displaystyle{C = \begin{pmatrix} 40 & 32 \\ 7 & -53 \end{pmatrix}}$.
+\item $\displaystyle{D = \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}}$.
+\end{itemize}
+
+\n
+
+As raízes do polinômio característico de uma matriz são chamados de autovalores dessa matriz. No futuro, quando for estudar Mecânica Quântica, você vai cansar de calcular autovalores de matrizes (sério, você vai fazer isso muito).
+
+\pagebreak
+
+\section{Polinômios de Legendre}
+
+Defina os polinômios de ordem zero $P_0(x) = 1$ e ordem um $P_1(x) = x$, e então defina por recorrência os polinômios $P_n(x)$ de ordem $n$:
+$$
+P_n(x) = \frac{1}{n} \Big[(2n - 1) x P_{n-1}(x) - (n-1) P_{n-2}(x)\Big].
+$$
+
+\begin{itemize}
+\item Calcule $P_2(x), P_3(x), P_4(x)$ e $P_5(x)$.
+\item Quais as raízes de $P_5(x)$?
+\item Você reencontrará esses polinômios no futuro de sua graduação, em particular eles serão úteis no Eletromagnetismo para a expansão multipolar e também em Cálculo Numérico através da integração por quadratura Gauss-Legendre.
+\end{itemize}
+
+\pagebreak
+
+\section{Soma de inteiros}
+
+Talvez você tenha aprendido progressões aritméticas no colégio, de maneira que seja familiar o fato
+$$
+0 + 1 + 2 + 3 + \ldots + n = \frac{n(n+1)}{2} = \frac{1}{2} n^2 + \frac{1}{2} n.
+$$
+
+Uma maneira de mostrar isso é pensar que, como estamos somando $n$ inteiros, sendo que cada um tem uma ordem polinomial de no máximo $n$, então o resultado deve ser um polinômio de ordem $n^2$. Denotando
+$$
+f(n) = 0 + 1 + 2 + 3 + \ldots + n,
+$$
+temos se $f(n)$ é um polinômio de ordem 2, então $f(x) = a x^2 + b x + c$. Mas pela definição de $f(n)$ temos que
+$$
+f(0) = 0 = c,
+$$
+$$
+f(1) = 0 + 1 = a + b + c,
+$$
+$$
+f(2) = 0 + 1 + 2 = 4 a + 2 b + c.
+$$
+
+Resolva as três equações acima para $a, b$ e $c$! Você deve obter $c = 0$, $a = \frac{1}{2}$ e $b = \frac{1}{2}$, que é o mesmo resultado que se obtém com progressões aritméticas.
+
+\n
+
+Utilize o mesmo raciocínio para os casos mais difíceis:
+
+\begin{itemize}
+\item Descubra uma fórmula para $0^2 + 1^2 + 2^2 + 3^2 + \ldots + n^2$. Essa fórmula deve ser uma polinômio de qual grau? Com essa fórmula calcule $1^2 + 2^2 + 3^2 + \ldots + 100^2$ com a sua mão.
+\item Descubra $0^3 + 1^3 + 2^3 + 3^3 + \ldots + n^3$. Deve ser um polinômio de qual grau? Calcule $1^3 + 2^3 + \ldots + 1000^3$ com a sua mão.
+\end{itemize}
+
+\pagebreak
+
+\section{Divisão de Polinômios}
+
+Dividir polinômios é análogo a fazer uma divisão euclidiana de números inteiros, por exemplo dividir $801$ por $7$:
+
+$$\longdiv{801}{7}$$
+
+Note que acima achamos o quociente $114$ e o resto $3$ que satisfazem $801 = 114 \cdot 7 + 3$.
+
+\n\n
+
+Vamos dividir o polinômio $f(x) = 6x^3 - 2x^2 + x + 3$ pelo polinômio $g(x) = x^2 + x + 1$. A ideia é parecida com o caso de números inteiros. Queremos achar os polinômios quociente $q(x)$ e resto $r(x)$ que satisfazem $f(x) = q(x) \, g(x) + r(x)$.
+
+$$\polylongdiv[style=D]{6x^3-2x^2+x+3}{x^2-x+1}$$
+
+No primeiro passo, multiplicamos $x^2 + x + 1$ por $\boxed{6x}$ e subtraimos, para conseguir cancelar o $\textcolor{blue}{6x^3}$ do $\textcolor{blue}{6x^3} - 2x^2 + x + 3$:
+
+$$\polylongdiv[style=D, stage=4]{6x^3-2x^2+x+3}{x^2-x+1}$$
+
+Com isso obtivemos $4x^2 - 5x + 3$, devemos então multiplicar $x^2 + x + 1$ por $\boxed{4}$ para cancelar o $\textcolor{blue}{4x^2}$ do $\textcolor{blue}{4x^2} - 5x + 3$ e então subtraimos:
+
+$$\polylongdiv[style=D]{6x^3-2x^2+x+3}{x^2-x+1}$$
+
+Isso nos deixa com o quociente $\boxed{q(x) = 6x + 4}$ e o resto foi o que sobrou $r(x) = - x - 1$.
+
+\begin{itemize}
+\item Dividir $x^2 - 2x + 1$ por $x - 1$.
+\item Dividir $x^5 + 3x^2 - 5$ por $x^2 + 1$.
+\item Dividir $-6x^3 + 5x - 8$ por $3x^2 - 1$.
+\end{itemize}
+
+
+\pagebreak
+
 \section{Derivada de Polinômios}
 
 A derivada $f'(x)$ de uma função $f(x)$ é definida como
@@ -50,38 +181,6 @@ Calcule a derivada dos seguintes polinômios:
 
 \pagebreak
 
-\section{Divisão de Polinômios}
-
-Dividir polinômios é análogo a fazer uma divisão euclidiana de números inteiros, por exemplo dividir $801$ por $7$:
-
-$$\longdiv{801}{7}$$
-
-Note que acima achamos o quociente $114$ e o resto $3$ que satisfazem $801 = 114 \cdot 7 + 3$.
-
-\n\n
-
-Vamos dividir o polinômio $f(x) = 6x^3 - 2x^2 + x + 3$ pelo polinômio $g(x) = x^2 + x + 1$. A ideia é parecida com o caso de números inteiros. Queremos achar os polinômios quociente $q(x)$ e resto $r(x)$ que satisfazem $f(x) = q(x) \, g(x) + r(x)$.
-
-$$\polylongdiv[style=D]{6x^3-2x^2+x+3}{x^2-x+1}$$
-
-No primeiro passo, multiplicamos $x^2 + x + 1$ por $\boxed{6x}$ e subtraimos, para conseguir cancelar o $\textcolor{blue}{6x^3}$ do $\textcolor{blue}{6x^3} - 2x^2 + x + 3$:
-
-$$\polylongdiv[style=D, stage=4]{6x^3-2x^2+x+3}{x^2-x+1}$$
-
-Com isso obtivemos $4x^2 - 5x + 3$, devemos então multiplicar $x^2 + x + 1$ por $\boxed{4}$ para cancelar o $\textcolor{blue}{4x^2}$ do $\textcolor{blue}{4x^2} - 5x + 3$ e então subtraimos:
-
-$$\polylongdiv[style=D]{6x^3-2x^2+x+3}{x^2-x+1}$$
-
-Isso nos deixa com o quociente $\boxed{q(x) = 6x + 4}$ e o resto foi o que sobrou $r(x) = - x - 1$.
-
-\begin{itemize}
-\item Dividir $x^2 - 2x + 1$ por $x - 1$.
-\item Dividir $x^5 + 3x^2 - 5$ por $x^2 + 1$.
-\item Dividir $-6x^3 + 5x - 8$ por $3x^2 - 1$.
-\end{itemize}
-
-
-\pagebreak
 
 \section{Funções horárias}
 
@@ -111,38 +210,6 @@ Suponha que o movimento de um corpo seja descrito por $s(t) = t^3 - 5 t^2 + 4t$,
 
 \pagebreak
 
-\section{Soma de inteiros}
-
-Talvez você tenha aprendido progressões aritméticas no colégio, de maneira que seja familiar o fato
-$$
-0 + 1 + 2 + 3 + \ldots + n = \frac{n(n+1)}{2} = \frac{1}{2} n^2 + \frac{1}{2} n.
-$$
-
-Uma maneira de mostrar isso é pensar que, como estamos somando $n$ inteiros, sendo que cada um tem uma ordem polinomial de no máximo $n$, então o resultado deve ser um polinômio de ordem $n^2$. Denotando
-$$
-f(n) = 0 + 1 + 2 + 3 + \ldots + n,
-$$
-temos se $f(n)$ é um polinômio de ordem 2, então $f(x) = a x^2 + b x + c$. Mas pela definição de $f(n)$ temos que
-$$
-f(0) = 0 = c,
-$$
-$$
-f(1) = 0 + 1 = a + b + c,
-$$
-$$
-f(2) = 0 + 1 + 2 = 4 a + 2 b + c.
-$$
-
-Resolva as três equações acima para $a, b$ e $c$! Você deve obter $c = 0$, $a = \frac{1}{2}$ e $b = \frac{1}{2}$, que é o mesmo resultado que se obtém com progressões aritméticas.
-
-\n
-
-Utilize o mesmo raciocínio para os casos mais difíceis:
-
-\begin{itemize}
-\item Descubra uma fórmula para $0^2 + 1^2 + 2^2 + 3^2 + \ldots + n^2$. Essa fórmula deve ser uma polinômio de qual grau? Com essa fórmula calcule $1^2 + 2^2 + 3^2 + \ldots + 100^2$ com a sua mão.
-\item Descubra $0^3 + 1^3 + 2^3 + 3^3 + \ldots + n^3$. Deve ser um polinômio de qual grau? Calcule $1^3 + 2^3 + \ldots + 1000^3$ com a sua mão.
-\end{itemize}
 
 
 \pagebreak
@@ -170,6 +237,15 @@ que é conhecido como \textbf{mapa logístico}. Denote $f(x) = r x ( 1 - x )$ e 
 \end{enumerate}
 
 Dica: para resolver $f(f(x)) = x$, note que as raízes de $f(x) = x$ também são raízes de $f(f(x)) = x$. Assim, ao achar as raízes de $f(x) = x$ no item 2, você pode dividir o polinômio $p(x) = f(f(x)) - x$ por essas raízes para diminuir a ordem da equação polinomial $f(f(x)) = x$.
+
+
+\pagebreak
+
+
+
+
+\pagebreak
+
 
 
 \end{document}
