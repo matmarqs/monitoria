@@ -1,0 +1,59 @@
+\documentclass[a4paper,10pt]{article}
+\input{preamble}
+
+\title{\Huge{\textbf{Lista 2 - Matéria Condensada 2}}}
+\author{Mateus Marques}
+
+\begin{document}
+
+\maketitle
+
+
+\section{Gás de elétrons livres}
+
+(a) Com a substituição $\sum_{\k} \to \frac{V_d}{(2\pi)^d} \int \dd[d]{k}$
+
+Vale a seguinte propriedade da função $\delta$ de Dirac (era um dos exercícios do curso de QFT):
+$$
+\int_{-\infty}^{\infty} f(x) \delta(g(x)) \dd{x} =
+\sum_{g(a)=0} \frac{1}{\abs{g'(a)}} \int_{-\infty}^{\infty} f(x) \delta(x-a) \dd{x}=
+\sum_{g(a)=0} \frac{1}{\abs{g'(a)}} \, f(a).
+$$
+onde a soma é sobre todos os zeros $a$ da função $g(x)$.
+$$
+\rho_d(\eps) = \sum_{\k, \s} \delta(\eps - E(\k)) =
+\frac{2V_d}{(2\pi)^d} \int \delta\qty(\eps - \frac{k^2}{2m}) \dd[d]{k} =
+\frac{2V_d}{(2\pi)^d} \int \dd{\Omega_d} \int_0^\infty \delta\qty(\eps - \frac{k^2}{2m}) k^{d-1} \dd{k},
+$$
+onde $\Theta_d = \int \dd{\Omega_d}$ o ângulo sólido de acordo com a dimensão $d$, sendo $\Theta_1 = 2, \Theta_2 = 2\pi$ e $\Theta_3 = 4\pi$.
+
+Definindo $g(k) = \eps - \frac{k^2}{2m}$, temos $\abs{g'(k)} = \abs{k} / m$ e suas raízes são $k = \pm \sqrt{2m \eps}$. Portanto
+$$
+\rho_d(\eps) = \frac{2V_d}{(2\pi)^d} \Theta_d \, \frac{m}{\sqrt{2m\eps}}
+\qty(\sqrt{2m \eps})^{d-1} = \frac{2 m V_d \Theta_d}{(2\pi)^d} \, (2m\eps)^{\frac{d-2}{2}}.
+$$
+
+Substituindo $d = 1, 2$ e $3$:
+\begin{itemize}
+\item $d = 1$:
+$$
+\rho_1(\eps) = \frac{2 m L}{\pi} \, \frac{1}{\sqrt{2m\eps}}.
+$$
+\item $d = 2$:
+$$
+\rho_2(\eps) = \frac{m A}{\pi}.
+$$
+\item $d = 3$:
+$$
+\rho_3(\eps) = \frac{m V}{\pi^2} \sqrt{2m\eps}.
+$$
+\end{itemize}
+
+(b)
+
+\begin{equation} \label{eq:pertub}
+(E - H_0) \ket{\psi} = \lambda V \ket{\psi}.
+\end{equation}
+
+
+\end{document}
