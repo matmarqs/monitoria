@@ -50,6 +50,74 @@ $$
 \end{itemize}
 
 (b)
+$$
+\rho_d(\eps) = \sum_{\k, \s} \delta(\eps - E(\k)) =
+\frac{2V_d}{(2\pi)^d} \int \delta\qty(\eps - vk) \dd[d]{k} =
+\frac{2V_d}{(2\pi)^d} \int \dd{\Omega_d} \int_0^\infty \delta\qty(\eps - vk) k^{d-1} \dd{k},
+$$
+
+Definindo dessa vez $g(k) = \eps - vk$, temos $\abs{g'(k)} = v$ e suas raízes são $k = \eps/v$. Portanto
+$$
+\rho_d(\eps) = \frac{2V_d}{(2\pi)^d} \Theta_d \, \frac{1}{v}
+\qty(\frac{\eps}{v})^{d-1} = \frac{2 V_d \Theta_d}{(2\pi)^d v} \, \qty(\frac{\eps}{v})^{d-1}.
+$$
+
+Substituindo $d = 1, 2$ e $3$:
+\begin{itemize}
+\item $d = 1$:
+$$
+\rho_1(\eps) = \frac{2 L}{\pi v}.
+$$
+\item $d = 2$:
+$$
+\rho_2(\eps) = \frac{A}{\pi} \, \frac{\eps}{v^2}.
+$$
+\item $d = 3$:
+$$
+\rho_3(\eps) = \frac{V}{\pi^2 v} \qty(\frac{\eps}{v})^2.
+$$
+\end{itemize}
+
+
+
+\pagebreak
+
+\section{Expansão de Sommerfeld}
+
+(a) Façamos a substituição de variáveis $x = \beta(\eps - \mu)$, temos
+$$
+I = \frac{1}{\beta} \int_{-\infty}^{\infty} \frac{G(\mu + \frac{x}{\beta})}{e^{x} + 1} \dd{x}
+$$
+Já que $\displaystyle{\frac{1}{e^{-x} + 1} = \frac{e^x}{e^x + 1} = 1 - \frac{1}{e^x + 1}}$, a integral de $-\infty$ até $0$ se escreve como
+$$
+\int_{-\infty}^0 \frac{G(\mu + \frac{x}{\beta})}{e^{x} + 1} \dd{x} =
+\int_0^{\infty} \frac{G(\mu - \frac{x}{\beta})}{e^{-x} + 1} \dd{x} =
+\int_0^{\infty} G\qty(\mu - \frac{x}{\beta}) \dd{x} -
+\int_0^{\infty} \frac{G(\mu - \frac{x}{\beta})}{e^{x} + 1} \dd{x}.
+$$
+Voltando à integral $I$, temos
+$$
+I =
+\int_0^{\infty} G\qty(\mu - \frac{x}{\beta}) \frac{\dd{x}}{\beta} +
+\frac{1}{\beta}
+\int_0^{\infty}\frac{G(\mu + \frac{x}{\beta}) - G(\mu - \frac{x}{\beta})}{e^x + 1}\dd{x}
+$$
+A primeira integral acima se reescreve facilmente como
+$$
+\int_0^\infty G\qty(\mu - \frac{x}{\beta}) \frac{\dd{x}}{\beta} =
+\int_{-\infty}^\mu G(\eps) \dd{\eps},
+$$
+enquanto que para $\beta \to \infty$
+$$
+G\qty(\mu + \frac{x}{\beta}) - G\qty(\mu - \frac{x}{\beta}) \approx \frac{2x}{\beta} G'(\mu),
+$$
+de maneira que
+$$
+\frac{1}{\beta}
+\int_0^{\infty}\frac{G(\mu + \frac{x}{\beta}) - G(\mu - \frac{x}{\beta})}{e^x + 1}\dd{x}=
+$$
+<++>
+<++>
 
 \begin{equation} \label{eq:pertub}
 (E - H_0) \ket{\psi} = \lambda V \ket{\psi}.
