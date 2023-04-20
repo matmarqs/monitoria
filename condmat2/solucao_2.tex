@@ -11,6 +11,8 @@
 
 \section{Gás de elétrons livres}
 
+\url{https://en.universaldenker.org/lessons/262}
+
 (a) Com a substituição $\sum_{\k} \to \frac{V_d}{(2\pi)^d} \int \dd[d]{k}$
 
 Vale a seguinte propriedade da função $\delta$ de Dirac (era um dos exercícios do curso de QFT):
@@ -49,7 +51,9 @@ $$
 $$
 \end{itemize}
 
-(b)
+(b) \url{https://eng.libretexts.org/Bookshelves/Materials_Science/Supplemental_Modules_(Materials_Science)/Electronic_Properties/Density_of_States}
+
+
 $$
 \rho_d(\eps) = \sum_{\k, \s} \delta(\eps - E(\k)) =
 \frac{2V_d}{(2\pi)^d} \int \delta\qty(\eps - vk) \dd[d]{k} =
@@ -77,8 +81,6 @@ $$
 \rho_3(\eps) = \frac{V}{\pi^2 v} \qty(\frac{\eps}{v})^2.
 $$
 \end{itemize}
-
-
 
 \pagebreak
 
@@ -115,9 +117,23 @@ de maneira que
 $$
 \frac{1}{\beta}
 \int_0^{\infty}\frac{G(\mu + \frac{x}{\beta}) - G(\mu - \frac{x}{\beta})}{e^x + 1}\dd{x}=
+\frac{2 G'(\mu)}{\beta^2}
+\int_0^{\infty}\frac{x}{e^x + 1}\dd{x} =
+\frac{\pi^2}{6 \beta^2} \, G'(\mu).
+$$
+
+Portanto
+$$
+I = \int_{-\infty}^{\mu} G(\eps) \dd{\eps} + \frac{\pi^2}{6} T^2 \eval{\dv{G}{\eps}}_{\eps = \mu}.
+$$
+
+(b) Temos
+$$
+n = \int_{-\infty}^{\infty} f(\eps) \rho(\eps)
 $$
 <++>
-<++>
+
+\pagebreak
 
 \begin{equation} \label{eq:pertub}
 (E - H_0) \ket{\psi} = \lambda V \ket{\psi}.
