@@ -218,8 +218,84 @@ $$
 
 \section{Teoria de perturbação para o gás de elétrons}
 
+(a) Em sala de aula vimos que a parte de Coulomb da hamiltoniana do Jellium se escreve como
+\begin{equation} \label{eq:jellium}
+\hat{V} = \frac{3 e^2}{2 N a_0 r_s}
+\sum_{\substack{\k_1, \k_2, \q \neq \0 \\ \s_1 \s_2}} \frac{1}{\q^2} \,
+c_{\k_1 - \q, \s_1}^\d c_{\k_2 + \q, \s_2}^\d c_{\k_2 \s_2} c_{\k_1 \s_1}
+\end{equation}
+
+A correção de primeira ordem para a energia do ground-state é dada por
+$$
+E_0^{(1)} = \ev{\hat{V}}{\text{GS}},
+$$
+onde o ground-state do sistema é
+$$
+\ket{\text{GS}} = \prod_{\abs{\k} \leq k_{F}, \s} c_{\k \s}^{\d} \ket{0}.
+$$
+
+Assim, teremos que calcular o elemento de matriz
+$$
+M_{\k_1 \k_2 \q, \s_1 \s_2} = \ev{c_{\k_1 - \q, \s_1}^\d c_{\k_2 + \q, \s_2}^\d c_{\k_2 \s_2} c_{\k_1 \s_1}}{\text{GS}}.
+$$
+
+Para isso, podemos utilizar que $\ev{c_k^\d c_l^\d c_i c_j}{n_i n_j} = (\delta_{kj} \delta_{li} - \delta_{ki} \delta_{lj}) n_i n_j$ do item 2(e) da Lista 1, onde $k = (\k_1 - \q, \s_1)$; $l = (\k_2 + \q, \s_2)$; $i = (\k_2, \s_2)$ e $j = (\k_1, \s_1)$. Assim, obtemos que
+
+$$
+M_{\k_1 \k_2 \q, \s_1 \s_2} =
+\Big(
+\delta_{\k_1 - \q, \k_1} \delta_{\s_1, \s_1} \delta_{\k_2 + \q, \k_2} \delta_{\s_2, \s_2} -
+\delta_{\k_1 - \q, \k_2} \delta_{\s_1, \s_2} \delta_{\k_2 + \q, \k_1} \delta_{\s_1, \s_2}
+\Big) \ev{\nn_{\k_2 \s_2} \nn_{\k_1 \s_1}}{\text{GS}} =
+$$
+$$
+=
+\Big(
+\delta_{\q, \0} -
+\delta_{\q, \k_1 - \k_2} \delta_{\s_1, \s_2}
+\Big) \ev{\nn_{\k_2 \s_2} \nn_{\k_1 \s_1}}{\text{GS}}.
+$$
+
+Como a interação $\hat{V}$ se trata de uma somatória com $\q \neq 0$, o termo $\delta_{\q, \0}$ vai desaparecer. Veja também que $\ev{\nn_{\k_2 \s_2} \nn_{\k_1 \s_1}}{\text{GS}} = \theta(k_F - \abs{\k_1}) \, \theta(k_F - \abs{\k_2})$, pois essa quantidade só é diferente de zero se ambos $\k_1$ e $\k_2$ estiverem dentro do mar de Fermi.
+
+Assim
+$$
+\hat{V} = - \frac{3e^2}{2N a_0 r_s} \sum_{\substack{\k_1, \k_2, \q \neq \0 \\ \s_1 \s_2}} \frac{1}{\q^2} \,
+\delta_{\q, \k_1 - \k_2} \delta_{\s_1, \s_2} \theta(k_F - \abs{\k_1}) \, \theta(k_F - \abs{\k_2}).
+$$
+$$
+= - \frac{3e^2}{2N a_0 r_s} \sum_{\s} \sum_{\q \neq \0} \frac{1}{\abs{\q}^2} \sum_{\k}
+\theta(k_F - \abs{\k}) \, \theta(k_F - \abs{\k + \q}).
+$$
+
+A somatória nos spins $\sum_{\s}$ se converte em um fator $2$ e as somatórias nos momentos nós convertemos em integrais via $\sum_{\k} \to \frac{\mathcal{V}}{(2\pi)^3} \int_{\R^3} \dd[3]{\k}$. Temos que
+$$
+I = \sum_{\q \neq \0} \frac{1}{\abs{\q}^2} \sum_{\k}
+\theta(k_F - \abs{\k}) \, \theta(k_F - \abs{\k + \q}) =
+\qty[ \frac{\mathcal{V}}{(2\pi)^3} ]^2 \int_{\R^3} \frac{\dd[3]{\q}}{\abs{\q}^2} \int_{\R^3}
+\theta(k_F - \abs{\k}) \, \theta(k_F - \abs{\k + \q}) \dd[3]{\k}.
+$$
+
+Fixado $\q$, temos que o termo de Heaviside $\theta(k_F - \abs{\k}) \, \theta(k_F - \abs{\k + \q})$ corresponde ao domínio de integração $D_{\q} = \{\k \in \R^3 \mid \abs{\k} < k_F\} \cap \{\k \in \R^3 \mid \abs{\k + \q} < k_F\}$, que é uma interseção de duas esferas com raio $k_F$, uma centrada em $\0$ e a outra em $-\q$. Note que esse domínio $D_{\q}$, não depende da direção de $\q$, somente do módulo $q$. Ainda mais, perceba que $D_q \neq \emptyset$ somente se $0 < q < 2 k_F$. Assim a integral $I$ se simplifica
+$$
+I = \qty[\frac{\mathcal{V}}{(2\pi)^3}]^2 \int_0^{2k_F} \frac{4\pi \, q^2 \dd{q}}{q^2} \int_{D_q} \dd[3]{\k} =
+\qty[\frac{\mathcal{V}}{(2\pi)^3}]^2 (4\pi) \int_0^{2k_F} \text{Vol}(D_q) \dd{q}.
+$$
+Assim, precisamos calcular $\text{Vol}(D_q) = \int_{D_q} \dd[3]{\k}$, que o volume da interseção das duas esferas. Se fizermos o desenho geométrico (não vou fazer aqui pois dá trabalho) e utilizarmos coordenadas polares $(k, \theta_k, \vphi_k)$ é fácil ver que
+$$
+\text{Vol}(D_q) = 2 \int_0^{2\pi} \dd{\vphi_k} \int_{q / (2 k_F)}^{1} \dd(\cos\theta_k) \int_{q / (2 \cos\theta_k)}^{k_F} k^2 \dd{k} = \frac{4\pi}{3} k_F^3 - \pi^2 k_F^2 q + \frac{\pi}{12} q^3
+$$
+<++>
+
+\pagebreak
+
+\section{Gás de elétrons polarizado}
+
 (a)
 
+<++>
+
+\pagebreak
 
 \begin{equation} \label{eq:pertub}
 (E - H_0) \ket{\psi} = \lambda V \ket{\psi}.
