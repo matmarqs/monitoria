@@ -127,13 +127,99 @@ $$
 I = \int_{-\infty}^{\mu} G(\eps) \dd{\eps} + \frac{\pi^2}{6} T^2 \eval{\dv{G}{\eps}}_{\eps = \mu}.
 $$
 
-(b) Temos
+(b) Para $T \to 0$, temos que $\mu \approx \eps_F$ de maneira que
 $$
-n = \int_{-\infty}^{\infty} f(\eps) \rho(\eps)
+n = \int_{-\infty}^{\infty} f(\eps) \rho(\eps) =
+\int_{-\infty}^{\eps_F} \rho(\eps) \dd{\eps} +
+\int_{\eps_F}^{\mu} \rho(\eps) \dd{\eps} +
+\frac{\pi^2}{6} T^2 \rho'(\eps_F),
 $$
-<++>
+onde aproximamos $\rho'(\mu) \approx \rho'(\eps_F)$. Temos ainda que
+$$
+\int_{-\infty}^{\eps_F} \rho(\eps) \dd{\eps} \approx n,
+$$
+$$
+\int_{\eps_F}^{\mu} \rho(\eps) \dd{\eps} \approx \rho(\eps_F) \, (\mu - \eps_F).
+$$
+
+Portanto concluimos que
+$$
+\mu \approx \eps_F - \frac{\pi^2}{6} T^2 \frac{\rho'(\eps_F)}{\rho(\eps_F)}.
+$$
+
+(c) Aproximando $\mu \approx \eps_F$ no limite $T \to 0$, temos
+$$
+E = \int_{-\infty}^{\infty} f(\eps) \eps \rho(\eps) \dd{\eps} \approx
+\int_{-\infty}^{\eps_F} \eps \rho(\eps) \dd{\eps} +
+(\mu - \eps_F) \eps_F \rho(\eps_F) +
+\frac{\pi^2}{6} T^2 \eval{\dv{(\eps \rho(\eps))}{\eps}}_{\eps = \eps_F},
+$$
+onde aproximamos $\displaystyle{\int_{\eps_F}^{\mu} \eps \rho(\eps_F) \dd{\eps} \approx (\mu - \eps_F) \eps_F \rho(\eps_F)}$ e $\displaystyle{\eval{\dv{(\eps \rho(\eps))}{\eps}}_{\eps = \mu} \approx \eval{\dv{(\eps \rho(\eps))}{\eps}}_{\eps = \eps_F}}$.
+
+\n
+
+Substituindo então a aproximação que obtivemos no item (b), obtemos
+$$
+E = \int_{-\infty}^{\eps_F} \eps \rho(\eps) \dd{\eps}
+- \cancel{ \frac{\pi^2}{6} T^2 \eps_F \rho'(\eps_F) } +
+\frac{\pi^2}{6} T^2 \Big[\rho(\eps_F) + \cancel{ \eps_F \rho'(\eps_F) } \Big],
+$$
+de maneira que
+$$
+c = \pdv{E}{T} \approx \frac{\pi^2}{3} T \rho(\eps_F).
+$$
+
 
 \pagebreak
+
+\section{Susceptibilidade paramagnética do gás de elétrons}
+
+(a) No limite $\mu_B h \to 0$, temos que $\mu$ não se altera significativamente, $\mu(h) \approx \mu(h = 0) = \mu$.
+
+Metade dos elétrons tem spin up $+1/2$ e a outra metade tem spin down $-1/2$. Devido ao campo magnético, ocorre um splitting nas energias. Os elétrons de spin up ficam com uma energia $\eps \to \eps - \mu_B h$ e os de spin down com $\eps \to \eps + \mu_B h$. Com essas considerações, temos
+$$
+n_+ = \frac{1}{2} \int f(\eps) \rho(\eps - \mu_B h) \dd{\eps} \e
+n_- = \frac{1}{2} \int f(\eps) \rho(\eps + \mu_B h) \dd{\eps},
+$$
+de maneira que $h = 0 \implies n_+ + n_- = \int f(\eps) \rho(\eps) \dd{\eps} = n$ (recuperamos o caso particular). A magnetização $m$ é dada por
+$$
+m = - \mu_B (n_+ - n_-) =
+\frac{\mu_B}{2} \int f(\eps) \Big[ \rho(\eps + \mu_B h) - \rho(\eps - \mu_B h) \Big] \dd{\eps},
+$$
+mas como $\mu_B h \to 0$, temos $\rho(\eps + \mu_B h) - \rho(\eps - \mu_B h) \approx 2 \mu_B h \rho'(\eps)$. Integrando por partes:
+$$
+m = \mu_B^2 h \int_{-\infty}^{\infty} f(\eps) \rho'(\eps) \dd{\eps} =
+\mu_B^2 h \qty(\eval{f(\eps) \rho(\eps)}_{-\infty}^{\infty} - \int \rho(\eps) f'(\eps) \dd{\eps} ).
+$$
+Mas $\rho(\pm\infty) = 0$, portanto
+$$
+m = \mu_B^2 h \int \rho(\eps) \qty(- \pdv{f}{\eps}) \dd{\eps} \implies
+\chi = \pdv{m}{h} = \mu_B^2 \int \rho(\eps) \qty(- \pdv{f}{\eps}) \dd{\eps}.
+$$
+
+(b) Para $T = 0$, temos
+$$
+m = \mu_B^2 h \int_{-\infty}^{\infty} f(\eps) \rho'(\eps) \dd{\eps} =
+\mu_B^2 h \int_{-\infty}^{\eps_F} \rho'(\eps) \dd{\eps} =
+\mu_B^2 h \qty[ \rho(\eps_F) - \cancelto{0}{\rho(-\infty)} ]
+$$
+$$
+\implies \chi = \mu_B^2 \rho(\eps_F).
+$$
+
+(c) Para $T \to \infty$ ($\beta \to 0$), aproximamos $f(\eps) \approx e^{-\beta(\eps - \mu)}$ de maneira que $\pdv{f}{\eps} = -\beta f(\eps)$. Portanto
+$$
+\chi(T \to \infty) = \mu_B^2 \beta \int f(\eps) \rho(\eps) \dd{\eps} = n \, \frac{\mu_B^2}{k_B T}.
+$$
+
+
+\pagebreak
+
+
+\section{Teoria de perturbação para o gás de elétrons}
+
+(a)
+
 
 \begin{equation} \label{eq:pertub}
 (E - H_0) \ket{\psi} = \lambda V \ket{\psi}.
