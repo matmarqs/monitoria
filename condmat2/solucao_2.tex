@@ -11,7 +11,7 @@
 
 \section{Gás de elétrons livres}
 
-\url{https://en.universaldenker.org/lessons/262}
+%\url{https://en.universaldenker.org/lessons/262}
 
 (a) Com a substituição $\sum_{\k} \to \frac{V_d}{(2\pi)^d} \int \dd[d]{k}$,
 $$
@@ -68,8 +68,16 @@ k_F^3 = 3\pi^2 n.
 $$
 \end{itemize}
 
-(b) \url{https://eng.libretexts.org/Bookshelves/Materials_Science/Supplemental_Modules_(Materials_Science)/Electronic_Properties/Density_of_States}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\textwidth]{fig/dos-k2.png}
+\caption{Densidade de estados $\rho_d(\eps)$ para as dimensões $d = 1, 2$ e $3$. Parâmetros: $m = L = A = V = 1$.}
+\label{fig:dosk2}
+\end{figure}
 
+(b) Analogamente para a dispersão $E(\k) = vk$:
+
+%\url{https://eng.libretexts.org/Bookshelves/Materials_Science/Supplemental_Modules_(Materials_Science)/Electronic_Properties/Density_of_States}
 
 $$
 \rho_d(\eps) = \sum_{\k, \s} \delta(\eps - E(\k)) =
@@ -77,7 +85,7 @@ $$
 \frac{2V_d}{(2\pi)^d} \int \dd{\Omega_d} \int_0^\infty \delta\qty(\eps - vk) k^{d-1} \dd{k},
 $$
 
-Definindo dessa vez $g(k) = \eps - vk$, temos $\abs{g'(k)} = v$ e suas raízes são $k = \eps/v$. Portanto
+Definindo dessa vez $g(k) = \eps - vk$, temos $\abs{g'(k)} = v$ e sua única raiz no domínio $D = (0, +\infty)$ é $k = \eps/v$. Portanto
 $$
 \rho_d(\eps) = \frac{2V_d}{(2\pi)^d} \Theta_d \, \frac{1}{v}
 \qty(\frac{\eps}{v})^{d-1} = \frac{2 V_d \Theta_d}{(2\pi)^d v} \, \qty(\frac{\eps}{v})^{d-1}.
@@ -85,19 +93,26 @@ $$
 
 Substituindo $d = 1, 2$ e $3$:
 \begin{itemize}
-\item $d = 1$:
+\item $d = 1$, $V_1 = L$, $\Theta_1 = 2$:
 $$
 \rho_1(\eps) = \frac{2 L}{\pi v}.
 $$
-\item $d = 2$:
+\item $d = 2$, $V_2 = A$, $\Theta_2 = 2\pi$:
 $$
-\rho_2(\eps) = \frac{A}{\pi} \, \frac{\eps}{v^2}.
+\rho_2(\eps) = \frac{A}{\pi v^2} \, \eps.
 $$
-\item $d = 3$:
+\item $d = 3$, $V_3 = V$, $\Theta_3 = 4\pi$:
 $$
-\rho_3(\eps) = \frac{V}{\pi^2 v} \qty(\frac{\eps}{v})^2.
+\rho_3(\eps) = \frac{V}{\pi^2 v^3} \, \eps^2.
 $$
 \end{itemize}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\textwidth]{fig/dos-vk.png}
+\caption{Densidade de estados $\rho_d(\eps)$ para as dimensões $d = 1, 2$ e $3$. Parâmetros: $v = L = A = V = 1$.}
+\label{fig:dosvk}
+\end{figure}
 
 \pagebreak
 
