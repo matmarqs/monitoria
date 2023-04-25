@@ -13,15 +13,7 @@
 
 \url{https://en.universaldenker.org/lessons/262}
 
-(a) Com a substituição $\sum_{\k} \to \frac{V_d}{(2\pi)^d} \int \dd[d]{k}$
-
-Vale a seguinte propriedade da função $\delta$ de Dirac (era um dos exercícios do curso de QFT):
-$$
-\int_{-\infty}^{\infty} f(x) \delta(g(x)) \dd{x} =
-\sum_{g(a)=0} \frac{1}{\abs{g'(a)}} \int_{-\infty}^{\infty} f(x) \delta(x-a) \dd{x}=
-\sum_{g(a)=0} \frac{1}{\abs{g'(a)}} \, f(a).
-$$
-onde a soma é sobre todos os zeros $a$ da função $g(x)$.
+(a) Com a substituição $\sum_{\k} \to \frac{V_d}{(2\pi)^d} \int \dd[d]{k}$,
 $$
 \rho_d(\eps) = \sum_{\k, \s} \delta(\eps - E(\k)) =
 \frac{2V_d}{(2\pi)^d} \int \delta\qty(\eps - \frac{k^2}{2m}) \dd[d]{k} =
@@ -29,25 +21,50 @@ $$
 $$
 onde $\Theta_d = \int \dd{\Omega_d}$ o ângulo sólido de acordo com a dimensão $d$, sendo $\Theta_1 = 2, \Theta_2 = 2\pi$ e $\Theta_3 = 4\pi$.
 
-Definindo $g(k) = \eps - \frac{k^2}{2m}$, temos $\abs{g'(k)} = \abs{k} / m$ e suas raízes são $k = \pm \sqrt{2m \eps}$. Portanto
+Vale a seguinte propriedade da função $\delta$ de Dirac (era um dos exercícios do curso de QFT):
+$$
+\int_{D} f(x) \delta(g(x)) \dd{x} =
+\sum_{\substack{g(a)=0 \\ a \in D}} \frac{1}{\abs{g'(a)}} \int_{-\infty}^{\infty} f(x) \delta(x-a) \dd{x}=
+\sum_{\substack{g(a)=0 \\ a \in D}} \frac{1}{\abs{g'(a)}} \, f(a).
+$$
+onde a soma é sobre todos os zeros $a \in D$ da função $g(x)$ dentro do domínio de integração $D$.
+
+Definindo $g(k) = \eps - \frac{k^2}{2m}$, temos $\abs{g'(k)} = \abs{k} / m$ e sua única raiz no domínio $D = (0, +\infty)$ é $k = \sqrt{2m \eps}$. Portanto
 $$
 \rho_d(\eps) = \frac{2V_d}{(2\pi)^d} \Theta_d \, \frac{m}{\sqrt{2m\eps}}
-\qty(\sqrt{2m \eps})^{d-1} = \frac{2 m V_d \Theta_d}{(2\pi)^d} \, (2m\eps)^{\frac{d-2}{2}}.
+\qty(\sqrt{2m \eps})^{d-1} \implies
+\boxed{ \rho_d(\eps) = \frac{2 m V_d \Theta_d}{(2\pi)^d} \, (2m\eps)^{\frac{d}{2}-1}. }
 $$
 
-Substituindo $d = 1, 2$ e $3$:
+Em $T = 0$, temos que $N = \int_0^{\eps_F} \rho_d(\eps) \dd{\eps}$, portanto
+$$
+N = \frac{2m V_d \Theta_d}{(2\pi)^d} (2m)^{\frac{d}{2} - 1} \int_0^{\eps_F} \eps^{\frac{d}{2} - 1} \dd{\eps} =
+\frac{V_d \Theta_d }{(2\pi)^d} (2m)^{\frac{d}{2}} \cdot \frac{2}{d} \, \eps_F^{d/2}.
+$$
+
+Substituindo a relação de dispersão $\eps_F = \frac{k_F^2}{2m}$ e $n = N/V_d$, obtemos
+$$
+N =
+\frac{2 V_d \Theta_d }{d (2\pi)^d} \cancel{(2m)^{\frac{d}{2}}} \, \frac{k_F^d}{\cancel{(2m)^{\frac{d}{2}}}} \implies
+\boxed{ n = \frac{2 \Theta_d}{d \, (2\pi)^d} \, k_F^d. }
+$$
+
+Substituindo explicitamente as dimensões $d = 1, 2$ e $3$:
 \begin{itemize}
-\item $d = 1$:
+\item $d = 1$, $V_1 = L$, $\Theta_1 = 2$:
 $$
-\rho_1(\eps) = \frac{2 m L}{\pi} \, \frac{1}{\sqrt{2m\eps}}.
+\rho_1(\eps) = \frac{2 m L}{\pi} \, \frac{1}{\sqrt{2m\eps}} \e
+k_F = \frac{\pi n}{2}.
 $$
-\item $d = 2$:
+\item $d = 2$, $V_2 = A$, $\Theta_2 = 2\pi$:
 $$
-\rho_2(\eps) = \frac{m A}{\pi}.
+\rho_2(\eps) = \frac{m A}{\pi} \e
+k_F^2 = 2 \pi n.
 $$
-\item $d = 3$:
+\item $d = 3$, $V_3 = V$, $\Theta_3 = 4\pi$:
 $$
-\rho_3(\eps) = \frac{m V}{\pi^2} \sqrt{2m\eps}.
+\rho_3(\eps) = \frac{m V}{\pi^2} \sqrt{2m\eps} \e
+k_F^3 = 3\pi^2 n.
 $$
 \end{itemize}
 
@@ -143,9 +160,9 @@ $$
 $$
 
 Portanto concluimos que
-$$
+\begin{equation} \label{eq:chempot}
 \mu \approx \eps_F - \frac{\pi^2}{6} T^2 \frac{\rho'(\eps_F)}{\rho(\eps_F)}.
-$$
+\end{equation}
 
 (c) Aproximando $\mu \approx \eps_F$ no limite $T \to 0$, temos
 $$
@@ -154,13 +171,13 @@ E = \int_{-\infty}^{\infty} f(\eps) \eps \rho(\eps) \dd{\eps} \approx
 (\mu - \eps_F) \eps_F \rho(\eps_F) +
 \frac{\pi^2}{6} T^2 \eval{\dv{(\eps \rho(\eps))}{\eps}}_{\eps = \eps_F},
 $$
-onde aproximamos $\displaystyle{\int_{\eps_F}^{\mu} \eps \rho(\eps_F) \dd{\eps} \approx (\mu - \eps_F) \eps_F \rho(\eps_F)}$ e $\displaystyle{\eval{\dv{(\eps \rho(\eps))}{\eps}}_{\eps = \mu} \approx \eval{\dv{(\eps \rho(\eps))}{\eps}}_{\eps = \eps_F}}$.
+onde aproximamos $\displaystyle{\int_{\eps_F}^{\mu} \eps \rho(\eps) \dd{\eps} \approx (\mu - \eps_F) \eps_F \rho(\eps_F)}$ e $\displaystyle{\eval{\dv{(\eps \rho(\eps))}{\eps}}_{\eps = \mu} \approx \eval{\dv{(\eps \rho(\eps))}{\eps}}_{\eps = \eps_F}}$.
 
 \n
 
-Substituindo então a aproximação que obtivemos no item (b), obtemos
+Substituindo então a aproximação \ref{eq:chempot} que obtivemos no item (b), obtemos
 $$
-E = \int_{-\infty}^{\eps_F} \eps \rho(\eps) \dd{\eps}
+E \approx \int_{-\infty}^{\eps_F} \eps \rho(\eps) \dd{\eps}
 - \cancel{ \frac{\pi^2}{6} T^2 \eps_F \rho'(\eps_F) } +
 \frac{\pi^2}{6} T^2 \Big[\rho(\eps_F) + \cancel{ \eps_F \rho'(\eps_F) } \Big],
 $$
@@ -187,9 +204,11 @@ m = - \mu_B (n_+ - n_-) =
 \frac{\mu_B}{2} \int f(\eps) \Big[ \rho(\eps + \mu_B h) - \rho(\eps - \mu_B h) \Big] \dd{\eps},
 $$
 mas como $\mu_B h \to 0$, temos $\rho(\eps + \mu_B h) - \rho(\eps - \mu_B h) \approx 2 \mu_B h \rho'(\eps)$. Integrando por partes:
+\begin{equation} \label{eq:magnetization}
+m = \mu_B^2 h \int_{-\infty}^{\infty} f(\eps) \rho'(\eps) \dd{\eps}
+\end{equation}
 $$
-m = \mu_B^2 h \int_{-\infty}^{\infty} f(\eps) \rho'(\eps) \dd{\eps} =
-\mu_B^2 h \qty(\eval{f(\eps) \rho(\eps)}_{-\infty}^{\infty} - \int \rho(\eps) f'(\eps) \dd{\eps} ).
+= \mu_B^2 h \qty(\eval{f(\eps) \rho(\eps)}_{-\infty}^{\infty} - \int \rho(\eps) f'(\eps) \dd{\eps} ).
 $$
 Mas $\rho(\pm\infty) = 0$, portanto
 $$
@@ -197,7 +216,7 @@ m = \mu_B^2 h \int \rho(\eps) \qty(- \pdv{f}{\eps}) \dd{\eps} \implies
 \chi = \pdv{m}{h} = \mu_B^2 \int \rho(\eps) \qty(- \pdv{f}{\eps}) \dd{\eps}.
 $$
 
-(b) Para $T = 0$, temos
+(b) Para $T = 0$, usando a equação \ref{eq:magnetization}, temos
 $$
 m = \mu_B^2 h \int_{-\infty}^{\infty} f(\eps) \rho'(\eps) \dd{\eps} =
 \mu_B^2 h \int_{-\infty}^{\eps_F} \rho'(\eps) \dd{\eps} =
@@ -209,14 +228,15 @@ $$
 
 (c) Para $T \to \infty$ ($\beta \to 0$), aproximamos $f(\eps) \approx e^{-\beta(\eps - \mu)}$ de maneira que $\pdv{f}{\eps} = -\beta f(\eps)$. Portanto
 $$
-\chi(T \to \infty) = \mu_B^2 \beta \int f(\eps) \rho(\eps) \dd{\eps} = n \, \frac{\mu_B^2}{k_B T}.
+\chi(T \to \infty) = \mu_B^2 \int \rho(\eps) \qty(- \pdv{f}{\eps}) \dd{\eps} \approx
+\mu_B^2 \beta \int f(\eps) \rho(\eps) \dd{\eps} = n \, \frac{\mu_B^2}{k_B T}.
 $$
 
 
 \pagebreak
 
 
-\section{Teoria de perturbação para o gás de elétrons}
+\section{Teoria de perturbação para o gás de elétrons} \label{sec:pert}
 
 (a) Em sala de aula vimos que a parte de Coulomb da hamiltoniana do Jellium se escreve como
 \begin{equation} \label{eq:jellium}
@@ -234,7 +254,7 @@ $$
 \ket{\text{GS}} = \prod_{\abs{\k} \leq k_{F}, \s} c_{\k \s}^{\d} \ket{0}.
 $$
 
-Assim, teremos que calcular o elemento de matriz
+Assim, teremos que calcular
 $$
 M_{\k_1 \k_2 \q, \s_1 \s_2} = \ev{c_{\k_1 - \q, \s_1}^\d c_{\k_2 + \q, \s_2}^\d c_{\k_2 \s_2} c_{\k_1 \s_1}}{\text{GS}}.
 $$
@@ -256,7 +276,7 @@ $$
 \Big) \ev{\nn_{\k_2 \s_2} \nn_{\k_1 \s_1}}{\text{GS}}.
 $$
 
-Como a interação $\hat{V}$ se trata de uma somatória com $\q \neq 0$, o termo $\delta_{\q, \0}$ vai desaparecer. Veja também que $\ev{\nn_{\k_2 \s_2} \nn_{\k_1 \s_1}}{\text{GS}} = \theta(k_F - \abs{\k_1}) \, \theta(k_F - \abs{\k_2})$, pois essa quantidade só é diferente de zero se ambos $\k_1$ e $\k_2$ estiverem dentro do mar de Fermi.
+Como a equação \ref{eq:jellium} se trata de uma somatória com $\q \neq 0$, o termo $\delta_{\q, \0}$ vai desaparecer. Veja também que $\ev{\nn_{\k_2 \s_2} \nn_{\k_1 \s_1}}{\text{GS}} = \theta(k_F - \abs{\k_1}) \, \theta(k_F - \abs{\k_2})$, pois essa quantidade só é diferente de zero se ambos $\k_1$ e $\k_2$ estiverem dentro do mar de Fermi.
 
 Assim
 $$
@@ -270,7 +290,7 @@ $$
 \theta(k_F - \abs{\k}) \, \theta(k_F - \abs{\k + \q}).
 $$
 
-A somatória nos spins $\sum_{\s}$ se converte em um fator $2$ e as somatórias nos momentos nós convertemos em integrais via $\sum_{\k} \to \frac{\mathcal{V}}{(2\pi)^3} \int_{\R^3} \dd[3]{\k}$. Temos que
+A \textcolor{blue}{somatória nos spins $\sum_{\s}$ se converte em um fator $\bm{2}$} e as somatórias nos momentos nós convertemos em integrais via $\sum_{\k} \to \frac{\mathcal{V}}{(2\pi)^3} \int_{\R^3} \dd[3]{\k}$. Temos que
 $$
 I = \sum_{\q \neq \0} \frac{1}{\abs{\q}^2} \sum_{\k}
 \theta(k_F - \abs{\k}) \, \theta(k_F - \abs{\k + \q}) =
@@ -278,12 +298,12 @@ I = \sum_{\q \neq \0} \frac{1}{\abs{\q}^2} \sum_{\k}
 \theta(k_F - \abs{\k}) \, \theta(k_F - \abs{\k + \q}) \dd[3]{\k}.
 $$
 
-Fixado $\q$, temos que o termo de Heaviside $\theta(k_F - \abs{\k}) \, \theta(k_F - \abs{\k + \q})$ corresponde ao domínio de integração $D_{\q} = \{\k \in \R^3 \mid \abs{\k} < k_F\} \cap \{\k \in \R^3 \mid \abs{\k + \q} < k_F\}$, que é uma interseção de duas esferas com raio $k_F$, uma centrada em $\0$ e a outra em $-\q$. Note que esse domínio $D_{\q}$, não depende da direção de $\q$, somente do módulo $q$. Ainda mais, perceba que $D_q \neq \emptyset$ somente se $0 < q < 2 k_F$. Assim a integral $I$ se simplifica
+Fixado $\q$, o termo de Heaviside $\theta(k_F - \abs{\k}) \, \theta(k_F - \abs{\k + \q})$ corresponde ao domínio de integração $D_{\q} = \{\k \in \R^3 \mid \abs{\k} < k_F\} \cap \{\k \in \R^3 \mid \abs{\k + \q} < k_F\}$, que é uma interseção de duas esferas com raio $k_F$, uma centrada em $\0$ e a outra em $-\q$. Note que esse domínio $D_{\q}$, não depende da direção de $\q$, somente do módulo $q$. Ainda mais, perceba que $D_q \neq \emptyset$ somente se $0 < q < 2 k_F$. Assim a integral $I$ se simplifica
 $$
 I = \qty[\frac{\mathcal{V}}{(2\pi)^3}]^2 \int_0^{2k_F} \frac{4\pi \, q^2 \dd{q}}{q^2} \int_{D_q} \dd[3]{\k} =
 \qty[\frac{\mathcal{V}}{(2\pi)^3}]^2 (4\pi) \int_0^{2k_F} \text{Vol}(D_q) \dd{q}.
 $$
-Assim, precisamos calcular $\text{Vol}(D_q) = \int_{D_q} \dd[3]{\k}$, que o volume da interseção das duas esferas. Se fizermos o desenho geométrico (não vou fazer aqui pois dá trabalho) e utilizarmos coordenadas polares $(k, \theta_k, \vphi_k)$ é fácil ver que
+Assim, precisamos calcular $\text{Vol}(D_q) = \int_{D_q} \dd[3]{\k}$, que é o volume da interseção das duas esferas. Se fizermos o desenho geométrico (não vou fazer aqui pois dá trabalho, mas o Bruus-Flensberg faz esse cálculo na página 42) e utilizarmos coordenadas polares $(k, \theta_k, \vphi_k)$ é fácil ver que
 $$
 \text{Vol}(D_q) = 2 \int_0^{2\pi} \dd{\vphi_k} \int_{q / (2 k_F)}^{1} \dd(\cos\theta_k) \int_{q / (2 \cos\theta_k)}^{k_F} k^2 \dd{k} = \frac{4\pi}{3} k_F^3 - \pi k_F^2 q + \frac{\pi}{12} q^3.
 $$
@@ -298,26 +318,33 @@ E_0^{(1)} = - \frac{2 \pi e^2}{N \mathcal{V}} \times 2 \times
 $$
 
 Finalmente, usando que $n = \frac{N}{\mathcal{V}}$ e $\displaystyle{ k_F = \sqrt[3]{3 \pi^2 n} = \frac{1}{a_0 r_s} \qty(\frac{9\pi}{4})^{1/3} }$, obtemos
-$$
+\begin{equation} \label{eq:1ord}
 E_0^{(1)} =
 - e^2 \cdot \frac{k_F^3}{n} \cdot
-\frac{1}{4 \pi^3} \cdot k_F =
-- e^2 \cdot
-\frac{3}{4 \pi} \cdot \frac{1}{a_0 r_s} \qty(\frac{9\pi}{4})^{1/3} \implies
+\frac{1}{4 \pi^3} \cdot k_F
+\end{equation}
+$$
+= - e^2 \cdot \frac{3}{4 \pi} \cdot \frac{1}{a_0 r_s} \qty(\frac{9\pi}{4})^{1/3}
+= - \frac{3}{2\pi} \qty(\frac{9\pi}{4})^{1/3} \frac{1}{r_s} \, \qty(\frac{e^2}{2a_0}) \implies
 $$
 $$
-E_0^{(1)} =
-- \frac{3}{2\pi} \qty(\frac{9\pi}{4})^{1/3} \frac{1}{r_s} \, \qty(\frac{e^2}{2a_0})
+E_0^{(1)}
 = - \frac{3}{2\pi} \qty(\frac{9\pi}{4})^{1/3} \frac{1}{r_s} \, \text{Ry}.
 $$
 
-(b) Numa célula esférica uniformemente carregada com densidade $- ne$, um elétron localizado num raio $r$ enxerga o potencial de Coulomb $-\frac{e^2}{r}$ da somente da bola de raio $r$, como se toda sua carga estivesse no centro. Assim, o potencial que elétron sente é
+\n
+
+(b) Numa célula esférica uniformemente carregada com densidade $+ne$, um elétron localizado num raio $r$ enxerga a força de Coulomb somente da bola positiva de raio $r$, como se toda carga dessa bola estivesse no centro. Assim, a força que o elétron sente é
 $$
-V(\r) = \frac{e^2}{r} n(r) = \frac{e^2}{a_0^3 r_s^3} r^2,
+F(\r) = -\grad{V} = - \frac{e^2}{r^2} n(r) \vu{r} = -\frac{e^2}{a_0^3 r_s^3} r \, \vu{r},
 $$
-onde $n(r) = n \frac{4 \pi}{3} r^3 = \qty(\frac{r}{a_0 r_s})^3$. Como se trata de um potencial harmônico, reescrevemos $V(\r) = \frac{1}{2} m \omega_0^2 \r^2$, com $\omega_0^2 = \frac{e^2}{m a_0^3 r_s^3}$. Lembrando que $a_0 = \frac{1}{m e^2}$, a energia de ponto zero corresponde à energia $\frac{3}{2} \omega_0$ do estado fundamental do oscilador harmônico tridimensional:
+onde $n(r) = n \frac{4 \pi}{3} r^3 = \qty(\frac{r}{a_0 r_s})^3$. Portanto, o potencial que o elétron sente é
 $$
-E = \frac{3}{2} \omega_0 =
+V(\r) = \frac{1}{2} \, \frac{e^2}{a_0^3 r_s^3} r^2,
+$$
+que é um potencial harmônico tridimensional. Escrevemos $V(\r) = \frac{1}{2} m \omega_0^2 \r^2$, com $\omega_0^2 = \frac{e^2}{m a_0^3 r_s^3}$. Lembrando que $a_0 = \frac{1}{m e^2}$ ($\hbar = 1$), a energia de ponto zero corresponde à energia $\frac{3}{2} \omega_0$ do estado fundamental do oscilador harmônico tridimensional:
+$$
+\frac{E_{\text{Wigner}}^{(1)}}{N} = \frac{3}{2} \omega_0 =
 \frac{3}{2} \, \frac{e}{\sqrt{m a_0^3}} \, \frac{1}{r_s^{3/2}} =
 \frac{3 e^2}{2 a_0} \, \frac{1}{r_s^{3/2}} = \frac{3}{r_s^{3/2}} \, \text{Ry}.
 $$
@@ -327,15 +354,73 @@ $$
 
 \section{Gás de elétrons polarizado}
 
-(a)
+(a) Sejam $k_{F \up}$ e $k_{F \down}$ os números de Fermi para spin $\up$ e $\down$. Temos
+$$
+N_{\up} = \sum_{\k} \ev{n_{\k \up}}{\text{GS}} =
+\frac{\mathcal{V}}{(2\pi)^3} \int \dd[3]{\k} \theta(k_{F\up} - k) = \frac{V}{6 \pi^2} k_{F\up}^3 \implies
+k_{F\up} = \sqrt[3]{3 \pi^2 n (1 + \xi)},
+$$
+analogamente para $k_{F\down} = \sqrt[3]{3 \pi^2 n (1 - \xi)}$. Para o termo de energia cinética temos
+$$
+\frac{E_{\text{pol}}^{(0)}}{N} = \frac{1}{N} \sum_{\k \s} \frac{\hbar^2 k^2}{2m} \ev{n_{\k\s}}{\text{GS}} =
+\frac{V}{(2 \pi)^3 N} \, \frac{\hbar^2}{2m} \int \dd[3]{\k} \qty[ \theta(k_{F\up} - k) + \theta(k_{F\down} - k) ] =
+$$
+$$
+= \frac{V}{(2 \pi)^3 N} \, \frac{\hbar^2}{2m} \, 4 \pi \qty[\int_0^{k_{F\up}} k^4 \dd{k} + \int_0^{k_{F\down}} k^4 \dd{k}]
+= \frac{1}{10 \pi^2 n} \, \frac{\hbar^2}{2m} \qty(k_{F\up}^5 + k_{F\down}^5).
+$$
+
+Substituindo $k_{F\up\down} = \sqrt[3]{3 \pi^2 n (1 \pm \xi)}$, $n = \frac{3}{4\pi (r_s a_0)^3}$, $a_0 = \frac{\hbar^2}{m e^2}$ e $\text{Ry} = \frac{e^2}{2a_0}$, obtemos
+$$
+\frac{E_{\text{pol}}^{(0)}}{N} = \frac{3}{10} \qty(\frac{9\pi}{4})^{2/3} \frac{1}{r_s^2}
+\qty[(1+\xi)^{5/3} + (1-\xi)^{5/3}] \, \text{Ry}.
+$$
+
+(b) Para a correção de primeira ordem do gás polarizado, os cálculos são análogos à Questão \ref{sec:pert}. Podemos usar diretamente o resultado da equação \ref{eq:1ord}, dividindo o resultado por $2$ (porque o spin não é simétrico mais) e separando $k_{F\up}$ e $k_{F\down}$:
+$$
+\frac{E_{\text{pol}}^{(1)}}{N} =
+- \frac{e^2}{2} \, \frac{1}{4\pi^3} \qty(\frac{k_{F\up}^3}{n} \, k_{F\up} + \frac{k_{F\down}^3}{n} \, k_{F\down}) =
+\frac{-3e^2}{2 \cdot 4\pi} n^{1/3} \qty[(1+\xi)^{4/3} + (1-\xi)^{4/3}] \implies
+$$
+$$
+\frac{E_{\text{pol}}^{(1)}}{N} =
+- \frac{3}{4\pi} \qty(\frac{9\pi}{4})^{1/3} \frac{1}{r_s} \, \qty[(1+\xi)^{4/3} + (1-\xi)^{4/3}] \, \text{Ry}.
+$$
+
+Defina $\Sigma(\xi) = \frac{E_{\text{pol}}^{(0)} + E_{\text{pol}}^{(1)}}{N}$ como a energia do estado fundamental como função da polarização $\xi$:
+$$
+\Sigma(\xi) =
+\frac{1}{2} \qty{ \frac{3}{5} \qty(\frac{9\pi}{4})^{2/3} \frac{1}{r_s^2}
+\qty[(1+\xi)^{5/3} + (1-\xi)^{5/3}]
+- \frac{3}{2\pi} \qty(\frac{9\pi}{4})^{1/3} \frac{1}{r_s} \qty[(1+\xi)^{4/3} + (1-\xi)^{4/3}]
+} \, \text{Ry}.
+$$
+
+Então analizamos os valores de $r_s$ para quais $\Sigma(\xi = 1) < \Sigma(\xi = 0)$. Isso nos dá que
+$$
+\Sigma(1) < \Sigma(0) \implies
+$$
+$$
+\frac{3}{5} \qty(\frac{9\pi}{4})^{2/3} \frac{2^{2/3}}{r_s^2}
+- \frac{3}{2\pi} \qty(\frac{9\pi}{4})^{1/3} \frac{2^{1/3}}{r_s} \; < \;
+\frac{3}{5} \qty(\frac{9\pi}{4})^{2/3} \frac{1}{r_s^2}
+- \frac{3}{2\pi} \qty(\frac{9\pi}{4})^{1/3} \frac{1}{r_s} \implies
+$$
+$$
+\frac{2\pi}{5} \qty(\frac{9\pi}{4})^{1/3} 2^{2/3} - 2^{1/3} r_s \; < \;
+\frac{2\pi}{5} \qty(\frac{9\pi}{4})^{1/3} - r_s \implies
+$$
+$$
+(2^{1/3} - 1) \, r_s \; > \; \frac{2\pi}{5} \qty(\frac{9\pi}{4})^{1/3} (2^{2/3} - 1)
+$$
+$$
+r_s \; > \; \qty(\frac{2\pi}{5}) \qty(\frac{9\pi}{4})^{1/3} (2^{1/3} + 1) = 5.45.
+$$
+
+O resultado acima indica que, para valores de $r_s$ altos o suficiente (a saber da ordem de $5.45$), o estado fundamental do sistema é \textbf{ferromagnético}, já que a energia desse estado é menor do que a energia do estado não-polarizado.
 
 
 
 \pagebreak
-
-\begin{equation} \label{eq:pertub}
-(E - H_0) \ket{\psi} = \lambda V \ket{\psi}.
-\end{equation}
-
 
 \end{document}
