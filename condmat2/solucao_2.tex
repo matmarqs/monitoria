@@ -220,14 +220,14 @@ $$
 
 (a) Em sala de aula vimos que a parte de Coulomb da hamiltoniana do Jellium se escreve como
 \begin{equation} \label{eq:jellium}
-\hat{V} = \frac{3 e^2}{2 N a_0 r_s}
+\hat{V} = \frac{2 \pi e^2}{\mathcal{V}}
 \sum_{\substack{\k_1, \k_2, \q \neq \0 \\ \s_1 \s_2}} \frac{1}{\q^2} \,
 c_{\k_1 - \q, \s_1}^\d c_{\k_2 + \q, \s_2}^\d c_{\k_2 \s_2} c_{\k_1 \s_1}
 \end{equation}
 
 A correção de primeira ordem para a energia do ground-state é dada por
 $$
-E_0^{(1)} = \ev{\hat{V}}{\text{GS}},
+E_0^{(1)} = \frac{\ev{\hat{V}}{\text{GS}}}{N},
 $$
 onde o ground-state do sistema é
 $$
@@ -260,11 +260,13 @@ Como a interação $\hat{V}$ se trata de uma somatória com $\q \neq 0$, o termo
 
 Assim
 $$
-\hat{V} = - \frac{3e^2}{2N a_0 r_s} \sum_{\substack{\k_1, \k_2, \q \neq \0 \\ \s_1 \s_2}} \frac{1}{\q^2} \,
+\frac{\ev{\hat{V}}{\text{GS}}}{N} =
+- \frac{2 \pi e^2}{N \mathcal{V}} \sum_{\substack{\k_1, \k_2, \q \neq \0 \\ \s_1 \s_2}}
+\frac{1}{\q^2} \,
 \delta_{\q, \k_1 - \k_2} \delta_{\s_1, \s_2} \theta(k_F - \abs{\k_1}) \, \theta(k_F - \abs{\k_2}).
 $$
 $$
-= - \frac{3e^2}{2N a_0 r_s} \sum_{\s} \sum_{\q \neq \0} \frac{1}{\abs{\q}^2} \sum_{\k}
+= - \frac{2 \pi e^2}{N \mathcal{V}} \sum_{\s} \sum_{\q \neq \0} \frac{1}{\abs{\q}^2} \sum_{\k}
 \theta(k_F - \abs{\k}) \, \theta(k_F - \abs{\k + \q}).
 $$
 
@@ -283,9 +285,43 @@ I = \qty[\frac{\mathcal{V}}{(2\pi)^3}]^2 \int_0^{2k_F} \frac{4\pi \, q^2 \dd{q}}
 $$
 Assim, precisamos calcular $\text{Vol}(D_q) = \int_{D_q} \dd[3]{\k}$, que o volume da interseção das duas esferas. Se fizermos o desenho geométrico (não vou fazer aqui pois dá trabalho) e utilizarmos coordenadas polares $(k, \theta_k, \vphi_k)$ é fácil ver que
 $$
-\text{Vol}(D_q) = 2 \int_0^{2\pi} \dd{\vphi_k} \int_{q / (2 k_F)}^{1} \dd(\cos\theta_k) \int_{q / (2 \cos\theta_k)}^{k_F} k^2 \dd{k} = \frac{4\pi}{3} k_F^3 - \pi^2 k_F^2 q + \frac{\pi}{12} q^3
+\text{Vol}(D_q) = 2 \int_0^{2\pi} \dd{\vphi_k} \int_{q / (2 k_F)}^{1} \dd(\cos\theta_k) \int_{q / (2 \cos\theta_k)}^{k_F} k^2 \dd{k} = \frac{4\pi}{3} k_F^3 - \pi k_F^2 q + \frac{\pi}{12} q^3.
 $$
-<++>
+
+E portanto
+$$
+I = \qty[\frac{\mathcal{V}}{(2\pi)^3}]^2 (4\pi) \, (\pi k_F^4) \implies
+E_0^{(1)} = - \frac{2 \pi e^2}{N \mathcal{V}} \times 2 \times
+\qty[\frac{\mathcal{V}}{(2\pi)^3}]^2 (4\pi) \, (\pi k_F^4)
+= - e^2 \frac{\mathcal{V}}{N}
+\frac{16 \pi^3 }{(2\pi)^6} k_F^4 .
+$$
+
+Finalmente, usando que $n = \frac{N}{\mathcal{V}}$ e $\displaystyle{ k_F = \sqrt[3]{3 \pi^2 n} = \frac{1}{a_0 r_s} \qty(\frac{9\pi}{4})^{1/3} }$, obtemos
+$$
+E_0^{(1)} =
+- e^2 \cdot \frac{k_F^3}{n} \cdot
+\frac{1}{4 \pi^3} \cdot k_F =
+- e^2 \cdot
+\frac{3}{4 \pi} \cdot \frac{1}{a_0 r_s} \qty(\frac{9\pi}{4})^{1/3} \implies
+$$
+$$
+E_0^{(1)} =
+- \frac{3}{2\pi} \qty(\frac{9\pi}{4})^{1/3} \frac{1}{r_s} \, \qty(\frac{e^2}{2a_0})
+= - \frac{3}{2\pi} \qty(\frac{9\pi}{4})^{1/3} \frac{1}{r_s} \, \text{Ry}.
+$$
+
+(b) Numa célula esférica uniformemente carregada com densidade $- ne$, um elétron localizado num raio $r$ enxerga o potencial de Coulomb $-\frac{e^2}{r}$ da somente da bola de raio $r$, como se toda sua carga estivesse no centro. Assim, o potencial que elétron sente é
+$$
+V(\r) = \frac{e^2}{r} n(r) = \frac{e^2}{a_0^3 r_s^3} r^2,
+$$
+onde $n(r) = n \frac{4 \pi}{3} r^3 = \qty(\frac{r}{a_0 r_s})^3$. Como se trata de um potencial harmônico, reescrevemos $V(\r) = \frac{1}{2} m \omega_0^2 \r^2$, com $\omega_0^2 = \frac{e^2}{m a_0^3 r_s^3}$. Lembrando que $a_0 = \frac{1}{m e^2}$, a energia de ponto zero corresponde à energia $\frac{3}{2} \omega_0$ do estado fundamental do oscilador harmônico tridimensional:
+$$
+E = \frac{3}{2} \omega_0 =
+\frac{3}{2} \, \frac{e}{\sqrt{m a_0^3}} \, \frac{1}{r_s^{3/2}} =
+\frac{3 e^2}{2 a_0} \, \frac{1}{r_s^{3/2}} = \frac{3}{r_s^{3/2}} \, \text{Ry}.
+$$
+
 
 \pagebreak
 
@@ -293,7 +329,7 @@ $$
 
 (a)
 
-<++>
+
 
 \pagebreak
 
