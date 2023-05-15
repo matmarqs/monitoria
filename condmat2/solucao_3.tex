@@ -10,16 +10,66 @@
 
 \section{Simetrias proibidas e quase-cristais}
 
-Definimos
+(b) Definimos
 $$
-S(k) = \sum_{n} e^{i k x_n} =
+\boxed{ S(k) = \sum_{n} e^{-i k x_n} } = \sum_{n} e^{-i k (n a)} e^{-i k F(na)}.
 $$
-Como $f(x) = e^{-i k F(x)}$ é uma função periódica de período $b$, podemos escrevê-la como uma série de Fourier
+
+Como $f_k(x) = e^{-i k F(x)}$ é uma função periódica de período $b$, podemos escrevê-la como uma série de Fourier, sendo $A_q(k)$ seus coeficientes:
 $$
-e^{-i k F(x)} = \sum_{q \in \Z} A_q(k) e^{i \frac{2\pi q x}{b}}, \quad
-A_q(k) = \frac{1}{b} \int e^{-\frac{2\pi i q y}{b}} e^{-i k F(y)} \dd{y}
+f_k(x) = e^{-i k F(x)} = \sum_{q} A_q(k) \, e^{i \frac{2\pi q x}{b}}, \quad
+\boxed{ A_q(k) = \frac{1}{b} \int_0^b e^{-\frac{2\pi i q y}{b}} e^{-i k F(y)} \dd{y}. }
 $$
-<++>
+
+Assim
+$$
+S(k) = \sum_{n} e^{-i k (n a)} e^{-i k F(na)} = \sum_{q} A_q(k) \sum_{n} e^{-i\qty(k - \frac{2\pi q}{b})(na)}.
+$$
+
+Mas lembre que, num Bravais Lattice de $N$ sítios e sendo $\k$ arbitrário, temos (Apêndice F do Ashcroft)
+$$
+\sum_{\vb{R}} e^{i \k \vdot \vb{R}} = N \sum_{\vb{G}} \delta_{\k,\vb{G}},
+$$
+onde a soma da esquerda $\sum_{\vb{R}}$ percorre o Bravais Lattice (de $N$ sítios) e a soma da direita $\sum_{\vb{G}}$ percorre o Reciprocal Lattice. Aplicando isso para o nosso caso, temos $\vb{R} = na \vu{x}$, $\vb{G} = \frac{2\pi p}{a} \vu{x}$, com $n, p$ inteiros, de maneira que
+$$
+\sum_{n} e^{-i \qty(k - \frac{2 \pi q}{b}) (na)} = N \sum_{p} \delta_{\qty(k - \frac{2 \pi q}{b}), \frac{2\pi p}{a}} =
+N \sum_{p} \delta_{k, G_{pq}}, \quad G_{pq} = \frac{2\pi p}{a} + \frac{2\pi q}{b}.
+$$
+
+Portanto temos que
+$$
+\boxed{ S(k) = N \sum_{p, q} A_q(k) \, \delta_{k, G_{pq}}. }
+$$
+
+(c) Reescrevemos a sequência $x_n$ como
+$$
+x_n = n + \rho [n \s] = n + \rho ( n \s - \{n\s\}) = n (1 + \rho \s) - \rho \qty{\frac{n (1 + \rho \s)}{(1+\rho\s)/\s}},
+$$
+onde identificamos $a = (1 + \rho \s)$, $F(x) = -\rho \qty{\frac{x}{b}}$, com $b = \frac{1+\rho\s}{\s}$. Podemos calcular diretamente os coeficientes, fazendo a mudança de variável $z = \frac{y}{b}$:
+$$
+A_q(k) = \frac{1}{b} \int_0^b e^{-\frac{2\pi i q y}{b}} e^{-i k F(y)} \dd{y} =
+\frac{1}{b} \int_0^b e^{-\frac{2\pi i q y}{b}} e^{i k \rho \qty{\frac{x}{b}}} \dd{y} =
+\int_0^1 e^{-2\pi i q z} e^{i k \rho \qty{z}} \dd{z},
+$$
+mas $\qty{z} = z$ para $0 \leq z < 1$, então
+$$
+A_q(k) = \int_0^1 e^{-i(2\pi q - k \rho) z} \dd{z} =
+\frac{1}{-i(2\pi q - k\rho)} \eval{\qty[e^{-i(2\pi q - k \rho) z}]}_{z=0}^{z=1}.
+$$
+
+Definindo então $X_{q}(k) = 2\pi q - k \rho$ (só depende de $q$ e $k$), obtemos
+$$
+A_q(k) = \frac{1}{-i X_q(k)} \qty(e^{-i X_q(k)} - 1) =
+\frac{e^{-i X_q(k)/2}}{X_q(k)/2} \cdot \frac{\qty(e^{iX_q(k)/2} - e^{-iX_q(k)/2})}{2i} =
+e^{-iX_q(k) / 2} \frac{\sin(X_q(k)/2)}{X_q(k)/2}.
+$$
+
+Se agora definirmos $X_{pq} = X_q(k = G_{pq})$, vemos facilmente que $\boxed{ X_{pq} = \frac{2\pi \rho}{(1+\rho\s)}\qty(\frac{q}{\rho} - p) }$ e obtemos
+$$
+\boxed{ S(k) = \sum_{n} e^{-ikx_n} = N \sum_{p,q} e^{-i X_{pq}/2} \, \frac{\sin(X_{pq}/2)}{X_{pq}/2} \delta_{k, G_{pq}}. }
+$$
+
+
 
 \pagebreak
 
