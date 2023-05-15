@@ -75,9 +75,72 @@ $$
 
 \section{Densidade de estados}
 
+(a) A densidade de estados por unidade de volume $d-$dimensional $V$ é
+$$
+\rho(E) = \frac{1}{V} \sum_{\k, \s} \delta(E - \eps(\k)) = \frac{2}{V} \cdot \frac{V}{(2\pi)^d} \int_{\R^d} \dd[d]{\k} \delta(E - \eps(\k)) = \frac{2}{(2\pi)^d} \int_{\R^d} \dd[d]{\k} \delta(E - \eps(\k)).
+$$
+
+Como pode ser visto na página \href{https://en.wikipedia.org/wiki/Dirac_delta_function#Properties}{$\delta$ de Dirac da Wikipédia}, vale a seguinte identidade
+$$
+\int_{\R^n} f(\r) \delta(g(\r)) \dd[n]{\r} = \int_{g^{-1}(0)} \frac{f(\r)}{\abs{\grad{g(\r)}}} \dd{\s(\r)},
+$$
+onde a expressão da direita é uma integral sobre a superfície $(n-1)-$dimensional $g^{-1}(0)$ (pontos $\r$ tais que $g(\r) = 0$). Dessa maneira
+$$
+\rho(E) = \frac{2}{(2\pi)^d} \int_{\eps^{-1}(E)} \frac{\dd{\s(\k)}}{\abs{\eps(\k)}} =
+\frac{2}{(2\pi)^d} \int_{C(E)} \frac{\dd{\s(\k)}}{\abs{\grad{\eps(\k)}}},
+$$
+onde $C(E) = \eps^{-1}(E)$ é a superfície de Fermi. No caso $d = 2$ temos uma integral de linha:
+$$
+\rho(E) = \frac{1}{2\pi^2} \int_{C(E)} \frac{\dd{\ell}}{\abs{\grad{\eps(\k)}}}.
+$$
+
+Expandindo $\eps(\k)$ em segunda ordem em Taylor ao redor de um ponto crítico $\k_o = (k_{xo}, k_{yo})$, podemos rotacionar $(k_x, k_y)$ de maneira que o termo de derivada mista $\pdv{\eps}{k_x}{k_y}$ seja zero. Dessa maneira, sem perda de generalidade temos
+$$
+\eps(\k) \approx \eps_o + \frac{A}{2} \qty[(k_x - k_{xo})^2 + \zeta (k_y - k_{yo})^2],
+$$
+onde $(A, \zeta) = (+1, +1)$ corresponde a um ponto de mínimo, $(A, \zeta) = (-1, +1)$ ponto de máximo e $(A, \zeta) = (+1, -1)$ a um ponto de sela (equivalente a $(A, \zeta) = (-1, +1)$).
+
+Nos casos de ponto de máximo e mínimo, a superfície $C(\eps)$ é um círculo de raio $R = \sqrt{2\abs{\eps-\eps_o}}$, pois
+$$
+(k_x - k_{xo})^2 + (k_y - k_{yo})^2 = 2 \abs{\eps - \eps_o} = R^2,
+$$
+com $\eps < \eps_o$ para ponto de máximo e $\eps > \eps_o$ para ponto de mínimo. Portanto, nesses dois casos $\abs{\grad{\eps(\k)}} = \sqrt{(k_x - k_{xo})^2 + (k_y - k_{yo})^2} = R$, $\dd{\ell} = R \dd{\theta}$ e
+$$
+\rho(E) = \frac{1}{2\pi^2} \int_0^{2\pi} \frac{R \dd{\theta}}{R} = \frac{1}{\pi} = \cte.
+$$
+
+Para calcular o caso do ponto de sela $(A, \zeta) = (+1, -1)$, acho mais fácil utilizar a expressão do $\delta$ de Dirac para a densidade de estados:
+$$
+\rho(E) = \frac{1}{2\pi^2} \int_{\R^2} \dd[2]{\k} \delta(E - \eps(\k)) =
+\frac{4}{2 \pi^2} \int_0^K \dd{q_y} \int_0^\infty \dd{q_x}
+\delta\qty(\abs{E - \eps_o} + \frac{q_y^2}{2} - \frac{q_x^2}{2}),
+$$
+onde a integração é sobre a variável $\q = \k - \k_o$, o fator $4$ apareceu devido à simetria entre os quadrantes $(\pm q_x, \pm q_y)$ e foi introduzido um cutoff $K$ para que a integral não divirja e possamos analisar seu comportamento.
+
+Usando que $\displaystyle{\delta(g(x)) = \sum_{g(a)=0} \frac{1}{\abs{g'(a)}} \delta(x-a)}$ e $\displaystyle{\int \frac{\dd{x}}{\sqrt{x^2+a}} = \log(x + \sqrt{x^2 + a})}$ (Mathematica), temos
+$$
+\rho(E) = \frac{2}{\pi^2} \int_0^K \frac{\dd{q_y}}{\sqrt{q_y^2 + 2 \abs{E-\eps_o}}} =
+\text{constante} - \frac{1}{\pi^2} \log\abs{E-\eps_o}.
+$$
+
+\textbf{FALTA ESBOÇAR OS TRÊS (DOIS) CASOS, CONSTANTE E DIV LOGARITMICA.}
+
+\n
+
+(b) Temos que $g(E) \dd{E} = \rho(\xi) \dd{\xi}$, mais ou menos isso só que tem degenerescência 2.
+
+Isso nos dá que
+$$
+\boxed{ g(E) = \frac{2 \abs{E}}{D \sqrt{E^2 - \Delta^2}}. }
+$$
+
+
+
 \pagebreak
 
 \section{Elétrons de Bloch}
+
+\textbf{AQUI A GENTE SÓ TEM QUE LATEXAR COPIANDO DO ASHCROFT.}
 
 \pagebreak
 
