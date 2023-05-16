@@ -125,14 +125,38 @@ $$
 
 \textbf{FALTA ESBOÇAR OS TRÊS (DOIS) CASOS, CONSTANTE E DIV LOGARITMICA.}
 
+\textbf{TALVEZ CORRIGIR A CONSTANTE QUE ACOMPANHA O LOG.}
+
 \n
 
-(b) Temos que $g(E) \dd{E} = \rho(\xi) \dd{\xi}$, mais ou menos isso só que tem degenerescência 2.
+(b) Temos que $E(\k) = \sqrt{\xi^2(\k) + \Delta^2}$. Assim, uma quase-partícula com energia $E$ corresponde a dois estados, um com energia $\xi_+ = \sqrt{E^2 - \Delta^2}$ e outro com $\xi_- = -\sqrt{E^2 - \Delta^2}$. Assim, temos que
+$$
+g(E) \dd{E} = \rho(\xi_+) \abs{\dd{\xi_+}} + \rho(\xi_-) \abs{\dd{\xi_-}}.
+$$
 
-Isso nos dá que
+Supondo que $E > \Delta$ e $-D < \xi_\pm < D$, temos então que
+$$
+g(E) = \rho(\xi_+) \abs{\dv{\xi_+}{E}} + \rho(\xi_-) \abs{\dv{\xi_-}{E}} =
+\frac{1}{D} \, \qty(\abs{\frac{2E}{2\sqrt{E^2-\Delta^2}}} + \abs{\frac{-2E}{2\sqrt{E^2-\Delta^2}}}) \implies
+$$
 $$
 \boxed{ g(E) = \frac{2 \abs{E}}{D \sqrt{E^2 - \Delta^2}}. }
 $$
+
+\textbf{FALTA ESBOÇAR O GRÁFICO DE $g(E)$ E DISCUTIR O RESULTADO.}
+
+\textbf{RELACIONAR O GAP SUPERCONDUTOR COM A TEORIA DE BANDAS.}
+
+
+\url{https://physics.stackexchange.com/questions/266965/what-is-the-difference-of-the-gap-between-superconductor-and-insulator}
+
+In a conventional conductor any momentum eigenstate in the band can be occupied by at most two electrons (with opposite spins) so in a full band the net momentum of the electrons in the band is zero i.e. there is no net drift velocity and hence no current.
+
+In a superconductor the electrons pair up into Cooper pairs that obey Bose-Einstein statistics, so any number of Cooper pairs can occupy the same momentum state. That means the electrons joined into Cooper pairs can have a net momentum, and hence a net drift velocity, so they can carry a current.
+
+Existence of a gap means that ground state and excited states are well separated and a transition from ground state and excited states requires some energy.
+
+Existence of a gap does not determine whether a system is insulating or not. In your case, conductivity is determined by the ground state. For an insulator, the ground state is insulating while ground state of superconductor is superconducting. A gap here means it is not easy for insulator to be excited to carry currents and for superconductors to lose its superconductivity.
 
 
 
@@ -140,7 +164,79 @@ $$
 
 \section{Elétrons de Bloch}
 
-\textbf{AQUI A GENTE SÓ TEM QUE LATEXAR COPIANDO DO ASHCROFT.}
+A hamiltoniana de Bloch é
+$$
+H_{\k} = -\frac{\hbar^2}{2m} \qty[\laplacian + 2i \k \vdot \grad - \k \vdot \k].
+$$
+Calculando $H_{\k + \q}$, obtemos
+$$
+H_{\k + \q} = -\frac{\hbar^2}{2m} \qty[\laplacian + 2i (\k + \q) \vdot \grad - (\k + \q) \vdot (\k + \q)] =
+H_{\k} - \frac{\hbar^2}{2m} \qty[2 i \q \vdot \grad - 2 \q \vdot \k - q^2]
+$$
+$$
+H_{\k + \q} = H_{\k} + V, \quad \boxed{V = \frac{\hbar^2}{m} \q \vdot \qty(-i \grad + \k) + \frac{\hbar^2}{2m} \, q^2.}
+$$
+
+Seguindo o Apêndice E do Ashcroft, iremos calcular $\pdv{\eps_n}{k_i}$ e $\pdv{\eps_n}{k_i}{k_j}$ através de teoria de perturbação:
+$$
+\eps_n(\k+\q) = \eps_n(\k) + \sum_{i} \pdv{\eps_n}{k_i} q_i +
+\frac{1}{2} \sum_{i,j} \pdv{\eps_n}{k_i}{k_j} q_i q_j + O(q^3) =
+$$
+$$
+= \eps_n(\k) + \ev{V}{u_{n\k}} + \sum_{n' \neq n} \frac{\abs{\mel{u_{n\k}}{V}{u_{n'\k}}}^2}{\eps_n(\k) - \eps_{n'}(\k)} + \cdots,
+$$
+onde $\ket{u_{n\k}}$ (com $\braket{\r}{n\k} = \psi_{n\k}(\r) = e^{i\k\vdot\r} u_{n\k}(\r)$) são os autoestados da hamiltoniana de Bloch $H_{\k}$.
+
+\n
+
+(a) O único termo linear de $V$ é $\frac{\hbar^2}{m} \q \vdot (-i\grad + \k)$, portanto
+$$
+\sum_{i} \pdv{\eps_n}{k_i} q_i = \frac{\hbar^2}{m} \ev{ \q \vdot (-i\grad + \k)}{u_{n\k}} =
+\frac{\hbar^2}{m} \int \dd[d]{\r} u_{n\k}^*(\r) \qty[\sum_{i}\qty(-i\grad + \k)_i q_i] u_{n\k}(\r) =
+$$
+$$
+\sum_{i} \pdv{\eps_n}{k_i} q_i =\sum_{i} \qty[\frac{\hbar^2}{m} \int \dd[d]{\r} u_{n\k}^*(\r) \qty(-i\grad + \k)_i u_{n\k}(\r) ] q_i.
+$$
+
+Mas note que $\psi_{n\k}^*(\r) \qty(-i\grad) \psi_{n\k}(\r) = u_{n\k}^*(\r) \qty(-i\grad + \k) u_{n\k}(\r)$, portanto
+$$
+\boxed{\frac{1}{\hbar} \pdv{\eps_n}{\k} = \frac{1}{m} \int \dd[d]{\r} \psi_{n\k}^*(\r) \qty(-i \hbar \grad) \psi_{n\k}(\r) =
+\frac{1}{m} \ev{\hat{p}}{n\k} = \v_n(\k),}
+$$
+que é a velocidade média de um elétron de Bloch no estado $\ket{n\k}$.
+
+\n
+
+(b) $\frac{\hbar^2}{2m} q^2$ (aplicando perturbação de primeira ordem) e $\frac{\hbar^2}{m} \q \vdot (-i\grad + \k)$ (aplicando perturbação de segunda ordem) dão origem a dois termos $O(q^2)$:
+$$
+\frac{1}{2} \sum_{i,j} \pdv{\eps_n}{k_i}{k_j} q_i q_j =
+\sum_{i,j} \frac{\hbar^2}{2m} \, \delta_{ij} q_i q_j +
+\sum_{n' \neq n} \frac{\abs{\mel{n\k}{\frac{\hbar^2}{m} \q \vdot (-i\grad)}{n'\k}}^2}{\eps_n(\k) - \eps_{n'}(\k)}.
+$$
+
+Podemos ainda reescrever
+$$
+\abs{\mel**{n\k}{\frac{\hbar^2}{m} \q \vdot (-i\grad)}{n'\k}}^2 =
+\sum_{i,j} \qty[ \sum_{n'\neq n}
+\mel**{n\k}{\frac{\hbar^2}{m} (-i\grad)_i}{n'\k} \mel**{n'\k}{\frac{\hbar^2}{m} (-i\grad)_j}{n\k} ] q_i q_j =
+$$
+$$
+\frac{\hbar^4}{2 m^2} \sum_{\substack{i,j \\ n' \neq n}}
+\qty[
+\mel**{n\k}{-i\pdv{r_i}}{n'\k} \mel**{n'\k}{-i\pdv{r_j}}{n\k} +
+\mel**{n\k}{-i\pdv{r_j}}{n'\k} \mel**{n'\k}{-i\pdv{r_i}}{n\k}
+] q_i q_j.
+$$
+
+Finalmente, obtemos
+$$
+\boxed{\frac{1}{\hbar^2} \pdv{\eps_n}{k_\mu}{k_\nu} = \frac{1}{m} \delta_{\mu\nu} + \qty(\frac{\hbar}{m})^2 \sum_{n'\neq n}
+\frac{
+\mel**{n\k}{\frac{1}{i}\pdv{r_\mu}}{n'\k} \mel**{n'\k}{\frac{1}{i}\pdv{r_\nu}}{n\k} +
+\mel**{n\k}{\frac{1}{i}\pdv{r_\nu}}{n'\k} \mel**{n'\k}{\frac{1}{i}\pdv{r_\mu}}{n\k}
+}{\eps_n(\k) - \eps_{n'}(\k)}.}
+$$
+
 
 \pagebreak
 
