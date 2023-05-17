@@ -242,6 +242,33 @@ $$
 
 \section{Modelos tight-binding}
 
+Farei o cálculo de tight-binding para a rede cúbica em $d$ dimensões. Sendo $\a_j$ ($j=1,2,\ldots,d$) os vetores do Bravais lattice, temos que a hamiltoniana pode ser escrita como
+$$
+H = -t \sum_{\vb{R}} \sum_{j=1}^{d}
+\qty[ c_{(\R+\a_j)}^\d c_{\R} + c_{\R}^\d c_{(\R+\a_j)} ].
+$$
+Tomando as transformadas de Fourier $c_{(\R+\a_j)}^\d = \frac{1}{\sqrt{N}} \sum_{\k} e^{-i\k\vdot(\R+\a_j)} c_{\k}^\d$ e $c_{\R} = \frac{1}{\sqrt{N}} \sum_{\k'} e^{i\k'\vdot\R} c_{\k'}$, temos
+$$
+H = \frac{-t}{N} \sum_{\k,\k'} \sum_{j=1}^{d}
+\qty{
+\cancelto{\boxed{= N \delta_{\k, \k'}}}{\qty[\sum_{\R} e^{-i(\k-\k')\vdot\R}]}
+e^{-i\k\vdot\a_j} c_{\k}^\d c_{\k'} + h.c.} =
+$$
+$$
+= -t \sum_{\k} \sum_{j=1}^{d} \qty(e^{i\k\vdot\a_j} + e^{-i\k\vdot\a_j})
+c_{\k}^\d c_{\k} =
+\sum_{\k} \qty[- 2t \sum_{j=1}^{d} \cos(\k \vdot \a_j)] c_{\k}^\d c_{\k}.
+$$
+
+Assim, a relação de dispersão para $d$ dimensões é $\eps(\k) = -2t \sum_{j=1}^{d} \cos(\k \vdot \a_j)$. No caso $d=1$ temos $\eps(k) = -2t \cos(ka)$, e no caso $d = 2$ temos $\eps(k_x, k_y) = -2t \Big[\cos(k_x a) + \cos(k_y a) \Big]$.
+
+Para $d = 1$, a densidade de estados (\textbf{FALTA ESCREVER O PASSO A PASSO}) é
+$$
+\rho(E) = \frac{1}{\pi a t \sqrt{1 - \qty(\frac{E}{2t})^2}}.
+$$
+<++>
+
+
 \pagebreak
 
 \section{Instabilidade de Peierls e modelo de Su-Schrieffer-Heeger}
