@@ -260,13 +260,31 @@ c_{\k}^\d c_{\k} =
 \sum_{\k} \qty[- 2t \sum_{j=1}^{d} \cos(\k \vdot \a_j)] c_{\k}^\d c_{\k}.
 $$
 
-Assim, a relação de dispersão para $d$ dimensões é $\eps(\k) = -2t \sum_{j=1}^{d} \cos(\k \vdot \a_j)$. No caso $d=1$ temos $\eps(k) = -2t \cos(ka)$, e no caso $d = 2$ temos $\eps(k_x, k_y) = -2t \Big[\cos(k_x a) + \cos(k_y a) \Big]$.
+(a) Assim, a relação de dispersão para $d$ dimensões é $\eps(\k) = -2t \sum_{j=1}^{d} \cos(\k \vdot \a_j)$. No caso $d=1$ temos $\boxed{\eps(k) = -2t \cos(ka),}$ e no caso $d = 2$ temos $\boxed{\eps(k_x, k_y) = -2t [\cos(k_x a) + \cos(k_y a) ].}$
 
-Para $d = 1$, a densidade de estados (\textbf{FALTA ESCREVER O PASSO A PASSO}) é
+\n
+
+Em $d = 1$, como o mínimo de $\eps(\k)$ é $-2t$ e o máximo é $+2t$, a largura de banda é $4t$. Para calcular $\rho(E)$, usando $\displaystyle{\sum_{\k} \to \frac{V}{(2\pi)^d} \int_{\text{BZ}} \dd[d]{\k}}$ e $\displaystyle{\delta(g(x)) = \sum_{g(a)=0} \frac{1}{\abs{g'(a)}} \delta(x-a)}$, temos
 $$
-\rho(E) = \frac{1}{\pi a t \sqrt{1 - \qty(\frac{E}{2t})^2}}.
+\rho(E) = \frac{1}{V} \sum_{\k, \s} \delta(E - \eps(\k)) =
+\frac{2}{2\pi} \int_{-\frac{\pi}{a}}^{\frac{\pi}{a}} \delta(E + 2t \cos(ka)) \dd{k} =
+\frac{1}{\pi a} \int_{-\pi}^{\pi} \delta(E + 2t \cos(z)) \dd{z} \implies
 $$
-<++>
+$$
+\rho(E) = \frac{1}{\pi a} \cdot \frac{2}{2t \sin(\arccos(\frac{E}{2t}))} =
+\frac{1}{\pi a t \sqrt{1 - \qty(\frac{E}{2t})^2}}.
+$$
+
+As singularidades de Van Hove ocorrem quando $\pdv{\eps}{k} = 0$, ou seja, quando $\sin(ka) = 0 \implies k = 0, \pm\frac{\pi}{a}$. Em $k = 0$ temos um mínimo (correspondente a $E = -2t$) e para $k = \pm \frac{\pi}{a}$ temos máximos ($E = 2t$). Como vemos na Figura \ref{fig:tightbinding-d1} abaixo, temos divergências para os dois valores $E = \pm 2t$, onde $\rho(E) \propto \frac{1}{\sqrt{(2t)^2 - E^2}}$.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.6\linewidth]{fig/dos-tightbinding-d1.png}
+\caption{Densidade de estados tight-binding para $d=1$. Parâmetros $a = t =1$.}
+\label{fig:tightbinding-d1}
+\end{figure}
+
+(b) Para $d = 2$ a relação de dispersão é $\eps(k_x, k_y) = -2t [\cos(k_x a) + \cos(k_y a)]$. Seu mínimo é $-4t$ e seu máximo $+4t$, logo a largura de banda é $8t$.
 
 
 \pagebreak
