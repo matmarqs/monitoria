@@ -291,4 +291,71 @@ As singularidades de Van Hove ocorrem quando $\pdv{\eps}{k} = 0$, ou seja, quand
 
 \section{Instabilidade de Peierls e modelo de Su-Schrieffer-Heeger}
 
+A hamiltoniana do modelo é dada por
+$$
+H = H_{\text{K}} + H_{\text{el}},
+\quad
+H_{\text{K}} = -t \sum_{j,\s} (1 + u_j) \qty(c_{j,\s}^\d c_{j+1, \s} + \text{h.c.}),
+\quad
+H_{\text{el}} = \frac{k}{2} \sum_{j} (u_{j+1} - u_j)^2,
+$$
+onde $H_{\text{K}}$ é a parte cinética e $H_{\text{el}}$ é a parte elástica.
+
+Considerando a modulação periódica $u_j = (-1)^j \alpha$, temos que $(u_{j+1} - u_j)^2 = 4 \alpha^2$, e portanto a parte elástica é muito simples $H_{\text{el}} = 2 k \alpha^2 N$, onde $N$ é o número (par) de sítios.
+
+Já a parte cinética pode ser diagonalizada considerando duas sub-redes $\textcolor{red}{A}$ (\textcolor{red}{vermelha}, $\textcolor{red}{a_{j,\s}^\d}$ e $\textcolor{red}{a_{j,\s}}$) e $\textcolor{blue}{B}$ (\textcolor{blue}{azul}, $\textcolor{blue}{b_{j,\s}^\d}$ e $\textcolor{blue}{b_{j,\s}}$). Pensando bem, a hamiltoniana cinética então pode ser escrita como
+$$
+H_{\text{K}} = -w \sum_{j, \s} \qty(a_{j+1,\s}^\d b_{j,\s} + \text{h.c.})
+-v \sum_{j,\s} \qty(a_{j,\s}^\d b_{j,\s} + \text{h.c.}),
+$$
+onde $v = t(1+\alpha)$ é o intra-hopping (entre a mesma célula) e $w = t(1-\alpha)$ é o inter-hopping (entre células diferentes). Supondo que a distância entre duas células unitárias seja $2a$, as transformadas de Fourier são
+$$
+a_{j,\s}^\d = \frac{1}{\sqrt{N}} \sum_{k} e^{-ik (2a) j} a_{k,\s}, \quad
+b_{j,\s}^\d = \frac{1}{\sqrt{N}} \sum_{k'} e^{-ik' (2a) j} b_{k',\s}.
+$$
+
+Substituindo em $H_{\text{K}}$, temos
+$$
+H_{\text{K}} = - \frac{1}{N}
+\sum_{j,\s} \qty{ v
+\sum_{k,k'} e^{-ik(2a)(j+1)} e^{ik'(2a)j} a_{k,\s}^\d b_{k',\s}
++ w
+\sum_{k,k'} e^{-ik(2a)j} e^{ik'(2a)j} a_{k,\s}^\d b_{k',\s}} + \text{h.c.} =
+$$
+$$
+= - \frac{1}{N}
+\sum_{k, k', \s} \qty{ v
+\cancelto{\boxed{N \delta_{k,k'}}}{\qty[\sum_{j} e^{-i(k-k')(2a)j}]}
+e^{-ik(2a)} a_{k,\s}^\d b_{k',\s}
++ w
+\cancelto{\boxed{N \delta_{k,k'}}}{\qty[\sum_{j} e^{-i(k-k')(2a)j}]}
+a_{k,\s}^\d b_{k',\s}} + \text{h.c.} =
+$$
+$$
+= - \sum_{k, \s} \qty{ \qty[ w  + v
+e^{-ik(2a)}]
+a_{k,\s}^\d b_{k,\s} + \text{h.c.} } =
+- \sum_{k, \s} \qty{ \qty[ w  + v
+e^{-ik(2a)}]
+a_{k,\s}^\d b_{k,\s} +
+\qty[ w  + v
+e^{ik(2a)}]
+b_{k,\s}^\d a_{k,\s}
+} =
+$$
+$$
+- \sum_{k, \s}
+\begin{pmatrix}
+a_{k,\s}^\d & b_{k,\s}^\d
+\end{pmatrix}
+\begin{pmatrix}
+0 & w + v e^{-2ika} \\
+w + v e^{+2ika} & 0
+\end{pmatrix}
+\begin{pmatrix}
+a_{k,\s} \\ b_{k,\s}
+\end{pmatrix} =
+$$
+<++>
+
 \end{document}
