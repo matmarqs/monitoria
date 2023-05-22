@@ -297,11 +297,11 @@ H = H_{\text{K}} + H_{\text{el}},
 \quad
 H_{\text{K}} = -t \sum_{j,\s} (1 + u_j) \qty(c_{j,\s}^\d c_{j+1, \s} + \text{h.c.}),
 \quad
-H_{\text{el}} = \frac{k}{2} \sum_{j} (u_{j+1} - u_j)^2,
+H_{\text{el}} = \frac{\kappa}{2} \sum_{j} (u_{j+1} - u_j)^2,
 $$
 onde $H_{\text{K}}$ é a parte cinética e $H_{\text{el}}$ é a parte elástica.
 
-Considerando a modulação periódica $u_j = (-1)^j \alpha$, temos que $(u_{j+1} - u_j)^2 = 4 \alpha^2$, e portanto a parte elástica é muito simples $H_{\text{el}} = 2 k \alpha^2 N$, onde $N$ é o número (par) de sítios.
+Considerando a modulação periódica $u_j = (-1)^j \alpha$, temos que $(u_{j+1} - u_j)^2 = 4 \alpha^2$, e portanto a parte elástica é muito simples $H_{\text{el}} = 2 \kappa \alpha^2 N$, onde $N$ é o número (par) de sítios.
 
 Já a parte cinética pode ser diagonalizada considerando duas sub-redes $\textcolor{red}{A}$ (\textcolor{red}{vermelha}, $\textcolor{red}{a_{j,\s}^\d}$ e $\textcolor{red}{a_{j,\s}}$) e $\textcolor{blue}{B}$ (\textcolor{blue}{azul}, $\textcolor{blue}{b_{j,\s}^\d}$ e $\textcolor{blue}{b_{j,\s}}$). Pensando bem, a hamiltoniana cinética então pode ser escrita como
 $$
@@ -344,17 +344,50 @@ b_{k,\s}^\d a_{k,\s}
 } =
 $$
 $$
-- \sum_{k, \s}
+= \sum_{k, \s}
 \begin{pmatrix}
 a_{k,\s}^\d & b_{k,\s}^\d
 \end{pmatrix}
 \begin{pmatrix}
-0 & w + v e^{-2ika} \\
-w + v e^{+2ika} & 0
+0 & -w - v e^{-2ika} \\
+-w - v e^{+2ika} & 0
 \end{pmatrix}
 \begin{pmatrix}
 a_{k,\s} \\ b_{k,\s}
-\end{pmatrix} =
+\end{pmatrix}.
+$$
+
+Portanto, as energias da parte cinética são $\eps_\pm(k) = \pm \sqrt{\abs{w + v e^{2ika}}^2} = \pm \sqrt{w^2 + v^2 + 2 vw \cos(2ka)}$. Como a distância entre células unitárias é $2a$, a zona de Brillouin é $-\frac{\pi}{2a} \leq k < \frac{\pi}{2a}$.
+
+Fazendo os gráficos somente da parte cinética (a elástica é uma constante), temos a Figura \ref{fig:eps_ssh}:
+\begin{figure}[H]
+\centering
+\label{fig:eps_ssh}
+\begin{subfigure}{.45\textwidth}
+  \centering
+  \includegraphics[width=\linewidth]{fig/eps_ssh_alpha0.png}
+  \label{fig:ssh_alpha0}
+\end{subfigure}
+\begin{subfigure}{.45\textwidth}
+  \centering
+  \includegraphics[width=\linewidth]{fig/eps_ssh_alphanot0.png}
+  \label{fig:ssh_alphanot0}
+\end{subfigure}
+\caption{Relação de dispersão do modelo SSH para $\alpha = 0$ e $\alpha = 0.2$. Parâmetros $a = t = 1$.}
+\end{figure}
+
+Para a energia do sistema em $T = 0$ temos
+$$
+E = \int_{-\infty}^{E_F} \eps \rho(\eps) \dd{\eps},
+$$
+onde
+$$
+\rho(\eps) = \frac{2 \cdot 2a}{2\pi} \sum_{n} \int_{\text{BZ}} \delta(\eps - \eps_n(k)) \dd{k}
+$$
+
+Assim
+$$
+E =
 $$
 <++>
 
