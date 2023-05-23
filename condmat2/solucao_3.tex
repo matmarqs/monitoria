@@ -291,7 +291,7 @@ As singularidades de Van Hove ocorrem quando $\pdv{\eps}{k} = 0$, ou seja, quand
 
 \section{Instabilidade de Peierls e modelo de Su-Schrieffer-Heeger}
 
-A hamiltoniana do modelo é dada por
+(a) A hamiltoniana do modelo é dada por
 $$
 H = H_{\text{K}} + H_{\text{el}},
 \quad
@@ -359,36 +359,84 @@ $$
 
 Portanto, as energias da parte cinética são $\eps_\pm(k) = \pm \sqrt{\abs{w + v e^{2ika}}^2} = \pm \sqrt{w^2 + v^2 + 2 vw \cos(2ka)}$. Como a distância entre células unitárias é $2a$, a zona de Brillouin é $-\frac{\pi}{2a} \leq k < \frac{\pi}{2a}$.
 
-Fazendo os gráficos somente da parte cinética (a elástica é uma constante), temos a Figura \ref{fig:eps_ssh}:
+Fazendo os gráficos somente da parte cinética (a elástica é uma constante), temos a Figura \ref{fig:eps-ssh}:
 \begin{figure}[H]
 \centering
-\label{fig:eps_ssh}
 \begin{subfigure}{.45\textwidth}
   \centering
   \includegraphics[width=\linewidth]{fig/eps_ssh_alpha0.png}
-  \label{fig:ssh_alpha0}
+  \label{fig:ssh-alpha0}
 \end{subfigure}
 \begin{subfigure}{.45\textwidth}
   \centering
   \includegraphics[width=\linewidth]{fig/eps_ssh_alphanot0.png}
-  \label{fig:ssh_alphanot0}
+  \label{fig:ssh-alphanot0}
 \end{subfigure}
 \caption{Relação de dispersão do modelo SSH para $\alpha = 0$ e $\alpha = 0.2$. Parâmetros $a = t = 1$.}
+\label{fig:eps-ssh}
 \end{figure}
 
-Para a energia do sistema em $T = 0$ temos
+(b) Para a energia do sistema em $T = 0$ temos
 $$
 E = \int_{-\infty}^{E_F} \eps \rho(\eps) \dd{\eps},
 $$
-onde
+onde a densidade de estados (incluindo as duas bandas $n = +$ e $n = -$) é
 $$
-\rho(\eps) = \frac{2 \cdot 2a}{2\pi} \sum_{n} \int_{\text{BZ}} \delta(\eps - \eps_n(k)) \dd{k}
+\rho(\eps) = \sum_{n} \sum_{k, \s} \delta(\eps - \eps_n(k)) =
+\frac{2 \cdot \cancelto{\boxed{2a}}{V}}{2\pi}
+\sum_{n} \int_{\text{BZ}} \delta(\eps - \eps_n(k)) \dd{k}.
 $$
 
 Assim
 $$
-E =
+E = \frac{2a}{\pi} \sum_{n} \int_{\text{BZ}} \dd{k}
+\int_{-\infty}^{E_F} \eps \, \delta(\eps - \eps_n(k)) \dd{\eps} =
+\frac{2a}{\pi} \sum_{n < E_F} \int_{\text{BZ}} \eps_n(k) \dd{k},
 $$
-<++>
+onde só integramos as bandas com energia menor que a energia de Fermi $E_F$. Na situação de semipreenchimento, só consideramos a banda $n=-$ com dispersão $\eps_-(k)$. Usando $\cos(2\xi) = 1 - 2 \sin[2](\xi)$ e a integral elíptica dada no exercício:
+$$
+E = - \frac{2a}{\pi} \int_{-\frac{\pi}{2a}}^{\frac{\pi}{2a}}
+t \sqrt{2 \, \qty[1 + \alpha^2 + (1-\alpha^2) \cos(2ka)]} \dd{k} =
+- \frac{4t}{\pi} \int_{-\frac{\pi}{2}}^{\frac{\pi}{2}}
+\qty[1 - (1-\alpha^2) \sin[2](\xi)]^{1/2} \dd{\xi} \implies
+$$
+$$
+E \simeq -\frac{4t}{\pi}
+\qty[2 + (a_1 - b_1 \ln \alpha^2) \alpha^2]
+$$
+
+A energia total é
+$$
+U =
+\qty{2\kappa \alpha^2 -\frac{4t}{\pi}
+\qty[2 + (a_1 - b_1 \ln \alpha^2) \alpha^2]} N.
+$$
+
+Mostrar que
+$$
+\eval{\dv{U}{\alpha}}_{\alpha=0} = 0,
+$$
+$$
+\eval{\dv[2]{U}{\alpha}}_{\alpha=0} =
+2 \eval{\dv{U}{\alpha^2}}_{\alpha=0}
+= 0.
+$$
+
+Elliptic approximation \url{https://math.stackexchange.com/questions/1093786/approximation-for-elliptic-integral-of-second-kind}.
+
+\n\n
+
+(c) Fazer desenho dos dois padrões de dimerização. Só desenhar as cadeias, com os edges states no caso não-trivial.
+
+\n\n
+
+(d) Mostrar que esse
+$$
+\Psi = \frac{1}{\sqrt{2}} \begin{pmatrix}
+1 \\ -e^{i\vphi_k}
+\end{pmatrix}
+$$
+é autovetor da matriz lá com $w + ve^{\pm 2ika}$.
+
 
 \end{document}
