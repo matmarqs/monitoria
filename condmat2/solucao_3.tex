@@ -123,9 +123,12 @@ $$
 \text{constante} - \frac{1}{\pi^2} \log\abs{E-\eps_o}.
 $$
 
-\textbf{FALTA ESBOÇAR OS TRÊS (DOIS) CASOS, CONSTANTE E DIV LOGARITMICA.}
-
-\textbf{TALVEZ CORRIGIR A CONSTANTE QUE ACOMPANHA O LOG.}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\linewidth]{fig/vanhove.png}
+\caption{Esboço das singularidades de Van Hove. Para os casos de máximo e mínimo temos a DOS constante. Para o caso de sela temos uma divergência logarítmica.}
+\label{fig:vanhove}
+\end{figure}
 
 \n
 
@@ -142,22 +145,14 @@ $$
 $$
 \boxed{ g(E) = \frac{2 \abs{E}}{D \sqrt{E^2 - \Delta^2}}. }
 $$
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.6\linewidth]{fig/bcs.png}
+\caption{Gráfico da densidade de estados da quase-partícula do par de Cooper.}
+\label{fig:bcs}
+\end{figure}
 
-\textbf{FALTA ESBOÇAR O GRÁFICO DE $g(E)$ E DISCUTIR O RESULTADO.}
-
-\textbf{RELACIONAR O GAP SUPERCONDUTOR COM A TEORIA DE BANDAS.}
-
-
-\url{https://physics.stackexchange.com/questions/266965/what-is-the-difference-of-the-gap-between-superconductor-and-insulator}
-
-In a conventional conductor any momentum eigenstate in the band can be occupied by at most two electrons (with opposite spins) so in a full band the net momentum of the electrons in the band is zero i.e. there is no net drift velocity and hence no current.
-
-In a superconductor the electrons pair up into Cooper pairs that obey Bose-Einstein statistics, so any number of Cooper pairs can occupy the same momentum state. That means the electrons joined into Cooper pairs can have a net momentum, and hence a net drift velocity, so they can carry a current.
-
-Existence of a gap means that ground state and excited states are well separated and a transition from ground state and excited states requires some energy.
-
-Existence of a gap does not determine whether a system is insulating or not. In your case, conductivity is determined by the ground state. For an insulator, the ground state is insulating while ground state of superconductor is superconducting. A gap here means it is not easy for insulator to be excited to carry currents and for superconductors to lose its superconductivity.
-
+A diferença do gap supercondutor de um gap de um isolante usual da teoria bandas é que o gap supercondutor acontece na relação de dispersão da quase-partícula (par de Cooper), que é um bóson. Não é pela existência de qualquer gap que o material é necessariamente isolante. Em um isolante de bandas, o gap aparece na dispersão dos elétrons, que são realmente os portadores de corrente elétrica. O papel do gap na verdade é dificultar que um isolante seja excitado para carregar correntes e de um supercondutor perder sua supercondutividade.
 
 
 \pagebreak
@@ -285,6 +280,111 @@ As singularidades de Van Hove ocorrem quando $\pdv{\eps}{k} = 0$, ou seja, quand
 \end{figure}
 
 (b) Para $d = 2$ a relação de dispersão é $\eps(k_x, k_y) = -2t [\cos(k_x a) + \cos(k_y a)]$. Seu mínimo é $-4t$ e seu máximo $+4t$, logo a largura de banda é $8t$.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\linewidth]{fig/num_dos.png}
+\caption{Densidade de estados numérica para $d = 2$. Parâmetros $a = t = 1$, $L = 1000$, $\Gamma = \frac{1}{100}$.}
+\label{fig:num_dos}
+\end{figure}
+
+O parâmetro $\Gamma$ serve para controlar a suavidade da curva. Quanto maior ele for, mais suave a curva fica. Porém se ele for grande demais não obtemos o comportamento correto do $\rho(\eps)$.
+
+A partir do cálculo numérico do $\rho(\eps)$, temos que $n(E_F) = 2 \int_{-\infty}^{E_F} \rho(E) \dd{E}$. Assim, descobrimos a energia de Fermi correspondente a um dado $n(E_F)$ a partir de integração (\texttt{scipy.integrate.simpson}) e root finding (\texttt{scipy.optimize.brentq}). Utilizando o \texttt{python}, obtive que
+$$
+\begin{cases}
+\; n(-2.30 \, t) = 0.30; \\
+\; n(-1.04 \, t) = 0.60; \\
+\; n(+0.00 \, t) = 1.00; \\
+\; n(+1.04 \, t) = 1.40; \\
+\; n(+2.30 \, t) = 1.70.
+\end{cases}
+$$
+
+Plotando as superfícies de Fermi no \url{https://www.desmos.com/calculator}:
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\linewidth]{fig/desmos.png}
+\caption{Superfícies de Fermi para as ocupações $\textcolor{Green}{n=0.30}$, $\textcolor{Purple}{n=0.60}$, $\textcolor{black}{n=1.00}$, $\textcolor{red}{n=1.40}$, $\textcolor{blue}{n=1.70}$.}
+\label{fig:desmos}
+\end{figure}
+
+(c) Fazendo o cálculo numérico da relação de dispersão $\eps_\pm(k)$ e $\rho(\eps)$ do grafeno, obtive a Figura \ref{fig:grafeno} (somente coloquei as expressões vistas em sala de aula no meu código do item b).
+\begin{figure}[H]
+\centering
+\begin{subfigure}{.46\textwidth}
+  \centering
+  \includegraphics[width=1\linewidth]{fig/graphene_eps.png}
+  \label{fig:graphene_eps}
+\end{subfigure}
+\begin{subfigure}{.43\textwidth}
+  \centering
+  \includegraphics[width=\linewidth]{fig/graphene_dos.png}
+  \label{fig:graphene_dos}
+\end{subfigure}
+\caption{Relação de dispersão e DOS do grafeno calculadas numericamente.}
+\label{fig:grafeno}
+\end{figure}
+
+Modificando o tight-binding do grafeno para a energia da sub-rede $A$ ser $\Delta$ e da sub-rede $B$ ser $-\Delta$, vemos facilmente que
+$$
+H = -t \sum_{\R_i, \nu} \qty[c_{\R_i, A}^\d c_{\R_{i+\nu}, B} + \text{h.c.}] +
+\Delta \sum_{\R_i} \qty(c_{\R_i, A}^\d c_{\R_i, A} - c_{\R_i, B}^\d c_{\R_i, B}) =
+$$
+$$
+= \sum_{\k}
+\begin{pmatrix}
+c_{\k,A}^\d & c_{\k,B}^\d
+\end{pmatrix}
+\begin{pmatrix}
+\Delta & \gamma(\k) \\
+\gamma^*(\k) & -\Delta
+\end{pmatrix}
+\begin{pmatrix}
+c_{\k,A} \\ c_{\k,B}
+\end{pmatrix}.
+$$
+
+Assim os autovalores se tornam $E_\pm(\k) = \sqrt{\abs{\gamma(\k)}^2 + \Delta^2}$. Nós sabemos que $\gamma(K) = \gamma(K') = 0$. Assim, é óbvio que o gap nos pontos $K$ e $K'$ é $2\Delta$, que é a diferença entre a banda de cima e a de baixo.
+
+Esse termo $\Delta$ é conhecido como termo de massa pela analogia com a dispersão $E = \sqrt{p^2 + m^2}$ para uma partícula massiva na Relatividade Especial.
+
+Quando $\Delta = 0$, ao redor do ponto $K$ sabemos que $\gamma(K + \q) = \frac{3}{2} i at (q_x - iq_y)$. Assim, a matriz em consideração é
+$$
+M_{\q} =
+\frac{3i at}{2}
+\begin{pmatrix}
+0 & q_x - iq_y \\
+q_x + i q_y & 0
+\end{pmatrix}.
+$$
+Analogamente ao cálculo (é o praticamente mesmo) feito na equação \ref{eq:matriz} (na Questão 5), é fácil ver que
+$$
+\phi_{\q}^{K, \pm} = \frac{1}{\sqrt{2}}
+\begin{pmatrix}
+1 \\ \pm e^{i\vphi_{\q}}
+\end{pmatrix},
+\quad e^{i\vphi_{\q}} = \frac{q_x + i q_y}{\abs{\q}},
+$$
+são os autovetores da matriz $M_{\q}$, com $M_{\q} \phi_{\q}^{K, \pm} = \pm \abs{\gamma(K+\q)} \phi_{\q}^{K, \pm} = \pm \frac{3iat}{2} \abs{\q} \phi_{\q}^{K, \pm}$.
+
+O operador de helicidade $\hat{h}$ é definido como
+$$
+\hat{h} = \frac{\bm{\tau} \vdot \q}{2 \abs{\q}} = \frac{1}{2\abs{\q}}
+(\tau^x q_x + \tau^y q_y) =
+\frac{1}{2\abs{\q}}
+\begin{pmatrix}
+0 & q_x - i q_y \\
+q_x + iq_y & 0
+\end{pmatrix} = \frac{1}{3iat \abs{\q}} M_{\q}.
+$$
+Como a helicidade é proporcional a $M_{\q}$, temos que $\phi_{\q}^{K, \pm}$ também são autovetores da helicidade:
+$$
+\hat{h} \phi_{\q}^{K, \pm} = \frac{1}{3iat\abs{\q}} M_{\q} \phi_{\q}^{K, \pm} =
+\pm \frac{1}{3iat\abs{\q}} \frac{3iat}{2} \abs{\q} \phi_{\q}^{K, \pm} = \pm \frac{1}{2} \phi_{\q}^{K, \pm}.
+$$
+
+Os resultados para o ponto $K'$ são análogos.
+
 
 
 \pagebreak
@@ -303,42 +403,40 @@ onde $H_{\text{K}}$ é a parte cinética e $H_{\text{el}}$ é a parte elástica.
 
 Considerando a modulação periódica $u_j = (-1)^j \alpha$, temos que $(u_{j+1} - u_j)^2 = 4 \alpha^2$, e portanto a parte elástica é muito simples $H_{\text{el}} = 2 \kappa \alpha^2 N$, onde $N$ é o número (par) de sítios.
 
-Já a parte cinética pode ser diagonalizada considerando duas sub-redes $\textcolor{red}{A}$ (\textcolor{red}{vermelha}, $\textcolor{red}{a_{j,\s}^\d}$ e $\textcolor{red}{a_{j,\s}}$) e $\textcolor{blue}{B}$ (\textcolor{blue}{azul}, $\textcolor{blue}{b_{j,\s}^\d}$ e $\textcolor{blue}{b_{j,\s}}$). Pensando bem, a hamiltoniana cinética então pode ser escrita como
+Já a parte cinética pode ser diagonalizada considerando duas sub-redes $\textcolor{red}{A}$ (\textcolor{red}{vermelha}, $\textcolor{red}{a_{j,\s}^\d}$ e $\textcolor{red}{a_{j,\s}}$) e $\textcolor{blue}{B}$ (\textcolor{blue}{azul}, $\textcolor{blue}{b_{j,\s}^\d}$ e $\textcolor{blue}{b_{j,\s}}$). A hamiltoniana cinética então pode ser escrita como
 $$
 H_{\text{K}} = -w \sum_{j, \s} \qty(a_{j+1,\s}^\d b_{j,\s} + \text{h.c.})
 -v \sum_{j,\s} \qty(a_{j,\s}^\d b_{j,\s} + \text{h.c.}),
 $$
-onde $v = t(1+\alpha)$ é o intra-hopping (entre a mesma célula) e $w = t(1-\alpha)$ é o inter-hopping (entre células diferentes). Supondo que a distância entre duas células unitárias seja $2a$, as transformadas de Fourier são
+onde $v = t(1+\alpha)$ é o intra-hopping (entre a mesma célula) e $w = t(1-\alpha)$ é o inter-hopping (entre células diferentes). Supondo que a distância entre cada sítio seja $a$, a distância entre duas células unitárias é $2a$. Substituindo as transformadas de Fourier em $H_{\text{K}}$, temos
 $$
 a_{j,\s}^\d = \frac{1}{\sqrt{N}} \sum_{k} e^{-ik (2a) j} a_{k,\s}, \quad
 b_{j,\s}^\d = \frac{1}{\sqrt{N}} \sum_{k'} e^{-ik' (2a) j} b_{k',\s}.
 $$
-
-Substituindo em $H_{\text{K}}$, temos
 $$
 H_{\text{K}} = - \frac{1}{N}
-\sum_{j,\s} \qty{ v
+\sum_{j,\s} \qty{ w
 \sum_{k,k'} e^{-ik(2a)(j+1)} e^{ik'(2a)j} a_{k,\s}^\d b_{k',\s}
-+ w
++ v
 \sum_{k,k'} e^{-ik(2a)j} e^{ik'(2a)j} a_{k,\s}^\d b_{k',\s}} + \text{h.c.} =
 $$
 $$
 = - \frac{1}{N}
-\sum_{k, k', \s} \qty{ v
+\sum_{k, k', \s} \qty{ w
 \cancelto{\boxed{N \delta_{k,k'}}}{\qty[\sum_{j} e^{-i(k-k')(2a)j}]}
 e^{-ik(2a)} a_{k,\s}^\d b_{k',\s}
-+ w
++ v
 \cancelto{\boxed{N \delta_{k,k'}}}{\qty[\sum_{j} e^{-i(k-k')(2a)j}]}
 a_{k,\s}^\d b_{k',\s}} + \text{h.c.} =
 $$
 $$
-= - \sum_{k, \s} \qty{ \qty[ w  + v
+= - \sum_{k, \s} \qty{ \qty[ v  + w
 e^{-ik(2a)}]
 a_{k,\s}^\d b_{k,\s} + \text{h.c.} } =
-- \sum_{k, \s} \qty{ \qty[ w  + v
+- \sum_{k, \s} \qty{ \qty[ v  + w
 e^{-ik(2a)}]
 a_{k,\s}^\d b_{k,\s} +
-\qty[ w  + v
+\qty[ v  + w
 e^{ik(2a)}]
 b_{k,\s}^\d a_{k,\s}
 } =
@@ -349,17 +447,20 @@ $$
 a_{k,\s}^\d & b_{k,\s}^\d
 \end{pmatrix}
 \begin{pmatrix}
-0 & -w - v e^{-2ika} \\
--w - v e^{+2ika} & 0
+0 & -v - w e^{-2ika} \\
+-v - w e^{+2ika} & 0
 \end{pmatrix}
 \begin{pmatrix}
 a_{k,\s} \\ b_{k,\s}
 \end{pmatrix}.
 $$
 
-Portanto, as energias da parte cinética são $\eps_\pm(k) = \pm \sqrt{\abs{w + v e^{2ika}}^2} = \pm \sqrt{w^2 + v^2 + 2 vw \cos(2ka)}$. Como a distância entre células unitárias é $2a$, a zona de Brillouin é $-\frac{\pi}{2a} \leq k < \frac{\pi}{2a}$.
-
-Fazendo os gráficos somente da parte cinética (a elástica é uma constante), temos a Figura \ref{fig:eps-ssh}:
+Portanto, as energias da parte cinética são
+$$
+\eps_\pm(k) = \pm \sqrt{\abs{v + w e^{2ika}}^2} = \pm \sqrt{w^2 + v^2 + 2 vw \cos(2ka)} =
+\pm 2t \sqrt{1 - (1-\alpha^2) \sin[2](ka) }.
+$$
+sendo a zona de Brillouin $-\frac{\pi}{2a} \leq k < \frac{\pi}{2a}$. Na Figura \ref{fig:eps-ssh} vemos a abertura do gap para $\alpha \neq 0$.
 \begin{figure}[H]
 \centering
 \begin{subfigure}{.45\textwidth}
@@ -376,67 +477,159 @@ Fazendo os gráficos somente da parte cinética (a elástica é uma constante), 
 \label{fig:eps-ssh}
 \end{figure}
 
-(b) Para a energia do sistema em $T = 0$ temos
+(b) Em $T = 0$, a energia cinética $E_{\text{K}}$ do sistema por dímero (são $N/2$ dímeros) é
 $$
-E = \int_{-\infty}^{E_F} \eps \rho(\eps) \dd{\eps},
+E_{\text{K}} = \int_{-\infty}^{E_F} \eps \rho(\eps) \dd{\eps},
 $$
-onde a densidade de estados (incluindo as duas bandas $n = +$ e $n = -$) é
+onde
 $$
 \rho(\eps) = \sum_{n} \sum_{k, \s} \delta(\eps - \eps_n(k)) =
-\frac{2 \cdot \cancelto{\boxed{2a}}{V}}{2\pi}
+\frac{2 \cdot (2a)}{2\pi}
 \sum_{n} \int_{\text{BZ}} \delta(\eps - \eps_n(k)) \dd{k}.
 $$
 
 Assim
 $$
-E = \frac{2a}{\pi} \sum_{n} \int_{\text{BZ}} \dd{k}
+E_{\text{K}} = \frac{2a}{\pi} \sum_{n} \int_{\text{BZ}} \dd{k}
 \int_{-\infty}^{E_F} \eps \, \delta(\eps - \eps_n(k)) \dd{\eps} =
 \frac{2a}{\pi} \sum_{n < E_F} \int_{\text{BZ}} \eps_n(k) \dd{k},
 $$
-onde só integramos as bandas com energia menor que a energia de Fermi $E_F$. Na situação de semipreenchimento, só consideramos a banda $n=-$ com dispersão $\eps_-(k)$. Usando $\cos(2\xi) = 1 - 2 \sin[2](\xi)$ e a integral elíptica dada no exercício:
+onde só integramos as bandas com energia menor que a energia de Fermi $E_F$. Na situação de semipreenchimento, só consideramos a banda com dispersão $\eps_-(k)$ totalmente preenchida.
 $$
-E = - \frac{2a}{\pi} \int_{-\frac{\pi}{2a}}^{\frac{\pi}{2a}}
-t \sqrt{2 \, \qty[1 + \alpha^2 + (1-\alpha^2) \cos(2ka)]} \dd{k} =
+E_{\text{K}} = - \frac{4t}{\pi} \int_{-\frac{\pi}{2a}}^{\frac{\pi}{2a}}
+\qty(1 - (1-\alpha^2) \sin[2](ka))^{1/2} \, a\dd{k} =
 - \frac{4t}{\pi} \int_{-\frac{\pi}{2}}^{\frac{\pi}{2}}
-\qty[1 - (1-\alpha^2) \sin[2](\xi)]^{1/2} \dd{\xi} \implies
+\qty(1 - (1-\alpha^2) \sin^2\xi)^{1/2} \, \dd{\xi} \implies
 $$
 $$
-E \simeq -\frac{4t}{\pi}
-\qty[2 + (a_1 - b_1 \ln \alpha^2) \alpha^2]
-$$
-
-A energia total é
-$$
-U =
-\qty{2\kappa \alpha^2 -\frac{4t}{\pi}
-\qty[2 + (a_1 - b_1 \ln \alpha^2) \alpha^2]} N.
+E_{\text{K}} \simeq -\frac{4t}{\pi}
+\qty[2 + (a_1 - b_1 \ln \alpha^2) \alpha^2].
 $$
 
-Mostrar que
+A energia interna total $U = u N$ do sistema é
 $$
-\eval{\dv{U}{\alpha}}_{\alpha=0} = 0,
-$$
-$$
-\eval{\dv[2]{U}{\alpha}}_{\alpha=0} =
-2 \eval{\dv{U}{\alpha^2}}_{\alpha=0}
-= 0.
+U = E_{\text{K}} \frac{N}{2} + U_{\text{el}} =
+2N \qty{\kappa \alpha^2 -\frac{t}{\pi}
+\qty[2 + (a_1 - b_1 \ln \alpha^2) \alpha^2]} \implies \boxed{u = 2 \kappa \alpha^2 - \frac{2t}{\pi}
+\qty[2 + (a_1 - b_1 \ln \alpha^2) \alpha^2].}
 $$
 
-Elliptic approximation \url{https://math.stackexchange.com/questions/1093786/approximation-for-elliptic-integral-of-second-kind}.
-
-\n\n
-
-(c) Fazer desenho dos dois padrões de dimerização. Só desenhar as cadeias, com os edges states no caso não-trivial.
+Vemos então que
+$$
+\dv{u}{\alpha} = 4 \alpha \qty{\kappa + \frac{t}{\pi} \qty[b_1 (1  + \ln \alpha^2) - a_1 ]}
+\implies \eval{\dv{u}{\alpha}}_{\alpha=0} = 0,
+$$
+$$
+\dv[2]{u}{\alpha} = 4\qty{\kappa + \frac{t}{\pi}[b_1(1+\ln\alpha^2) - a_1]} + \frac{8t b_1}{\pi} \implies
+\eval{\dv[2]{u}{\alpha}}_{\alpha = 0} \to -\infty.
+$$
+Isso mostra que o ponto $\alpha = 0$ é um máximo local (note que $\displaystyle{\eval{\dv[2]{u}{\alpha}}_{\alpha = 0} \to -\infty}$ diverge porque utilizamos uma aproximação para a integral elíptica, mas isso estabelece que $\displaystyle{\eval{\dv[2]{u}{\alpha}}_{\alpha = 0} < 0}$). Dessa forma, temos que o ponto $\alpha = 0$ sempre é instável (instabilidade de Peierls).
 
 \n\n
 
-(d) Mostrar que esse
+(c) Para $\alpha > 0$, temos que o intra-hopping é mais forte ($v > w$). Assim, o padrão de dimerização correspondente é esboçado na Figura \ref{fig:intra}:
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\linewidth]{fig/intra.png}
+\caption{Padrão de dimerização para $\alpha > 0$. O intra-hopping é mais forte e temos $N/2$ dímeros.}
+\label{fig:intra}
+\end{figure}
+Para $\alpha < 0$, o inter-hopping é mais forte ($w > v$). Porém, como a cadeia é \textbf{finita}, os sítios das bordas permanecem isolados (não formam dímeros). Isso é uma configuração com estados de borda, o que indica ser topologicamente não-trivial. O esboço pode ser visto na Figura \ref{fig:inter}:
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\linewidth]{fig/inter}
+\caption{Padrão de dimerização para $\alpha < 0$, onde o inter-hopping é mais forte. Temos $N/2 - 2$ dímeros e 2 estados de borda, o que indica ser topologicamente não-trivial.}
+\label{fig:inter}
+\end{figure}
+
+\n\n
+
+(d) A matriz que aparece em $H_{\text{K}}$ é
+\begin{equation} \label{eq:matriz}
+M_k =
+\begin{pmatrix}
+0 & \zeta^*(k) \\
+\zeta(k) & 0
+\end{pmatrix},
+\end{equation}
+onde $\zeta(k) = v + w e^{2ika} = \abs{\zeta} e^{i\arg(\zeta)}$ e $- \abs{\zeta(k)}$ é o autovalor da banda de baixo (de dispersão $\eps_-(k)$). Temos que resolver então $M_k\Psi_k = -\abs{\zeta} \Psi_k$:
 $$
-\Psi = \frac{1}{\sqrt{2}} \begin{pmatrix}
+M_k \Psi_k =
+\frac{1}{\sqrt{2}}
+\begin{pmatrix}
+0 & \zeta^* \\
+\zeta & 0
+\end{pmatrix}
+\begin{pmatrix}
 1 \\ -e^{i\vphi_k}
 \end{pmatrix}
+=
+\frac{1}{\sqrt{2}}
+\begin{pmatrix}
+-\zeta^* e^{i\vphi_k} \\ \zeta
+\end{pmatrix}
+=
+\frac{-\abs{\zeta}}{\sqrt{2}}
+\begin{pmatrix}
+e^{-i\arg(\zeta)} e^{i\vphi_k} \\ -e^{i\arg(\zeta)}
+\end{pmatrix}
+=
+\frac{-\abs{\zeta}}{\sqrt{2}}
+\begin{pmatrix}
+1 \\ -e^{i\vphi_k}
+\end{pmatrix}
+=
+-\abs{\zeta} \Psi_k.
 $$
-é autovetor da matriz lá com $w + ve^{\pm 2ika}$.
+Vemos que a equação acima é satisfeita se $\vphi_k=\arg(\zeta(k))$, $e^{i \vphi_k} = e^{i \arg(\zeta(k))} = \frac{\zeta(k)}{\abs{\zeta(k)}} = \frac{v + w e^{2ika}}{\abs{v+we^{2ika}}}$.
+
+A fase de Berry é dada por
+$$
+\gamma = i \oint_{\text{BZ}} \ev**{\pdv{k}}{\Psi_k} \dd{k},
+$$
+mas como
+$$
+\ev**{\pdv{k}}{\Psi_k} = \dv{\vphi_k}{k} \ev**{\pdv{\vphi_k}}{\Psi_k} =
+\frac{1}{2} \dv{\vphi_k}{k}
+\begin{pmatrix}
+1 & -e^{-i\vphi_k}
+\end{pmatrix}
+\pdv{\vphi_k}
+\begin{pmatrix}
+1 \\ -e^{i\vphi_k}
+\end{pmatrix}
+= $$
+$$
+= \frac{1}{2} \dv{\vphi_k}{k}
+\begin{pmatrix}
+1 & -e^{-i\vphi_k}
+\end{pmatrix}
+\begin{pmatrix}
+0 \\ - i e^{i\vphi_k}
+\end{pmatrix} = \frac{i}{2} \dv{\vphi_k}{k},
+$$
+temos que
+$$
+\gamma = - \frac{1}{2} \oint_{\text{BZ}} \dv{\phi_k}{k} \dd{k} = - \frac{1}{2} \int_{-\frac{\pi}{2a}}^{\frac{\pi}{2a}} \dd{\vphi_k}.
+$$
+
+Podemos descobrir os valores de $\gamma$ notando que $\vphi_k = \arg\zeta(k)$ e fazendo o desenho geométrico:
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\linewidth]{fig/geogebra.png}
+\caption{Desenho geométrico do número complexo $\zeta$, onde $\vphi_k = \arg\zeta(k)$.}
+\label{fig:geogebra}
+\end{figure}
+
+Veja que para $\textcolor{blue}{w > v}$, a origem não está dentro do círculo azul. Por causa disso a integral é zero. Para $\textcolor{red}{w < v}$ a origem está contida dentro do círculo, o que faz a integral ser $2\pi$ pelo resíduo. Portanto, concluimos que
+$$
+\gamma =
+\begin{cases}
+\; \textcolor{blue}{0, \quad \, w > v} \\
+\; \textcolor{red}{-\pi, \; w < v}
+\end{cases},
+$$
+o que mostra que a fase de Berry $\gamma$ é não-trivial para $\alpha < 0$ (fase topológica).
 
 
 \end{document}

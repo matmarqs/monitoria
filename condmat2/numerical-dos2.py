@@ -12,14 +12,12 @@ rc('text.latex', preamble=r'\usepackage{physics}')
 #matplotlib.verbose.level = 'debug-annoying'
 #######################################################################
 
-#m, L, A, V = 1, 1, 1, 1
-#r1 = lambda x: (2*m*L) / np.pi * 1 / (np.sqrt(2*m*x))
-#r2 = lambda x: m*A / np.pi + 0*x
-#r3 = lambda x: m*V / np.pi**2 * np.sqrt(2*m*x)
+from scipy.integrate import simpson as integral
+from scipy.optimize import brentq as root
 
-L = 1000
+L = 500
 N = L * L
-Gamma = 1/100
+Gamma = 1/40
 t = 1
 
 def dirac(x):
@@ -40,23 +38,24 @@ def dos(E):
 def dos_approx(w):
     return 1/(4*np.pi*t**2) * np.log(t/np.abs(w))
 
-def main():
-    a = -4.5*t; b = 4.5*t
-    xs = np.linspace(a, b, 1000)
-    plt.plot(xs,  dos(xs), label=r'$\rho_{\text{numerical}}(\epsilon)$')
-    a1 = -0.5*t; b1 = 0.5*t
-    x1s = np.linspace(a1, b1, 300)
-    plt.plot(x1s,  dos_approx(x1s), label=r'$\rho_{\text{approx}}(\epsilon)=\frac{1}{4\pi t^2} \ln(\frac{t}{\abs{\epsilon}})$')
-    plt.xlabel(r'$\epsilon$', fontsize=20)
-    plt.ylabel(r'$\rho(\epsilon)$', fontsize=20)
-    plt.legend(fontsize=16)
-    plt.title(r'densidade de estados tight-binding $d=2$')
-    plt.savefig("num_dos.png", dpi=300, format='png', bbox_inches="tight")
-    plt.clf()
 
-# unused code
-#plt.savefig("plot.png", dpi=300, format='png', bbox_inches="tight")
-#plt.clf()
+def n(Ef):
+    ws = np.linspace(-4*t, Ef, 200)
+    return 2 * integral(dos(ws), ws)
+
+def main():
+    r = root(lambda x: n(x) - 1.7, -4*t, 4*t)
+    print(r)
+
+    #a = -4.5*t; b = 4.5*t
+    #xs = np.linspace(a, b, 1000)
+    #plt.plot(xs,  dos(xs), label=r'$\rho_{\text{numerical}}(\epsilon)$')
+    #plt.xlabel(r'$\epsilon$', fontsize=20)
+    #plt.ylabel(r'$\rho(\epsilon)$', fontsize=20)
+    #plt.legend(fontsize=16)
+    #plt.title(r'densidade de estados tight-binding $d=2$')
+    #plt.savefig("num_dos.png", dpi=300, format='png', bbox_inches="tight")
+    #plt.clf()
 
 if __name__ == '__main__':
     main()
