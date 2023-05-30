@@ -10,6 +10,16 @@
 
 \section{Fórmula de Drude revisitada}
 
+Neste caso, o campo elétrico $\E(t) = E(\omega) e^{-i\omega t}$ é estático, porém dependente do tempo. Dessa forma, a função distribuição $f(\k, t)$ depende apenas do momento $k$ e do tempo $t$. A equação de Boltzmann dentro da aproximação do tempo de relaxação então fica
+$$
+\qty[\pdv{t} + \dot{\k} \vdot \grad_{\k}] f(\k, t) =
+-\frac{1}{\tau} \qty[f(\k,t) - f_0(\k)],
+$$
+onde $f_0(\k) = \frac{1}{\exp[\beta(\eps_n(\k)-\mu)] + 1}$ é a distribuição de Fermi-Dirac. Da equação semiclássica
+$$
+\hbar \dot{\k} = -e [\E + \frac{1}{c} \v_n(\k) \cp \vb{H}],
+$$
+temos que $\k = - \frac{e \E(t)}{\hbar} = -\frac{e \E(\omega)}{\hbar} e^{-i\omega t}$.
 
 \pagebreak
 
