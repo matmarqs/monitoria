@@ -10,7 +10,7 @@
 
 \section{Fórmula de Drude revisitada}
 
-Neste caso, o campo elétrico $\E(t) = E(\omega) e^{-i\omega t}$ é estático, porém dependente do tempo. Dessa forma, a função distribuição $f(\k, t)$ depende apenas do momento $k$ e do tempo $t$. A equação de Boltzmann dentro da aproximação do tempo de relaxação então fica
+Neste caso, o campo elétrico $\E(t) = E(\omega) e^{-i\omega t}$ é estático (e o magnético zero $\vb{H}=\0$), porém dependente do tempo. Dessa forma, a função distribuição $f(\k, t)$ depende apenas do momento $k$ e do tempo $t$. A equação de Boltzmann dentro da aproximação do tempo de relaxação então fica
 $$
 \qty[\pdv{t} + \dot{\k} \vdot \grad_{\k}] f(\k, t) =
 -\frac{1}{\tau} \qty[f(\k,t) - f_0(\k)],
@@ -19,7 +19,55 @@ onde $f_0(\k) = \frac{1}{\exp[\beta(\eps_n(\k)-\mu)] + 1}$ é a distribuição d
 $$
 \hbar \dot{\k} = -e [\E + \frac{1}{c} \v_n(\k) \cp \vb{H}],
 $$
-temos que $\k = - \frac{e \E(t)}{\hbar} = -\frac{e \E(\omega)}{\hbar} e^{-i\omega t}$.
+temos que $\dot{\k} = - \frac{e \E(t)}{\hbar} = -\frac{e \E(\omega)}{\hbar} e^{-i\omega t}$ (colocarei $\hbar=1$). Definindo $\delta f(\k,t) = f(\k,t) - f_0(\k)$ e utilizando a aproximação linear que $\delta f(\k,t) \propto \E(t) = \E(\omega) e^{-i\omega t}$, temos $\pdv{t} \delta f(\k,t) = - i\omega \delta f(\k,t)$. Portanto:
+$$
+\pdv{t}\delta f(\k,t) + \frac{1}{\tau} \delta f(\k, t) =  - \dot{\k} \vdot \grad_{\k}  [f_0(\k) + \delta f(\k, t) ] \implies
+$$
+$$
+\delta f(\k,t) = \frac{e \tau}{1-i\omega \tau} \, \E(t) \vdot \grad_{\k}  [ f_0(\k) + \delta f(\k, t) ].
+$$
+Note que a equação acima é um equação de ponto fixo para $\delta f(\k,t)$. Mas como nos basta a aproximação linear onde $\delta f(\k,t)$ é proporcional a $\E(t)$, ficamos com
+$$
+\delta f(\k,t) \simeq \frac{e \tau}{1-i\omega \tau} \, \E(t) \vdot \grad_{\k}  f_0(\k).
+$$
+Utilizando a expressão para a densidade de corrente em duas dimensões
+$$
+\vb{j}_n = -e \int \frac{\dd[2]{\k}}{(2\pi)^2} \v_n(\k) f(\k),
+$$
+temos
+$$
+\vb{j}_n = -e \int \frac{\dd[2]{\k}}{(2\pi)^2} \v_n(\k)
+\qty{ \cancelto{0}{f_0(\k)} +
+\frac{\tau[\eps_n(\k)]}{1-\omega \tau[\eps_n(\k)]} e\E \vdot \grad_{\k} f_0(\k)} =
+$$
+$$
+= e^2 \int \frac{\dd[2]{\k}}{(2\pi)^2} \v_n(\k)
+\frac{\tau[\eps_n(\k)]}{1-\omega \tau[\eps_n(\k)]} \qty(-\pdv{f_0(\k)}{\eps(\k)}) \, \E \vdot
+\cancelto{\v_n(\k)}{\grad_k \eps_n(\k)} =
+$$
+$$
+= e^2 \int \frac{\dd[2]{\k}}{(2\pi)^2} \v_n(\k) ( \v_n(\k) \vdot \E )
+\frac{\tau[\eps_n(\k)]\qty(-\partial f_0 / \partial \eps)_{\eps = \eps_n(\k)}}{1-\omega \tau[\eps_n(\k)]}.
+$$
+Como definimos $j^{\mu} = \sum_{\nu} \s^{\mu\nu} E^{\nu}$, vemos facilmente que
+$$
+\sigma^{(n)}(\omega) = e^2 \int \frac{\dd[2]{\k}}{(2\pi)^2}
+\frac{\v_n(\k) \v_n(\k) \, \tau[\eps_n(\k)] \, \qty(-\partial f_0 / \partial \eps)_{\eps = \eps_n(\k)}}
+{1-\omega \tau[\eps_n(\k)]}.
+$$
+
+Supondo que $\tau[\eps_n(\k)]$ tenha um valor bem definido $\tau_F$ na superfície de Fermi, no limite $T \to 0$ temos $\qty(-\partial f_0 / \partial \eps)_{\eps = \eps_n(\k)} \to \delta(\eps_n(\k) - E_F)$ e portanto
+$$
+\sigma(\omega) = e^2 \int \frac{\dd[2]{\k}}{(2\pi)^2}
+\frac{\v(\k) \v(\k) \, \tau[\eps_n(\k)] \, \delta(\eps_n(\k) - E_F)}
+{1-\omega \tau[\eps_n(\k)]} =
+e^2 \frac{v_F^2 \, \tau_F }{1-\omega \tau_F}
+\int \frac{\dd[2]{\k}}{(2\pi)^2} \, \delta(\eps_n(\k) - E_F) \implies
+$$
+$$
+\s(\omega) = e^2 \frac{v_F^2 \, \tau_F }{1-\omega \tau_F} \, \rho(E_F)
+$$
+<++>
 
 \pagebreak
 
