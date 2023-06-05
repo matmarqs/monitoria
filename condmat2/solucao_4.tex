@@ -10,14 +10,14 @@
 
 \section{Fórmula de Drude revisitada}
 
-Neste caso, o campo elétrico $\E(t) = E(\omega) e^{-i\omega t}$ é estático (e o magnético zero $\vb{H}=\0$), porém dependente do tempo. Dessa forma, a função distribuição $f(\k, t)$ depende apenas do momento $k$ e do tempo $t$. A equação de Boltzmann dentro da aproximação do tempo de relaxação então fica
+Neste caso, o campo elétrico $\E(t) = \E(\omega) e^{-i\omega t}$ é estático (e o magnético zero $\vb{H}=\0$), porém dependente do tempo. Dessa forma, a função distribuição $f(\k, t)$ depende apenas do momento $\k$ e do tempo $t$. A equação de Boltzmann dentro da aproximação do tempo de relaxação então fica
 $$
 \qty[\pdv{t} + \dot{\k} \vdot \grad_{\k}] f(\k, t) =
 -\frac{1}{\tau} \qty[f(\k,t) - f_0(\k)],
 $$
 onde $f_0(\k) = \frac{1}{\exp[\beta(\eps_n(\k)-\mu)] + 1}$ é a distribuição de Fermi-Dirac. Da equação semiclássica
 $$
-\hbar \dot{\k} = -e [\E + \frac{1}{c} \v_n(\k) \cp \vb{H}],
+\hbar \dot{\k} = -e \qty[\E + \frac{1}{c} \v_n(\k) \cp \vb{H}],
 $$
 temos que $\dot{\k} = - \frac{e \E(t)}{\hbar} = -\frac{e \E(\omega)}{\hbar} e^{-i\omega t}$ (colocarei $\hbar=1$). Definindo $\delta f(\k,t) = f(\k,t) - f_0(\k)$ e utilizando a aproximação linear que $\delta f(\k,t) \propto \E(t) = \E(\omega) e^{-i\omega t}$, temos $\pdv{t} \delta f(\k,t) = - i\omega \delta f(\k,t)$. Portanto:
 $$
@@ -38,40 +38,105 @@ temos
 $$
 \vb{j}_n = -e \int \frac{\dd[2]{\k}}{(2\pi)^2} \v_n(\k)
 \qty{ \cancelto{0}{f_0(\k)} +
-\frac{\tau[\eps_n(\k)]}{1-\omega \tau[\eps_n(\k)]} e\E \vdot \grad_{\k} f_0(\k)} =
+\frac{\tau[\eps_n(\k)]}{1-i\omega \tau[\eps_n(\k)]} e\E \vdot \grad_{\k} f_0(\k)} =
 $$
 $$
 = e^2 \int \frac{\dd[2]{\k}}{(2\pi)^2} \v_n(\k)
-\frac{\tau[\eps_n(\k)]}{1-\omega \tau[\eps_n(\k)]} \qty(-\pdv{f_0(\k)}{\eps(\k)}) \, \E \vdot
+\frac{\tau[\eps_n(\k)]}{1-i\omega \tau[\eps_n(\k)]} \qty(-\pdv{f_0(\k)}{\eps(\k)}) \, \E \vdot
 \cancelto{\v_n(\k)}{\grad_k \eps_n(\k)} =
 $$
 $$
 = e^2 \int \frac{\dd[2]{\k}}{(2\pi)^2} \v_n(\k) ( \v_n(\k) \vdot \E )
-\frac{\tau[\eps_n(\k)]\qty(-\partial f_0 / \partial \eps)_{\eps = \eps_n(\k)}}{1-\omega \tau[\eps_n(\k)]}.
+\frac{\tau[\eps_n(\k)]\qty(-\partial f_0 / \partial \eps)_{\eps = \eps_n(\k)}}{1-i\omega \tau[\eps_n(\k)]}.
 $$
 Como definimos $j^{\mu} = \sum_{\nu} \s^{\mu\nu} E^{\nu}$, vemos facilmente que
 $$
-\sigma^{(n)}(\omega) = e^2 \int \frac{\dd[2]{\k}}{(2\pi)^2}
-\frac{\v_n(\k) \v_n(\k) \, \tau[\eps_n(\k)] \, \qty(-\partial f_0 / \partial \eps)_{\eps = \eps_n(\k)}}
-{1-\omega \tau[\eps_n(\k)]}.
+\sigma^{\mu\nu}_{(n)}(\omega) = e^2 \int \frac{\dd[2]{\k}}{(2\pi)^2}
+\frac{v_n^{\mu}(\k) v_n^{\nu}(\k) \, \tau[\eps_n(\k)] \, \qty(-\partial f_0 / \partial \eps)_{\eps = \eps_n(\k)}}
+{1-i\omega \tau[\eps_n(\k)]}.
 $$
 
 Supondo que $\tau[\eps_n(\k)]$ tenha um valor bem definido $\tau_F$ na superfície de Fermi, no limite $T \to 0$ temos $\qty(-\partial f_0 / \partial \eps)_{\eps = \eps_n(\k)} \to \delta(\eps_n(\k) - E_F)$ e portanto
 $$
 \sigma(\omega) = e^2 \int \frac{\dd[2]{\k}}{(2\pi)^2}
 \frac{\v(\k) \v(\k) \, \tau[\eps_n(\k)] \, \delta(\eps_n(\k) - E_F)}
-{1-\omega \tau[\eps_n(\k)]} =
-e^2 \frac{v_F^2 \, \tau_F }{1-\omega \tau_F}
+{1-i\omega \tau[\eps_n(\k)]} =
+e^2 \frac{v_F^2 \, \tau_F }{1-i\omega \tau_F}
 \int \frac{\dd[2]{\k}}{(2\pi)^2} \, \delta(\eps_n(\k) - E_F) \implies
 $$
 $$
-\s(\omega) = e^2 \frac{v_F^2 \, \tau_F }{1-\omega \tau_F} \, \rho(E_F)
+\s(\omega) = e^2 \frac{v_F^2 \, \tau_F }{1-i\omega \tau_F} \, \rho(E_F)
 $$
-<++>
+
+INCLUIR ISOTROPIA (DIVIDIR POR DIMENSÕES), CORRIGIR $\s$ e EXPLICAR o fator de $n$.
+
 
 \pagebreak
 
 \section{Condutividade eletrônica}
+
+Por equipartição da energia (isotropia) temos na superfície de Fermi $3v^2 = v_F^2$. Para baixas temperaturas $T \to 0$ temos então
+$$
+\s = \frac{2e^2 v_F^2 \tau_F}{3} \int \frac{\dd[3]{\k}}{(2\pi)^3}
+\qty(-\pdv{f}{\eps})_{\eps=\eps(\k)} =
+\frac{2e^2 v_F^2 \tau_F}{3} \int \frac{\dd[3]{\k}}{(2\pi)^3}
+\int \dd{\eps} \delta(\eps - \eps(\k)) \qty(-\pdv{f}{\eps}) =
+$$
+$$
+\s = \frac{2e^2 v_F^2 \tau_F}{3} \int \dd{\eps} \rho(\eps) \qty(-\pdv{f}{\eps}).
+$$
+
+Integrando por partes:
+$$
+\int \dd{\eps} \rho(\eps) \qty(-\pdv{f}{\eps}) =
+\int \dd{\eps} f(\eps) \dv{\rho}{\eps}.
+$$
+
+A partir de agora assumiremos $E_F$, $T_F = D = k_B = 1$.
+
+\begin{itemize}
+\item (a) Metal: $\rho(\eps) = \frac{4}{\pi} \sqrt{1-\eps^2}$. Para $T \to 0$ podemos usar a expansão de Sommerfeld
+$$
+\int_{-\infty}^{\infty} \dd{\eps} f(\eps) G(\eps) \simeq
+\int_{-\infty}^{\mu} G(\eps) + \frac{\pi^2}{6} T^2 \eval{\dv{G}{\eps}}_{\eps=\mu}.
+$$
+Colocando $G(\eps) = \dd{\rho}/\dd{\eps}$ temos
+$$
+\s = \frac{2e^2 v_F^2 \tau_F}{3}
+\int_{-\infty}^{\infty} \dd{\eps} f(\eps) \dv{\rho}{\eps} =
+\frac{2e^2 v_F^2 \tau_F}{3}
+\qty{\rho(E_F) + \frac{\pi^2}{6} T^2 \eval{\dv[2]{\rho}{\eps}}_{\eps=E_F}}.
+$$
+Assim, da expressão $\s = \s_0 - A T^2$, reconhecemos
+$$
+\s_0 = \frac{2e^2 v_F^2 \tau_F}{3} \rho(E_F) \e
+A = -\frac{2e^2v_F^2\tau_F}{3} \frac{\pi^2}{6} \eval{\dv[2]{\rho}{\eps}}_{\eps=E_F}.
+$$
+
+\textbf{ESBOÇO $\rho(\eps)$ e $\s(T)$. VERIFICAR QUE $\int\rho=2$}. COMENTAR O GRÁFICO.
+
+\item (b) Semimetal: $\rho(\eps)=2\abs{\eps}$.
+
+\item (c) Semicondutor: $\rho(\eps) = \frac{\eps}{\sqrt{\eps^2-\Delta^2}}$, $\Delta < \eps < 1$. Como obter $\Delta$ a partir somente do $\s(T)$?
+
+Observação: basicamente temos $T \to 0$. Então em baixas energias temos que cada sistema se comporta com o $\rho(\eps)$ da categoria. Ainda mais, podemos sempre setar $E_F = 0$.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.6\textwidth]{fig/dos-systems.png}
+\caption{Densidade de estados para os sistemas metal, semimetal e semicondutor.}
+\label{fig:dos-systems}
+\end{figure}
+Note que obtivemos $1.999$ ao invés de $2$ para o caso semicondutor. Para fazer esse cálculo, utilizei a função \texttt{scipy.integrate.quad} e explicitei que os pontos $\pm\Delta$ são pontos de divergência. Mesmo assim a integral não resultou em $2$ exatamente.
+
+Percebi que na verdade temos $\int \frac{x}{\sqrt{x^2-\Delta^2}} \dd{x} = \sqrt{x^2 - \Delta^2}$, de maneira que
+$$
+\int_{-1}^{-\Delta} \frac{\abs{\eps}}{\eps^2-\Delta^2} \dd{\eps} + \int_{\Delta}^{1} \frac{\eps}{\eps^2-\Delta^2} \dd{\eps} = 2 \sqrt{1-\Delta^2}.
+$$
+Assim, a integral não é exatamente $2$, a não ser que $\Delta = 0$.
+
+\end{itemize}
+
 
 \pagebreak
 
