@@ -11,7 +11,7 @@ rc('text', usetex=True)
 rc('text.latex', preamble=r'\usepackage{physics}')
 #matplotlib.verbose.level = 'debug-annoying'
 #######################################################################
-from scipy.integrate import simpson
+#from scipy.integrate import simpson
 from scipy.integrate import quad
 
 #m, L, A, V = 1, 1, 1, 1
@@ -25,13 +25,13 @@ dos_metal = lambda e: (4/np.pi) * np.sqrt(1-np.clip(e**2, 0, 1))
 dos_semimetal = lambda e: 2 * np.abs(e) * (np.abs(e) <= 1)
 dos_semicondu = lambda e: np.abs(e) / np.sqrt(np.clip(e**2, (Delta+infinitesimal)**2, 1) - Delta**2) * (np.abs(e) > Delta) * (np.abs(e) < 1)
 
-def fermi_dv(e, T):
-    return (1/T) * np.exp(e/T) / (np.exp(e/T) + 1)**2
-
-# sigma / ( 2/3 e^2 tau_F v_F^2 )
 def sigma(rho, T):
-    result = quad(lambda e: rho(e) * fermi_dv(e, T), -1, 1, points=(Delta, -Delta))
-    return result[0]
+    if (T > 10**(-2.55)):
+        fdv = lambda e, T: (1/T) * np.exp(e/T) / (np.exp(e/T) + 1)**2
+        result = quad(lambda e: rho(e) * fdv(e, T), -1, 1, points=(Delta, -Delta))
+        return result[0]
+    else:
+        return rho(0)
 
 def main():
     a = -1; b = 1
@@ -59,7 +59,7 @@ def main():
     plt.savefig("dos.png", dpi=300, format='png', bbox_inches="tight")
     plt.clf()
 
-    Ts = np.logspace(-2.55, -0.3, 200)
+    Ts = np.logspace(-6, -0.3, 400)
     sigma_metal, sigma_semimetal, sigma_semicondu = [], [], []
     for T in Ts:
         sigma_metal.append(sigma(dos_metal, T))
