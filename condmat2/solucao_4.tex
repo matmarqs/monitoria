@@ -251,7 +251,7 @@ O parâmetro $\lambda$ controla o peso (assimetria) entre as duas bandas. Se $\l
 \label{fig:bandas-anderson12}
 \end{figure}
 
-(b) \textbf{FALTA O ITEM (B)}
+(b) \textbf{FALTA O ITEM (B), TEM AQUELA FUNÇÃO $\beta(g)$}
 
 \pagebreak
 
@@ -380,7 +380,40 @@ $$
 \int_{\text{ocupados}} \frac{\dd[2]{\k}}{(2\pi)^2} \frac{1}{\hbar^2} \pdv{\eps_n(\k)}{k_\mu k_\nu}.
 $$
 
-Considerando um isolante, os estados ocupados correspondem a primeira zona de Brillouin completa. Usando o resultado do problema 3(b) da Lista 3 para o tensor massa efetiva, obtemos
+O resultado do problema 3(b) da Lista 3 para o tensor massa efetiva é
+$$
+\frac{1}{\hbar^2} \pdv{\eps_n(\k)}{k_\mu}{k_\nu} =
+\frac{\delta_{\mu\nu}}{m_e} +
+\qty(\frac{\hbar}{m_e})^2
+\sum_{m\neq n}
+\frac{
+\mel**{n}{\frac{1}{i}\pdv{r_\mu}}{m} \mel**{m}{\frac{1}{i}\pdv{r_\nu}}{n} +
+\mel**{n}{\frac{1}{i}\pdv{r_\nu}}{m} \mel**{m}{\frac{1}{i}\pdv{r_\mu}}{n}
+}{\eps_n(\k) - \eps_{m}(\k)}.
+$$
+
+O problema que estamos tratando envolve um campo elétrico alternado $\E(t) = \E(\omega) e^{-i\omega t}$, ou seja, uma frequência $\omega$ de onda eletromagnética bem definida. A essa frequência correspondem excitações de energia $\delta(\pm \hbar \omega + \eps_n(\k) - \eps_m(\k))$ do espectro. No limite $\hbar \omega \to 0$, então é razoável aproximarmos
+$$
+\frac{1}{\hbar^2} \pdv{\eps_n(\k)}{k_\mu}{k_\nu} =
+\frac{\delta_{\mu\nu}}{m_e} +
+\qty(\frac{\hbar}{m_e})^2
+\sum_{m\neq n} \qty{
+\frac{\mel**{n}{\frac{1}{i}\pdv{r_\mu}}{m} \mel**{m}{\frac{1}{i}\pdv{r_\nu}}{n}}
+{\hbar \omega + \eps_n(\k) - \eps_{m}(\k)} +
+\frac{\mel**{n}{\frac{1}{i}\pdv{r_\nu}}{m} \mel**{m}{\frac{1}{i}\pdv{r_\mu}}{n}}
+{-\hbar \omega + \eps_n(\k) - \eps_{m}(\k)}
+} .
+$$
+
+Expandimos então
+$$
+\frac{1}{\pm \hbar \omega + \eps_n(\k) - \eps_m(\k)} =
+\frac{1}{\eps_n(\k) - \eps_m(\k)}
+\mp \frac{\hbar\omega}{(\eps_n(\k) - \eps_m(\k))^2}.
+$$
+<++>
+
+Considerando um isolante, os estados ocupados correspondem a primeira zona de Brillouin completa. o resultado do problema 3(b) da Lista 3 para o tensor massa efetiva, obtemos
 $$
 \s^{(n)}_{\mu\nu}(\omega) = -\frac{e^2}{i\omega} \int_{\text{BZ}} \frac{\dd[2]{\k}}{(2\pi)^2} \times
 $$
