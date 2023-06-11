@@ -49,12 +49,12 @@ $$
 = e^2 \int \frac{\dd[2]{\k}}{(2\pi)^2} \v_n(\k) ( \v_n(\k) \vdot \E )
 \frac{\tau[\eps_n(\k)]\qty(-\partial f_0 / \partial \eps)_{\eps = \eps_n(\k)}}{1-i\omega \tau[\eps_n(\k)]}.
 $$
-Como definimos $j^{\mu} = \sum_{\nu} \s^{\mu\nu} E^{\nu}$, vemos facilmente que
-$$
-\sigma^{\mu\nu}_{(n)}(\omega) = e^2 \int \frac{\dd[2]{\k}}{(2\pi)^2}
+Como definimos $j^{\mu} = \sum_{\nu} \s_{\mu\nu} E^{\nu}$, vemos facilmente que
+\begin{equation} \label{eq:cond}
+\sigma_{\mu\nu}^{(n)}(\omega) = e^2 \int \frac{\dd[2]{\k}}{(2\pi)^2}
 \frac{v_n^{\mu}(\k) v_n^{\nu}(\k) \, \tau[\eps_n(\k)] \, \qty(-\partial f_0 / \partial \eps)_{\eps = \eps_n(\k)}}
 {1-i\omega \tau[\eps_n(\k)]}.
-$$
+\end{equation}
 
 Supondo que $\tau[\eps_n(\k)]$ tenha um valor bem definido $\tau_F$ na superfície de Fermi, no limite $T \to 0$ temos $\qty(-\partial f_0 / \partial \eps)_{\eps = \eps_n(\k)} \to \delta(\eps_n(\k) - E_F)$ e portanto
 $$
@@ -317,13 +317,85 @@ $$
 
 \section{Número de Chern para um modelo de duas bandas}
 
-\textbf{INTEGRAR NUMERICAMENTE.}
+É direto obter que
+$$
+\abs{\vb{h}(\vb{k})}^2 =
+\Delta^2 + 2 (1 + \cos k_x \cos k_y - \Delta (\cos k_x + \cos k_y)) + \Delta^2.
+$$
+$$
+\begin{vmatrix}
+h_x & h_y & h_z \\
+\pdv{h_x}{k_x} & \pdv{h_y}{k_x} & \pdv{h_z}{k_x} \\
+\pdv{h_x}{k_y} & \pdv{h_y}{k_z} & \pdv{h_z}{k_y} \\
+\end{vmatrix}
+=
+\begin{pmatrix}
+\sin k_x & \sin k_y & \Delta - \cos k_x - \cos k_y \\
+\cos k_x &  0 & \sin k_x \\
+0 & \cos k_y & \sin k_y \\
+\end{pmatrix}
+=
+\Delta \cos k_x \cos k_y - \cos k_x - \cos k_y.
+$$
+
+Portanto,
+$$
+C = \frac{1}{4\pi} \int_{-\pi}^{\pi} \int_{-\pi}^{\pi}
+\frac{\Delta \cos k_x \cos k_y - \cos k_x - \cos k_y}{\qty[\Delta^2 + 2 (1 + \cos k_x \cos k_y - \Delta (\cos k_x + \cos k_y)) + \Delta^2]}
+\dd{k_x} \dd{k_y}
+$$
+
+Integrando a expressão acima numericamente com a função \texttt{scipy.integrate.dblquad} do Python, obtemos a Figura \ref{fig:chern}:
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.75\textwidth]{fig/chern.png}
+\caption{Número de Chern em função do parâmetro $\Delta$.}
+\label{fig:chern}
+\end{figure}
 
 \pagebreak
 
 \section{Condutividade Hall}
 
-\textbf{FAZER CÁLCULOS PASSO A PASSO.}
+Da equação \ref{eq:cond}, substituindo $\grad_{\k}f = \pdv{f(\k)}{\eps_n(\k)} \grad_{\k}\eps_n(\k)$ ($f$ é a distribuição de Fermi-Dirac), $\v_n(\k) = \frac{1}{\hbar} \grad_{\k}\eps_n(\k)$ e aproximando $1-i\omega\tau \approx -i\omega\tau$ no limite $\omega\tau \gg 1$, temos
+$$
+\bm{\s}^{(n)}(\omega) = \frac{e^2}{i\omega \hbar^2}
+\int \frac{\dd[2]{\k}}{(2\pi)^2} \grad_{\k}\eps_n(\k) \grad_{\k} f.
+$$
+
+ Integrando por partes as componentes $\mu, \nu$:
+$$
+\int \dd[2]{\k} \pdv{\eps_n(\k)}{k_\mu} \pdv{f(\k)}{k_\nu} =
+\cancelto{0}{\boxed{\int \dd[2]{\k} \pdv{k_\nu} \qty[\pdv{\eps_n(\k)}{k_\mu} f(\k)]}} -
+\int \dd[2]{\k} \pdv{\eps_n(\k)}{k_\mu}{k_\nu} f(\k).
+$$
+
+O termo superficial acima é zero pois o integrando é periódico dentro na borda da zona de Brillouin.
+
+Em $T=0$, a distribuição de Fermi-Dirac faz a integral ser somente sobre os estados ocupados, portanto
+$$
+\s^{(n)}_{\mu\nu}(\omega) = \frac{e^2}{i\omega \hbar^2}
+\int \frac{\dd[2]{\k}}{(2\pi)^2} \pdv{\eps_n(\k)}{k_\mu} \pdv{f(\k)}{k_\nu} =
+- \frac{e^2}{i\omega}
+\int_{\text{ocupados}} \frac{\dd[2]{\k}}{(2\pi)^2} \frac{1}{\hbar^2} \pdv{\eps_n(\k)}{k_\mu k_\nu}.
+$$
+
+Considerando um isolante, os estados ocupados correspondem a primeira zona de Brillouin completa. Usando o resultado do problema 3(b) da Lista 3 para o tensor massa efetiva, obtemos
+$$
+\s^{(n)}_{\mu\nu}(\omega) = -\frac{e^2}{i\omega} \int_{\text{BZ}} \frac{\dd[2]{\k}}{(2\pi)^2} \times
+$$
+$$
+\times \qty{
+\frac{\delta_{\mu\nu}}{m_e} +
+\qty(\frac{\hbar}{m_e})^2
+\sum_{m\neq n}
+\frac{
+\mel**{n\k}{\frac{1}{i}\pdv{r_\mu}}{n'\k} \mel**{n'\k}{\frac{1}{i}\pdv{r_\nu}}{n\k} +
+\mel**{n\k}{\frac{1}{i}\pdv{r_\nu}}{n'\k} \mel**{n'\k}{\frac{1}{i}\pdv{r_\mu}}{n\k}
+}{\eps_n(\k) - \eps_{n'}(\k)}
+}
+$$
+<++>
 
 
 \end{document}
