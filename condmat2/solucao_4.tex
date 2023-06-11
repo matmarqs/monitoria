@@ -405,30 +405,37 @@ $$
 } .
 $$
 
-Expandimos então
+Expandimos então para $\hbar \omega \to 0$:
 $$
 \frac{1}{\pm \hbar \omega + \eps_n(\k) - \eps_m(\k)} =
-\frac{1}{\eps_n(\k) - \eps_m(\k)}
+\boxed{\frac{1}{\eps_n(\k) - \eps_m(\k)}}
 \mp \frac{\hbar\omega}{(\eps_n(\k) - \eps_m(\k))^2}.
 $$
-<++>
 
-Considerando um isolante, os estados ocupados correspondem a primeira zona de Brillouin completa. o resultado do problema 3(b) da Lista 3 para o tensor massa efetiva, obtemos
+Como estamos interessados na condutividade $\s_{xy}$, note que ela deve se manter a invariante sobre a rotação $x \to y$, $y \to -x$. Mas, com relação ao primeiro termo destacado acima, as derivadas $\pdv{x}$ e $\pdv{y}$ tomam um sinal de menos na expressão de $\s_{y,-x}$, de maneira que o termo destacado é anulado.
+
+Além disso, da equação de Heisenberg temos $i\hbar \dot{r}_\mu = [r_\mu, H] = i\hbar \pdv{H}{p_\mu} \implies \dot{r}_\mu = \pdv{H}{p_\mu}$. Podemos então fazer a substiuição $p_\mu = \frac{1}{i} \hbar \pdv{r_\mu} = m_e \dot{r}_\mu = m_e \pdv{H}{p_\mu} = m_e \hbar^{-1} \pdv{H}{k_\mu}$.
+
+Dessa maneira, ficamos com
 $$
-\s^{(n)}_{\mu\nu}(\omega) = -\frac{e^2}{i\omega} \int_{\text{BZ}} \frac{\dd[2]{\k}}{(2\pi)^2} \times
-$$
-$$
-\times \qty{
-\frac{\delta_{\mu\nu}}{m_e} +
-\qty(\frac{\hbar}{m_e})^2
+\s^{(n)}_{xy}(T=0) =i\frac{e^2}{\hbar}\int_{\text{BZ}}\frac{\dd[2]{\k}}{(2\pi)^2}
 \sum_{m\neq n}
+\qty[
 \frac{
-\mel**{n\k}{\frac{1}{i}\pdv{r_\mu}}{n'\k} \mel**{n'\k}{\frac{1}{i}\pdv{r_\nu}}{n\k} +
-\mel**{n\k}{\frac{1}{i}\pdv{r_\nu}}{n'\k} \mel**{n'\k}{\frac{1}{i}\pdv{r_\mu}}{n\k}
-}{\eps_n(\k) - \eps_{n'}(\k)}
-}
+\mel**{n}{\partial_x H}{m} \mel**{m}{\partial_y H}{n} -
+\mel**{n}{\partial_y H}{m} \mel**{m}{\partial_x H}{n}
+}{(\eps_n(\k) - \eps_{m}(\k))^2} ]
 $$
-<++>
+
+Usando que $(E_n - E_m)^2 = 4h^2$ e a equação (26) das notas de aula sobre Isolantes Topológicos para a curvatura de Berry, chegamos que
+$$
+\s^{(n)}_{xy}(T=0) =
+\frac{e^2}{\hbar} \int_{\text{BZ}} \frac{\dd[2]{\k}}{(2\pi)^2} B_n(\k) =
+\frac{e^2}{\hbar} C_n.
+$$
+
+\textbf{DAR UMA LIMPADA NO TEXTO.}
+
 
 
 \end{document}
