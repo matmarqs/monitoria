@@ -10,7 +10,7 @@
 
 \section{Fórmula de Drude revisitada}
 
-Neste caso, o campo elétrico $\E(t) = \E(\omega) e^{-i\omega t}$ é estático (e o magnético zero $\vb{H}=\0$), porém dependente do tempo. Dessa forma, a função distribuição $f(\k, t)$ depende apenas do momento $\k$ e do tempo $t$. A equação de Boltzmann dentro da aproximação do tempo de relaxação então fica
+(a) Neste caso, o campo elétrico $\E(t) = \E(\omega) e^{-i\omega t}$ é estático (e o magnético zero $\vb{H}=\0$), porém dependente do tempo. Dessa forma, a função distribuição $f(\k, t)$ depende apenas do momento $\k$ e do tempo $t$. A equação de Boltzmann dentro da aproximação do tempo de relaxação então fica
 $$
 \qty[\pdv{t} + \dot{\k} \vdot \grad_{\k}] f(\k, t) =
 -\frac{1}{\tau} \qty[f(\k,t) - f_0(\k)],
@@ -56,21 +56,50 @@ Como definimos $j^{\mu} = \sum_{\nu} \s_{\mu\nu} E^{\nu}$, vemos facilmente que
 {1-i\omega \tau[\eps_n(\k)]}.
 \end{equation}
 
-Supondo que $\tau[\eps_n(\k)]$ tenha um valor bem definido $\tau_F$ na superfície de Fermi, no limite $T \to 0$ temos $\qty(-\partial f_0 / \partial \eps)_{\eps = \eps_n(\k)} \to \delta(\eps_n(\k) - E_F)$ e portanto
+Supondo que $\tau[\eps_n(\k)]$ tenha um valor bem definido $\tau_F$ na superfície de Fermi e que, por isotropia em duas dimensões $2v^2 = v_F^2$, no limite $T \to 0$ temos $\qty(-\partial f_0 / \partial \eps)_{\eps = \eps_n(\k)} \to \delta(\eps_n(\k) - E_F)$ e portanto
 $$
 \sigma(\omega) = e^2 \int \frac{\dd[2]{\k}}{(2\pi)^2}
 \frac{\v(\k) \v(\k) \, \tau[\eps_n(\k)] \, \delta(\eps_n(\k) - E_F)}
 {1-i\omega \tau[\eps_n(\k)]} =
-e^2 \frac{v_F^2 \, \tau_F }{1-i\omega \tau_F}
+e^2 \frac{v_F^2 \, \tau_F }{2(1-i\omega \tau_F)}
 \int \frac{\dd[2]{\k}}{(2\pi)^2} \, \delta(\eps_n(\k) - E_F) \implies
 $$
 $$
-\s(\omega) = e^2 \frac{v_F^2 \, \tau_F }{1-i\omega \tau_F} \, \rho(E_F)
+\s(\omega) = e^2 \frac{v_F^2 \, \tau_F }{2(1-i\omega \tau_F)} \, \rho(E_F).
 $$
 
-\textbf{INCLUIR ISOTROPIA (DIVIDIR POR DIMENSÕES), CORRIGIR $\s$ e EXPLICAR o fator de $n$.}
+Agora, supondo uma dispersão de elétrons livres com massa efetiva $m^*$, temos $E(\k) = \frac{\hbar^2 \k^2}{2m^*}$. Em duas dimensões sabemos que $E_F \propto n$, de maneira que $\rho(E_F) = \dv{n}{E_F} = n/E_F = \frac{2 n}{m^* v_F^2}$. Substituindo obtemos
+$$
+\s(\omega) = \frac{\s_0}{1-i\omega \tau_F}, \quad \s_0 = \frac{n e^2 \tau_F}{m^*}.
+$$
 
-(b) \textbf{FALTA O TEIM (B), GRAFICAR}
+(b) Da expressão de Drude vemos que
+$$
+\Re[\s(\omega)] = \frac{ne^2}{m^*} \, \frac{\tau}{1+\omega^2 \tau^2}.
+$$
+
+Colocando $ne^2/m^* = 1$ e plotando $\Re[\s(\omega)]$ para diferentes valores de $\tau$, obtemos:
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.75\textwidth]{fig/resigma.png}
+\caption{$\omega \times \Re[\s(\omega)]$ para diferentes valores de $\tau$. Vemos que para $\tau \to \infty$ o peso espectral localiza-se em $\omega = 0$, pois $\Re[\s(\omega)]$ é uma lorentziana.}
+\label{fig:resigma}
+\end{figure}
+
+Devido à representação da função $\delta$ de Dirac por lorentzianas
+$$
+\delta(\omega) = \lim_{\eta \to \infty} \frac{1}{\pi} \cdot \frac{\eta}{1 + \omega^2 \eta^2},
+$$
+temos que no limite $\tau \to \infty$:
+$$
+\Re[\s(\omega)] = \frac{ne^2 \pi}{m^*} \delta(\omega).
+$$
+
+Definindo $\omega_p^2 = \frac{4\pi n e^2}{m^*}$, obtemos que
+$$
+\Re[\s(\omega)] = \frac{\omega_p^2}{4} \delta(\omega) \e
+\int_0^{\infty} \Re[\s(\omega)] \dd{\omega} = \frac{\omega_p^2}{8}.
+$$
 
 
 \pagebreak
@@ -94,7 +123,7 @@ $$
 \int \dd{\eps} f(\eps) \dv{\rho}{\eps}.
 $$
 
-A partir de agora assumiremos $E_F$, $T_F = D = k_B = 1$.
+A partir de agora assumiremos $E_F = 0$ e $T_F = D = k_B = 1$.
 
 \begin{itemize}
 \item (a) Metal: $\rho(\eps) = \frac{4}{\pi} \sqrt{1-\eps^2}$. Para $T \to 0$ podemos usar a expansão de Sommerfeld
@@ -111,27 +140,29 @@ $$
 $$
 Assim, da expressão $\s = \s_0 - A T^2$, reconhecemos
 $$
-\s_0 = \frac{2e^2 v_F^2 \tau_F}{3} \rho(E_F) \e
-A = -\frac{2e^2v_F^2\tau_F}{3} \frac{\pi^2}{6} \eval{\dv[2]{\rho}{\eps}}_{\eps=E_F}.
+\s_0 = \frac{2e^2 v_F^2 \tau_F}{3} \rho(E_F) = \frac{8e^2 v_F^2 \tau_F^2}{3\pi} \e
+A = -\frac{2e^2v_F^2\tau_F}{3} \frac{\pi^2}{6} \eval{\dv[2]{\rho}{\eps}}_{\eps=E_F}
+= \frac{4 \pi e^2v_F^2\tau_F}{9}.
 $$
 
-\textbf{ESBOÇO $\rho(\eps)$ e $\s(T)$. VERIFICAR QUE $\int\rho=2$}. COMENTAR O GRÁFICO.
+Essa DOS semicircular reflete o comportamento de um metal, já que a $\rho(\eps)$ é não-nulo para todo $-D \leq \eps \leq D$. Em particular $\rho(E_F) > 0$ nos dá uma condutividade finita em $T = 0$.
 
-\item (b) Semimetal: $\rho(\eps)=2\abs{\eps}$.
+\item (b) Semimetal: $\rho(\eps)=2\abs{\eps}$. Essa DOS representa um semimetal pois $\rho(E_F) = 0$, porém $\rho(\eps) > 0$ para $\eps \neq E_F$.
 
-\item (c) Semicondutor: $\rho(\eps) = \frac{\eps}{\sqrt{\eps^2-\Delta^2}}$, $\Delta < \eps < 1$. Como obter $\Delta$ a partir somente do $\s(T)$?
+\item (c) Semicondutor: $\rho(\eps) = \frac{\eps}{\sqrt{\eps^2-\Delta^2}}$, $\Delta < \eps < 1$. Em geral essa DOS representa um isolante de bandas, já que ela é gerada por uma dispersão da forma $\eps(\k) = \sqrt{\k^2 + \Delta^2}$ com a existência de um gap $\Delta$. Um semicondutor nada mais é do que um isolante com um gap $\Delta$ pequeno.
+\end{itemize}
 
-Observação: basicamente temos $T \to 0$. Então em baixas energias temos que cada sistema se comporta com o $\rho(\eps)$ da categoria. Ainda mais, podemos sempre setar $E_F = 0$.
+Observação: Basicamente temos $T \to 0$. Então em baixas energias (perto de $E_F$) temos que cada sistema se comporta como o $\rho(\eps)$ da categoria correspondente (metal, semimetal ou semicondutor). Ainda mais, podemos sempre setar $E_F = 0$. Então as escolhas de $\rho(\eps)$ e $E_F = 0$ feitas aqui são gerais.
+
+Os gráficos das densidades de estados $\rho(\eps)$ e das condutividades $\s(T)$ são exibidos nas Figuras \ref{fig:dos-systems} e \ref{fig:sigma}.
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.6\textwidth]{fig/dos-systems.png}
+\includegraphics[width=0.4\textwidth]{fig/dos-systems.png}
 \caption{Densidade de estados para os sistemas metal, semimetal e semicondutor.}
 \label{fig:dos-systems}
 \end{figure}
-Note que obtivemos $1.999$ ao invés de $2$ para o caso semicondutor. Para fazer esse cálculo, utilizei a função \texttt{scipy.integrate.quad} e explicitei que os pontos $\pm\Delta$ são pontos de divergência. Mesmo assim a integral não resultou em $2$ exatamente.
-
-Percebi que na verdade temos $\int \frac{x}{\sqrt{x^2-\Delta^2}} \dd{x} = \sqrt{x^2 - \Delta^2}$, de maneira que
+Note que obtivemos $1.908$ ao invés de $2$ para o caso semicondutor (com gap $\Delta = 0.3$). Percebi que na verdade temos $\int \frac{x}{\sqrt{x^2-\Delta^2}} \dd{x} = \sqrt{x^2 - \Delta^2}$, de maneira que
 $$
 \int_{-1}^{-\Delta} \frac{\abs{\eps}}{\eps^2-\Delta^2} \dd{\eps} + \int_{\Delta}^{1} \frac{\eps}{\eps^2-\Delta^2} \dd{\eps} = 2 \sqrt{1-\Delta^2}.
 $$
@@ -139,19 +170,24 @@ Assim, a integral não é exatamente $2$, a não ser que $\Delta = 0$.
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.75\textwidth]{fig/sigma.png}
-\caption{Condutividade}
+\includegraphics[width=0.6\textwidth]{fig/sigma.png}
+\caption{Condutividade para os diferentes sistemas físicos. No semicondutor utilizei $\Delta = 0.3$.}
 \label{fig:sigma}
 \end{figure}
 
-\end{itemize}
+Note que $\sigma_{\text{metal}}$ é finita para $T = 0$, e como podemos ver na Figura \ref{fig:sigma}, ela se comporta como $\s_0 - AT^2$ para temperaturas baixas (comportamento quadrático). É a única condutividade que decresce com o aumento da temperatura, as condutividades do semimetal e semicondutor são nulas para $T = 0$, porém aumentam com a temperatura.
 
+No caso do semimetal, a condutividade é zero para $T = 0$, porém é positiva para todo $T > 0$. Ela tem um comportamento linear para $T \approx 0$.
+
+No semicondutor, a condutividade é zero para $T = 0$ e permanece essencialmente zero para até um certo valor de $T \approx 0.05$ na Figura \ref{fig:sigma}.
+
+Vemos que o fato da condutividade permanecer zero para temperaturas pequenas no caso semicondutor é explicada pela existência do gap $\Delta$. Assim, podemos estudar o valor de $\Delta$ somente a partir de $\s(T)$ para baixas temperaturas. Quanto maior for a faixa de temperaturas em que $\s(T)$ permanece zero, maior é o gap $\Delta$.
 
 \pagebreak
 
 \section{Desordem e localização de Anderson}
 
-É intuitivo pensar que a banda associada aos operadores $d_i$ é localizada pois, na hamiltoniana considerada, existem termos de hopping entre $c_i$ e $c_j$ (sítios diferentes) e entre $c_i$ e $d_i$ (mesmo sítio), mas não existe hopping entre $d_i$ e $d_j$.
+(a) É intuitivo pensar que a banda associada aos operadores $d_i$ é localizada pois, na hamiltoniana considerada, existem termos de hopping entre $c_i$ e $c_j$ (sítios diferentes) e entre $c_i$ e $d_i$ (mesmo sítio), mas não existe hopping entre $d_i$ e $d_j$.
 
 Assumindo que o espaçamento de rede é $a$, tomamos as transformadas de Fourier
 $$
@@ -251,7 +287,21 @@ O parâmetro $\lambda$ controla o peso (assimetria) entre as duas bandas. Se $\l
 \label{fig:bandas-anderson12}
 \end{figure}
 
-(b) \textbf{FALTA O ITEM (B), TEM AQUELA FUNÇÃO $\beta(g)$}
+(b) A função de escala
+$$
+\beta(g) = \dv{\ln g}{\ln L} = \frac{L}{g} \dv{g}{L}
+$$
+quantifica a resposta (independente da escala, devido ao fator $L/g$) da condutância adimensional $g$ com respeito ao comprimento $L$ do sistema. Se a derivada em questão for positiva, a condutância aumenta ao aumentarmos o sistema (comportamento metálico). Do contrário, temos um comportamento isolante.
+
+Em aula fizemos uma estimativa para o comportamento $\beta(g)$ para a teoria de localização de Anderson. Obtivemos o seguinte gráfico:
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.75\textwidth]{fig/beta.png}
+\caption{Comportamento qualitativo da função de escala $\beta(g)$ para a teoria de localização de Anderson.}
+\label{fig:beta}
+\end{figure}
+
+Veja que para $d \leq 2$, temos $\beta(g) < 0$ negativo sempre. Isso mostra que não podemos ter estados estendidos nesse caso, todos são localizados (o sistema se comporta como isolante). Na presença de um campo magnético os estados do bulk continuam localizados, porém os da borda conseguem transmitir corrente elétrica. É o que acontece no efeito Hall quântico inteiro.
 
 \pagebreak
 
@@ -291,13 +341,14 @@ $$
 $$
 \Phi_{(x,y),(x,y+a)} = \frac{q}{\hbar} \int_{(x,y)}^{(x,y+a)} (B x \vu{y}) \vdot (dy \vu{y}) = \frac{qBxa}{\hbar}.
 $$
-<++>
+
+A hamiltoniana desse problema então ficaria
 $$
 H = -t \sum_{\R}
 \qty{
 \qty[c^\d_{(\R+a\vu{x})} c_{\R} + c_{\R}^\d c_{(\R+a\vu{x})}] +
 \qty[e^{i\frac{qBxa}{\hbar}} c^\d_{(\R+a\vu{y})} c_{\R} + e^{-i\frac{qBxa}{\hbar}}c_{\R}^\d c_{(\R+a\vu{y})}]
-}
+}.
 $$
 $$
 H = -\frac{t}{N} \sum_{\k,\k'}
@@ -310,8 +361,29 @@ e^{-ik_x a} c_{\k}^\d c_{\k'} + \hc] +
 e^{-ik_y a} c_{\k}^\d c_{\k'} + \hc]
 }
 $$
+$$
+H = -t \sum_{\k} \qty{
+\qty[e^{-ik_x a} c_{\k}^\d c_{\k} +
+e^{-ik_y a} c_{\k}^\d c_{\qty(\k - \frac{qBa}{\hbar} \vu{x})}
+] + \hc
+}.
+$$
 
-\textbf{NÃO TENHO MUITO IDEIA da DOS. VOU INVENTAR QUALQUER COISA}
+Como a \href{https://en.wikipedia.org/wiki/Hofstadter's_butterfly}{borboleta de Hofstadter} exibe um padrão bem complexo, não tenho muita certeza de como intuir sobre a densidade de estados desse problema. Porém, olhando a Figura \ref{fig:butterfly}, sabemos quais são as energias possíveis para o problema. Note que apesar delas serem discretas, o espectro é simétrico em torno do zero. Como calculamos na Questão 4 da Lista 3, a hamiltoniana de tight-binding na rede quadrada 2D tem uma divergência logarítmica em $\eps = 0$. Eu chutaria que a DOS na presença de campo magnético também terá divergências logarítmicas, porém em pontos diferentes de zero e de maneira simétrica. Um esboço do que eu estou pensando está na Figura \ref{fig:dos-esboco}.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\textwidth]{fig/butterfly.png}
+\caption{Espectro da borboleta de Hofstadter, energias possíveis $\eps_\alpha$ em função da razão de fluxo $\alpha$.}
+\label{fig:butterfly}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.75\textwidth]{fig/dos-esboco.png}
+\caption{Esboço do que eu intuo que seria a ``cara'' da densidade de estados do tight-binding rede quadrada 2D na presença de campo magnético.}
+\label{fig:dos-esboco}
+\end{figure}
+
 
 \pagebreak
 
@@ -431,11 +503,7 @@ Usando que $(E_n - E_m)^2 = 4h^2$ e a equação (26) das notas de aula sobre Iso
 $$
 \s^{(n)}_{xy}(T=0) =
 \frac{e^2}{\hbar} \int_{\text{BZ}} \frac{\dd[2]{\k}}{(2\pi)^2} B_n(\k) =
-\frac{e^2}{\hbar} C_n.
+\frac{e^2}{h} C_n.
 $$
-
-\textbf{DAR UMA LIMPADA NO TEXTO.}
-
-
 
 \end{document}
