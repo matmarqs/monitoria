@@ -10,7 +10,7 @@
 
 \section{Modelo de Hubbard}
 
-Na questão 3 da Lista 1 eu cheguei a calcular $\S_i \vdot \S_j$, lá eu obtive
+(a) Na questão 3 da Lista 1 eu cheguei a calcular $\S_i \vdot \S_j$. Lá eu obtive
 $$
 \S_i \vdot \S_j = -\frac{1}{2} \sum_{\s, \s'} c_{i\s}^\d c_{j\s'}^\d c_{i\s'} c_{j\s} - \frac{1}{4} n_i n_{j}.
 $$
@@ -22,9 +22,48 @@ $$
 
 Usando que $[c_{i\s}^\d, n_{i\s'}] = - \delta_{\s\s'} c_{i\s}^\d$ e $n_i^2 = (n_{i\up} + n_{i\down})^2 = n_i + 2 n_{i\up} n_{\down}$, temos
 $$
-\S_i^2 = -\frac{1}{2} \sum_{\s,\s'} \qty(n_{i\s'} c_{i\s}^\d + \delta_{\s\s'} )
+\S_i^2 = -\frac{1}{2} \sum_{\s,\s'} \qty(n_{i\s'} c_{i\s}^\d - \delta_{\s\s'} c_{i\s}^\d ) c_{i\s} - \frac{1}{4} (n_i + 2 n_{i\up} n_{i\down}) \implies
 $$
-<++>
+$$
+\S_i^2 = -\frac{1}{2} \sum_{\s,\s'} n_{i\s'} n_{i\s} + \sum_{\s} n_{i\s} - \frac{1}{4} (n_i + 2 n_{i\up} n_{i\down}) \implies
+$$
+$$
+\S_i^2 = -\frac{1}{2} (n_i + 2 n_{i\up} n_{\down}) + n_i - \frac{1}{4} n_i - \frac{1}{2} n_{i\up} n_{i\down} =
+\frac{1}{4} n_i - \frac{3}{2} n_{i\up} n_{i\down} \implies
+$$
+$$
+n_{i\up} n_{i\down} = -\frac{2}{3} \S_i^2 + \frac{1}{2} n_i \implies
+\boxed{
+U \sum_{i} n_{i\up} n_{i\down} =
+-\frac{2}{3} \sum_{i} (\S_i^2) + \frac{U}{2} \sum_{i} n_i.
+}
+$$
+
+Para mostrar que $[H, N_e] = 0$, é óbvio que cada $n_{i\up}$ e $n_{i\down}$ comutam com os termos \textit{interaction} e \textit{on-site} da hamiltoniana. Assim, falta mostrar que $N_e$ comuta com o termo de \textit{hopping}. Note que
+$$
+[c_{i\s}^\d c_{j\s} + c_{j\s}^\d c_{i\s}, n_{k\s'}] =
+\Big([c_{i\s}^\d, n_{k\s'}] c_{j\s} + c_{i\s}^\d [c_{j\s}, n_{k\s'}]\Big) +
+\Big([c_{j\s}^\d, n_{k\s'}] c_{i\s} + c_{j\s}^\d [c_{i\s}, n_{k\s'}]\Big)
+$$
+$$
+=
+\delta_{\s\s'} \Big(-c_{i\s}^\d c_{j\s} \delta_{ik} + c_{i\s}^\d c_{j\s} \delta_{jk} -
+c_{j\s}^\d c_{i\s} \delta_{jk} + c_{j\s}^\d c_{i\s} \delta_{ik} \Big)
+$$
+
+Assim, para qualquer spin $\s' = \; \up, \down$, temos
+$$
+\qty[\sum_{\nn{i}{j}, \s} (c_{i\s}^\d c_{j\s} + c_{j\s}^\d c_{i\s}),
+\sum_{k} n_{k\s'} ] =
+\delta_{\s\s'} \sum_{\nn{i}{j}, \s}
+\qty( \cancelto{0}{\boxed{-c_{i\s}^\d c_{j\s} + c_{i\s}^\d c_{j\s}}} \; \cancelto{0}{\boxed{- c_{j\s}^\d c_{i\s} + c_{j\s}^\d c_{i\s}}} ) = 0.
+$$
+
+Como $N_e = \sum_{\s} \sum_{k} n_{k\s}$, vemos que $[H, N_e] = 0$.
+
+\n
+
+Para a magnetização $M^z$, também é óbvio que ela comuta com os termos de \textit{interaction} e \textit{on-site}. Escrevendo $2 M^z = \sum_{k} n_{k\up} - \sum_{k} n_{k\down}$, do resultado anterior é direto que $M^z$ também comuta com o termo de \textit{hopping}. Isso nos dá que $[H, M^z] = 0$.
 
 \pagebreak
 
