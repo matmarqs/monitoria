@@ -1,4 +1,4 @@
-f=solucao_3
+f=solucao_5
 
 #latex:
 #	pdflatex $(f).tex pdflatex $(f).tex && latexmk $(f).tex && pdflatex $(f).tex pdflatex $(f).tex

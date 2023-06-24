@@ -4,6 +4,8 @@
 \title{\Huge{\textbf{Lista 4 - Matéria Condensada 2}}}
 \author{Mateus Marques}
 
+\renewcommand{\lg}{\text{lg}}
+
 \begin{document}
 
 \maketitle
@@ -64,6 +66,80 @@ Como $N_e = \sum_{\s} \sum_{k} n_{k\s}$, vemos que $[H, N_e] = 0$.
 \n
 
 Para a magnetização $M^z$, também é óbvio que ela comuta com os termos de \textit{interaction} e \textit{on-site}. Escrevendo $2 M^z = \sum_{k} n_{k\up} - \sum_{k} n_{k\down}$, do resultado anterior é direto que $M^z$ também comuta com o termo de \textit{hopping}. Isso nos dá que $[H, M^z] = 0$.
+
+\pagebreak
+
+(b) As duas sub-redes da rede quadrada são facilmente identificadas, como na Figura \ref{fig:square-lat}:
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.4\textwidth]{fig/square-lat.png}
+\caption{Rede quadrada e suas sub-redes $\textcolor{red}{A}$ e $\textcolor{blue}{B}$.}
+\label{fig:square-lat}
+\end{figure}
+
+
+A transformação partícula-buraco \textbf{na verdade} (c.f. notas de aula) é dada por
+$$
+c_{i\s} =
+\begin{cases}
+\; -d_{i\s}^\d, \quad i \in A; \\
+\; +d_{i\s}^\d, \quad i \in B.
+\end{cases}
+$$
+
+Para uma rede bipartida, a parte de \textit{hopping} do hamiltoniano é dado por
+$$
+H_t = -t \sum_{\s, \R_i, \bm{\delta}} \Big[
+c_{\R_i, A, \s}^\d c_{\R_i + \bm{\delta}, B, \s} +
+c_{\R_i, B, \s}^\d c_{\R_i + \bm{\delta}, A, \s}
+\Big].
+$$
+
+Sobre a transformação partícula-buraco, temos que
+$$
+c_{\R_i, A, \s}^\d c_{\R_i + \bm{\delta}, B, \s} +
+c_{\R_i, B, \s}^\d c_{\R_i + \bm{\delta}, A, \s} =
+- d_{\R_i, A, \s} d_{\R_i + \bm{\delta}, B, \s}^\d
+- d_{\R_i, B, \s} d_{\R_i + \bm{\delta}, A, \s}^\d =
+$$
+$$
+= d_{\R_i, A, \s}^\d d_{\R_i + \bm{\delta}, B, \s} +
+d_{\R_i, B, \s}^\d d_{\R_i + \bm{\delta}, A, \s},
+$$
+ou seja, $H_t$ se mantém invariante sobre a transformação partícula-buraco.
+
+Se definirmos $H_U$ como
+$$
+H_U = U \sum_{i} (n_{i\up} - 1/2) (n_{i\down} - 1/2),
+$$
+temos que ele também se mantém invariante. Note que $n_{i\s} = c_{i\s}^\d c_{i\s} = d_{i\s} d_{i\s}^\d = 1 - d_{i\s}^\d d_{i\s}$, logo
+$$
+(c_{i\up}^\d c_{i\up} - 1/2) (c_{i\down}^\d c_{i\down} - 1/2) =
+(1/2 - d_{i\up}^\d d_{i\up}) (1/2 - d_{i\down}^\d d_{i\down}) =
+(d_{i\up}^\d d_{i\up} - 1/2) (d_{i\down}^\d d_{i\down} - 1/2).
+$$
+Assim, $H_U$ também se mantém invariante.
+
+Porém, para a parte $H_{\tilde{\mu}}$, definida como
+$$
+H_{\tilde{\mu}} =
+-\tilde{\mu} \sum_{i} (n_{i\up} + n_{i\down}) =
+-\tilde{\mu} \sum_{i} (c_{i\up}^\d c_{i\up} + c_{i\down}^\d c_{i\down}) =
+-\tilde{\mu} \sum_{i} (2 - d_{i\up}^\d d_{i\up} - d_{i\down}^\d d_{i\down}),
+$$
+não se mantém invariante a menos que $\tilde{\mu} = 0$, que é justamente a situação de semipreenchimento $\mu = U/2$, quando todo o hamiltoniano de Hubbard possui simetria partícula-buraco.
+
+\n
+
+(c) No limite atômico $t = 0$, como os sítios são independentes, a função de partição é simplesmente dada por $Z = 1 + 2 e^{\beta \mu} + e^{\beta(2\mu - U)}$. A ocupação média $n$ é dada então por
+$$
+n = \frac{1}{\beta Z} \cdot \pdv{Z}{\mu} =
+\frac{2 e^{\beta\mu} + 2 e^{\beta(2\mu-U)}}{1 + 2 e^{\beta \mu} + e^{\beta(2\mu - U)}}.
+$$
+\textbf{FAZER O GRÁFICO.}
+
+
+
 
 \pagebreak
 
