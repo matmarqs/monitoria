@@ -145,6 +145,198 @@ $$
 
 \section{Antiferromagnetismo no modelo de Hubbard em campo médio}
 
+(a) A magnetização no espaço real para o estado de Néel na rede quadrada é esboçada na Figura \ref{fig:mag-neel}:
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.4\textwidth]{fig/magnetization-real_space.png}
+\caption{Magnetização $m^z_j = \Re[m^z e^{i \bm{Q} \vdot \bm{R}_j}]$ em vermelho para o estado de Néel.}
+\label{fig:mag-neel}
+\end{figure}
+
+(b) No contexto de campo médio para os operadores de spin $\S_i$, vimos em aula que a hamiltoniana de Hubbard se escreve como
+$$
+H_{MF} = H_0 - \sum_{i} \bm{m}_i \vdot \S_i + \frac{3}{8U} \sum_{i} \bm{m}_i^2, \quad
+\bm{m}_i = \frac{4U}{3} \ev{\S_i},
+$$
+onde $H_0$ denota a parte não-interagente (\textit{on-site} + \textit{hopping}).
+
+\n
+
+Analisando cada termo por vez:
+\begin{itemize}
+\item Como sabemos, $H_0$ no espaço de momento $\k$ é dado por $\sum_{\k\s} \eps_{\k} c_{\k\s}^\d c_{\k\s}$. Mas como uma translação $\k \to \k + \bm{Q}$ não afeta a somatória (devido à periodicidade da zona de Brillouin), podemos escrever
+$$
+H_0 = \frac{1}{2}
+\qty{
+\sum_{\k\s} \eps_{\k} c_{\k\s}^\d c_{\k\s} +
+\sum_{\k\s} \eps_{\k+\bm{Q}} c_{\k+\bm{Q},\s}^\d c_{\k+\bm{Q},\s}
+}.
+$$
+
+\item O termo $\frac{3}{8U} \sum_{i} \bm{m}_i^2$ resulta simplesmente em $\frac{3}{8U} N m^2$.
+
+\item Utilizando o estado de Néel $\bm{m}_j = \bm{m} \, e^{i \bm{Q} \vdot \bm{R}_j}$, lembre que precisamos tomar a parte real ou, de forma equivalente, somar o hermitiano conjugado e dividir o resultado por 2. Temos que
+$$
+- \sum_{i} \bm{m}_i \vdot \S_i = -\sum_{i}\sum_{\alpha \beta} c_{i\alpha} \qty(\frac{\bm{\s} \vdot \bm{m}}{2})_{\alpha \beta} c_{i\beta} e^{-i\bm{Q} \vdot \bm{R}_j}.
+$$
+
+Tomando as transformadas de Fourier $c_{i\alpha}^\d = \frac{1}{\sqrt{N}} \sum_{\k} e^{-i\k\vdot\R_i}$, temos
+$$
+= -\frac{1}{N} \sum_{\k,\k'} \sum_{\alpha \beta}
+\cancelto{\boxed{N \delta_{\k,\k'+\bm{Q}}}}{\qty{\sum_{i} e^{-i(\k-\k'-\bm{Q})\vdot\R_i}}}
+c_{\k\alpha}^\d \qty(\frac{\bm{\s}\vdot\bm{m}}{2})_{\alpha\beta} c_{\k'\beta} =
+$$
+$$
+= - \sum_{\k} \sum_{\alpha \beta}
+c_{\k+\bm{Q},\alpha}^\d \qty(\frac{\bm{\s}\vdot\bm{m}}{2})_{\alpha\beta} c_{\k\beta}.
+$$
+
+
+Tomando a parte real ($+ \hc$ e dividindo por 2), o termo $-\sum_{i} \bm{m}_i \vdot \S_i$ resulta em
+$$
+= - \frac{1}{2} \sum_{\k} \sum_{\alpha\beta}
+\qty{
+c_{\k+\bm{Q},\alpha}^\d \qty(\frac{\bm{\s}\vdot\bm{m}}{2})_{\alpha\beta} c_{\k\beta}+
+c_{\k\alpha}^\d \qty(\frac{\bm{\s}\vdot\bm{m}}{2})_{\alpha\beta} c_{\k+\bm{Q},\beta}.
+}
+$$
+\end{itemize}
+
+Juntando todas as partes de $H_{MF}$, é fácil enxergar que ela se escreve como
+$$
+H_{MF} = \frac{3}{8U} Nm^2 + \frac{1}{2} \sum_{\k}
+\begin{pmatrix}
+c_{\k\up}^{\d} & c_{\k\down}^{\d} & c_{\k+\bm{Q},\up}^{\d} & c_{\k+\bm{Q},\down}^{\d}
+\end{pmatrix}
+\begin{pmatrix}
+\eps_{\k} \1 & -\bm{\s} \vdot \bm{m}/2 \\
+-\bm{\s} \vdot \bm{m}/2 & \eps_{\k+\bm{Q}} \1
+\end{pmatrix}
+\begin{pmatrix}
+c_{\k\up} \\ c_{\k\down} \\ c_{\k+\bm{Q},\up} \\ c_{\k+\bm{Q},\down}
+\end{pmatrix},
+$$
+onde $\1$ é a matriz identidade $2 \times 2$.
+
+\n
+
+(c) Assumindo uma rede quadrada, onde $\eps_{\k+\bm{Q}}=-\eps_{\k}$, e sem perda de generalidade, que a direção do vetor $\bm{m} = m \vu{z}$ esteja alinhada com eixo $z$, temos que diagonalizar a matriz
+$$
+M =
+\begin{pmatrix}
+\eps_{\k} & 0 & -\frac{m}{2} & 0 \\
+0 & \eps_{\k} & 0 & \frac{m}{2} \\
+-\frac{m}{2} & 0 & -\eps_{\k} & 0 \\
+0 & \frac{m}{2} & 0 & -\eps_{\k}
+\end{pmatrix}.
+$$
+
+Para diagonalizá-la, eu notei que a transformação canônica sugerida na lista está com um pequeno erro. Depois de muitas contas, eu descobri que a transformação correta é
+\begin{equation} \label{eq:transf}
+\begin{pmatrix}
+c_{\k\s} \\ c_{\k+\bm{Q},\s}
+\end{pmatrix}
+=
+\begin{pmatrix}
+\cos\theta_{\k} & \s\sin\theta_{\k} \\
+-\s\sin\theta_{\k} & \cos\theta_{\k}
+\end{pmatrix}
+\begin{pmatrix}
+\alpha_{\k\s} \\ \beta_{\k\s}
+\end{pmatrix},
+\end{equation}
+$$
+T =
+\begin{pmatrix}
+\cos\theta_{\k} & 0 & \sin\theta_{\k} & 0 \\
+0 & \cos\theta_{\k} & 0 & -\sin\theta_{\k} \\
+-\sin\theta_{\k} & 0 & \cos\theta_{\k} & 0 \\
+0 & \sin\theta_{\k} & 0 & \cos\theta_{\k}
+\end{pmatrix},
+$$
+onde $\s = \pm 1$ para $\up$ ou $\down$ (esse sinal dependente do spin faz toda diferença, sem ele a matriz $M$ não é diagonalizada). Com isso em mente, fazemos as multiplicações de matriz:
+$$
+T^{\d} M T =
+$$
+$$
+\begin{pmatrix}
+\cos\theta_{\k} & 0 & -\sin\theta_{\k} & 0 \\
+0 & \cos\theta_{\k} & 0 & \sin\theta_{\k} \\
+\sin\theta_{\k} & 0 & \cos\theta_{\k} & 0 \\
+0 & -\sin\theta_{\k} & 0 & \cos\theta_{\k}
+\end{pmatrix}
+\begin{pmatrix}
+\eps_{\k} & 0 & -\frac{m}{2} & 0 \\
+0 & \eps_{\k} & 0 & \frac{m}{2} \\
+-\frac{m}{2} & 0 & -\eps_{\k} & 0 \\
+0 & \frac{m}{2} & 0 & -\eps_{\k}
+\end{pmatrix}
+\begin{pmatrix}
+\cos\theta_{\k} & 0 & \sin\theta_{\k} & 0 \\
+0 & \cos\theta_{\k} & 0 & -\sin\theta_{\k} \\
+-\sin\theta_{\k} & 0 & \cos\theta_{\k} & 0 \\
+0 & \sin\theta_{\k} & 0 & \cos\theta_{\k}
+\end{pmatrix} =
+$$
+$$
+=
+\begin{pmatrix}
+\cos\theta_{\k} & 0 & -\sin\theta_{\k} & 0 \\
+0 & \cos\theta_{\k} & 0 & \sin\theta_{\k} \\
+\sin\theta_{\k} & 0 & \cos\theta_{\k} & 0 \\
+0 & -\sin\theta_{\k} & 0 & \cos\theta_{\k}
+\end{pmatrix}
+\times
+$$
+$$
+\begin{pmatrix}
+\eps_{\k}\cos\theta_{\k} + \frac{m}{2}\sin\theta_{\k} & 0 & -\eps_{\k}\cos\theta_{\k}+\frac{m}{2}\sin\theta_{\k} & 0 \\
+0 & \eps_{\k}\cos\theta_{\k}+\frac{m}{2}\sin\theta_{\k} & 0 & \eps_{\k}\sin\theta_{\k}-\frac{m}{2}\cos\theta_{\k} \\
+-\eps_{\k}\sin\theta_{\k}+\frac{m}{2}\cos\theta_{\k} & 0 & -\eps_{\k}\cos\theta_{\k}-\frac{m}{2}\sin\theta_{\k} & 0 \\
+0 & \eps_{\k}\sin\theta_{\k}-\frac{m}{2}\cos\theta_{\k} & 0 & -\eps_{\k}\cos\theta_{\k}-\frac{m}{2}\sin\theta_{\k}
+\end{pmatrix} =
+$$
+$$
+\begin{pmatrix}
+\eps_{\k}\cos2\theta_{\k} + \frac{m}{2}\sin2\theta_{\k} & 0 & -\eps_{\k}\sin2\theta_{\k}+\frac{m}{2}\cos2\theta_{\k} & 0 \\
+0 & \eps_{\k}\cos2\theta_{\k}+\frac{m}{2}\sin2\theta_{\k} & 0 & \eps_{\k}\sin2\theta_{\k}-\frac{m}{2}\cos2\theta_{\k} \\
+-\eps_{\k}\sin2\theta_{\k}+\frac{m}{2}\cos2\theta_{\k} & 0 & -\eps_{\k}\cos2\theta_{\k}-\frac{m}{2}\sin2\theta_{\k} & 0 \\
+0 & \eps_{\k}\sin2\theta_{\k}-\frac{m}{2}\cos2\theta_{\k} & 0 & -\eps_{\k}\cos2\theta_{\k}-\frac{m}{2}\sin2\theta_{\k}
+\end{pmatrix}.
+$$
+
+\n
+
+Se $\theta_{\k}$ satisfizer a relação
+$$
+\eps_{\k} \sin2\theta_{\k} = \frac{m}{2} \cos2\theta_{\k} \iff
+\boxed{ \tan2\theta_{\k} = \frac{m}{2\eps_{\k}}, }
+$$
+a matriz $M$ será diagonalizada:
+$$
+T^\d M T =
+\begin{pmatrix}
+\sqrt{\eps_{\k}^2 + m^2/4} & 0 & 0 & 0 \\
+0 & \sqrt{\eps_{\k}^2 + m^2/4} & 0 & 0 \\
+0 & 0 & -\sqrt{\eps_{\k}^2 + m^2/4} & 0 \\
+0 & 0 & 0 & -\sqrt{\eps_{\k}^2 + m^2/4}
+\end{pmatrix}.
+$$
+
+Obs: é fácil verificar que $\qty{\alpha_{\k\s},\alpha_{\k\s}^\d} = \qty{\beta_{\k\s},\beta_{\k\s}^\d} = 1$ com a transformação \ref{eq:transf}. Não vou explicitar as contas aqui.
+
+\pagebreak
+
+(d) A função de partição grande canônica é
+$$
+Z = \tr[e^{-\beta(H_{MF} - \mu N)}]
+$$
+<++>
+
+
+
+
+
 
 \pagebreak
 
