@@ -327,20 +327,107 @@ Obs: é fácil verificar que $\qty{\alpha_{\k\s},\alpha_{\k\s}^\d} = \qty{\beta_
 
 \pagebreak
 
-(d) A função de partição grande canônica é
+(d) Utilizando o índice $p = \pm$ para indexar as energias $E_{\k,p}$, temos que a energia livre de campo médio por sítio é
 $$
-Z = \tr[e^{-\beta(H_{MF} - \mu N)}]
+f = - \frac{1}{\beta N} \ln Z = \frac{3}{8U}m^2 -
+\frac{1}{\beta N} \sum_{\k, p, \s} \ln[ 1 + e^{-\beta (E_{\k,p,\s} - \mu)} ].
 $$
-<++>
 
+Usando que $1 + e^{-x} = e^{-x/2} \cdot 2 \cosh x$, o termo da somatória pode ser reescrito como
+$$
+\frac{1}{\beta N} \sum_{\k, p, \s} \ln[ 1 + e^{-\beta (E_{\k,p} - \mu)} ] =
+-\frac{1}{\beta N} \sum_{\k, p, \s} \qty{
+-\frac{\beta}{2} (E_{\k,p} - \mu) +
+\ln\qty{2 \cosh\qty[\frac{\beta}{2} (E_{k,p} - \mu)] }
+} =
+$$
+$$
+=
+-\frac{1}{2 N} \sum_{\k, p, \s} \mu -
+\frac{1}{\beta N} \sum_{\k, p, \s}
+\ln\qty{2 \cosh\qty[\frac{\beta}{2} (E_{k,p} - \mu)] },
+$$
+onde usei que $\sum_{p} E_{\k,p} = 0$, já que $E_{\k,-} = - E_{\k,+}$. Com isso vemos que $f$ tem a forma
+$$
+f = f_0 -
+\frac{T}{N} \sum_{\k,p,\s}
++ \frac{3}{8U} m^2
+\ln\qty{2\cosh\qty[\frac{\beta}{2}(E_{\k,p} - \mu)]} .
+$$
 
+(e) Extremizando a energia livre com respeito a $m$ e substituindo $E_{\k,p} = p \sqrt{\eps_{\k}^2 + m^2}$, temos
+$$
+0 = \pdv{f}{m} =
+\frac{3}{4U} m -
+\frac{1}{\cancel{\beta} N} \sum_{\k, p, \s}
+\frac{\cancel{2}\sinh\qty[\frac{\beta}{2}(E_{\k,p}-\mu)]}{\cancel{2}\cosh\qty[\frac{\beta}{2}(E_{\k,p}-\mu)]} \cdot
+\frac{\cancel{\beta}}{2} \, \frac{p m}{\sqrt{\eps_{\k}^2 + m^2}} \implies
+$$
+$$
+\implies \frac{1}{2N} \sum_{\k, p, \s}
+\tanh\qty[\frac{\sqrt{\eps_{\k}^2 + m^2} - p\mu}{2T}]
+\frac{1}{\sqrt{\eps_{\k}^2 + m^2}} = \frac{3}{4U} .
+$$
 
+Tomando $T \to 0$, a tangente hiperbólica tende a $1$. Substituindo $\frac{1}{N} \sum_{\k,p,\s} = \int_{-\infty}^{\infty} \dd{\eps} \rho(\eps)$:
+$$
+\int_{-\infty}^{\infty} \frac{\rho(\eps)}{\sqrt{\eps^2 + m^2}} \dd{\eps} = \frac{3}{2U}.
+$$
+
+A aproximação $\rho(\eps) = (1/4\pi t^2) \ln(t/\abs{\eps})$ é válida para $\abs{\eps} \leq \tau \ll t$ ($\tau$ é um cut-off). Temos então
+$$
+\frac{3}{2U} = \int_{-\infty}^{\infty} \frac{\rho(\eps)}{\sqrt{\eps^2 + m^2}} \dd{\eps} =
+\textcolor{blue}{\int_{-\tau}^{\tau} \frac{\rho(\eps)}{\sqrt{\eps^2 + m^2}} \dd{\eps}} +
+\textcolor{red}{\int_{\abs{\eps} \geq \tau} \frac{\rho(\eps)}{\sqrt{\eps^2 + m^2}} \dd{\eps}} =
+\textcolor{blue}{I} + \textcolor{red}{J},
+$$
+onde substituimos a aproximação logarítmica em $I = (1/4\pi t^2) \int_{-\tau}^{\tau} \frac{\ln(t/\abs{\eps})}{\sqrt{\eps^2 + m^2}} \dd{\eps}$ e a integral $0 \leq J < \infty$ tem um resultado finito (não diverge) pois $\rho(\eps)$ é bem comportado para $\abs{\eps} \geq \tau$.
+
+\n
+
+Estudaremos a convergência da integral $I$:
+\begin{itemize}
+\item Para $m > 0$, provarei que $I < \infty$ converge. Temos que $\frac{1}{\sqrt{\eps^2+m^2}} \leq \frac{1}{m}$. Assim:
+$$
+I \leq \frac{1}{4\pi t^2 m} \int_{-\tau}^{\tau} \Big( \ln t - \ln\abs{\eps} \Big) \dd{\eps} =
+\frac{1}{4\pi t^2 m} \Big[ 2\tau \ln t - 2 \int_{0}^{\tau} \ln\eps \dd{\eps} \Big] .
+$$
+
+Lembrando que $\int \ln x \dd{x} = x \ln x - x$ e que $\displaystyle{\lim_{x\to 0} (x \ln x) = 0}$, obtemos que a integral $I$ converge para todo $m > 0$:
+$$
+I \leq \frac{\tau}{2\pi t^2 m} \qty[1 + \ln(\frac{t}{\tau})] < \infty.
+$$
+
+Isso mostra que, dado $m > 0$, a interação correspondente $U = \frac{3}{2(I+J)} > 0$ é maior que zero (ela seria zero caso $I + J = \infty$).
+
+\item Para $m = 0$ provarei que $I = \infty$ diverge. Nesse caso, substituindo a variável $x = t/\eps$ temos
+$$
+I = \frac{1}{2\pi t^2} \int_{0}^{\tau} \frac{\ln(\frac{t}{\eps})}{\eps} \dd{\eps} =
+\frac{1}{2\pi t^2}
+\int_{t/\tau}^{\infty} \frac{\ln x}{x} \dd{x} =
+\frac{1}{2\pi t^2} \cdot \eval{\frac{(\ln x)^2}{2}}_{t/\tau}^{\infty} = \infty.
+$$
+
+Portanto $I = \infty$ diverge e, consequentemente, para $m = 0$ o $U$ correspondente é zero.
+\end{itemize}
+
+Esses dois itens demonstram que $U_c = 0^+$.
+
+A solução obtida corresponde a um isolante pois vemos que o módulo da magnetização $m$ se comporta como um gap na relação de dispersão $E_{\k,\pm} = \pm \sqrt{\eps_{\k}^2 + m^2/4}$ e, para $n_e = 1$, a banda de baixo é toda preenchida, de maneira que conseguimos interpretar o resultado como um isolante de bandas, onde o gap é originado pelo estabilidade da fase antiferromagnética.
+
+O resultado obtido mostra que, para qualquer interação $U > 0$, temos uma solução $m > 0$ estável que extremiza a energia livre. Isso mostra a estabilidade do estado antiferromagnético. Lembrando do que estudamos para isolantes de Mott onde $U/t \geq 1$, temos que o material correlacionados é um isolante (de Mott) e a fase antiferromagnética também é estável.
+
+\textbf{AS IDEIAS ESTÃO ACIMA. ORGANIZAR O TEXTO.}
 
 
 
 \pagebreak
 
 \section{Modelo de Heisenberg na rede triangular}
+
+Bora lá
+<++>
+
 
 
 \pagebreak
