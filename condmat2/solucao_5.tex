@@ -148,7 +148,7 @@ $$
 (a) A magnetização no espaço real para o estado de Néel na rede quadrada é esboçada na Figura \ref{fig:mag-neel}:
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.4\textwidth]{fig/magnetization-real_space.png}
+\includegraphics[width=0.75\textwidth]{fig/magnetization-real_space.png}
 \caption{Magnetização $m^z_j = \Re[m^z e^{i \bm{Q} \vdot \bm{R}_j}]$ em vermelho para o estado de Néel.}
 \label{fig:mag-neel}
 \end{figure}
@@ -325,7 +325,7 @@ $$
 
 Obs: é fácil verificar que $\qty{\alpha_{\k\s},\alpha_{\k\s}^\d} = \qty{\beta_{\k\s},\beta_{\k\s}^\d} = 1$ com a transformação \ref{eq:transf}. Não vou explicitar as contas aqui.
 
-\pagebreak
+\n
 
 (d) Utilizando o índice $p = \pm$ para indexar as energias $E_{\k,p}$, temos que a energia livre de campo médio por sítio é
 $$
@@ -425,7 +425,7 @@ O resultado obtido mostra que, para qualquer interação $U > 0$, temos uma solu
 
 \section{Modelo de Heisenberg na rede triangular}
 
-Para a rede triangular com vetores unitários $\vb{a}_1 = (1,0)$ e $\vb{a}_2 = \qty(\frac{1}{2}, \frac{\sqrt{3}}{2})$, temos que todos os possíveis vetores $\bm{\delta}$ são $\pm\vb{a}_1, \pm\vb{a}_2$ e $\pm (\vb{a}_2 - \vb{a}_1)$. Portanto
+Para a rede triangular com vetores unitários $\vb{a}_1 = (1,0)$ e $\vb{a}_2 = \qty(\frac{1}{2}, \frac{\sqrt{3}}{2})$ e os vetores correspondentes no espaço recíproco são $\vb{b}_1 = \frac{4\pi}{\sqrt{3}} \qty(\frac{\sqrt{3}}{2}, -\frac{1}{2})$ e $\vb{b}_2 = \frac{4\pi}{\sqrt{3}} \qty(0, 1)$. Temos que todos os possíveis vetores $\bm{\delta}$ são $\pm\vb{a}_1, \pm\vb{a}_2$ e $\pm (\vb{a}_2 - \vb{a}_1)$. Portanto
 $$
 J(\q) = \frac{J}{2} \sum_{\bm{\delta}} e^{-i \q \vdot \bm{\delta}} =
 J \qty{\cos(\q \vdot \vb{a}_1) + \cos(\q \vdot \vb{a}_2) + \cos[\q \vdot (\vb{a}_2 - \vb{a}_1)]} =
@@ -434,20 +434,114 @@ $$
 = J \qty[\cos(q_x) + \cos(\frac{q_x}{2} + \frac{\sqrt{3} q_y}{2}) + \cos(\frac{q_x}{2} - \frac{\sqrt{3} q_y}{2})].
 $$
 
-Jogando no Wolfram Alpha, temos que o mínimo de $J(\q)$ é $-3/2$
+Usando que $\cos(x+y) + \cos(x-y) = 2 \cos(x) \cos(y)$, temos que
+$$
+J(\q) = J \qty[\cos(q_x) + 2 \cos(\frac{q_x}{2}) \cos(\frac{\sqrt{3} q_y}{2})].
+$$
 
+Tomando o gradiente e igualando a zero temos
+$$
+\pdv{J}{q_x} = J \qty[-\sin(q_x) - \sin(\frac{q_x}{2}) \cos(\frac{\sqrt{3} q_y}{2})] = 0,
+$$
+$$
+\pdv{J}{q_y} = - \sqrt{3} J \cos(\frac{q_x}{2}) \sin(\frac{\sqrt{3} q_y}{2}) = 0.
+$$
 
+Escolhendo $\sin(\frac{\sqrt{3} q_y}{2}) = 0$, podemos tomar $q_y = \frac{2\pi}{\sqrt{3}}$, de maneira que $\cos(\frac{\sqrt{3} q_y}{2}) = -1$ e, portanto, $\sin(q_x) - \sin(q_x/2) = 2 \cos(\frac{3 q_x}{4}) \sin(\frac{q_x}{4}) = 0$. Escolhendo $\cos(\frac{3q_x}{4}) = 0$, tomamos $q_x = \frac{2\pi}{3}$. Essas escolhas nos dão $\vb{Q} = \qty(\frac{2\pi}{3}, \frac{2\pi}{\sqrt{3}}) \in \text{BZ}$ e $J(\vb{Q}) = -\frac{3}{2} J = \displaystyle{\min_{\q} J(\q)}$. Assim, a energia do estado fundamental é $E_0 / N  = -\frac{3}{2} S^2$, que é o resultado esperado para todos os spins formando um ângulo de $120^\circ$.
 
+Fazendo o esboço da magnetização $m_j = m e^{i \vb{Q} \vdot \vb{R}_j}$ no espaço real, obtemos a Figura \ref{fig:mag-triang}:
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.75\textwidth]{fig/mag_triang-real_space.png}
+\caption{Magnetização $m^z_j = \Re[m^z e^{i \bm{Q} \vdot \bm{R}_j}]$ em vermelho para a rede triangular.}
+\label{fig:mag-triang}
+\end{figure}
 
 \pagebreak
 
 \section{Transformação de Bogoliubov bosônica}
 
+(a) Invertendo $T$ temos que
+$$
+\begin{pmatrix}
+\alpha_{\k} \\ \alpha_{-\k}^\d
+\end{pmatrix}
+=
+T^{-1}
+\begin{pmatrix}
+a_{\k} \\ a_{-\k}^\d
+\end{pmatrix}
+=
+\begin{pmatrix}
+\cosh\theta_{\k} & \sinh\theta_{\k} \\
+\sinh\theta_{\k} & \cosh\theta_{\k}
+\end{pmatrix}
+\begin{pmatrix}
+a_{\k} \\ a_{-\k}^\d
+\end{pmatrix}
+$$
+
+Portanto
+$$
+[\alpha_{\k}, \alpha_{-\k}] =
+\cosh\theta_{\k}\sinh\theta_{\k} \cancelto{0}{[a_{\k}, a_{-\k}]} +
+\cosh^2\theta_{\k} \cancelto{1}{[a_{\k}, a_{\k}^\d]} +
+\sinh^2\theta_{\k} \cancelto{-1}{[a_{-\k}^\d, a_{-\k}]} +
+\cosh\theta_{\k}\sinh\theta_{\k} \cancelto{0}{[a_{-\k}^\d, a_{\k}^\d]} +
+$$
+$$
+= \cosh^2\theta_{\k} - \sinh^2\theta_{\k} = 1.
+$$
+
+\n
+
+(b) Temos que
+$$
+T^\d M T =
+\begin{pmatrix}
+\cosh\theta_{\k} & -\sinh\theta_{\k} \\
+-\sinh\theta_{\k} & \cosh\theta_{\k}
+\end{pmatrix}
+\begin{pmatrix}
+1 & \gamma_{\k} \\
+\gamma_{\k} & 1
+\end{pmatrix}
+\begin{pmatrix}
+\cosh\theta_{\k} & -\sinh\theta_{\k} \\
+-\sinh\theta_{\k} & \cosh\theta_{\k}
+\end{pmatrix}
+=
+$$
+$$
+=
+\begin{pmatrix}
+\cosh(2\theta_{\k}) - \gamma_{\k}\sinh(2\theta_{\k}) & \gamma_{\k}\cosh(2\theta_{\k}) - \sinh(2\theta_{\k}) \\
+\gamma_{\k}\cosh(2\theta_{\k}) - \sinh(2\theta_{\k}) & \cosh(2\theta_{\k}) - \gamma_{\k}\sinh(2\theta_{\k})
+\end{pmatrix}.
+$$
+
+Vemos então que, para a matriz acima ser diagonal, tem-se que $\tanh(2\theta_{\k}) = \gamma_{\k}$. Substituindo isso obtemos
+$$
+T^\d M T =
+\frac{1}{2}
+\begin{pmatrix}
+2\sqrt{1-\gamma_{\k}^2} & 0 \\
+0 & 2\sqrt{1-\gamma_{\k}^2}
+\end{pmatrix},
+$$
+onde identificamos $\omega_{\k} = 2\sqrt{1-\gamma_{\k}^2}$.
+
+Com a transformação de Bogoliubov e as relações de comutação deduzidas é fácil ver que a hamiltoniana transformada se escreve como
+$$
+H_{SW} = \frac{1}{2} \sum_{\k} \qty(\omega_{\k} \alpha_{\k}^\d \alpha_{\k} + \omega_{\k}).
+$$
 
 
 \pagebreak
 
 \section{Ondas de spin}
+
+(a)
 
 
 
