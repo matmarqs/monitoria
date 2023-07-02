@@ -529,7 +529,7 @@ T^\d M T =
 0 & 2\sqrt{1-\gamma_{\k}^2}
 \end{pmatrix},
 $$
-onde identificamos $\omega_{\k} = 2\sqrt{1-\gamma_{\k}^2}$.
+onde identificamos $\omega_{\k} = 4JS \sqrt{1-\gamma_{\k}^2}$.
 
 Com a transformação de Bogoliubov e as relações de comutação deduzidas é fácil ver que a hamiltoniana transformada se escreve como
 $$
@@ -541,7 +541,128 @@ $$
 
 \section{Ondas de spin}
 
-(a)
+(a) A forma linearizada da transformação de Holstein-Primakoff (para $\ev{n_i} \ll 2S$) foi vista em aula, sendo dada por
+$$
+S_i^z = S - a_i^\d a_i, \quad
+S_i^+ = \sqrt{2S} \, a_i, \quad
+S_i^- = \sqrt{2S} \, a_i^\d,
+$$
+$$
+S_i^x = \frac{1}{2} (S_i^+ + S_i^-) = \sqrt{\frac{S}{2}} (a_i+a_i^\d), \quad
+S_i^y = -\frac{i}{2} (S_i^+ - S_i^-) = -i\sqrt{\frac{S}{2}} (a_i-a_i^\d).
+$$
+
+Temos então
+$$
+\vb{S}_i^o \vdot \vb{S}_j^o =
+\cos(\theta_i-\theta_j) (S_i^xS_j^x + S_i^zS_j^z) + S_i^yS_j^y +
+\sin(\theta_i-\theta_j) (S_i^zS_j^x - S_i^xS_j^z) =
+$$
+$$
+=
+\cos(\theta_i - \theta_j) \cdot \frac{S}{2}
+\Big[
+a_i a_j + a_i a_j^\d + a_i^\d a_j + a_i^\d a_j^\d +
+2S  - 2 a_i^\d a_i - 2 a_j^\d a_j + 2 \frac{a_i^\d a_i a_j^\d a_j}{S}
+\Big] +
+$$
+$$
++ \qty(-\frac{S}{2})
+\Big[
+a_ia_j - a_ia_j^\d - a_i^\d a_j + a_i^\d a_j^\d
+\Big] +
+$$
+$$
++ \sin(\theta_i - \theta_j) \cdot S \sqrt{\frac{S}{2}}
+\qty{
+a_j^\d + a_j^\d - \frac{a_i^\d a_i}{S} (a_j+a_j^\d) -
+\qty[a_i + a_i^\d - (a_i + a_i^\d) \frac{a_j^\d a_j}{S}]
+} \implies
+$$
+\begin{equation} \label{eq:linear-spin}
+\vb{S}_i^o \vdot \vb{S}_j^o \simeq
+\cos(\theta_i - \theta_j)
+\qty[
+S^2 - S(a_i^\d a_i + a_j^\d a_j) +
+\frac{S}{2} (a_i a_j + a_i^\d a_j + a_j^\d a_i + a_i^\d a_j^\d)
+]
+\end{equation}
+$$
+-\frac{S}{2}
+\Big[
+a_ia_j - a_ia_j^\d - a_i^\d a_j + a_i^\d a_j^\d
+\Big] +
+\sin(\theta_i - \theta_j) \cdot S \sqrt{\frac{S}{2}}
+\qty[a_j + a_j^\d - a_i - a_i^\d]
++ O(a^3),
+$$
+onde podemos considerar apenas termos de ordem até quadrática, pois já estamos assumindo flutuações diluídas $\ev{a_i^\d a_i} \ll 2S$ dentro da linearização da transformação de Holstein-Primakoff.
+
+Para o estado de Néel, temos $\theta_i = 0$ (sub-rede $A$) e $\theta_j = \pi$ (sub-rede $B$). Substuindo essa condição na equação \ref{eq:linear-spin}, obtemos
+$$
+\vb{S}_i^o \vdot \vb{S}_j^o \simeq
+- \qty[
+S^2 - S(a_i^\d a_i + a_j^\d a_j) +
+\frac{S}{2} (a_i a_j + \cancel{a_i^\d a_j} + \cancel{a_j^\d a_i} + a_i^\d a_j^\d)
+]
+-\frac{S}{2}
+\Big[
+a_ia_j - \cancel{a_ia_j^\d} - \cancel{a_i^\d a_j} + a_i^\d a_j^\d
+\Big] =
+$$
+$$
+= -S^2 + S(a_i^\d a_i + a_j^\d a_j) - S (a_i a_j + a_i^\d a_j^\d).
+$$
+
+A hamiltoniana de Heisenberg então fica
+$$
+H = J \sum_{\nn{i}{j}} \vb{S}_i^o \vdot \vb{S}_j^o =
+J \sum_{\nn{i}{j}} \qty{-S^2 + S(a_i^\d a_i + a_j^\d a_j) - S (a_i a_j + a_i^\d a_j^\d)} \implies
+$$
+$$
+H = - 2N JS^2 + 4JS \sum_{i} a_i^\d a_i - JS \sum_{\nn{i}{j}} (a_i a_j + a_i^\d a_j^\d),
+$$
+onde usamos a relação combinatória $\displaystyle{\sum_{\nn{i}{j}} 1 = \sum_{i} 2}$, pois na rede quadrada temos duas direções para nearest-neighbors. Veja que a hamiltoniana obtida não possui simetria $U(1)$, ou seja, $a_i \to a_i e^{-i\alpha}$ não mantém $H$ invariante. Dessa forma, o número de bósons $\sum_{i} a_i^\d a_i$ não é conservado. Porém isso não gera nenhum problema, pois os operadores $a_i^\d$ representam modos coletivos (as ondas de spin). Devido aos termos $a_i a_j$, $a_i^\d a_j^\d$, é necessária uma transformação de Bogoliubov para diagonalizar a hamiltoniana para o estado de Néel.
+
+\n
+
+(b) Para o estado ferromagnético, temos $\theta_i = \theta_j = 0$ pois todos os spins estão alinhados. Colocando essa condição na equação \ref{eq:linear-spin}, temos
+$$
+\vb{S}_i^o \vdot \vb{S}_j^o \simeq
+\qty[
+S^2 - S(a_i^\d a_i + a_j^\d a_j) +
+\frac{S}{2} (\cancel{a_i a_j} + a_i^\d a_j + a_j^\d a_i + \cancel{a_i^\d a_j^\d})
+]
+-\frac{S}{2}
+\Big[
+\cancel{a_ia_j} - a_ia_j^\d - a_i^\d a_j + \cancel{a_i^\d a_j^\d}
+\Big] =
+$$
+$$
+= S^2 - S (a_i^\d a_i + a_j^\d a_j) + S (a_i^\d a_j + a_j^\d a_i).
+$$
+
+A hamiltoniana no estado ferromagnético fica
+$$
+H = 2 N J S^2 - 4 JS \sum_{i} a_i^\d a_i + JS \sum_{\nn{i}{j}} (a_i^\d a_j + a_j^\d a_i).
+$$
+
+Perceba que obtivemos uma hamiltoniana de \textit{tight-binding}! Ela possui simetria $U(1)$. Portanto, não precisamos de uma transformação de Bogoliubov para diagonalizá-la, basta reescrevê-la no espaço de momentos. Como estamos na rede quadrada, já sabemos a dispersão resultante (calculamos na Lista 3):
+$$
+H = 2 N J S^2 - 4 JS \sum_{\k} a_{\k}^\d a_{\k} + JS \sum_{\k} \eps_{\k} a_{\k}^\d a_{\k} \implies
+$$
+$$
+H = 2 N J S^2 + \sum_{\k} \omega_{\k} a_{\k}^\d a_{\k}.
+$$
+onde $\eps_{\k} = 2 [\cos(k_x) + \cos(k_y)]$ é a dispersão tight-binding da rede quadrada e a dispersão dos magnóns é $\omega_{\k} = - JS \big[4 - 2 \cos(k_x) - 2 \cos(k_y) \big]$.
+
+Devido aos operadores serem bosônicos, a distribuição $\ev{n_{\k}}$ é dada por Bose-Einstein (ou Planck). Portanto
+$$
+\Delta m = \frac{1}{N} \sum_{\k} \ev{n_{\k}} = \int_{\text{BZ}} \frac{1}{e^{\beta \omega_{\k}}-1} \dd[2]{\k}.
+$$
+
+\textbf{CONSEGUI, SÓ PASSAR A LIMPO}
+
 
 
 
