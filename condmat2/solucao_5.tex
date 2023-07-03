@@ -136,10 +136,22 @@ $$
 n = \frac{1}{\beta Z} \cdot \pdv{Z}{\mu} =
 \frac{2 e^{\beta\mu} + 2 e^{\beta(2\mu-U)}}{1 + 2 e^{\beta \mu} + e^{\beta(2\mu - U)}}.
 $$
-\textbf{FAZER O GRÁFICO.}
 
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.75\textwidth]{fig/occup.png}
+\caption{Gráfico da ocupação média para diferentes temperaturas $T$ e interação $U$.}
+\label{fig:occup}
+\end{figure}
 
-
+Analisando a Figura \ref{fig:occup}, notamos que:
+\begin{itemize}
+\item A ocupação $n$ tende a 0 para $\mu < 0$.
+\item A ocupação $n$ tende a 1 para $0 < \mu < U$.
+\item A ocupação $n$ tende a 2 para $\mu > U$.
+\item O efeito da interação $U$ é aumentar o intervalo em que $n = 1$.
+\item O efeito da temperatura é suavizar a curva $n(\mu)$. Quando $T \to 0$, vemos que há descontinuidades nas vizinhanças de $n = 1$, ou seja, em $\mu = 0$ e $\mu = U$.
+\end{itemize}
 
 \pagebreak
 
@@ -149,7 +161,7 @@ $$
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.75\textwidth]{fig/magnetization-real_space.png}
-\caption{Magnetização $m^z_j = \Re[m^z e^{i \bm{Q} \vdot \bm{R}_j}]$ em vermelho para o estado de Néel.}
+\caption{Magnetização $m^z_j = \Re[m^z e^{i \bm{Q} \vdot \bm{R}_j}]$, $\bm{Q} = (\pi, \pi)$, em vermelho para o estado de Néel.}
 \label{fig:mag-neel}
 \end{figure}
 
@@ -413,13 +425,11 @@ Portanto $I = \infty$ diverge e, consequentemente, para $m = 0$ o $U$ correspond
 
 Esses dois itens demonstram que $U_c = 0^+$.
 
-A solução obtida corresponde a um isolante pois vemos que o módulo da magnetização $m$ se comporta como um gap na relação de dispersão $E_{\k,\pm} = \pm \sqrt{\eps_{\k}^2 + m^2/4}$ e, para $n_e = 1$, a banda de baixo é toda preenchida, de maneira que conseguimos interpretar o resultado como um isolante de bandas, onde o gap é originado pelo estabilidade da fase antiferromagnética.
+\n
 
-O resultado obtido mostra que, para qualquer interação $U > 0$, temos uma solução $m > 0$ estável que extremiza a energia livre. Isso mostra a estabilidade do estado antiferromagnético. Lembrando do que estudamos para isolantes de Mott onde $U/t \geq 1$, temos que o material correlacionados é um isolante (de Mott) e a fase antiferromagnética também é estável.
+A solução obtida corresponde a um isolante pois vemos que o módulo da magnetização $m$ se comporta como um gap na relação de dispersão $E_{\k,\pm} = \pm \sqrt{\eps_{\k}^2 + m^2/4}$ e, para $n_e = 1$, a banda de baixo é toda preenchida, de maneira que conseguimos interpretar o resultado como um isolante de bandas, onde o gap é originado pela estabilidade da fase antiferromagnética.
 
-\textbf{AS IDEIAS ESTÃO ACIMA. ORGANIZAR O TEXTO.}
-
-
+O resultado obtido também mostra que, para qualquer interação $U > 0$, temos uma solução $m > 0$ estável que extremiza a energia livre. Isso mostra a estabilidade do estado antiferromagnético. Analogamente ao que estudamos para isolantes de Mott onde $U/t \gg 1$, também acontece que o material é um isolante e a fase antiferromagnética também é estável.
 
 \pagebreak
 
@@ -449,11 +459,11 @@ $$
 
 Escolhendo $\sin(\frac{\sqrt{3} q_y}{2}) = 0$, podemos tomar $q_y = \frac{2\pi}{\sqrt{3}}$, de maneira que $\cos(\frac{\sqrt{3} q_y}{2}) = -1$ e, portanto, $\sin(q_x) - \sin(q_x/2) = 2 \cos(\frac{3 q_x}{4}) \sin(\frac{q_x}{4}) = 0$. Escolhendo $\cos(\frac{3q_x}{4}) = 0$, tomamos $q_x = \frac{2\pi}{3}$. Essas escolhas nos dão $\vb{Q} = \qty(\frac{2\pi}{3}, \frac{2\pi}{\sqrt{3}}) \in \text{BZ}$ e $J(\vb{Q}) = -\frac{3}{2} J = \displaystyle{\min_{\q} J(\q)}$. Assim, a energia do estado fundamental é $E_0 / N  = -\frac{3}{2} S^2$, que é o resultado esperado para todos os spins formando um ângulo de $120^\circ$.
 
-Fazendo o esboço da magnetização $m_j = m e^{i \vb{Q} \vdot \vb{R}_j}$ no espaço real, obtemos a Figura \ref{fig:mag-triang}:
+Fazendo o esboço da magnetização $m_j = m e^{i \vb{Q} \vdot \vb{R}_j}$ no espaço real, obtemos a Figura \ref{fig:mag-triang}, que mostra os ângulos $120^\circ$ formado pelos spins:
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.75\textwidth]{fig/mag_triang-real_space.png}
-\caption{Magnetização $m^z_j = \Re[m^z e^{i \bm{Q} \vdot \bm{R}_j}]$ em vermelho para a rede triangular.}
+\caption{Magnetização $m^z_j = m^z e^{i \bm{Q} \vdot \bm{R}_j}$ em vermelho para a rede triangular.}
 \label{fig:mag-triang}
 \end{figure}
 
@@ -656,14 +666,35 @@ H = 2 N J S^2 + \sum_{\k} \omega_{\k} a_{\k}^\d a_{\k}.
 $$
 onde $\eps_{\k} = 2 [\cos(k_x) + \cos(k_y)]$ é a dispersão tight-binding da rede quadrada e a dispersão dos magnóns é $\omega_{\k} = - JS \big[4 - 2 \cos(k_x) - 2 \cos(k_y) \big]$.
 
-Devido aos operadores serem bosônicos, a distribuição $\ev{n_{\k}}$ é dada por Bose-Einstein (ou Planck). Portanto
+\n
+
+(c) Devido aos operadores serem bosônicos, a distribuição $\ev{n_{\k}}$ é dada por Bose-Einstein (ou Planck). Portanto
 $$
 \Delta m = \frac{1}{N} \sum_{\k} \ev{n_{\k}} = \int_{\text{BZ}} \frac{1}{e^{\beta \omega_{\k}}-1} \dd[2]{\k}.
 $$
 
-\textbf{CONSEGUI, SÓ PASSAR A LIMPO}
+Escrevendo em coordenadas polares, temos
+$$
+\Delta m = \int_{\text{BZ}} \frac{k \dd{k} \dd{\theta}}{e^{\beta\omega_{\k}} - 1}.
+$$
 
+Agora estudaremos a convergência da integral somente na região infravermelho, ou seja, para $\abs{\k} \to 0$. Seja $\Delta m = \Delta m' + \text{resto}$, onde $\Delta m'$ é a contribuição infravermelho para um cutoff $\abs{\k} \leq \kappa \ll 1$:
+$$
+\Delta m' = \int_0^{2\pi} \dd{\theta} \int_0^\kappa \frac{k \dd{k}}{e^{\beta \omega_{\k}} - 1}.
+$$
 
+Nessa região, podemos aproximar $\cos(x) \simeq 1 - \frac{x^2}{2}$, portanto $\omega_{\k} = -JS [4 - 2\cos(k_x) - 2\cos(k_y)] \simeq - JS (k_x^2 + k_y^2) = -JS k^2$. Fazendo a substituição $u = \beta J S k^2$, temos
+$$
+\Delta m' = 2\pi \int_0^\kappa \frac{k}{e^{-\beta JS k^2} - 1} \dd{k} =
+\frac{\pi}{\beta J S} \lim_{\eps \to 0^+} \int_{\eps}^{\beta J S \kappa^2} \frac{\dd{u}}{e^{-u} - 1}.
+$$
+
+Notando que $\int \frac{\dd{x}}{e^{-x} - 1} = - \ln(e^x - 1)$, obtemos
+$$
+\Delta m' = \frac{\pi}{\beta JS} \lim_{\eps \to 0^+} \ln(\frac{e^\eps-1}{e^{\beta JS\kappa^2}-1}) = -\infty.
+$$
+
+Como $\Delta m'$ diverge, temos que a correção $\Delta m$ da magnetização diverge também, de maneira que $m = S - \Delta m \to +\infty$. Isso mostra que as flutuações térmica destroem o estado ordenado ferromagnético para a dimensão $d = 2$, de modo que este é instável.
 
 
 \end{document}
