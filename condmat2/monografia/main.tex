@@ -8,18 +8,46 @@
 
 \maketitle
 
-\section{Pontos}
+\section{Introdução}
 
 \begin{itemize}
 \item Temos como objetivo discutir supercondutividade não-convencional fenomenologicamente.
-\item Ainda não levamos em consideração a interação repulsiva entre elétrons na teoria BCS.
+\item Ainda não levamos em consideração a interação repulsiva (Coulomb) entre elétrons na teoria BCS, somente atrativa quando escrevemos
+$$
+U_{\k\k'} =
+\begin{cases}
+\; -g, \text{ se } E_F \leq \eps(\k), \eps(\k') \leq E_F + \hbar \omega_D \\
+\; 0, \text{ caso contrário.}
+\end{cases}
+$$
+\item Para que a função de onda do par de Cooper (e o gap) sejam anisotrópicos, devemos considerar também a repulsão entre os elétrons.
+\item A tal da supercondutividade não-convencional tem relação com os supercondutores em questão serem anisotrópicos, sendo a interação repulsiva de Coulomb responsável por tal anisotropia. No contexto dessa anisotropia, a função de onda dos pares de Cooper (formada por pares de elétron com momento angular orbital $\ell \geq 1$) e a função de gap possuem nós.
+\item Dois exemplos de pares com funções de onda anisotrópicas são os pares \textit{p-wave} do superfluido $^3$He e os pares \textit{d-wave} dos supercondutores de alta temperatura baseados em cupratos.
 \end{itemize}
 
-\section{Relembrando aspectos da BCS usual (\textit{s-wave})}
+\section{Aprender é recordar}
 
-<++>
+Em nossas aulas sobre fônons deduzimos a interação efetiva elétron-elétron mediada por fônons, sendo dada por
+$$
+H_{\text{int}} = \sum_{\k,\p,\q} \abs{g_{\q}}^2 c_{\k+\q} c_{\p-\q}^\d c_{\p} c_{\k} \,
+\frac{\hbar \omega_{\q}}{[\eps(\p-\q) - \eps(p)]^2 - \hbar^2 \omega_{\q}^2},
+$$
+e foi argumentado que essa interação é atrativa para $\abs{\eps(\p-\q) - \eps(\q)} < \hbar \omega_{\q}$. \textbf{Incluir o conceito atração retardada}. Mas considerando apenas $H_{\text{int}}$, estamos ignorando o termo repulsivo da interação de Coulomb, que justamente é responsável pela anisotropia (além de \textit{s-wave}).
 
 \section{Teoria BCS com gap dependente do momento}
+
+Em BCS tínhamos
+$$
+H = \sum_{\k\s} \eps_{\k\s} c_{\k\s}^\d c_{\k\s} +
+\sum_{\k,\k'} V_{\k,\k'} (c_{\k\up}^\d c_{-\k\down}^\d) (c_{-\k'\down} c_{\k'\up})
+$$
+
+Assumindo um gap dependente do momento $\Delta_{\k} = \ev{c_{-\k\down}c_{\k\up}}$, generalizamos a equação do gap vista em aula para
+\begin{equation} \label{eq:gapeq}
+\Delta_{\k} = - \sum_{\k'} V_{\k,\k'} \frac{\Delta_{\k'}}{2 E_{\k'}} \tanh(\frac{\beta E_{\k'}}{2}).
+\end{equation}
+
+Devido ao sinal de menos do lado direito da equação \ref{eq:gapeq}
 
 
 
