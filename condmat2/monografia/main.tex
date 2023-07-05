@@ -1,4 +1,4 @@
-\documentclass[a4paper,10pt]{article}
+\documentclass[a4paper,11pt]{article}
 \input{preamble}
 
 \title{\Huge{\textbf{Monografia}}}
@@ -39,15 +39,17 @@ e foi argumentado que essa interação é atrativa para $\abs{\eps(\p-\q) - \eps
 Em BCS tínhamos
 $$
 H = \sum_{\k\s} \eps_{\k\s} c_{\k\s}^\d c_{\k\s} +
-\sum_{\k,\k'} V_{\k,\k'} (c_{\k\up}^\d c_{-\k\down}^\d) (c_{-\k'\down} c_{\k'\up})
+\frac{1}{V} \sum_{\k,\k'} U_{\k,\k'} (c_{\k\up}^\d c_{-\k\down}^\d) (c_{-\k'\down} c_{\k'\up}).
 $$
 
-Assumindo um gap dependente do momento $\Delta_{\k} = \ev{c_{-\k\down}c_{\k\up}}$, generalizamos a equação do gap vista em aula para
+A simetria \textit{s-wave} veio de termos assumido a interação $U_{\k,\k'}$ isotrópica.
+
+Assumindo um gap dependente do momento $\Delta_{\k} = \sum_{\k'} U_{k, k'} \ev{c_{-\k'\down}c_{\k'\up}}$, generalizamos a equação do gap vista em aula para
 \begin{equation} \label{eq:gapeq}
-\Delta_{\k} = - \sum_{\k'} V_{\k,\k'} \frac{\Delta_{\k'}}{2 E_{\k'}} \tanh(\frac{\beta E_{\k'}}{2}).
+\Delta_{\k} = - \sum_{\k'} U_{\k,\k'} \frac{\Delta_{\k'}}{2 E_{\k'}} \tanh(\frac{\beta E_{\k'}}{2}).
 \end{equation}
 
-Devido ao sinal de menos do lado direito da equação \ref{eq:gapeq}
+Devido ao sinal de menos do lado direito da equação \ref{eq:gapeq}, se a interação $U_{\k,\k'}$ for sempre negativa (atrativa), então a equação \ref{eq:gapeq} é satisfeita por uma função gap sempre positiva. Mas, em geral $U_{\k,\k'}$ será positiva para alguns momentos, de maneira que a função de gap também será negativa em alguns pontos, surgindo pontos onde ela troca de sinal (nós).
 
 
 
