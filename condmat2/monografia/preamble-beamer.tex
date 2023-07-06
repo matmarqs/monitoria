@@ -37,17 +37,22 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \newcommand{\eps}{\epsilon}
-\newcommand{\s}{\sigma}
 \newcommand{\vphi}{\varphi}
 \newcommand{\cte}{\text{cte}}
 
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\Z}{\mathbb{Z}}
 \newcommand{\Q}{\mathbb{Q}}
-\newcommand{\R}{\mathbb{R}}
+\newcommand{\R}{\vb{R}}
 \newcommand{\C}{\mathbb{C}}
-\renewcommand{\H}{\hat{H}}
-\newcommand{\intR}{\int_{-\infty}^{\infty}}
+\renewcommand{\S}{\vb{S}}
+%\renewcommand{\H}{\s{H}}
+
+\renewcommand{\a}{\vb{a}}
+\renewcommand{\d}{\dagger}
+\newcommand{\up}{\uparrow}
+\newcommand{\down}{\downarrow}
+\newcommand{\hc}{\text{h.c.}}
 
 \newcommand{\0}{\vb{0}}
 \newcommand{\1}{\mathds{1}}
@@ -59,16 +64,10 @@
 \newcommand{\p}{\vb{p}}
 \newcommand{\q}{\vb{q}}
 \newcommand{\F}{\vb{F}}
+\newcommand{\A}{\vb{A}}
 
-\renewcommand{\a}{\hat{a}}
-\renewcommand{\b}{\hat{b}}
-\renewcommand{\c}{\hat{c}}
-\newcommand{\nn}{\hat{n}}
-
-\newcommand{\gf}[2]{\ev{\ev{#1 : #2}}}
-\newcommand{\zub}[2]{\ev{\comm{#1}{#2}_\mp}}
-
-\newcommand{\pair}[2]{\left\langle #1 , #2 \right\rangle}
+\newcommand{\s}{\sigma}
+\newcommand{\nn}[2]{\left\langle #1 , #2 \right\rangle}
 \newcommand{\cc}[1]{\overline{#1}}
 \newcommand{\Eval}[3]{\eval{\left( #1 \right)}_{#2}^{#3}}
 
@@ -81,10 +80,5 @@
 \newcommand{\ptodo}{\forall \,}
 \renewcommand{\implies}{\; \Rightarrow \;}
 %\newcommand{\eqname}[1]{\tag*{#1}} % Tag equation with name
-
-% math %
-\renewcommand{\erf}[1]{\text{erf}\left(#1\right)}
-\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
-\newcommand{\ceil}[1]{\left\lceil #1 \right\rceil}
 
 %\setlength{\droptitle}{-6em}   % crashes with beamer
