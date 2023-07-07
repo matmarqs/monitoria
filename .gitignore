@@ -1,4 +1,3 @@
-**/*.pdf
 **/*.aux
 **/*.bbl
 **/*.blg
@@ -9,6 +8,8 @@
 **/*.out
 **/*.toc
 **/*.swp
+**/*.snm
+**/*.nav
 **/*.fdb_latexmk
 topology/
 brilliant/
