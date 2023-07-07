@@ -62,6 +62,7 @@ BSCCO-2223           & d-wave   & $108   \, \text{K}$      & Cuprato \\
 UPt$_3$              & f-wave   & $0.51  \, \text{K}$      & Heavy-Fermion \\
 K$_3$C$_{60}$        & $-$      & $18    \, \text{K}$      & Orgânico  \\
 LaO$_{1-x}$F$_x$FeAs & $-$      & $26    \, \text{K}$      & Ferro  \\
+MATBG                & $-$      & $1.7    \, \text{K}$     & Grafeno  \\
 \hline
 \end{tabular}
 \end{center}
@@ -74,7 +75,7 @@ LaO$_{1-x}$F$_x$FeAs & $-$      & $26    \, \text{K}$      & Ferro  \\
 \begin{frame}{Objetivos}
 
 \begin{itemize}
-\item Passar uma ideia introdutória de como generalizar a teoria BCS para estudar supercondutividade não-convencional.
+\item Passar uma ideia introdutória de como generalizar a teoria BCS para estudar a \textbf{fenomenologia} da supercondutividade não-convencional.
 
 \n\n
 
@@ -135,7 +136,7 @@ $$
 
 Se definirmos o gap $\Delta_{\k} = \sum_{\k'} V_{\k,\k'} \ev{c_{-\k'\down} c_{\k'\up}}$ e aplicarmos o procedimento de campo médio $AB \simeq A\ev{B} + B\ev{A} - \ev{A}\ev{B}$, generalizamos a equação do gap
 \begin{equation} \label{eq:gapeq}
-\Delta_{\k} = - \sum_{\k'} V_{\k,\k'} \frac{\Delta_{\k'}}{2 E_{\k'}} \tanh(\frac{\beta E_{\k'}}{2}).
+\Delta_{\k} = - \frac{1}{V} \sum_{\k'} V_{\k,\k'} \frac{\Delta_{\k'}}{2 E_{\k'}} \tanh(\frac{\beta E_{\k'}}{2}).
 \end{equation}
 
 Devido ao sinal negativo acima, se $V_{\k,\k'}$ não for sempre negativo, a função de gap $\Delta_{\k}$ poderá ser negativa em alguns pontos, de maneira a surgirem nós. Esse fenômeno acontece em várias classes de supercondutores: orgânicos, heavy-fermion, cupratos e baseados em ferro.
@@ -288,7 +289,7 @@ $$
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.25\linewidth]{fig/d-orbitals.png}
+\includegraphics[width=0.27\linewidth]{fig/d-orbitals.png}
 \caption{Harmônicos esféricos $Y_{2m}$ dos orbitais $d$.}
 \label{fig:d-orbitals}
 \end{figure}
@@ -317,6 +318,8 @@ V_{\text{mag}} = \frac{1}{2} \sum_{\q} J_{\q} \, \va*{S}_{-\q} \vdot \va*{S}_{\q
 \qty(\frac{\va*{\s}}{2})_{\alpha\beta} \qty(\frac{\va*{\s}}{2})_{\gamma\delta} c_{\k_2\delta} c_{\k_1\beta},
 $$
 onde $J_{\q}$ é a interação efetiva dos spins. Por exemplo, para spins em uma rede quadrada interagindo só com primeiros vizinhos temos $J_{\q} = 2 J [\cos(q_x a) + \cos(q_y a)]$ (tight-binding).
+
+\n
 
 Considerando o produto escalar $\qty(\frac{\va*{\s}}{2})_{\alpha\beta} \cdot \qty(\frac{\va*{\s}}{2})_{\gamma\delta} \equiv \va*{S}_1 \vdot \va*{S}_2$, lembremos que seus autovalores são $+\frac{1}{4}$ para o tripleto e $-\frac{3}{4}$ para o singleto (lembre da estrutura hiperfina do hidrogênio):
 $$
@@ -412,15 +415,173 @@ $$
 
 \end{frame}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}{Superfície de Fermi}
+\begin{frame}{Termos s-wave e d-wave}
+
+Podemos separar a interação $V_{\k,\k'} = V_{\k,\k'}^s + V_{\k,\k'}^d$ em um termo s-wave e d-wave:
+$$
+V_{\k,\k'}^s =
+\overbrace{U}^{\text{s-wave}} -
+\overbrace{\frac{3}{4} J (c_x + c_y) (c_{x'} + c_{y'})}^{\text{s-wave estendida}}
+\quad \text{(s-wave)},
+$$
+$$
+V_{\k,\k'}^d = - \frac{3}{4} J (c_x - c_y) (c_{x'} - c_{y'})
+\quad \text{(d-wave)},
+$$
+onde o termo s-wave é invariante por rotações de $90^\circ$ e o termo d-wave troca de sinal, $V_{\k,\k'}^s = + V_{\k, R\k'}^s$ e $V_{\k,\k'}^d = - V_{\k, R\k'}^d$ com $R\k = (-k_y, k_x)$.
+
+\n
+
+Se analisarmos a equação \ref{eq:gapeq} do gap
+$$
+\Delta_{\k} = - \int \frac{\dd[2]{\k'}}{(2\pi)^2} (V_{\k,\k'}^s + V_{\k,\k'}^d) \frac{\Delta_{\k'}}{2 E_{\k'}} \tanh(\frac{\beta E_{\k'}}{2}),
+$$
+é possível escrever também $\Delta_{\k} = \Delta_{\k}^s + \Delta_{\k}^d$, com
+$$
+\Delta_{\k}^s = \Delta_1 + \Delta_ 2 (c_x + c_y) = + \Delta_{R\k}^s,
+$$
+$$
+\Delta_{\k}^d = \Delta_d (c_x - c_y) = - \Delta_{R\k}^d.
+$$
+
+Os dois termos $\Delta_{\k,\k'}^s$ e $\Delta_{\k,\k'}^d$ se acoplam somente com as respectivas interações s-wave e d-wave na equação do gap, pois $\int \frac{\dd[2]{\k'}}{(2\pi)^2} V_{\k,\k'}^s \Delta^d_{\k'} (\ldots) = 0$ e $\int \frac{\dd[2]{\k'}}{(2\pi)^2} V_{\k,\k'}^d \Delta^s_{\k'} (\ldots) = 0$, devido às integrais mudarem de sinal sob uma rotação de $90^\circ$ e, portanto, serem nulas. Concluimos que as duas simetrias s-wave e d-wave são desacopladas e, em particular, a simetria d-wave é ortogonal ao potencial de Coulomb local $U$.
+
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Simetria d-wave}
+
+\n
+
+Analisando o gap d-wave $\Delta_{\k}^d = \Delta_d (c_x - c_y)$, vemos que ele possui nós nas diagonais $k_x = \pm k_y$, de maneira que essa simetria d-wave tem a forma do orbital $d_{x^2-y^2}$ da Figura \ref{fig:d-orbitals}. A energia das quasepartículas $E_{\k} = \sqrt{\eps_{\k}^2 + \Delta_d^2 (c_x - c_y)^2}$ se anula na interseção dessas diagonais (onde $\Delta_{\k} = 0$) com a superfície de Fermi (onde $\eps_{\k} = 0$), de maneira a formar cones de Dirac nesses pontos (nodais), ilustrados na Figura \ref{fig:fermisurf}:
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.55\linewidth]{fig/fermisurf.png}
-\caption{Superfície de Fermi.}
+\includegraphics[width=0.45\linewidth]{fig/fermisurf.png}
+\caption{Cones de Dirac nos pontos nodais, que se localizam na interseção da superfície de Fermi (FS) com as retas $k_x = \pm k_y$.}
 \label{fig:fermisurf}
 \end{figure}
+
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Gap d-wave}
+
+Utilizando a equação do gap, podemos fazer algumas aproximações para ter uma ideia da física envolvida. Supondo que o preenchimento ao redor de $\Gamma (\k = \0)$ seja pequeno, temos $\eps_{\k} = -2t (c_x + c_y) \simeq -4t  + t k^2$ e o gap
+$$
+\Delta_{\k}^d = \Delta_d (c_x - c_y) \simeq -\frac{\Delta_d}{2 k_F^2}
+\qty[\qty(\frac{k_x}{k_F})^2 - \qty(\frac{k_y}{k_F})^2] = - \Delta_0 \cos(2\theta),
+\quad \Delta_0 = \frac{\Delta_d}{2 k_F^2}, \k = (k_x, k_y) = \abs{\k} e^{i\theta}.
+$$
+Perceba que $\Delta^d(\theta) \propto \cos(2\theta)$ remete ao harmônico esférico do orbital $d_{x^2 - y^2}$.
+
+\n
+
+Colocando um cutoff na energia $\abs{\eps} \leq \omega_0$ e assumindo que a densidade de estados por spin seja constante $\rho(E_F) = \frac{1}{4\pi t}$, obtemos a equação do gap:
+$$
+1 = \frac{3 J}{4} \rho(E_F) \int_{-\omega_0}^{\omega_0} \dd{\eps}
+\int_0^{2\pi} \frac{\dd{\theta}}{2\pi} \cos[2](2\theta) \frac{\tanh(\frac{\beta E}{2})}{2E}, \quad E = \sqrt{\eps^2 + [\Delta_0 \cos(2\theta)]^2}.
+$$
+
+Aproximando grosseiramente $\cos[2](2\theta)$ pela sua média $1/2$, chegamos numa equação aproximada (similar à BCS) para $T_c$:
+$$
+1 = \frac{3J}{8} \rho(E_F) \int_0^{\omega_0} \dd{\eps} \,
+\frac{\tanh(\frac{\eps}{2T_c})}{\eps},
+$$
+onde é possível obter $T_c \sim 1.13 \, \omega_0 e^{-\frac{8}{3 J \rho(E_F)}}$.
+
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Densidade de estados d-wave}
+
+Também podemos calcular a densidade de estados aproximada tomando uma média sobre o ângulo $\theta$:
+$$
+\frac{N_d(E)}{N(0)} = \dv{\eps}{E} =
+\Re{\int_0^{2\pi} \frac{\dd{\theta}}{2\pi}
+\frac{\abs{E}}{\sqrt{(E - i\delta)^2 + [\Delta_0 \cos(2\theta)]^2}}
+},
+$$
+em que obtemos a Figura \ref{fig:dwavedos}:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.25\textwidth]{fig/dwavedos.png}
+\caption{Densidade de estados $N_d(E)/N(0)$ aproximada para um supercondutor d-wave.}
+\label{fig:dwavedos}
+\end{figure}
+
+Note que não temos mais uma densidade de estados gapeada, pois de fato há cones de Dirac pelos nós nas diagonais $k_x = \pm k_y$. A Figura \ref{fig:dwavedos} na verdade parece muito com a DOS do grafeno.
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Simetria s-wave estendida}
+
+Exploremos por final a componente s-wave do gap $\Delta_{\k}^s = \Delta_1 + \Delta_2 (c_x + c_y)$. A equação do gap correspondente é
+$$
+\Delta_{\k}^s = - \int \frac{\dd[2]{\k'}}{(2\pi)^2}
+\overbrace{\qty[U - \frac{3}{4} J (c_x + c_y)(c_{x'}+ c_{y'})]}^{V_{\k,\k'}^s}
+\frac{\Delta_{\k'}^s}{2 E_{\k'}} \, \tanh(\frac{\beta E_{\k'}}{2}).
+$$
+
+Ela é mais complicada pois existe acoplamento entre o termo local $\Delta_1$ e o termo s-wave estendido $\Delta_2 (c_x + c_y)$.
+
+\n
+
+De forma simplificada, assumindo uma única superfície de Fermi, um cutoff $\abs{\eps} \leq \omega_0$ e expandindo $\k, \k' \ll t$ próximo do ponto $\Gamma$ de maneira que $c_x \simeq c_y \simeq 1$, temos que a interação efetiva é da ordem de $V_{\k,\k'}^s \simeq U - 3J$.
+\n
+
+Isso indica que, para uma única superfície de Fermi, a atração s-wave estendida é suprimida pela interação de Coulomb $U$. Isso faz com que a interação efetiva seja reduzida.
+
+\n
+
+Pensando na fórmula da temperatura crítica BCS para a componente s-wave $T_c^s \sim 1.13 \, \omega_0 e^{-\frac{1}{g \rho(E_F)}}$, essa redução na constante efetiva de acoplamento $g \sim V_{\k,\k'}^s \simeq U-3J$ faz com que a temperatura crítica s-wave diminua.
+
+\n
+
+Essas estimativas indicam que nos cupratos o $T_c^d$ da componente d-wave é maior que $T_c^s$ (que foi suprimido por $U$), fazendo com que o pareamento d-wave seja predominante.
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Referências}
+
+\footnotesize
+
+\begin{thebibliography}{10}
+\bibitem{coleman}
+\alert{P. Coleman.}
+\newblock {Introduction to Many-Body Physics.}
+\newblock {Cambridge University Press, 2015.}
+
+\bibitem{timm}
+\alert{Carsten Timm.}
+\newblock {Theory of Superconductivity.}
+\newblock {Version: March 24, 2023.}
+
+\bibitem{tsuei}
+\alert{C. C. Tsuei and J. R. Kirtley}
+\newblock {Pairing symmetry in cuprate superconductors.}
+\newblock {\textit{Rev. Mod. Phys.}, 72, 969, October 2000.}
+
+\bibitem{wiki-cuprate}
+\alert{Wikipédia contributors.}
+\newblock {Cuprate superconductor - Wikipédia}
+\newblock {\url{https://en.wikipedia.org/wiki/Cuprate_superconductor}.}
+
+\end{thebibliography}
+
 
 \end{frame}
 
