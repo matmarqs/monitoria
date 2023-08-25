@@ -1,13 +1,15 @@
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
 \usepackage[brazilian]{babel}
 \usepackage[left=2.5cm,right=2.5cm,top=3cm,bottom=2.5cm]{geometry}
 \usepackage{mathtools}
-\usepackage{amsthm}
+%\usepackage{amsthm}
 \usepackage{amsmath}
 %\usepackage{nccmath}
 \usepackage{amssymb}
 \usepackage{amsfonts}
 \usepackage{physics}
-\usepackage{dsfont}
+%\usepackage{dsfont}
 %\usepackage{mathrsfs}
 
 \usepackage{titling}
@@ -23,8 +25,6 @@
 \usepackage{float}
 \usepackage{graphicx}
 %\usepackage{tikz}
-\usepackage{caption}
-\usepackage{subcaption}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -35,19 +35,12 @@
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\Z}{\mathbb{Z}}
 \newcommand{\Q}{\mathbb{Q}}
-\newcommand{\R}{\vb{R}}
+\newcommand{\R}{\mathbb{R}}
 \newcommand{\C}{\mathbb{C}}
-\renewcommand{\S}{\vb{S}}
 %\renewcommand{\H}{\s{H}}
 
-\renewcommand{\a}{\vb{a}}
-\renewcommand{\d}{\dagger}
-\newcommand{\up}{\uparrow}
-\newcommand{\down}{\downarrow}
-\newcommand{\hc}{\text{h.c.}}
-
 \newcommand{\0}{\vb{0}}
-\newcommand{\1}{\mathds{1}}
+%\newcommand{\1}{\mathds{1}}
 \newcommand{\E}{\vb{E}}
 \newcommand{\B}{\vb{B}}
 \renewcommand{\v}{\vb{v}}
@@ -56,10 +49,10 @@
 \newcommand{\p}{\vb{p}}
 \newcommand{\q}{\vb{q}}
 \newcommand{\F}{\vb{F}}
-\newcommand{\A}{\vb{A}}
+\newcommand{\J}{\vb{J}}
 
-\newcommand{\s}{\sigma}
-\newcommand{\nn}[2]{\left\langle #1 , #2 \right\rangle}
+\newcommand{\s}[1]{\mathcal{#1}}
+%\newcommand{\prodint}[2]{\left\langle #1 , #2 \right\rangle}
 \newcommand{\cc}[1]{\overline{#1}}
 \newcommand{\Eval}[3]{\eval{\left( #1 \right)}_{#2}^{#3}}
 
@@ -73,12 +66,12 @@
 \renewcommand{\implies}{\; \Rightarrow \;}
 %\newcommand{\eqname}[1]{\tag*{#1}} % Tag equation with name
 
-\setlength{\droptitle}{-7em}
+\setlength{\droptitle}{-10em}
 
-\theoremstyle{plain}
-\newtheorem{theorem}{Teorema}[section]
+%\theoremstyle{plain}
+%\newtheorem{theorem}{Teorema}[section]
 %\newtheorem{defi}[theorem]{Definição}
-\newtheorem{lemma}[theorem]{Lema}
+%\newtheorem{lemma}[theorem]{Lema}
 %\newtheorem{corol}[theorem]{Corolário}
 %\newtheorem{prop}[theorem]{Proposição}
 %\newtheorem{example}{Exemplo}
@@ -103,10 +96,10 @@
 %  {\renewcommand\theinnerthm{#1}\innerthm}
 %  {\endinnerthm}
 %
-\newtheorem{innerlema}{Lema}
-\newenvironment{lema}[1]
-  {\renewcommand\theinnerlema{#1}\innerlema}
-  {\endinnerlema}
+%\newtheorem{innerlema}{Lema}
+%\newenvironment{leminha}[1]
+%  {\renewcommand\theinnerlema{#1}\innerlema}
+%  {\endinnerlema}
 %
 %\theoremstyle{remark}
 %\newtheorem*{hint}{Dica}

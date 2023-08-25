@@ -1,0 +1,133 @@
+\documentclass[a4paper,10pt]{article}
+\input{preamble}
+
+\title{\Huge{\textbf{Lista 1 - Mecânica Estatística}}}
+\author{Mateus Marques}
+
+\begin{document}
+
+\maketitle
+
+\section*{2) Oscilador harmônico clássico no ensemble microcanônico}
+
+(a) Temos que
+$$
+\Gamma(E) = \int \frac{\dd{p_1} \dd{q_1}}{2\pi\hbar} \cdots \int \frac{\dd{p_N} \dd{q_N}}{2\pi\hbar} 1,
+$$
+onde a integração é sobre o volume em que $H \leq E$, sendo
+$$
+H = \sum_{i=1}^{N}
+\qty(
+\frac{p_i^2}{2m} + \frac{m\omega^2 q_i^2}{2}
+).
+$$
+
+Se mudarmos as variáveis $P_i^2 = \frac{p_i^2}{2m}$ e $Q_i^2 = \frac{m \omega^2 q_i^2}{2}$, o vínculo pode ser reescrito como
+$$
+\sum_{i=1}^{N} (P_i^2 + Q_i^2) \leq (\sqrt{E})^2,
+$$
+que define uma bola $2N-$dimensional de raio $R = \sqrt{E}$ nas variáveis $P_i, Q_i$. Assim
+$$
+\Gamma(E) = \int \frac{\dd{P_1} \dd{Q_1}}{\pi\hbar \omega} \cdots \int \frac{\dd{P_N} \dd{Q_N}}{\pi\hbar \omega} =
+\frac{1}{(\pi \hbar \omega)^N} V_{2N}(\sqrt{E}),
+$$
+onde $V_n(R) = \frac{\pi^{n/2}}{(n/2)!} R^n$ (na minha notação $x!$ é a função Gamma) é o volume da bola $n-$dimensional de raio $R$ (\url{https://en.wikipedia.org/wiki/Volume_of_an_n-ball}).
+
+Portanto
+$$
+\Gamma(E) =
+\frac{1}{(\pi \hbar \omega)^N} \, \frac{\pi^N}{N!} \, E^N = \frac{1}{N!} \, \qty(\frac{E}{\hbar\omega})^N.
+$$
+
+A aproximação de Stirling que derivamos na Questão 1 é
+$$
+N! = \sqrt{2\pi N} \, N^N e^{-N}.
+$$
+
+Temos que
+$$
+\log \Gamma(E) = N \log(E) - N \log(\hbar\omega) - \log N! \implies
+$$
+$$
+\frac{D(E)}{\Gamma(E)} = \dv{\log \Gamma(E)}{E} = \frac{N}{E} \implies
+$$
+$$
+\boxed{ D(E) \simeq \sqrt{\frac{N}{2\pi E^2}} \, \qty(\frac{E e}{N \hbar\omega})^N .}
+$$
+
+\n\n
+
+(b) Falta calcular a entropia $S(E, N, V)$ para $N \to \infty$, temperatura $1/T = \qty(\pdv{S}{E})_{V,N}$, pressão $P = -T \qty(\pdv{S}{V})_{E,N}$ e potencial químico $\mu = T \qty(\pdv{S}{N})_{E, V}$. O Eric falou pra discutir que $P = 0$ porque a entropia não depende do volume e também porque o potencial é harmônico, ou seja, a pressão não deforma o volume do sistema.
+
+\textbf{FALTA ITEM (b)}
+
+
+\pagebreak
+
+\section*{3) Transformada de Legendre}
+
+(a) Sendo $E(S)$ tal que o sinal de sua curvatura não mude, sem perda de generalidade $\dv[2]{E}{S} > 0$, temos que sua derivada $T = \dv{E}{S}$ é uma função crescente com $S$. Em particular, $T(S)$ é inversível. Assim, dado $T$, é possível achar os valores de $S(T)$ e $E(S(T))$ correspondentes resolvendo $\dv{E}{S} = T$ para $S$. Pela definição de $F$ como o intercepto da tangente da curva $E(S)$ com o eixo $E$, é imediato a relação $E = F + \dv{E}{S} \, S$. Isso define $F(T) = E(S(T)) - T S(T)$ inequivocamente como função apenas de $T$.
+
+\n\n
+
+(b) Pela própria definição de $T = \dv{E}{S}$, é imediato que $\dd{E}(S) = T(S) \dd{S}$. Agora, para a energia livre aplicamos regras de derivadas:
+$$
+\dv{F}{T} = \xcancel{\dv{E}{S} \dv{S}{T}} - S(T) - \xcancel{T \dv{S}{T}} = -S(T) \implies \boxed{\dd{F}(T) = -S(T) \dd{T}.}
+$$
+
+\n\n
+
+(c) Como $E(S,V)$ tem os sinais de curvatura definidos tanto para $S$ quanto para $V$, definindo $\displaystyle{ T = \qty(\pdv{E}{S})_V }$ e $\displaystyle{P = - \qty(\pdv{E}{V})_S}$, podemos resolver a primeira equação para $S$ em função de $T, V$ e a segunda para $V$ em função de $S, P$. Isso define as funções $S(T,V)$ e $V(S,P)$.
+
+\begin{itemize}
+\item Mantendo $V$ constante, define-se $F(T,V)$ como o intercepto da tangente de $E(S(T,V), V)$ com o eixo $E$, o que nos dá $\boxed{ F(T,V) = E(S(T,V), V) - T S(T,V) }$.
+
+\item Mantendo $S$ constante, define-se $H(S,P)$ como o intercepto da tangente de $E(S, V(S,P))$ com o eixo $E$. Assim $\displaystyle{E = H + V \qty(\pdv{E}{V})_S}$ e temos que $\boxed{ H(S,P) = E(S, V(S,P)) + P V(S,P) }$.
+\end{itemize}
+
+\n
+
+As diferenciais completas de $F(T,V)$ e $H(S, P)$ são dadas por
+$$
+\dd{F} = \qty(\pdv{F}{T})_{V} \dd{T} + \qty(\pdv{F}{V})_{T} \dd{V},
+$$
+$$
+\dd{H} = \qty(\pdv{H}{S})_{P} \dd{S} + \qty(\pdv{H}{P})_{S} \dd{P}.
+$$
+
+\n
+
+Calculando as derivadas:
+$$
+\qty(\pdv{F}{T})_{V} = \cancel{\qty(\pdv{E}{S})_V \qty(\pdv{S}{T})_V} - S - \cancel{T \qty(\pdv{S}{T})_V} = - S.
+$$
+$$
+\qty(\pdv{F}{V})_{T} = \cancel{\qty(\pdv{E}{S})_V \qty(\pdv{S}{V})_T} + \cancelto{\boxed{-P}}{\qty(\pdv{E}{V})_S} - \cancel{T \qty(\pdv{S}{V})_T} = -P.
+$$
+$$
+\qty(\pdv{H}{S})_{P} = \cancelto{\boxed{T}}{\qty(\pdv{E}{S})_V} + \cancel{\qty(\pdv{E}{V})_S \qty(\pdv{V}{S})_P} + \cancel{P \qty(\pdv{V}{S})_P} = T.
+$$
+$$
+\qty(\pdv{H}{P})_{S} = \cancel{\qty(\pdv{E}{V})_S \qty(\pdv{V}{P})_S} + V + \cancel{P \qty(\pdv{V}{P})_S} = V.
+$$
+
+Isso estabelece que
+$$
+\boxed{ \dd{F} = -S \dd{T} - P \dd{V}, }
+$$
+$$
+\boxed{ \dd{H} = T \dd{S} + V \dd{P}. }
+$$
+
+
+\pagebreak
+
+\section*{5) Gás ideal}
+
+(a) \textbf{FAZER O ITEM (a)}
+
+\n\n
+
+(b) $S = \int \dd{S}$ e ignorar o $\log(\frac{V}{N})$.
+
+\end{document}
