@@ -124,10 +124,106 @@ $$
 
 \section*{5) Gás ideal}
 
-(a) \textbf{FAZER O ITEM (a)}
+Neste exercício utilizarei as duas relações de Maxwell
+\begin{equation} \label{eq:maxwell_1}
+\pdvc{S}{V}{T} = \pdvc{P}{T}{V} = - \pdv{F}{T}{V},
+\end{equation}
+\begin{equation} \label{eq:maxwell_2}
+\pdvc{S}{P}{T} = - \pdvc{V}{T}{P} = - \pdv{G}{T}{P},
+\end{equation}
+e também
+\begin{equation} \label{eq:ptvp}
+\pdvc{P}{T}{V} \pdvc{T}{V}{P} \pdvc{V}{P}{T} = -1,
+\end{equation}
+que foram demonstradas no item (4) dessa lista.
+
+\n
+
+(a)
+\begin{itemize}
+\item Considerando a entropia como uma função de $T$ e $P$, da forma $S(T, V(T, P))$, temos pela regra da cadeia que
+$$
+\pdvc{S}{T}{P} = \pdvc{S}{T}{V} + \pdvc{S}{V}{T} \pdvc{V}{T}{P}.
+$$
+
+Multiplicando a equação acima por $T$, pelas definições de $C_V$ e $C_P$ temos
+$$
+C_P - C_V = T \pdvc{S}{V}{T} \pdvc{V}{T}{P}.
+$$
+Usando então as relações \ref{eq:maxwell_1} e \ref{eq:ptvp} obtemos
+\begin{equation} \label{eq:cpcv}
+C_P - C_V = T \pdvc{P}{T}{V} \pdvc{V}{T}{P} = - \pdvc{V}{T}{P}^2 \pdvc{P}{V}{T} > 0,
+\end{equation}
+que é maior que zero pois $\pdvc{P}{V}{T} < 0$, i.e., se o volume aumenta a pressão diminui.
+
+\n
+
+\item Considerando a energia interna $E$ como função de $T$ e $V$, da forma $E(S(T,V), V)$, usamos a relação \ref{eq:maxwell_1} e obtemos
+$$
+\pdvc{E}{V}{T} = \pdvc{E}{S}{V} \pdvc{S}{V}{T} + \pdvc{E}{V}{S} = T \pdvc{P}{T}{V} - P.
+$$
+
+\n
+
+\item Considerando agora $E$ como função de $T$ e $P$, da forma $E(S(T,P), V(T,P))$, usamos a relação \ref{eq:maxwell_2} e temos
+$$
+\pdvc{E}{P}{T} = \pdvc{E}{S}{V} \pdvc{S}{P}{T} + \pdvc{E}{V}{S} \pdvc{V}{P}{T} = - T \pdvc{V}{T}{P} - P \pdvc{V}{P}{T}.
+$$
+
+\n
+
+\item Usando as relações de Maxwell \ref{eq:maxwell_1}, \ref{eq:maxwell_2} e trocando a ordem das derivadas parciais, segue
+$$
+\pdvc{C_V}{V}{T} = \pdv{V} \qty(T \pdvc{S}{T}{V})_T = T \pdv{T} \qty(\pdvc{S}{V}{T})_V = T \qty(\pdv[2]{P}{T})_V.
+$$
+$$
+\pdvc{C_P}{P}{T} = \pdv{P} \qty(T \pdvc{S}{T}{P})_T = T \pdv{T} \qty(\pdvc{S}{P}{T})_P = -T \qty(\pdv[2]{V}{T})_P.
+$$
+\end{itemize}
+
+\n\n\n\n
+
+(b) Por hipótese temos $PV = N k_B T$ e $C_V = \alpha N k_B$. Usando a equação \ref{eq:cpcv} temos
+$$
+C_P - C_V = T \qty(\frac{N k_B}{P}) \qty(\frac{N k_B}{V}) = N k_B \implies \boxed{ C_P = (\alpha + 1) N k_B. }
+$$
+
+Para a entropia, calculemos sua diferencial
+$$
+\dd{S} = \pdvc{S}{T}{V} \dd{T} + \pdvc{S}{V}{T} \dd{V}.
+$$
+
+Pela definição de $C_V$:
+$$
+\pdvc{S}{T}{V} = \frac{C_V}{T} = \frac{\alpha N k_B}{T}.
+$$
+
+Pela relação de Maxwell \ref{eq:maxwell_1} e usando a equação de estado:
+$$
+\pdvc{S}{V}{T} = \pdvc{P}{T}{V} = \frac{N k_B}{V}.
+$$
+
+Integrando a diferencial:
+$$
+S = \int \dd{S} = \int \qty(\frac{\alpha N k_B}{T} \dd{T} + \frac{N k_B}{V} \dd{V})
+\implies \boxed{ S = N k_B \log V + \alpha N k_B \log T + \cte. }
+$$
 
 \n\n
 
-(b) $S = \int \dd{S}$ e ignorar o $\log(\frac{V}{N})$.
+Em um processo adiabático a entropia $S(T,V) = S(T_0, V_0)$ é constante, portanto
+$$
+N k_B \log V + \alpha N k_B \log T = N k_B \log V_0 + \alpha N k_B \log T_0 \implies
+\log(V T^\alpha) = \log(V_0 T_0^\alpha)
+$$
+$$
+\implies V T^{\alpha} = \cte.
+$$
+
+Substituindo $T = PV / N k_B$ também temos
+$$
+V \qty(\frac{PV}{N k_B})^{\alpha} = \cte. \implies P^\alpha V^{\alpha + 1} = \cte. \implies P V^{\gamma} = \cte,
+$$
+onde $\gamma = \frac{\alpha + 1}{\alpha} = C_P / C_V$.
 
 \end{document}
