@@ -57,9 +57,50 @@ $$
 
 \n\n
 
-(b) Falta calcular a entropia $S(E, N, V)$ para $N \to \infty$, temperatura $1/T = \qty(\pdv{S}{E})_{V,N}$, pressão $P = -T \qty(\pdv{S}{V})_{E,N}$ e potencial químico $\mu = T \qty(\pdv{S}{N})_{E, V}$. O Eric falou pra discutir que $P = 0$ porque a entropia não depende do volume e também porque o potencial é harmônico, ou seja, a pressão não deforma o volume do sistema.
+(b) Temos $\Omega(E) = D(E) \delta E$ de maneira que, quando $N \to \infty$, $s = S/N$ é dado por
+$$
+s = \frac{k_B \log \Omega}{N} \stackrel{N \to \infty}{=}
+\cancelto{0}{\frac{1}{N} \log(\delta E \sqrt{\frac{N}{2\pi E^2}})} + \log(\frac{Ee}{N\hbar \omega}) \implies
+$$
+$$
+S = s N = N k_B \log(\frac{E}{N \hbar \omega}) + \cte.
+$$
 
-\textbf{FALTA ITEM (b)}
+Com a expressão da entropia, conseguimos calcular a temperatura, pressão e potencial químico, a partir da relação $\dd{S} = \frac{1}{T} \dd{E} + \frac{p}{T} \dd{V} - \frac{\mu}{T} \dd{N}$:
+\begin{itemize}
+\item Temperatura:
+$$
+\frac{1}{T} = \pdvc{S}{E}{V,N} = \frac{N k_B}{E} \implies \boxed{ E = N k_B T. }
+$$
+A interpretação do resultado acima da temperatura é que, como a hamiltoniana do sistema é quadrática, pelo Teorema da Equipartição cada grau de liberdade contribuirá $\frac{1}{2} k_B T$ para a energia interna. Note que temos $2N$ graus de liberdade ($2$ para cada oscilador, pois a hamiltoniana é quadrática em $q$ e $p$), assim $E = 2N \times \frac{1}{2} k_B T = N k_B T$, o que explica o resultado obtido.
+
+\n
+
+\item Pressão:
+$$
+\boxed{ p = T \pdvc{S}{V}{E,N} = 0. }
+$$
+De fato, $p = 0$ pois a entropia não depende do volume.
+
+\n
+
+Minha interpretação intuitiva deste resultado é o seguinte cenário. Num gás ideal, a única restrição sobre as posições das moléculas é que elas estejam dentro do volume $V$ do sistema. Essa restrição impõe que as moléculas que se movem livremente dentro do volume sejam refletidas toda vez que tentam sair do volume, o que causa uma pressão não-nula. De fato, se não fosse a resistência das paredes do recipiente, o gás ideal iria naturalmente se expandir. Agora, pensando no conjunto de $N$ osciladores de mesma frequência $\omega$, como o movimento é harmônico, a restrição das posições dos osciladores é muito mais forte. Cada um deles somente pode se desviar da posição de equilíbrio por uma amplitude microscópica. Nesse caso, os osciladores ficam naturalmente presos oscilando em torno da posição de equilíbrio, não havendo a tendência deles se expandirem. Por isso, a pressão desse sistema é identicamente nula.
+
+\n
+
+\item Potencial químico:
+$$
+\mu = - T \pdvc{S}{N}{E,V} = -\frac{E}{N k_B} \qty[k_B \log(\frac{E}{N\hbar\omega}) - k_B] \implies
+$$
+$$
+N \mu = E \qty[1 - \log(\frac{E}{N\hbar\omega})] = E - T \cdot \qty[N k_B \log(\frac{E}{N\hbar\omega})] \implies
+\boxed{ N \mu = E - TS = F(T, N). }
+$$
+$$
+\boxed{ \mu(T) = k_B T \qty[1-\log(\frac{k_B T}{\hbar\omega})]. }
+$$
+Como discutido, a entropia do sistema não depende de seu volume. Isso implica que a energia livre $F(T,N)$ também não depende do volume. Neste caso, temos simplesmente $\dd{F} = -S \dd{T} + \mu \dd{N}$. Como $F$, que é extensiva, depende apenas de $T$ (intensiva) e $N$, devemos ter necessariamente $F(T,N) = N \mu(T)$. Isso explica o resultado obtido para o potencial químico, ele é a energia livre dividida por $N$.
+\end{itemize}
 
 
 \pagebreak
