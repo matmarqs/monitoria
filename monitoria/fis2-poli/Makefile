@@ -1,4 +1,4 @@
-f=lista_1
+f=exerc_1
 
 #latex:
 #	pdflatex $(f).tex pdflatex $(f).tex && latexmk $(f).tex && pdflatex $(f).tex pdflatex $(f).tex

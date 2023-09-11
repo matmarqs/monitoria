@@ -1,0 +1,86 @@
+\documentclass[a4paper,10pt]{article}
+\input{preamble}
+
+\title{\Huge{\textbf{Exercícios 1}}}
+\author{Mateus Marques}
+
+\begin{document}
+
+\maketitle
+
+\section{}
+
+Qual sistema não é adequadamente descrito como um oscilador amortecido?
+
+\begin{itemize}
+\item Um pêndulo na atmosfera.
+\item Um circuito RLC.
+\item Um bola de bilhar rolando sobre a mesa de sinuca.
+\item Uma corda de violão vibrando até parar.
+\end{itemize}
+
+
+\section{}
+
+A diferença de potencial entre as extremidades de um capacitor, resistor e indutor são, respectivamente, $V_C = \frac{Q}{C}$, $V_R = R I$ e $V_L = L \dv{I}{t}$.
+
+É montado um circuito RLC, ou seja, os três componentes capacitor (capacitância $C$), resistor (resistência $R$) e indutor (indutância $L$) conectados em série.
+
+As valores nominais de resistência e indutância dos componentes são $R = 1 \unit{\Omega}$, $L = 40 \unit{mH}$, $C = 1 \unit{\mu F}$.
+
+No instante inicial $t = 0$, não há corrente pelo circuito e a voltagem entre as extremidades do capacitor é $V_0 = 0.1 \unit{V}$.
+
+$$
+\ddot{Q} + \frac{R}{L} \dot{Q} + \frac{Q}{LC} = 0
+$$
+$$
+\ddot{V} + \frac{R}{L} \dot{V} + \frac{V}{LC} = 0
+$$
+$$
+\ddot{V} + \gamma \dot{V} + \omega_0^2 V = 0,
+$$
+onde $\gamma = R/L$ e $\omega_0 = 1/\sqrt{LC}$.
+
+Subamortecimento é o caso $\gamma/2 < \omega_0$, ou seja, $R < 2 \sqrt{L/C}$.
+
+Qual o módulo da corrente máxima que o circuito atinge depois do instante inicial?
+$$
+Q(t) = A \, e^{-\frac{\gamma}{2} t} \cos(\omega t + \phi), \quad \omega = \sqrt{\omega_0^2 - (\gamma/2)^2}.
+$$
+$$
+I(t) = - \frac{\gamma}{2} A \, e^{-\frac{\gamma}{2} t} \cos(\omega t + \phi) - \omega A \, e^{-\frac{\gamma}{2} t} \sin(\omega t + \phi).
+$$
+$$
+I(0) = 0 = - \frac{\gamma}{2} A \, \cos(\phi) - \omega A \, \sin(\phi) \implies
+$$
+$$
+\tan(\phi) = -\frac{\gamma}{2 \omega}.
+$$
+$$
+\cos(\phi) = \frac{1}{\sqrt{1+\tan^2\phi}} = \frac{\omega}{\sqrt{\omega^2 + (\gamma/2)^2}} = \frac{\omega}{\omega_0}.
+$$
+$$
+Q_0 = CV_0 = A \cos(\phi) \implies A = C V_0 \frac{\omega_0}{\omega}.
+$$
+
+Qual a carga no capacitor depois de um período de oscilação?
+$$
+Q\qty(\frac{2\pi}{\omega}) = C V_0 \exp(-\frac{\pi \gamma}{\omega}).
+$$
+
+\section{}
+
+Uma corpo de massa $m = 50 \unit{g}$ que oscila preso a uma mola de constante elástica $k = 1.25 \unit{N \cdot m^{-1}}$ é sujeito a uma força de resistência do ar proporcional à sua velocidade, sendo $b = 3 \unit{g \cdot s^{-1}}$ a constante de proporcionalidade. No instante inicial $t = 0$ a mola está em sua posição de equilíbrio e o corpo tem velocidade inicial não-nula $v_0 = 1 \unit{m \cdot s^{-1}}$.
+
+Qual o período $T$ de oscilação do movimento? $T = 2 \pi / \omega$, $\omega = \sqrt{\qty(\sqrt{\frac{k}{m}})^2 - \qty(\frac{b}{2m})^2}$.
+
+Sendo $x(t)$ a posição do corpo com respeito à posição de equilíbrio, definimos o desvio médio $\sigma_x(t)$ num período do movimento $\sigma_x(t)$ como
+$$
+\sigma_x(t) = \int_{t + T}^T x^2(t) \dd{t}
+$$
+
+Quanto vale $\sigma_x(4T)$? É uma conta braba pra fazer exata...
+
+Qual o valor da razão $\displaystyle{\frac{\sigma_x(60T)}{\sigma_x(0)}}$? $\sigma_x$ é proporcional a $e^{-\frac{b}{2m}t}$, logo a resposta é $e^{-\frac{b}{m} \cdot 30 T}$.
+
+\end{document}
