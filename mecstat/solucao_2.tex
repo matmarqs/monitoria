@@ -1,0 +1,74 @@
+\documentclass[a4paper,10pt]{article}
+\input{preamble}
+
+\title{\Huge{\textbf{Lista 2 - Mecânica Estatística}}}
+\author{Mateus Marques}
+
+\begin{document}
+
+\maketitle
+
+\section*{2) Oscilador harmônico no ensemble canônico}
+
+(a) Para contar todos os microestados com energia variável no cálculo da função de partição, integramos todas as variáveis $q_i, p_i$ sobre todos os valores possíveis:
+$$
+Z = \int_{-\infty}^{\infty}\int_{-\infty}^{\infty} \frac{\dd{p_1} \dd{q_1}}{2\pi\hbar} \cdots \int_{-\infty}^{\infty}\int_{-\infty}^{\infty} \frac{\dd{p_N} \dd{q_N}}{2\pi\hbar} e^{-\beta H(\q, \p)} =
+$$
+$$
+= \qty{\frac{1}{2\pi\hbar} \int_{-\infty}^{\infty} e^{-\beta \frac{p^2}{2m}} \dd{p} \int_{-\infty}^{\infty} e^{-\beta \frac{m\omega^2q^2}{2} }\dd{q}}^N =
+\qty[ \frac{1}{2\pi\hbar} \sqrt{\frac{2m\pi}{\beta}} \sqrt{\frac{2\pi}{m\omega^2\beta}} ]^N =
+\qty(\frac{1}{\beta \hbar \omega})^N = \qty(\frac{k_B T}{\hbar \omega})^N.
+$$
+
+\begin{itemize}
+\item Energia livre $F = - k_B T \log Z$.
+\item Energia:
+$$
+E = \frac{\tr(H e^{-\beta H})}{\tr(e^{-\beta H})} = - \frac{1}{Z} \pdv{Z}{\beta} = - \pdv{\log Z}{\beta}.
+$$
+\item Entropia:
+$$
+S = -\pdvc{F}{T}{V,N}.
+$$
+\item Pressão:
+$$
+P = -\pdvc{F}{V}{T,N} = 0,
+$$
+por que o sistema não depende do volume, como discutimos na Lista 1.
+$$
+\mu = \pdvc{F}{N}{T,V}.
+$$
+\end{itemize}
+
+(b) A função de partição nesse caso é
+$$
+Z_N = \sum_{n_1 = 0}^{\infty} \sum_{n_2 = 0}^{\infty} \cdots \sum_{n_N = 0}^{\infty} e^{-\beta \sum_{j=1}^{N} E_n^j} =
+\qty(\sum_{n=0}^{\infty} e^{-\beta E_n})^N =
+$$
+$$
+= \qty(e^{-\beta \hbar \omega / 2} \sum_{n=0}^{\infty} e^{-\beta n \hbar\omega})^N =
+\qty(\frac{e^{-\beta \hbar \omega / 2}}{1 - e^{-\beta\hbar\omega}})^N =
+\qty[\frac{1}{2\sinh(\frac{\beta\hbar\omega}{2})}]^N.
+$$
+
+Energia livre e entropia é o mesmo cálculo do item (a). Calor específico é depois de calcular a entropia
+$$
+C_V = T \pdvc{S}{T}{V}.
+$$
+
+A ocupação média $\ev{n(T)} = \sum_{n=0}^{\infty} n \frac{e^{-\beta E_n}}{Z_1}$ vai dar simplesmente a distribuição de Bose-Einstein.
+
+\n
+
+Fazer esboço das curvas $C_V/N \times T$ e $S/N \times T$. Discutir os limites $T \to 0$ e $T \to \infty$. Nós claramente recuperaremos o limite clássico quando $\hbar \to 0$.
+
+\pagebreak
+
+\section*{4) Distribuição de Maxwell}
+
+\pagebreak
+
+\section*{6) Magnetismo de gases}
+
+
+\end{document}
