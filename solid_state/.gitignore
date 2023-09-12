@@ -8,3 +8,5 @@
 *.out
 *.toc
 *.fdb_latexmk
+lista*.pdf
+lista_*.pdf

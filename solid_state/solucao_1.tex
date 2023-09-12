@@ -1,0 +1,90 @@
+\documentclass[a4paper,10pt]{article}
+\input{preamble}
+
+\title{\Huge{\textbf{Lista 1 - Estado Sólido 1}}}
+\author{Mateus Marques}
+
+\begin{document}
+
+\maketitle
+
+\section{}
+
+(a) O gás de elétrons, em geral, é um sistema ideal composto de elétrons independentes (não interagem entre si) e livres (o potencial externo que age sobre eles é constante em todo ponto no interior do volume do sistema).
+
+Podem ser feitas hipóteses adicionais sobre esse sistema. Se por exemplo houver interesse em calcular propriedades de transporte, pode-se supor que os elétrons entram em equilíbrio através de ``colisões instantâneas'' com um associado tempo de relaxação $\tau$, definido de maneira que a probabilidade de colisão por unidade de tempo seja $\tau^{-1}$.
+
+\n
+
+(b) No modelo de Drude consideramos apenas os elétrons de valência e são feitas as hipóteses adicionais descritas acima no item (a). Além disso também é suposto que as velocidades das partículas seguem a distribuição clássica de Boltzmann. Supondo um campo elétrico estacionário, utilizando a lei de Ohm ($\J = \sigma \E$) e a equação para o momento médio dos elétrons (obtida pela introdução do tempo de relaxação), obtém-se a fórmula de Drude para condutividade no regime estacionário:
+$$
+\sigma = \frac{ne^2\tau}{m_e}.
+$$
+
+\n
+
+(c) As únicas diferenças do modelo semiclássico de Sommerfeld para o modelo clássico de Drude é a consideração dos elétrons como partículas quânticas (são descritos por funções de onda que satisfazem Schrödinger) que obedecem à estatística de férmions (distribuição de Fermi-Dirac, não mais obedecem à estatística de Boltzmann). As hipóteses do tempo de relaxação e do gás de elétrons são mantidas.
+
+\n
+
+(d) Sim, uma diferença importantíssima é que no modelo de Sommerfeld os elétrons obedecem ao princípio de exclusão de Pauli. Devido aos elétrons estarem confinados a um volume $V$ finito (mas mascroscópico), eles possuem momentos $\p = \hbar \k$ quantizados. Em condições periódicas, a quantização para o vetor quântico $\k$ é da forma $(k_x, k_y, k_z) = \qty(\frac{2\pi n_x}{L_x}, \frac{2\pi n_y}{L_y}, \frac{2\pi n_z}{L_z})$. Devido a $k$ ter unidade de inverso de comprimento, chamamos o espaço dos números ``$k$'' de espaço recíproco. Pelos elétrons serem férmions, o princípio de Pauli faz com que cada vetor quântico $\k$ consiga acomodar no máximo dois elétrons, um com spin up e outro com spin down.
+
+\n
+
+(e) Existem vários problemas, como a falta de dependência da temperatura no calor específico e condutividade, o modelo não conseguir exibir o comportamento em um campo elétrico AC ou num campo magnético. Mas eu acredito que o problema mais sério seja relacionado ao efeito Hall. Os dois modelos (Drude e Sommerfeld) prevêem um coeficiente Hall $R_H = - 1/ne$, que para alguns metais é bem diferente do previsto e para outros tem até o \textbf{sinal errado}, indicando portadores de carga positiva.
+
+\section{}
+
+(a) Simetria de translação é a invariância com respeito à translação, ou seja deslocamento por vetores $\r \to \r + \a$. Simetrias de translação só podem existir em sistema infinitos.
+
+Simetria de ponto é uma invariância com respeito a realização de operações que estão atreladas em um único ponto, a saber as operações de rotação, reflexão, roto-reflexão e inversão. Simetrias de ponto podem ocorrer tanto em estruturas finitas (moléculas) como em estruturas infinitas (sistemas cristalinos).
+
+\n
+
+(b) Obs: Os vetores primitivos não são únicos, por isso usarei a expressão ``pode-se achar os vetores primitivos de tal forma'' no sentido de que eles existem na estrutura da rede, mas poderiam ser escolhidos outros vetores primitivos de qualidades diferentes.
+
+\n
+
+Os quatro grupos de simetria de rede para sistemas cristalinos 2D são:
+\begin{itemize}
+\item Rede quadrada: pode-se achar dois vetores primitivos ortonormais, ou seja, perpendiculares e de mesmo módulo. Exemplo $\a_1 = a \vu{x}$ e $\a_2 = a \vu{y}$.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.35\linewidth]{fig/lattice_quad.png}
+\caption{Rede Quadrada.}
+\label{fig:lat-quad}
+\end{figure}
+\item Rede retangular: pode-se achar dois vetores primitivos ortogonais mas de módulo diferente. Exemplo: $\a_1 = a_1 \vu{x}$ e $\a_2 = a_2 \vu{y}$, com $a_2 \neq a_1$.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.35\linewidth]{fig/lattice_retang.png}
+\caption{Rede Retangular.}
+\label{fig:lat-retang}
+\end{figure}
+\item Rede hexagonal: pode-se achar dois vetores primitivos que formam um ângulo de $60^\circ$ entre si e tenham o mesmo módulo. Exemplo: $\a_1 = a \vu{x}$ e $\a_2 = a \qty(\frac{1}{2} \vu{x} + \frac{\sqrt{3}}{2} \vu{y})$.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.35\linewidth]{fig/lattice_triang.png}
+\caption{Rede Hexagonal (Triangular).}
+\label{fig:lat-triang}
+\end{figure}
+\item Rede oblíqua: pode-se achar dois vetores primitivos que formam um ângulo \textbf{diferente} de $90^\circ$ e que tenham \textbf{módulos diferentes}. Exemplo: $\a_1 = a \vu{x}$ e $\a_2 = a (2 \vu{x} + 3\vu{y})$.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.35\linewidth]{fig/lattice_obliq.png}
+\caption{Rede Oblíqua.}
+\label{fig:lat-obliq}
+\end{figure}
+\end{itemize}
+
+\n
+
+(c) A rede hexagonal tem as seguintes simetrias:
+\begin{itemize}
+\item $C_6$: rotações de $60^\circ$.
+\item Inversão.
+\end{itemize}
+
+
+
+\end{document}
