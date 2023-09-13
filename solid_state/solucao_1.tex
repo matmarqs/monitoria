@@ -54,7 +54,7 @@ Os quatro grupos de simetria de rede para sistemas cristalinos 2D são:
 \caption{Rede Quadrada.}
 \label{fig:lat-quad}
 \end{figure}
-\item Rede retangular: pode-se achar dois vetores primitivos ortogonais mas de módulo diferente. Exemplo: $\a_1 = a_1 \vu{x}$ e $\a_2 = a_2 \vu{y}$, com $a_2 \neq a_1$.
+\item Rede retangular: pode-se achar dois vetores primitivos ortogonais mas de módulo diferente. Exemplo: $\a_1 = a \vu{x}$ e $\a_2 = 1.5 a \,\vu{y}$.
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.35\linewidth]{fig/lattice_retang.png}
@@ -68,7 +68,7 @@ Os quatro grupos de simetria de rede para sistemas cristalinos 2D são:
 \caption{Rede Hexagonal (Triangular).}
 \label{fig:lat-triang}
 \end{figure}
-\item Rede oblíqua: pode-se achar dois vetores primitivos que formam um ângulo \textbf{diferente} de $90^\circ$ e que tenham \textbf{módulos diferentes}. Exemplo: $\a_1 = a \vu{x}$ e $\a_2 = a (2 \vu{x} + 3\vu{y})$.
+\item Rede oblíqua: pode-se achar dois vetores primitivos que formam um ângulo \textbf{diferente} de $90^\circ$ e que tenham \textbf{módulos diferentes}. Exemplo: $\a_1 = a \vu{x}$ e $\a_2 = a (0.3 \vu{x} + 0.9\vu{y})$.
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.35\linewidth]{fig/lattice_obliq.png}
@@ -79,10 +79,77 @@ Os quatro grupos de simetria de rede para sistemas cristalinos 2D são:
 
 \n
 
-(c) A rede hexagonal tem as seguintes simetrias:
+(c) A rede hexagonal tem o grupo de simetria diedral $D_6$, que é composto de 12 elementos distintos. Esse grupo é gerado somente através de duas operações, uma rotação $\rho$ de $60^\circ$ e uma reflexão $\sigma$ qualquer. Assim, todos as operações de simetria são dados por $D_6 = \{1, \rho, \rho^2, \rho^3, \rho^4, \rho^5, \s, \rho\s, \rho^2\s, \rho^3\s, \rho^4\s, \rho^5\s\}$. Esses elementos são algum dos seguintes:
 \begin{itemize}
-\item $C_6$: rotações de $60^\circ$.
-\item Inversão.
+\item Rotações de $60^\circ$: 6 elementos contando com a identidade ($0^\circ$, $60^\circ$, $120^\circ$, $180^\circ$, $240^\circ$, $300^\circ$).
+\item Reflexões em alguns dos seguintes 6 eixos: três por \textcolor{red}{eixos que ligam vértices do hexágono} e três por \textcolor{blue}{eixos que passam pelo meio de arestas do hexágono}.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\linewidth]{fig/hex_reflex.png}
+\caption{Seis eixos de reflexão da rede hexagonal.}
+\label{fig:hex_reflex}
+\end{figure}
+\item Inversão: que pode ser vista como uma rotação de $180^\circ$.
+\end{itemize}
+
+(d) Não tenho certeza o que você quer dizer com rede ``oblíqua triangular'', mas acredito que seria com dois vetores primitivos $\a_1$ e $\a_2$ formando $60^\circ$ entre si mas com módulos diferentes. Por exemplo, $\a_1 = a \vu{x}$ e $\a_2 = 1.3 a \qty(\frac{1}{2} \vu{x} + \frac{\sqrt{3}}{2} \vu{y})$. \textbf{NÃO TENHO CERTEZA.}
+
+\n
+
+(e) Podemos chegar à estrutura do grafeno a partir da rede hexagonal com vetores de rede $\a_1 = a \vb{x}$ e $\a_2 = a \qty(\frac{1}{2} \vu{x} + \frac{\sqrt{3}}{2} \vu{y})$ e dois vetores compondo a base (os dois átomos de carbono inequivalentes da célula unitária do grafeno), sendo eles $\r_1 = \0$ e $\r_2 = a \qty(\frac{1}{2}\vu{x} + \frac{\sqrt{3}}{3}\vb{y})$.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.4\linewidth]{fig/graphene_vec}
+\caption{Estrutura do grafeno e vetores.}
+\label{fig:graphene_vec}
+\end{figure}
+
+\section{}
+
+(a) Quadrada 2D:
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.3\linewidth]{fig/nn_quad}
+\caption{Primeiros, segundos e terceiros vizinhos na rede quadrada.}
+\label{fig:nn_quad}
+\end{figure}
+\begin{itemize}
+\item 4 primeiros vizinhos com distância $a$.
+\item 4 segundos vizinhos com distância $a\sqrt{2}$.
+\item 4 terceiros vizinhos com distância $2a$.
+\end{itemize}
+
+(b) Hexagonal 2D:
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.3\linewidth]{fig/nn_triang}
+\caption{Primeiros, segundos e terceiros vizinhos na rede hexagonal.}
+\label{fig:nn_triang}
+\end{figure}
+\begin{itemize}
+\item 6 primeiros vizinhos com distância $a$.
+\item 6 segundos vizinhos com distância $a\sqrt{3}$.
+\item 6 terceiros vizinhos com distância $2a$.
+\end{itemize}
+
+Para as estruturas 3D eu não vou desenhar, mas é fácil contar os vizinhos por combinatória $\sqrt{(\;)^2+(\;)^2+(\;)^2}$.
+
+\n
+
+(c) Cúbica:
+
+\begin{itemize}
+\item 6 primeiros vizinhos com distância $a$.
+\item 12 segundos vizinhos com distância $a\sqrt{2}$.
+\item 8 terceiros vizinhos com distância $a\sqrt{3}$.
+\end{itemize}
+
+(d) Cúbica de Corpo Centrado: ($a$ a distância dos vetores primitivos na célula convencional do bcc)
+
+\begin{itemize}
+\item 8 primeiros vizinhos com distância $a \frac{\sqrt{3}}{2}$.
+\item 6 segundos vizinhos com distância $a$.
+\item 12 terceiros vizinhos com distância $a\sqrt{2}$.
 \end{itemize}
 
 
