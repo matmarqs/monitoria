@@ -152,6 +152,45 @@ Para as estruturas 3D eu não vou desenhar, mas é fácil contar os vizinhos por
 \item 12 terceiros vizinhos com distância $a\sqrt{2}$.
 \end{itemize}
 
+\section{}
+
+(a) Calcularemos os vetores primitivos da rede recíproca para cada uma das redes do exercício 3:
+\begin{itemize}
+\item Rede quadrada 2D: $\a_1 = a(1,0,0)$, $\a_2 = a(0,1,0)$, $\a_3 = (0,0,1)$. $\Omega = \abs{\a_1 \vdot (\a_2 \times \a_3)} = a^3$.
+$$
+\b_1 = \frac{2\pi}{\Omega} \, \a_2 \times \a_3 = \frac{2\pi}{a} \, \vu{y} \times \vu{z} = \frac{2\pi}{a} \vu{x} = \frac{2\pi}{a} (1, 0).
+$$
+$$
+\b_2 = \frac{2\pi}{\Omega} \, \a_3 \times \a_1 = \frac{2\pi}{a} \, \vu{z} \times \vu{x} = \frac{2\pi}{a} \vu{y} = \frac{2\pi}{a} (0, 1).
+$$
+
+Assim, a recíproca da rede quadrada também é uma rede quadrada, mas com distância de rede $\frac{2\pi}{a}$.
+
+\item Rede hexagonal 2D: $\a_1 = a(1,0,0)$, $\a_2 = a\qty(\frac{1}{2},\frac{\sqrt{3}}{2},0)$, $\a_3 = (0,0,1)$. $\Omega = \abs{\a_1 \vdot (\a_2 \times \a_3)} = \frac{a^3 \sqrt{3}}{2}$.
+$$
+\b_1 = \frac{2\pi}{\Omega} \, \a_2 \times \a_3 =
+\frac{4\pi}{a \sqrt{3}}
+\begin{vmatrix}
+\vu{x} & \vu{y} & \vu{z} \\
+\frac{1}{2} & \frac{\sqrt{3}}{2} & 0 \\
+0 & 0 & 1 \\
+\end{vmatrix}
+=
+\frac{4\pi}{a \sqrt{3}} \qty(\frac{\sqrt{3}}{2} \vu{x} - \frac{1}{2} \vu{y}).
+$$
+$$
+\b_2 = \frac{2\pi}{\Omega} \, \a_3 \times \a_1 =
+\frac{4\pi}{a \sqrt{3}}
+\begin{vmatrix}
+\vu{x} & \vu{y} & \vu{z} \\
+0 & 0 & 1 \\
+1 & 0 & 0 \\
+\end{vmatrix}
+= \frac{4\pi}{a\sqrt{3}} \vu{y}.
+$$
+\end{itemize}
+
+
 
 
 \end{document}
