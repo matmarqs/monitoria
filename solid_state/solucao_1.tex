@@ -71,7 +71,7 @@ Os quatro grupos de simetria de rede para sistemas cristalinos 2D são:
 \item Rede oblíqua: pode-se achar dois vetores primitivos que formam um ângulo \textbf{diferente} de $90^\circ$ e que tenham \textbf{módulos diferentes}. Exemplo: $\a_1 = a \vu{x}$ e $\a_2 = a (0.3 \vu{x} + 0.9\vu{y})$.
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.35\linewidth]{fig/lattice_obliq.png}
+\includegraphics[width=0.6\linewidth]{fig/lattice_obliq.png}
 \caption{Rede Oblíqua.}
 \label{fig:lat-obliq}
 \end{figure}
@@ -85,14 +85,31 @@ Os quatro grupos de simetria de rede para sistemas cristalinos 2D são:
 \item Reflexões em alguns dos seguintes 6 eixos: três por \textcolor{red}{eixos que ligam vértices do hexágono} e três por \textcolor{blue}{eixos que passam pelo meio de arestas do hexágono}.
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.5\linewidth]{fig/hex_reflex.png}
+\includegraphics[width=0.6\linewidth]{fig/hex_reflex.png}
 \caption{Seis eixos de reflexão da rede hexagonal.}
 \label{fig:hex_reflex}
 \end{figure}
 \item Inversão: que pode ser vista como uma rotação de $180^\circ$.
 \end{itemize}
 
-(d) Não tenho certeza o que você quer dizer com rede ``oblíqua triangular'', mas acredito que seria com dois vetores primitivos $\a_1$ e $\a_2$ formando $60^\circ$ entre si mas com módulos diferentes. Por exemplo, $\a_1 = a \vu{x}$ e $\a_2 = 1.3 a \qty(\frac{1}{2} \vu{x} + \frac{\sqrt{3}}{2} \vu{y})$. \textbf{NÃO TENHO CERTEZA.}
+\pagebreak
+
+(d) Pelo que conversei com a Professora Marília, uma rede oblíqua triangular é uma rede onde os vetores primitivos tem o mesmo módulo mas o ângulo entre eles é genérico diferente de $90^\circ$. Eu gerei no \href{https://www.geogebra.org/geometry}{GeoGebra} uma rede com vetores primitivos de mesmo módulo, com o ângulo de $\theta = 1 \unit{rad} \simeq 57.29^\circ$ entre eles. Obtive a Figura \ref{fig:obliq_triang}:
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\linewidth]{fig/obliq_triang.png}
+\caption{Rede oblíqua triangular gerada no \href{https://www.geogebra.org/geometry}{GeoGebra}.}
+\label{fig:obliq_triang}
+\end{figure}
+
+As \textcolor{blue}{linhas azuis} na Figura \ref{fig:obliq_triang} correspondem aos vetores primitivos $\textcolor{blue}{\a_1 = a(1,0)}$ e $\textcolor{blue}{\a_2 = a(\cos\theta,\sin\theta)}$.
+
+Podemos redefinir esse sistema através de uma rede retangular. Isso só é possível pois $\a_1$ e $\a_2$ possuem o mesmo módulo. Os \textcolor{red}{vetores vermelhos} que definem essa rede retangular podem ser escolhidos como $\textcolor{red}{\v_1} = \a_2 - \a_1$ e $\textcolor{red}{\v_2} = \a_2 + \a_1$. É fácil ver que $\v_1$ e $\v_2$ são ortogonais, já que
+$$
+\v_1 \vdot \v_2 = (\a_2 - \a_1) \vdot (\a_2 + \a_1) = \a_2^2 - \a_1^2 = a^2 - a^2 = 0.
+$$
+
+O porém dessa descrição é que teremos que utilizar uma base de 2 átomos, com a posição dada pelos vetores $\r_1 = \0$ e $\r_2 = (\v_1 + \v_2)/2$.
 
 \n
 
@@ -154,7 +171,9 @@ Para as estruturas 3D eu não vou desenhar, mas é fácil contar os vizinhos por
 
 \section{}
 
-(a) Calcularemos os vetores primitivos da rede recíproca para cada uma das redes do exercício 3:
+(a) Dada uma rede de Bravais, sua rede recíproca é dada pelos vetores $\vb{G}$ tais que $e^{i \vb{G} \vdot \vb{R}} = 1$, para todos os vetores $\vb{R}$ na rede de Bravais. Se os vetores primitivos da rede de Bravais são $\a_i$, a condição para os vetores primitivos $\b_j$ da rede recíproca se traduz em $\a_i \vdot \b_j = 2\pi \delta_{ij}$. Os vetores $\b_1 = \frac{2\pi}{\Omega} (\a_2 \times \a_3)$, $\b_2 = \frac{2\pi}{\Omega} (\a_3 \times \a_1)$ e $\b_3 = \frac{2\pi}{\Omega} (\a_1 \times \a_2)$ satisfazem essa condição, de maneira que eles servem como vetores primitivos da rede recíproca.
+
+Calcularemos os vetores primitivos da rede recíproca para cada uma das redes do exercício 3:
 \begin{itemize}
 \item Rede quadrada 2D: $\a_1 = a(1,0,0)$, $\a_2 = a(0,1,0)$, $\a_3 = (0,0,1)$. $\Omega = \abs{\a_1 \vdot (\a_2 \times \a_3)} = a^3$.
 $$
@@ -188,9 +207,94 @@ $$
 \end{vmatrix}
 = \frac{4\pi}{a\sqrt{3}} \vu{y}.
 $$
+
+O ângulo entre os vetores $\b_1$ e $\b_2$ é $\cos\theta = \frac{\b_1 \vdot \b_2}{\abs{\b_1}\,\abs{\b_2}} = -\frac{1}{2} \implies \theta = \frac{2\pi}{3} = 120^\circ$. Como o ângulo é $120^\circ$, a rede recíproca também forma uma rede hexagonal e, portanto, tem simetria hexagonal. A Figura \ref{fig:hex_bz} mostra os vetores primitivos da rede recíproca e a zona de Brillouin.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\linewidth]{fig/hex_bz}
+\caption{Vetores primitivos da rede recíproca da rede hexagonal e a zona de Brillouin.}
+\label{fig:hex_bz}
+\end{figure}
+
+\item Rede cúbica: $\a_1 = a \vu{x}$, $\a_2 = a\vu{y}$ e $\a_3 = a\vu{z}$, com $\Omega = a^3$. Como na rede quadrada do item (a), os vetores primitivos da rede cúbica são calculados facilmente como:
+$$
+\b_1 = \frac{2\pi}{a} \vu{x}, \quad \b_2 = \frac{2\pi}{a} \vu{y}, \quad \b_3 = \frac{2\pi}{a} \vu{z}.
+$$
+
+Assim, a rede recíproca também é uma rede cúbica, ou seja, possui simetria cúbica.
+
+\n
+
+\item Rede cúbica de corpo centrado: Nesse caso consideraremos os vetores primitivos desenhados na Figura \ref{fig:bcc}:
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.4\linewidth]{fig/bcc.png}
+\caption{Vetores primitivos que consideraremos da rede BCC.}
+\label{fig:bcc}
+\end{figure}
+
+Em coordenadas, eles são $\a^* = \a_1 = \frac{a}{\sqrt{3}}(1, 1, -1)$, $\vb{b}^* = \a_2 = \frac{a}{\sqrt{3}}(-1, 1, 1)$ e $\vb{c}^* = \a_3 = \frac{a}{\sqrt{3}}(1, -1, 1)$. Temos então
+$$
+\Omega = \abs{\a_1 \vdot (\a_2 \times \a_3)} =
+\frac{a^3}{3\sqrt{3}}
+\begin{vmatrix}
+1 & 1 & -1 \\
+-1 & 1 & 1 \\
+1 & -1 & 1 \\
+\end{vmatrix}
+=
+\frac{4a^3}{3\sqrt{3}}.
+$$
+$$
+\b_1 = \frac{2\pi}{\Omega}
+\begin{vmatrix}
+\vu{x} & \vu{y} & \vu{z} \\
+-1 & 1 & 1 \\
+1 & -1 & 1 \\
+\end{vmatrix}
+=
+\frac{3\pi\sqrt{3}}{2a^3} (2\vu{x} + 2\vu{y}) = \frac{3\pi\sqrt{3}}{a^3} (1, 1, 0).
+$$
+$$
+\b_2 = \frac{2\pi}{\Omega}
+\begin{vmatrix}
+\vu{x} & \vu{y} & \vu{z} \\
+1 & -1 & 1 \\
+1 & 1 & -1 \\
+\end{vmatrix}
+=
+\frac{3\pi\sqrt{3}}{2a^3} (2\vu{y} + 2\vu{z}) = \frac{3\pi\sqrt{3}}{a^3} (0, 1, 1).
+$$
+$$
+\b_3 = \frac{2\pi}{\Omega}
+\begin{vmatrix}
+\vu{x} & \vu{y} & \vu{z} \\
+1 & 1 & -1 \\
+-1 & 1 & 1 \\
+\end{vmatrix}
+=
+\frac{3\pi\sqrt{3}}{2a^3} (2\vu{x} + 2\vu{z}) = \frac{3\pi\sqrt{3}}{a^3} (1, 0, 1).
+$$
+
+Perceba que os vetores que obtemos formam uma rede de face centrada (FCC), como ilustrado na Figura \ref{fig:fcc}:
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.4\linewidth]{fig/fcc.png}
+\caption{Rede de face centrada e vetores primitivos.}
+\label{fig:fcc}
+\end{figure}
+
+Pela rede recíproca da BCC ser a FCC, sua zona de Brillouin terá simetria cúbica do tipo FCC.
 \end{itemize}
 
 
-
+(b) Desenhei no papel as 3 primeiras zonas de Brillouin na rede hexagonal, Figura \ref{fig:hex_bz-123} A construção delas é baseada em traçar as linhas dos plano de Bragg (pontos equidistantes da origem e de dado vetor da rede recíproca) e identificar os cruzamentos desses planos, se cruzar $n$ vezes, o ponto pertence à $n-$ésima zona de Brillouin.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\linewidth]{fig/hex_bz-123.jpg}
+\caption{Primeira, segunda e terceira zonas de Brillouin da rede hexagonal 2D.}
+\label{fig:hex_bz-123}
+\end{figure}
 
 \end{document}
