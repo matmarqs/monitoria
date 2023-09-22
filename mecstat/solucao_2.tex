@@ -12,7 +12,7 @@
 
 (a) Para contar todos os microestados com energia variável no cálculo da função de partição, integramos todas as variáveis $q_i, p_i$ sobre todos os valores possíveis:
 $$
-Z = \int_{-\infty}^{\infty}\int_{-\infty}^{\infty} \frac{\dd{p_1} \dd{q_1}}{2\pi\hbar} \cdots \int_{-\infty}^{\infty}\int_{-\infty}^{\infty} \frac{\dd{p_N} \dd{q_N}}{2\pi\hbar} e^{-\beta H(\q, \p)} =
+Z_N = \int_{-\infty}^{\infty}\int_{-\infty}^{\infty} \frac{\dd{p_1} \dd{q_1}}{2\pi\hbar} \cdots \int_{-\infty}^{\infty}\int_{-\infty}^{\infty} \frac{\dd{p_N} \dd{q_N}}{2\pi\hbar} e^{-\beta H(\q, \p)} =
 $$
 $$
 = \qty{\frac{1}{2\pi\hbar} \int_{-\infty}^{\infty} e^{-\beta \frac{p^2}{2m}} \dd{p} \int_{-\infty}^{\infty} e^{-\beta \frac{m\omega^2q^2}{2} }\dd{q}}^N =
@@ -21,26 +21,39 @@ $$
 $$
 
 \begin{itemize}
-\item Energia livre $F = - k_B T \log Z$.
-\item Energia:
+\item A energia livre é dada por
 $$
-E = \frac{\tr(H e^{-\beta H})}{\tr(e^{-\beta H})} = - \frac{1}{Z} \pdv{Z}{\beta} = - \pdv{\log Z}{\beta}.
+F = - k_B T \log Z = -\frac{1}{\beta} N \log(\frac{1}{\beta \hbar \omega}) = \frac{N}{\beta} \log(\beta\hbar\omega) =
+-N k_B T \log(\frac{k_B T}{\hbar \omega}).
 $$
-\item Entropia:
+
+\item A energia interna é
 $$
-S = -\pdvc{F}{T}{V,N}.
+E = \frac{\tr(H e^{-\beta H})}{\tr(e^{-\beta H})} = - \frac{1}{Z} \pdv{Z}{\beta} = - \pdv{\log Z}{\beta} =
+N\pdv{\log(\beta\hbar\omega)}{\beta} = \frac{N}{\beta} = N k_B T,
 $$
+que corresponde ao que obtemos na lista 1 para o ensemble microcanônico.
+
+\item Da definição termodinâmica de energia livre $F = E - TS$, temos que a entropia é
+$$
+S = \frac{E-F}{T} = \frac{N k_B T + N k_B T \log(\frac{k_B T}{\hbar\omega})}{T} = N k_B \qty[1 + \log(\frac{k_B T}{\hbar\omega})],
+$$
+que também é a mesma entropia obtida na lista 1.
+
 \item Pressão:
 $$
 P = -\pdvc{F}{V}{T,N} = 0,
 $$
-por que o sistema não depende do volume, como discutimos na Lista 1.
+porque o sistema não depende do volume, como foi discutido na lista 1.
+
+\item Potencial químico:
 $$
-\mu = \pdvc{F}{N}{T,V}.
+\mu = \pdvc{F}{N}{T,V} = - k_B T \log(\frac{k_B T}{\hbar\omega}),
 $$
+que também está de acordo com o que obtivemos no ensemble microcanônico.
 \end{itemize}
 
-(b) A função de partição nesse caso é
+(b) A função de partição no caso quântico é
 $$
 Z_N = \sum_{n_1 = 0}^{\infty} \sum_{n_2 = 0}^{\infty} \cdots \sum_{n_N = 0}^{\infty} e^{-\beta \sum_{j=1}^{N} E_n^j} =
 \qty(\sum_{n=0}^{\infty} e^{-\beta E_n})^N =
@@ -51,16 +64,57 @@ $$
 \qty[\frac{1}{2\sinh(\frac{\beta\hbar\omega}{2})}]^N.
 $$
 
-Energia livre e entropia é o mesmo cálculo do item (a). Calor específico é depois de calcular a entropia
+A energia livre é dada por
+\begin{equation} \label{eq:free_energy-1qu}
+F = - \frac{1}{\beta} \log Z = \frac{N}{\beta} \log\qty[2 \sinh(\frac{\beta\hbar\omega}{2})] =
+N k_B T \log\qty[2 \sinh(\frac{\hbar\omega}{2 k_B T})].
+\end{equation}
+
+A entropia pode ser calculada por
 $$
-C_V = T \pdvc{S}{T}{V}.
+S = -\pdvc{F}{T}{V,N} = - N k_B \log\qty[2 \sinh(\frac{\hbar\omega}{2 k_B T})] -
+N k_B T \frac{2 \cosh(\frac{\hbar\omega}{2 k_B T})}{2 \sinh(\frac{\hbar\omega}{2 k_B T})} \,
+\qty(-\frac{\hbar\omega}{2 k_B T^2}) \implies
+$$
+$$
+S = - N k_B \log\qty[2 \sinh(\frac{\hbar\omega}{2 k_B T})] + \frac{N\hbar\omega}{2 T} \coth(\frac{\hbar\omega}{2 k_B T}).
+$$
+Notando que na expressão acima a fórmula \ref{eq:free_energy-1qu} da energia livre reaparece no primeiro termo, temos que
+$$
+S = - \frac{F}{T} + \frac{N\hbar\omega}{2 T} \coth(\frac{\hbar\omega}{2 k_B T}) \implies
+E = T \qty(S + \frac{F}{T}) = \frac{N\hbar\omega}{2} \coth(\frac{\hbar\omega}{2 k_B T}).
 $$
 
-A ocupação média $\ev{n(T)} = \sum_{n=0}^{\infty} n \frac{e^{-\beta E_n}}{Z_1}$ vai dar simplesmente a distribuição de Bose-Einstein.
+O calor específico $C_V$ é então
+$$
+C_V = \pdvc{E}{T}{V,N} =
+- \frac{N\hbar\omega}{2} \frac{1}{\sinh[2](\frac{\hbar\omega}{2 k_B T})} \qty(-\frac{\hbar\omega}{2 k_B T^2}) =
+\frac{N (\hbar\omega)^2}{4 k_B T^2} \cdot \frac{1}{\sinh[2](\frac{\hbar\omega}{2 k_B T})}.
+$$
 
 \n
 
+Como $\hat{H} = \sum_{i} \hbar\omega(\hat{N}_i + \frac{1}{2})$, temos que a ocupação média $\ev{n} = \frac{1}{N} \sum_{i} \ev{\hat{N}_i}$ satisfaz
+$$
+E = \ev{\hat{H}} = N \hbar\omega\qty(\ev{n} + \frac{1}{2}),
+$$
+portanto
+$$
+\ev{n} = \frac{1}{2} \qty[\coth(\frac{\hbar\omega}{2 k_B T}) - 1].
+$$
+Reescrevendo $\coth x - 1 = \frac{e^x + e^{-x}}{e^x - e^{-x}} - 1 = \frac{e^{2x} + 1}{e^{2x} - 1} - \frac{e^{2x} - 1}{e^{2x} - 1} = \frac{2}{e^{2x} - 1}$, temos
+$$
+\ev{n} = \frac{1}{e^{\frac{\hbar\omega}{k_B T}} - 1},
+$$
+que é a distribuição de Bose-Einstein.
+
+\n
+
+\textbf{FAZERRRRRRR}
+
 Fazer esboço das curvas $C_V/N \times T$ e $S/N \times T$. Discutir os limites $T \to 0$ e $T \to \infty$. Nós claramente recuperaremos o limite clássico quando $\hbar \to 0$.
+
+
 
 \pagebreak
 
