@@ -1,0 +1,36 @@
+\documentclass[a4paper,10pt]{article}
+\input{preamble}
+
+\title{\Huge{\textbf{Exercícios 2}}}
+\author{Mateus Marques}
+
+\begin{document}
+
+\maketitle
+
+\section{}
+
+Quais fenômenos podem ser entendidos com o conceito de ressonância?
+\begin{itemize}
+\item Levitação acústica de pequenos objetos. \textbf{NÃO}
+\item O aquecimento de comida dentro de um microondas. \textbf{SIM}
+\item A afinação de uma das cordas de um violão, através de outra corda já afinada. \textbf{SIM}
+\item O desabamento de uma ponte por fortes rajadas de vento. \textbf{SIM}
+\item O eco em uma sala grande e vazia. \textbf{NÃO}
+\item Um grito que destrói uma taça de vidro. \textbf{SIM}
+\end{itemize}
+
+
+\section{}
+
+Um cristal unidimensional é constituído por partículas iguais de massa $m = 0.1 \unit{\mu g}$ com espaçamento médio $a = 1 \unit{nm}$ entre elas. Essas partículas vibram com uma frequência natural $\omega_0 = 10 \unit{GHz}$ devido a efeitos térmicos. É aplicada uma onda sonora com força $F(t) = F_0 \cos(\omega t)$ nesse cristal com uma frequência $\omega$ muito próxima da frequência de ressonância $\omega_0$, sendo $F_0 = 10^{-5} \unit{N}$. Assumindo que o cristal se despedaça quando a amplitude média de oscilação de suas moléculas ultrapassa o espaçamento médio entre as partículas, qual a ordem de grandeza do tempo que o cristal demora para despedaçar?
+
+Pela equação (4.3.20) do Moysés $x(t) = \frac{F_0}{2m\omega_0} t \sin(\omega_0 t)$.
+$$
+\ev{x(t)} = \frac{F_0}{2m\omega_0} t \implies t = \frac{2m\omega_0 a}{F_0}.
+$$
+
+$t \approx 2 \cdot 10^{-4} \unit{s}$.
+
+
+\end{document}
