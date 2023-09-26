@@ -1,7 +1,7 @@
 \documentclass[a4paper,10pt]{article}
 \input{preamble}
 
-\title{\Huge{\textbf{Exercícios 2}}}
+\title{\Huge{\textbf{Exercícios 3}}}
 \author{Mateus Marques}
 
 \begin{document}
@@ -10,17 +10,46 @@
 
 \section{}
 
-Um pêndulo simples de comprimento $L$ é colocado para oscilar em um meio viscoso sobre uma força periódica $F(t) = F_0 \cos(\Omega t)$, sendo que a massa $m$ em sua extremidade sofre uma força de resistência do ar da forma $F_{\text{ar}} = - \rho \dot{\theta}$. A frequência $\Omega$ é sempre ajustada de maneira que $\Omega = (1 + \eps) \omega$. Para qual valor de $\omega$ a amplitude é máxima?
+Um pêndulo simples de comprimento $L$ é colocado para oscilar no instante inicial $t = 0$ em um meio viscoso sobre uma força periódica $F(t) = 3 F_0 \cos(\Omega t) + 4 F_0 \sin(\Omega t)$, sendo que a massa $m$ em sua extremidade sofre uma força de resistência do ar da forma $F_{\text{ar}} = - \rho \dv{\theta}{t}$. Considerando que se passou muito tempo depois do instante inicial, de maneira a entrarmos no regime estacionário, qual é o maior deslocamento com relação à posição de equilíbrio?
+
+\n
+
+\textbf{SOLUÇÃO}: Podemos reescrever a força $F(t)$ como
 $$
-A(\omega) = \frac{F_0}{m \sqrt{\eps^2 \omega^2 + \gamma^2 \omega^2}}.
+F(t) = 5 F_0 \qty[\frac{3}{5} \cos(\Omega t) - \qty(\frac{4}{5}) \sin(\Omega t)] = 5 F_0 \cos(\Omega t + \Delta),
+$$
+onde a fase $\Delta = \tan(-4/3)$. Como a fase $\Delta$ é irrelevante para a amplitude máxima, esta é
+$$
+A = \frac{5 F_0}{m \sqrt{(\omega_0^2 - \omega^2)^2 + \gamma^2 \omega^2}}.
 $$
 
-Deriva e iguala a zero.
+
+\n
+
 
 
 \section{}
 
-Balanço de energia. Qual a taxa de perda de energia? Quanto tempo demora para a energia cair pela metade?
+
+Uma massa $m$ presa a mola de constante elástica $k$ oscila num meio viscoso com coeficiente $\rho$ sob ação de uma força externa $F(t) = F_0 \cos(\Omega t)$. Considerando que já se passou tempo suficiente para o sistema atingir o regime estacionário, qual
+\begin{itemize}
+\item A maior taxa de variação de energia no tempo ($\dv{E}{t}$)?
+
+\textbf{SOLUÇÃO:} Equação (4.5.5) do Moysés.
+$$
+\dv{E}{t} = m \omega (\omega^2 - \omega_0^2) A^2 \cdot \frac{1}{2} \sin[2(\omega t+\vphi)].
+$$
+Colocando o seno igual a 1, a maior taxa de variação de energia no tempo é $m\omega(\omega^2-\omega_0^2) A^2$.
+
+\item Supondo que podemos ajustar a frequência $\omega$ de oscilação da força $F(t)$, qual a maior potência média realizada pela força, para qual $\omega$ ela ocorre?
+
+\textbf{SOLUÇÃO:} Equação (4.5.9) do Moysés.
+$$
+\cc{P}(\omega) = \frac{\gamma F_0^2 \omega^2}{2m \qty[(\omega^2-\omega_0^2)^2 + \gamma^2\omega^2]}.
+$$
+Derivar e igualar a zero obtém-se a resposta.
+
+\end{itemize}
 
 
 \end{document}
