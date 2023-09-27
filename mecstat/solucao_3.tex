@@ -1,0 +1,108 @@
+\documentclass[a4paper,10pt]{article}
+
+\input{preamble}
+
+\title{\Huge{\textbf{Lista 3 - Mecânica Estatística}}}
+\author{Mateus Marques}
+
+\begin{document}
+
+\maketitle
+
+\section*{2) Entropia para bósons e férmions}
+
+Primeiramente, definamos o parâmetro $\zeta = \pm 1$, sendo $\zeta = +1$ referindo à bósons e $\zeta = -1$ a férmions. Queremos mostrar que
+\begin{equation} \label{eq:entropia_ruim}
+S = \zeta k_B \sum_{j} \Big[
+(1 + \zeta n_j) \log(1 + \zeta n_j) - \zeta n_j \log n_j
+\Big], \quad n_j = \frac{1}{e^{\beta(\eps_j-\mu)} - \zeta}.
+\end{equation}
+Desenvolvendo essa expressão (usando que $\zeta^2 = 1$), temos
+$$
+S = k_B \sum_{j} \qty[
+\zeta \log(1 + \zeta n_j) +
+n_j \log(\frac{1}{n_j} + \zeta)
+].
+$$
+Substituindo a expressão de $n_j$ explícita:
+$$
+\zeta \log(1 + \zeta n_j) =
+\zeta \log\qty[\frac{(e^{\beta(\eps_j-\mu)}-\cancel{\zeta})+\cancel{\zeta}}{e^{\beta(\eps_j-\mu)}-\zeta}] =
+\zeta \qty{ \beta(\eps_j-\mu) + \log\qty[\frac{1}{e^{\beta(\eps_j-\mu)}-\zeta}] }.
+$$
+$$
+n_j \log(\frac{1}{n_j} + \zeta) = \frac{1}{e^{\beta(\eps_j-\mu)}-\zeta}
+\log[(e^{\beta(\eps_j-\mu)}-\cancel{\zeta})+\cancel{\zeta}] =
+\frac{\beta (\eps_j-\mu)}{e^{\beta(\eps_j-\mu)}-\zeta}.
+$$
+
+A entropia então se simplifica para
+$$
+S = k_B \sum_{j}
+\qty{
+\zeta\log\qty[\frac{1}{e^{\beta(\eps_j-\mu)}-\zeta}] +
+\beta(\eps_j-\mu) \qty[\frac{\zeta e^{\beta(\eps_j-\mu)}-\cancel{\zeta^2}+\cancel{1}}{e^{\beta(\eps_j-\mu)}-\zeta}] =
+}
+$$
+\begin{equation} \label{eq:entropia_boa}
+\boxed{ S = \zeta k_B \sum_{j}
+\qty[
+\log n_j +
+\beta(\eps_j-\mu) e^{\beta(\eps_j-\mu)} n_j
+]. }
+\end{equation}
+
+Dessa forma, temos que a equação \ref{eq:entropia_boa} é equivalente à equação \ref{eq:entropia_ruim}. Mostrarei que a entropia dos gases quânticos se escreve como na forma da equação \ref{eq:entropia_boa}.
+
+\n
+
+Como vimos em aula, no ensemble grande canônico a função de partição é
+$$
+Z = \prod_j Z_j, \quad Z_j = [1 \mp e^{-\beta(\eps_j-\mu)}]^{\mp 1}= [1 - \zeta e^{-\beta(\eps_j-\mu)}]^{-\zeta},
+$$
+onde $Z_j$ é a função de partição para o estado $j$. Perceba que $Z_j$ se reescreve como
+$$
+Z_j = \qty[\frac{1}{ 1 - \zeta e^{-\beta(\eps_j-\mu)} }]^{\zeta} =
+\qty[\frac{e^{\beta(\eps_j-\mu)}}{ e^{\beta(\eps_j-\mu)} - \zeta }]^{\zeta} =
+\Big[
+e^{\beta(\eps_j-\mu)} n_j
+\Big]^{\zeta}.
+$$
+
+Portanto, a entropia $S = -\pdvc{F}{T}{V,\mu}$, com $F = -k_B T \log Z$, é dada por
+$$
+S = \pdv{T} \qty(k_B T \sum_{j} \zeta \Big[\beta(\eps_j-\mu) + \log n_j\Big])_{V,\mu} =
+$$
+$$
+= \zeta k_B \sum_{j} \Big[\cancel{\beta(\eps_j-\mu)} + \log n_j\Big] +
+\zeta k_B \sum_{j} \qty{-\cancel{\beta (\eps_j - \mu)} + \beta(\eps_j-\mu) n_j e^{\beta(\eps_j-\mu)}} =
+$$
+$$
+= \zeta k_B \sum_{j} \qty[\log n_j + \beta (\eps_j - \mu) n_j e^{\beta(\eps_j-\mu)}],
+$$
+que é exatamente a equação \ref{eq:entropia_boa}. Na dedução acima eu utilizei (mas não explicitei) as derivadas $T \pdv{\beta}{T} = -\beta$ e $T \pdv{\log n_j}{T} = \beta (\eps_j-\mu) n_j e^{\beta(\eps_j-\mu)}$. Isso termina o exercício.
+
+\pagebreak
+
+\section*{3) Radiação de corpo negro}
+
+<++>
+
+\pagebreak
+
+\section*{5) Condensado de Bose-Einstein: duas dimensões e armadilha parabólica}
+
+<++>
+
+\pagebreak
+
+\section*{6) Paramagnetismo de Pauli}
+
+<++>
+
+\pagebreak
+
+
+
+
+\end{document}
