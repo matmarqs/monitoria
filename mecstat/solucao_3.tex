@@ -86,7 +86,61 @@ que é exatamente a equação \ref{eq:entropia_boa}. Na dedução acima eu utili
 
 \section*{3) Radiação de corpo negro}
 
-<++>
+Um estado de partícula única é caracterizada pelo vetor de onda $\k$ e pela polarização $p$ do fóton. Sendo $E(\k) = \hbar c \abs{\k}$ a relação de dispersão, a DOS (por volume) desse sistema é
+$$
+D(\eps) = \frac{1}{V} \sum_{\k,p} \delta(\eps-E(\k)) = \frac{1}{V} \, \frac{2V}{(2\pi)^3} \int \dd[3]{\k} \delta(\eps-E(\k)) =
+\frac{1}{\pi^2} \int \dd{k} k^2 \delta(\eps-\underbrace{\hbar c k}_{x})
+$$
+$$
+D(\eps) = \frac{1}{\pi^2 (\hbar c)^3} \int \dd{x} x^2 \delta(\eps-x)
+= \frac{\eps^2}{\pi^2 (\hbar c)^3}.
+$$
+
+Sendo $n(\eps)$ a distribuição de Bose-Einstein, como $E/V = \int \eps D(\eps) n(\eps) \dd{\eps} = \int \hbar \omega D(\hbar\omega)\, n(\hbar\omega) \hbar \dd{\omega} = \int u(\omega) \dd{\omega}$, temos que a densidade de energia dos fótons com frequência entre $\omega$ e $\omega + \dd{\omega}$ é
+$$
+u(\omega) = \hbar^2 \omega D(\hbar\omega) n(\hbar\omega) = \frac{\hbar^2 \omega \, \hbar^2 \omega^2}{\pi^2 \hbar^3 c^3} \cdot
+\frac{1}{e^{\beta\hbar\omega} - 1} \implies
+\boxed{ u(\omega) =
+\frac{\hbar}{\pi^2 c^3} \cdot \frac{\omega^3}{e^{\beta\hbar\omega} - 1}. }
+$$
+
+A partir de $\abs{u(\omega) \dd{\omega}} = \abs{u(\lambda) \dd{\lambda}}$ e usando $h = 2\pi \hbar$, temos que
+$$
+u(\lambda) = u(\omega) \abs{\dv{\omega}{\lambda}} = u\qty(\frac{2\pi c}{\lambda}) \cdot \frac{2\pi c}{\lambda^2} \implies
+\boxed{ u(\lambda) =
+\frac{8 \pi h c}{\lambda^5} \cdot \frac{1}{e^{\beta hc / \lambda} - 1}. }
+$$
+
+\n
+
+(b) Com a mudança de variável $x = \beta \hbar\omega$, temos
+$$
+\frac{E}{V} = \int_0^\infty u(\omega) \dd{\omega} = \frac{\hbar}{\pi^2 c^3} \,
+\qty(\frac{1}{\beta\hbar})^4 \int_0^\infty \frac{x^3}{e^{x} - 1} \dd{x}.
+$$
+
+Pedindo para o Mathematica calcular a integral acima, ele retorna $\int_0^\infty \frac{x^3}{e^{x} - 1} \dd{x} = \frac{\pi^4}{15}$. Portanto
+$$
+\frac{E}{V} = \frac{k_B^4 T^4}{\pi^2 \hbar^3 c^3} \cdot \frac{\pi^4}{15} =
+\frac{4}{c} \, \underbrace{\qty(\frac{\pi^2 k_B^4}{60 \hbar^3 c^2})}_{\sigma} \, T^4 = \frac{4}{c} \sigma T^4.
+$$
+
+Temos $C_V = \pdvc{E}{T}{V,N} = \frac{16}{c} V \sigma T^3 \propto T^3$. O número de fótons (por volume) é dado por ($x = \beta \eps$)
+$$
+\frac{N}{V} = \int D(\eps) n(\eps) \dd{\eps} =
+\frac{1}{\pi^2 (\hbar c)^3} \int_0^{\infty} \frac{\eps^2}{e^{\beta \eps}-1} \dd{\eps} =
+\frac{1}{\pi^2 (\hbar c)^3} \cdot \frac{1}{\beta^3} \int_0^\infty \frac{x^2}{e^x - 1} \dd{x}.
+$$
+
+O Mathematica retorna $\int_0^\infty \frac{x^2}{e^x - 1} \dd{x} = 2 \zeta(3) \approx 2.40411$. Portanto
+$$
+\frac{N}{V} = \frac{2 \zeta(3) k_B^3}{\pi^2 \hbar^3 c^3} \cdot T^3.
+$$
+
+\n
+
+(c)
+
 
 \pagebreak
 
