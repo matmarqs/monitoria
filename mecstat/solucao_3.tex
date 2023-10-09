@@ -210,7 +210,53 @@ H = \qty(\frac{\hat{P}_x^2}{2m} + \frac{m \omega_x^2}{2} \hat{X}^2) +
 \qty(\frac{\hat{P}_y^2}{2m} + \frac{m \omega_y^2}{2} \hat{Y}^2) +
 \qty(\frac{\hat{P}_z^2}{2m} + \frac{m \omega_z^2}{2} \hat{Z}^2),
 $$
-que é um oscilador harmônico em 3D. Como sabemos, as autoenergias do oscilador harmônico em 1D são $E_n = \hbar\omega(n+\frac{1}{2})$. Então para o oscilador 3D é a soma $E_{n_x, n_y, n_z} = $<++>
+que é um oscilador harmônico em 3D. Como sabemos, as autoenergias do oscilador harmônico em 1D são $E_n = \hbar\omega(n+\frac{1}{2})$. Então para o oscilador 3D é a soma $E_{n_x, n_y, n_z} = \frac{\hbar}{2} (\omega_x + \omega_y + \omega_z) + \hbar(\omega_x n_x + \omega_y n_y + \omega_z n_z)$. Para o oscilador harmônico 1D, também sabemos que as autofunções são dadas por polinômios de Hermite
+$$
+\psi_n(x) = \frac{1}{\sqrt{2^n n!}} \qty(\frac{m\omega}{\pi\hbar})^{1/4} e^{-\frac{m\omega x^2}{2\hbar}}
+H_n\qty(\sqrt{\frac{m\omega}{\hbar}} x).
+$$
+
+Em particular, no estado fundamental $n = 0$ temos $\psi_0(x) = \qty(\frac{m\omega}{\pi\hbar})^{1/4} e^{-\frac{m\omega x^2}{2\hbar}}$. Como o oscilador harmônico 3D é o produto tensorial de três osciladores 1D, a função de onda do estado fundamental é o produto dos estados fundamentais dos três osciladores 1D
+$$
+\Psi_0(x,y,z) =
+\qty(\frac{m}{\pi\hbar})^{3/4}
+(\omega_x \omega_y \omega_z)^{1/4}
+\exp[-\frac{m}{2\hbar} (\omega_x x^2 + \omega_y y^2 + \omega_z z^2)].
+$$
+
+\n
+
+Como o condensado é um sistema de bósons (não há restrições na ocupação dos estados), no limite termodinâmico $N \to \infty$ e à temperatura baixa, o estado $\ket{\Psi_0}$ é macroscopicamente ocupado. Devido à interpretação estatística da função de onda, se o número de partículas num estado $\ket{\Psi}$ é muito grande, medir o módulo quadrado $\abs{\Psi(\r)}^2$ (ao redor do ponto $\r$) corresponde a medir a densidade de partículas no ponto $\r$ (com volume infinitesimal $\dd[3]{\r}$), dado que usemos uma normalização $\int \abs{\Psi(\r)}^2 \dd[3]{\r} = N$. Com isso podemos interpretar que a densidade de partículas é dada por $n(\r) = \abs{\Psi(\r)}^2$.
+
+\n
+
+Para a armadilha parabólica, a densidade de partículas no estado fundamental é
+$$
+n(\r) = N \abs{\Psi_0(x,y,z)}^2 =
+N\qty(\frac{m}{\pi\hbar})^{3/2}
+(\omega_x \omega_y \omega_z)^{1/2}
+\exp[-\frac{m}{\hbar} (\omega_x x^2 + \omega_y y^2 + \omega_z z^2)].
+$$
+
+\n
+
+Para estimar o volume do condensado, analisaremos a região do espaço que as partículas no estado fundamental podem ocupar. Por exemplo, para a coordenada $x$ a parte correspondente da hamiltoniana é $H_x = \frac{p_x^2}{2m} + \frac{m\omega_x^2 x^2}{2}$ e sua energia do estado fundamental correspondente é $\frac{1}{2} \hbar \omega_x$. Assim, o módulo máximo da coordenada $x$ é dado por $r_x$, onde $\frac{m\omega_x^2 r_x^2}{2} = \frac{1}{2} \hbar \omega_x \implies r_x = \sqrt{\hbar/m\omega_x}$. Analogamente, para as coordenadas $y$ e $z$, temos $r_y = \sqrt{\hbar/m\omega_y}$ e $r_z = \sqrt{\hbar/m\omega_z}$. Dessa maneira, a nuvem de partículas do condensado ocupa um elipsoide de volume
+$$
+V = \frac{4\pi}{3} r_x r_y r_z = \frac{4\pi}{3} \sqrt{\frac{\hbar^3}{m^3\omega_x\omega_y\omega_z}}.
+$$
+
+\n
+
+Para um gás tridimensional livre, a função de onda é uma onda plana $\psi(\r) = \frac{1}{\sqrt{V}} e^{i \k \vdot \r}$. Dessa maneira, a densidade é constante $n(\r) = N \abs{\psi(\r)}^2 = N/V$, diferentem do gás em armadilha parabólica que é uma gaussiana centrada em zero.
+
+\n
+
+A distribuiçã de densidade de partículas no espaço de momentos é dada por $n(\k) = N\abs{\tilde{\Psi_0}(\k)}^2$, onde $\tilde{\Psi_0}(\k)$ é a transformada de Fourier de $\Psi_0(\r)$. Temos então
+$$
+\text{transf de Fourier de gaussiana é gaussiana também.}
+$$
+<++>
+
 
 \pagebreak
 
