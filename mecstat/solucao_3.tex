@@ -86,19 +86,19 @@ que é exatamente a equação \ref{eq:entropia_boa}. Na dedução acima eu utili
 
 \section*{3) Radiação de corpo negro}
 
-Um estado de partícula única é caracterizada pelo vetor de onda $\k$ e pela polarização $p$ do fóton. Sendo $E(\k) = \hbar c \abs{\k}$ a relação de dispersão, a DOS (por volume) desse sistema é
+Um estado de partícula única é caracterizada pelo vetor de onda $\k$ e pela polarização $p$ do fóton. Sendo $E(\k) = \hbar c \abs{\k}$ a relação de dispersão, a DOS desse sistema é
 $$
-D(\eps) = \frac{1}{V} \sum_{\k,p} \delta(\eps-E(\k)) = \frac{1}{V} \, \frac{2V}{(2\pi)^3} \int \dd[3]{\k} \delta(\eps-E(\k)) =
-\frac{1}{\pi^2} \int \dd{k} k^2 \delta(\eps-\underbrace{\hbar c k}_{x})
+D(\eps) = \sum_{\k,p} \delta(\eps-E(\k)) = \frac{2V}{(2\pi)^3} \int \dd[3]{\k} \delta(\eps-E(\k)) =
+\frac{V}{\pi^2} \int \dd{k} k^2 \delta(\eps-\underbrace{\hbar c k}_{x})
 $$
 $$
-D(\eps) = \frac{1}{\pi^2 (\hbar c)^3} \int \dd{x} x^2 \delta(\eps-x)
-= \frac{\eps^2}{\pi^2 (\hbar c)^3}.
+D(\eps) = \frac{V}{\pi^2 (\hbar c)^3} \int \dd{x} x^2 \delta(\eps-x)
+= \frac{V \eps^2}{\pi^2 (\hbar c)^3}.
 $$
 
-Sendo $n(\eps)$ a distribuição de Bose-Einstein, como $E/V = \int \eps D(\eps) n(\eps) \dd{\eps} = \int \hbar \omega D(\hbar\omega)\, n(\hbar\omega) \hbar \dd{\omega} = \int u(\omega) \dd{\omega}$, temos que a densidade de energia dos fótons com frequência entre $\omega$ e $\omega + \dd{\omega}$ é
+Sendo $n(\eps)$ a distribuição de Bose-Einstein, como $E/V = \frac{1}{V} \int \eps D(\eps) n(\eps) \dd{\eps} = \int \hbar \omega \frac{D(\hbar\omega)}{V} \, n(\hbar\omega) \hbar \dd{\omega} = \int u(\omega) \dd{\omega}$, temos que a densidade de energia dos fótons com frequência entre $\omega$ e $\omega + \dd{\omega}$ é
 $$
-u(\omega) = \hbar^2 \omega D(\hbar\omega) n(\hbar\omega) = \frac{\hbar^2 \omega \, \hbar^2 \omega^2}{\pi^2 \hbar^3 c^3} \cdot
+u(\omega) = \frac{1}{V} \hbar^2 \omega D(\hbar\omega) n(\hbar\omega) = \frac{\hbar^2 \omega \, \hbar^2 \omega^2}{\pi^2 \hbar^3 c^3} \cdot
 \frac{1}{e^{\beta\hbar\omega} - 1} \implies
 \boxed{ u(\omega) =
 \frac{\hbar}{\pi^2 c^3} \cdot \frac{\omega^3}{e^{\beta\hbar\omega} - 1}. }
@@ -111,7 +111,13 @@ u(\lambda) = u(\omega) \abs{\dv{\omega}{\lambda}} = u\qty(\frac{2\pi c}{\lambda}
 \frac{8 \pi h c}{\lambda^5} \cdot \frac{1}{e^{\beta hc / \lambda} - 1}. }
 $$
 
-\n
+\textbf{FAZER ESBOÇO de $\lambda \times u(\lambda)$}
+
+\textbf{QUAL A FREQUENCIA $\omega$ QUE CORRESPONDE AO MÁXIMO de $u(\omega)$}
+
+\textbf{TOMAR O LIMITE $\hbar\omega \ll k_B T$ do RAYLEIGH-JEANS E DISCUTIR CATÁSTROFE DO ULTRAVIOLETA}
+
+\n\n
 
 (b) Com a mudança de variável $x = \beta \hbar\omega$, temos
 $$
@@ -125,34 +131,139 @@ $$
 \frac{4}{c} \, \underbrace{\qty(\frac{\pi^2 k_B^4}{60 \hbar^3 c^2})}_{\sigma} \, T^4 = \frac{4}{c} \sigma T^4.
 $$
 
-Temos $C_V = \pdvc{E}{T}{V,N} = \frac{16}{c} V \sigma T^3 \propto T^3$. O número de fótons (por volume) é dado por ($x = \beta \eps$)
+Temos $C_V = \pdvc{E}{T}{V,N} = \frac{16}{c} V \sigma T^3 \propto T^3$. O número de fótons é dado por ($x = \beta \eps$)
 $$
-\frac{N}{V} = \int D(\eps) n(\eps) \dd{\eps} =
+\frac{N}{V} = \frac{1}{V} \int D(\eps) n(\eps) \dd{\eps} =
 \frac{1}{\pi^2 (\hbar c)^3} \int_0^{\infty} \frac{\eps^2}{e^{\beta \eps}-1} \dd{\eps} =
 \frac{1}{\pi^2 (\hbar c)^3} \cdot \frac{1}{\beta^3} \int_0^\infty \frac{x^2}{e^x - 1} \dd{x}.
 $$
 
 O Mathematica retorna $\int_0^\infty \frac{x^2}{e^x - 1} \dd{x} = 2 \zeta(3) \approx 2.40411$. Portanto
 $$
-\frac{N}{V} = \frac{2 \zeta(3) k_B^3}{\pi^2 \hbar^3 c^3} \cdot T^3.
+\frac{N}{V} = \frac{2 \zeta(3) k_B^3}{\pi^2 \hbar^3 c^3} \cdot T^3,
+$$
+ou seja, o número de fótons é proporcional a $T^3$.
+
+\n\n
+
+(c) Como visto em aula, temos para fótons $\mu = 0$ e que o potencial termodinâmico de bósons é (usando o limite do contínuo $\sum_{\k,p} = \int \dd{\eps} D(\eps)$)
+$$
+\Phi = k_B T \sum_{\k,p} \log(1 - e^{-\beta (\eps_{\k} - \mu)}) = k_B T \int_0^{\infty} \dd{\eps} D(\eps) \log(1 - e^{-\beta \eps})
+$$
+$$
+\Phi = \frac{V k_B T}{\pi^2 (\hbar c)^3} \int_0^{\infty} \eps^2 \log(1 - e^{-\beta \eps}) \dd{\eps} =
 $$
 
-\n
+A integral acima foi realizada no Mathematica e ele retornou $\int_0^{\infty} \eps^2 \log(1 - e^{-\beta \eps}) \dd{\eps} = - \frac{\pi^4}{45 \beta^3}$. Dessa maneira, obtemos
+$$
+\Phi = -\frac{V \pi^2 (k_B T)^4}{45 (\hbar c)^3} =
+- \frac{4 V}{3 c} \cdot \underbrace{\qty(\frac{\pi^2 k_B^4}{60 \hbar^3 c^2})}_{\sigma} T^4 =
+- \frac{V}{3} \underbrace{\qty(\frac{4}{c} \sigma T^4)}_{E} = -\frac{E V}{3}.
+$$
 
-(c)
+Lembrando que $\Phi = - PV$, obtemos que
+$$
+\boxed{ P = \frac{1}{3} E. }
+$$
+
+\n\n
+
+(d) \textbf{PEGAR O GRAFICO DA RADIACAO COSMICA DE FUNDO DA INTERNET E COMPARAR PARA $T = 2.725 \unit{K}$. DISCUTIR O RESULTADO E ESPECULAR PORQUE O ESPECTRO DE CORPO NEGRO FUNCIONA BEM.}
 
 
 \pagebreak
 
 \section*{5) Condensado de Bose-Einstein: duas dimensões e armadilha parabólica}
 
-<++>
+(a) Calculemos a DOS para o gás de bósons livres em duas dimensões (com dispersão $\eps = \hbar^2 k^2 / 2m$, temos que
+$k = \sqrt{2m\eps/\hbar^2}$ e $\dd{k} = \sqrt{\frac{m}{2\hbar^2\eps}} \dd{\eps}$):
+$$
+\sum_{\k, \sigma} = \frac{g V}{(2\pi)^2} \int \dd[2] k = \frac{gV}{2\pi} \int \dd{k} k =
+\frac{gV}{2\pi} \int \sqrt{\frac{m}{2\hbar^2\eps}} \dd{\eps} \sqrt{2m\eps/\hbar^2} =
+$$
+$$
+= \int \dd{\eps} \frac{mgV}{2\pi \hbar^2} = \int \dd{\eps} D(\eps),
+$$
+onde obtemos $D(\eps) = \frac{mgV}{2\pi \hbar^2}$ em duas dimensões.
+
+\n
+
+Substituindo $x = \beta \eps$, temos
+$$
+N = \int D(E) n(E) \dd{E} = \frac{m g V}{2\pi \hbar^2} \int_0^{\infty} \frac{1}{e^{\beta (\eps-\mu)} - 1} \dd{\eps} =
+k_B T \cdot \frac{m g V}{2\pi \hbar^2} \int_0^{\infty} \frac{1}{e^{(x - \beta\mu)} - 1} \dd{x}.
+$$
+
+\n
+
+Para $T > T_c$ temos que $\mu < 0$, e que $\mu \to 0^-$ quando $T \to T_c$. Isso nos dá que
+$$
+\frac{N}{V} = T_c \, \frac{k_B m g V}{2\pi \hbar^2} \int_0^{\infty} \frac{1}{e^{x} - 1} \dd{x},
+$$
+só que a integral $\int_0^{\infty} \frac{1}{e^{x} - 1} \dd{x} = +\infty$ é divergente no infravermelho (para $x \to 0^+$). Isso implica que $\boxed{T_c = 0}$ para o condensado de Bose-Einstein livre em duas dimensões.
+
+\n
+
+(b) Para o gás de bósons em uma armadilha parabólica, a hamiltoniana do sistema é
+$$
+H = \qty(\frac{\hat{P}_x^2}{2m} + \frac{m \omega_x^2}{2} \hat{X}^2) +
+\qty(\frac{\hat{P}_y^2}{2m} + \frac{m \omega_y^2}{2} \hat{Y}^2) +
+\qty(\frac{\hat{P}_z^2}{2m} + \frac{m \omega_z^2}{2} \hat{Z}^2),
+$$
+que é um oscilador harmônico em 3D. Como sabemos, as autoenergias do oscilador harmônico em 1D são $E_n = \hbar\omega(n+\frac{1}{2})$. Então para o oscilador 3D é a soma $E_{n_x, n_y, n_z} = $<++>
 
 \pagebreak
 
 \section*{6) Paramagnetismo de Pauli}
 
-<++>
+(a) No limite de campo magnético $h \to 0$, temos que o potencial químico $\mu$ não se altera significativamente, $\mu(h) \approx \mu(h = 0) = \mu$.
+
+Metade dos elétrons tem spin up $+1/2$ e a outra metade tem spin down $-1/2$. Devido ao campo magnético, ocorre um splitting nas energias. Os elétrons de spin up ficam com uma energia $\eps \to \eps - \mu_0 \mu_B h$ e os de spin down com $\eps \to \eps + \mu_0 \mu_B h$. Com essas considerações, temos
+$$
+N_+ = n_+ V = \frac{1}{2} \int n(E) D(E - \mu_0 \mu_B h) \dd{E} \e
+N_- = n_- V = \frac{1}{2} \int n(E) D(E + \mu_0 \mu_B h) \dd{E},
+$$
+de maneira que $h = 0 \implies N_+ + N_- = \int n(E) D(E) \dd{E} = N$ (recuperamos o caso particular). A magnetização $m$ é então dada por
+$$
+m = - \mu_B (n_+ - n_-) =
+\frac{\mu_B}{2V} \int n(E) \Big[ D(E + \mu_B h) - D(E - \mu_B h) \Big] \dd{E},
+$$
+mas como $h \to 0$, temos $D(E + \mu_0 \mu_B h) - D(E - \mu_0 \mu_B h) \approx 2 \mu_0 \mu_B h \, D'(E)$. Integrando por partes:
+\begin{equation} \label{eq:magnetization}
+m = \frac{\mu_0 \mu_B^2 h}{V} \int_{-\infty}^{\infty} n(E) D'(E) \dd{E}
+\end{equation}
+$$
+= \frac{\mu_0 \mu_B^2 h}{V} \qty(\eval{n(E) D(E)}_{-\infty}^{\infty} - \int D(E) n'(E) \dd{E} ).
+$$
+Mas $D(\pm\infty) = 0$, portanto
+$$
+m = \frac{\mu_0 \mu_B^2 h}{V} \int D(E) \qty(- \pdv{n}{E}) \dd{E} \implies
+\boxed{ \chi = \pdv{m}{h} = \frac{\mu_0 \mu_B^2}{V} \int D(E) \qty(- \pdv{n(E)}{E}) \dd{E}. }
+$$
+
+\n\n
+
+(b) Para $T \to 0$, temos que $n(E) \to \theta_H(E_F-E)$ e usando a equação \ref{eq:magnetization}:
+$$
+m = \frac{\mu_0 \mu_B^2 h}{V} \int_{-\infty}^{\infty} n(E) D'(E) \dd{E} =
+\frac{\mu_0 \mu_B^2 h}{V} \int_{-\infty}^{E_F} D'(E) \dd{E} =
+\frac{\mu_0 \mu_B^2 h}{V} \qty[ D(E_F) - \cancelto{0}{D(-\infty)} ]
+$$
+$$
+\implies \boxed{ \chi(T\to 0) = \pdv{m}{h} = \mu_0 \mu_B^2 \rho(E_F), }
+$$
+onde definimos $\rho(E) = D(E) / V$ como a densidade de estados por volume.
+
+\n\n
+
+(c) Para $T \to \infty$ ($\beta = \frac{1}{k_B T} \to 0$), podemos aproximar $n(E) \approx e^{-\beta(E - \mu)}$ (a distribuição de Fermi-Dirac tende à distribuição de Boltzmann em altas temperaturas) de maneira que $\pdv{n(E)}{E} \approx -\beta n(E)$. Portanto
+$$
+\chi(T \to \infty) = \frac{\mu_0\mu_B^2}{V} \int D(E) \qty(- \pdv{n(E)}{E}) \dd{E} \approx
+\frac{\mu_0\mu_B^2}{V} \beta \underbrace{\int n(E) D(E) \dd{E}}_{N} \implies
+$$
+$$
+\boxed{ \chi(T\to\infty) = \frac{N}{V} \, \frac{\mu_0 \mu_B^2}{k_B T}. }
+$$
 
 \pagebreak
 
