@@ -86,13 +86,18 @@ Assim, a recíproca da rede quadrada também é uma rede quadrada, mas com dist�
 
 \begin{frame}{Simetrias da rede quadrada}
 
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.3\linewidth]{fig/symm_square.png}
+\caption{Célula unitária da rede quadrada e suas simetrias.}
+\label{fig:symm_square}
+\end{figure}
+
 \begin{itemize}
-\item Identidade.
-\n\n
 \item Rotações $C_4$ (por $90^\circ$ no eixo $z$).
-\n\n
+\n
 \item Reflexões $\sigma_h$, $\sigma_v$ e $\sigma_d$.
-\n\n
+\n
 \item Inversão.
 \end{itemize}
 
@@ -171,13 +176,18 @@ A Figura \ref{fig:hex_bz} mostra os vetores primitivos da rede recíproca e a zo
 
 \begin{frame}{Simetrias da rede hexagonal}
 
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.3\linewidth]{fig/symm_hexago.png}
+\caption{Célula unitária da rede hexagonal e suas simetrias. As linhas pontilhadas vermelhas indicam as reflexões $\textcolor{red}{\sigma_v}$ e as azuis $\textcolor{blue}{\sigma_d}$.}
+\label{fig:symm_hexago}
+\end{figure}
+
 \begin{itemize}
-\item Identidade.
-\n\n
 \item Rotações $C_6$ (por $60^\circ$ no eixo $z$).
-\n\n
+\n
 \item Reflexões $\sigma_h$, $\sigma_v$ e $\sigma_d$.
-\n\n
+\n
 \item Inversão.
 \end{itemize}
 
@@ -208,18 +218,40 @@ Assim, sua rede recíproca também é uma rede cúbica, só que com distância d
 
 \begin{frame}{Simetrias da rede cúbica}
 
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.6\linewidth]{fig/rot_cubic.png}
+\caption{Eixos de rotação da rede cúbica.}
+\label{fig:rot_cubic}
+\end{figure}
+
+
 \begin{itemize}
-\item Identidade.
-\n\n
 \item Rotações $C_4$ (nos eixos $x, y, z$).
-\n\n
-\item Rotações $C_2$ (nos eixos $\sigma_{xy}, \sigma_{yz}, \sigma_{zx}$).
-\n\n
-\item Rotações $C_2$ (nas diagonais $\sigma_{xyz}$).
-\n\n
-\item Reflexões $\sigma_h$, $\sigma_v$ e $\sigma_d$.
-\n\n
-\item Inversão.
+\item Rotações $C_2$ (eixos das diagonais).
+\item Rotações $C_2$ (eixos que passam pelos pontos médios das arestas).
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}{Simetrias da rede cúbica}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.6\linewidth]{fig/reflex_cubic.png}
+\caption{Planos de reflexão da rede cúbica.}
+\label{fig:reflex_cubic}
+\end{figure}
+
+
+\begin{itemize}
+\item Reflexões (na Figura \ref{fig:reflex_cubic}).
+\n
+\item Identidade e Inversão.
 \end{itemize}
 
 \end{frame}
@@ -297,7 +329,7 @@ $$
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\begin{frame}{Rede BCC}
+\begin{frame}{Rede recíproca da BCC é a FCC}
 
 Perceba que os vetores obtidos formam uma rede de face centrada (FCC):
 \begin{figure}[H]
@@ -313,22 +345,21 @@ Perceba que os vetores obtidos formam uma rede de face centrada (FCC):
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\begin{frame}{Simetrias da Rede FCC}
+\begin{frame}{Simetrias da rede FCC}
 
-\textbf{DÚVIDAAAAA}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\linewidth]{fig/fcc_wignerseitz.png}
+\caption{A rede FCC tem 12 primeiros vizinhos. Sua célula unitária de Wigner-Seitz é um \textit{rhombic dodecahedron}.}
+\label{fig:fcc_wignerseitz}
+\end{figure}
 
 \begin{itemize}
-\item Identidade.
-\n\n
-\item Rotações $C_4$ (nos eixos $x, y, z$).
-\n\n
-\item Rotações $C_2$ (nos eixos $\sigma_{xy}, \sigma_{yz}, \sigma_{zx}$).
-\n\n
-\item Rotações $C_2$ (nas diagonais $\sigma_{xyz}$).
-\n\n
-\item Reflexões $\sigma_h$, $\sigma_v$ e $\sigma_d$.
-\n\n
-\item Inversão.
+\item Rotações $C_4$ (nos eixos que ligam aos primeiros vizinhos).
+\item Rotações $C_3$ (nos eixos que passam por vértices que incidem 3 arestas)
+\item Rotações $C_2$ (nos eixos que passam por pontos médios de arestas).
+\item Reflexões em diversos planos do tipo $\sigma_v$ e $\sigma_d$.
+\item Identidade e Inversão.
 \end{itemize}
 
 \end{frame}
@@ -437,6 +468,10 @@ As animações a seguir foram retiradas deste \href{https://www.doitpoms.ac.uk/t
   \includegraphics[width=\linewidth]{fig/hexbz_construct-8.png}
 \end{subfigure}
 \end{figure}
+
+O ``folding'' das zonas de Brillouin pode ser melhor visualizado no link
+
+\textcolor{blue}{\url{https://www.doitpoms.ac.uk/tlplib/brillouin_zones/folding.php}}
 
 \end{frame}
 
