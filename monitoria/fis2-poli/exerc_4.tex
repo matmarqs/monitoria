@@ -1,0 +1,92 @@
+\documentclass[a4paper,10pt]{article}
+\input{preamble}
+
+\title{\Huge{\textbf{Exercícios 4}}}
+\author{Mateus Marques}
+
+\begin{document}
+
+\maketitle
+
+\section{Compreensão Semana 9}
+
+Com respeito à direção de vibração e à direção de propagação de uma onda, classifique os seguintes fenômenos como ondas longitudinais, transversais ou compostas (longitudinais + transversais).
+
+\begin{itemize}
+\item Ondas formadas na corda de um violão. (transversais)
+\item Ondas no oceano. (compostas)
+\item Ondas eletromagnéticas. (transversais)
+\item Ondas sonoras. (longitudinais)
+\item Ondas gravitacionais. (transversais)
+\end{itemize}
+
+
+\section{Aprofundamento Semana 9}
+
+Para este exercício, defina as funções de uma variável
+$$
+\theta_H(x) = \frac{x +  \abs{x}}{2x} \e \phi(x) = \exp(-\frac{1}{1-x^2}).
+$$
+
+Agora considere que uma onda \textbf{exótica} da forma
+$$
+y(x,t) = A \, \theta_H(1 - (kx - \omega t)) \, \theta_H(1 + (kx - \omega t)) \, \phi(kx - \omega t).
+$$ se propaga num barbante preso nas extremidades, onde $A = 2 \unit{cm}$, $\omega = 10 \unit{s^{-1}}$ e $k = 1 \unit{cm^{-1}}$.
+
+\n
+
+Para conseguir visualizar, plote $\theta_H(x)$, $f(x) = \theta_H(1-x) \theta_H(1+x)$, $\phi(x)$ e $g(x) = y(x, 0)$ no Desmos. Plote também as derivadas $g'(x)$ e $g''(x)$.
+
+\n\n
+
+\textit{Comentário 1: A ideia do produto $\theta_H(1-x) \theta_H(1+x)$ (é uma caixa de largura 2 e altura 1) é delimitar o domínio para $x \in [-1, 1]$ e tornar a onda \textbf{finita}. A função $\phi(x)$ parece uma gaussiana, mas ela decai para $0$ para $x \to \pm 1$ (a gaussiana normal se estende até o infinito). Quando $x$ está fora do intervalo $(-1, 1)$ a função $\phi(x)$ é muito louca, por isso adicionei $\theta_H(1-x) \theta_H(1+x)$ para tornar ela bem comportada e $y(x,t)$ ser uma onda finita de fato.}
+
+\n
+
+\textit{Comentário 2: A ideia deste exercício é que ele seja resolvido com auxílio do Desmos mesmo. Mas todos os itens podem ser resolvidos de forma analítica (A função $\phi(x)$ é bem comportada).}
+
+\n\n
+
+\begin{itemize}
+
+\item Pergunta de sanidade: a função $y(x,t)$ é uma onda de verdade? Ela obedece à equação de onda
+$$
+\pdv[2]{y}{x} = \frac{1}{v^2} \pdv[2]{y}{t} \; ?
+$$
+Qual a velocidade $v$?
+
+R: Sim, pois $y(x,t)$ é da forma $F(kx - \omega t)$. Logo, é onda que se propaga para direita com velocidade $v = \omega/k = 10 \unit{cm/s}$.
+
+\item Num instante $t = 3 \unit{s}$, onde se localiza o ponto mais alto dessa onda?
+
+A posição desse ponto é $x = \frac{\omega}{k} \, t$.
+
+\item Qual é a largura $L$ dessa onda?
+
+A função $\phi(x)$ se anula em $x = \pm 1$. Portanto a largura de $\phi(x)$ é 2. Como $y(x, 0)$ possui o termo $\phi(kx)$, a largura é portanto $L = 2/k$.
+
+\item Qual a velocidade máxima (vertical) de um ponto da corda?
+
+Pelo \textit{Comentário 1}, para todos efeitos práticos podemos ignorar $\theta_H(1-x) \theta_H(1+x)$ e dar atenção apenas ao termo $A \phi(kx - \omega t)$.
+
+Temos que
+$$
+\phi'(x) = - \frac{2x}{(1-x^2)^2} \exp(-\frac{1}{1-x^2}) \e
+\phi''(x) = \frac{(6x^4-2)}{(1-x^2)^4} \exp(-\frac{1}{1-x^2})
+$$
+
+A velocidade máxima de um ponto da corda ocorre quando sua aceleração $a_y = 0$.
+$$
+a_y = \pdv[2]{y}{t} = \omega^2 A \phi''(kx - \omega t) = 0 \implies
+6 (kx - \omega t)^4 - 2 = 0 \implies \boxed{kx - \omega t =  \pm \sqrt[4]{\frac{1}{3}}.}
+$$
+
+Inserindo esse argumento em $v_y = \partial y / \partial t$, temos (para $t = 0$ por exemplo)
+$$
+v_{\text{max}} = \abs{\pdv{y\qty(x = \frac{1}{k} \sqrt[4]{\frac{1}{3}}, t=0)}{t}} = \omega A \abs{ \phi\qty(\sqrt[4]{\frac{1}{3}}) } = 0.79843 \, \omega A = 15.9686 \unit{cm/s}.
+$$
+
+\end{itemize}
+
+
+\end{document}
