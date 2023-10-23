@@ -33,26 +33,44 @@
 
 \begin{frame}{(a) Rede recíproca}
 
-Dada uma rede de Bravais, sua rede recíproca é definida pelos vetores $\vb{G}$ tais que $e^{i \vb{G} \vdot \vb{R}} = 1$, para todos os vetores $\vb{R}$ na rede de Bravais. Uma onda plana $e^{i \k \vdot \r}$ tem periodicidade da rede de Bravais se, e somente se, $\k$ pertencer à rede recíproca.
+Dada uma rede de Bravais $\R = n_1 \a_1 + n_2 \a_2 + n_3 \a_3$, a rede recíproca são os vetores $\vb{G}$ (que vivem no espaço recíproco) tais que
+$$
+\boxed{e^{i \vb{G} \vdot \vb{R}} = 1, \; \ptodo \R \in \text{rede de Bravais}.}
+$$
 
-\n
+Se escrevermos $\vb{G} = m_1 \b_1 + m_2 \b_2 + m_3 \b_3$, isso se traduz em
+$$
+\boxed{\a_i \vdot \b_j = 2 \pi \delta_{ij}.}
+$$
 
-Sendo $\a_i$ os vetores primitivos da rede de Bravais, a condição para os vetores primitivos $\b_j$ da rede recíproca se traduz em
-\begin{equation} \label{eq:b-cond}
-\a_i \vdot \b_j = 2\pi \delta_{ij}
-\end{equation}
+Podemos tomar os vetores unitários $\b_j$ da rede recíproca como
+$$
+\boxed{\b_1 = \frac{2\pi (\a_2 \times \a_3)}{\abs{\a_1 \vdot (\a_2 \times \a_3)}}, \quad \b_2 = \frac{2\pi(\a_3 \times \a_1)}{\abs{\a_1 \vdot (\a_2 \times \a_3)}}, \quad \b_3 = \frac{2\pi(\a_1 \times \a_2)}{\abs{\a_1 \vdot (\a_2 \times \a_3)}},}
+$$
 
-\n
+onde o denominador em comum é o volume da célula unitária
+$$
+\boxed{\Omega = \abs{\a_1 \vdot (\a_2 \times \a_3)}.}
+$$
 
-Sendo $\Omega = \abs{\a_1 \vdot (\a_2 \times \a_3)}$ o volume da célula unitária da rede de Bravais, os vetores $\b_1 = \frac{2\pi}{\Omega} (\a_2 \times \a_3)$, $\b_2 = \frac{2\pi}{\Omega} (\a_3 \times \a_1)$ e $\b_3 = \frac{2\pi}{\Omega} (\a_1 \times \a_2)$ satisfazem a condição (\ref{eq:b-cond}).
 
-\n
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}{(a) Rede recíproca}
 
 Neste exercício, calcularemos os vetores primitivos da rede recíproca para as redes
+\n\n
 \begin{itemize}
 \item Quadrada 2D;
+\n\n
 \item Hexagonal 2D;
+\n\n
 \item Cúbica;
+\n\n
 \item Cúbica de corpo centrado (BCC).
 \end{itemize}
 
@@ -64,11 +82,17 @@ Neste exercício, calcularemos os vetores primitivos da rede recíproca para as 
 
 \begin{frame}{Rede quadrada}
 
-$\a_1 = a(1,0,0)$, $\a_2 = a(0,1,0)$, $\a_3 = (0,0,1)$, $\Omega = \abs{\a_1 \vdot (\a_2 \times \a_3)} = a^2$.
+\begin{equation*}
+\begin{split}
+\a_1 &= a(1,0,0) \\
+\a_2 &= a(0,1,0) \\
+\a_3 &= (0,0,1) \quad \text{(para realizar o cálculo)} \\
+\Omega &= \abs{\a_1 \vdot (\a_2 \times \a_3)} = a^2.
+\end{split}
+\end{equation*}
 
 \n
 
-Note que a rede quadrada é 2D, mas podemos utilizar um vetor primitivo ``artificial'' $\a_3 = (0,0,1)$ somente para fazer o cálculo de $\b_1$ e $\b_2$ através das expressões mencionadas.
 $$
 \b_1 = \frac{2\pi}{\Omega} \, \a_2 \times \a_3 = \frac{2\pi}{a} \, \vu{y} \times \vu{z} = \frac{2\pi}{a} \vu{x} = \frac{2\pi}{a} (1, 0).
 $$
@@ -76,7 +100,9 @@ $$
 \b_2 = \frac{2\pi}{\Omega} \, \a_3 \times \a_1 = \frac{2\pi}{a} \, \vu{z} \times \vu{x} = \frac{2\pi}{a} \vu{y} = \frac{2\pi}{a} (0, 1).
 $$
 
-Assim, a recíproca da rede quadrada também é uma rede quadrada, mas com distância de rede $\frac{2\pi}{a}$.
+\n
+
+A recíproca também é uma rede quadrada, mas com parâmetro de rede $\boxed{\displaystyle{2\pi/a}}$.
 
 \end{frame}
 
@@ -109,11 +135,11 @@ Assim, a recíproca da rede quadrada também é uma rede quadrada, mas com dist�
 
 \begin{frame}{Rede hexagonal}
 
-A escolha dos vetores primitivos de uma rede de Bravais não é única. Para a rede hexagonal, uma escolha natural é de dois vetores de mesmo módulo que formam um ângulo de $60^\circ$.
+É natural escolher dois vetores unitários de mesmo módulo formando um ângulo de $60^\circ$ entre eles.
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.35\linewidth]{fig/lattice_triang.png}
+\includegraphics[width=0.38\linewidth]{fig/lattice_triang.png}
 \caption{Rede hexagonal (triangular).}
 \label{fig:lat-triang}
 \end{figure}
@@ -149,7 +175,9 @@ $$
 = \frac{4\pi}{a\sqrt{3}} \vu{y}.
 $$
 
-O ângulo entre $\b_1$ e $\b_2$ é $\cos\theta = \frac{\b_1 \vdot \b_2}{\abs{\b_1}\,\abs{\b_2}} = -\frac{1}{2} \implies \theta = 120^\circ$. Como o ângulo é $120^\circ$, a rede recíproca também forma uma rede hexagonal.
+\n
+
+O ângulo entre $\b_1$ e $\b_2$ é $\cos\theta = \frac{\b_1 \vdot \b_2}{\abs{\b_1}\,\abs{\b_2}} = -\frac{1}{2} \implies \boxed{\theta = 120^\circ}$. Como o ângulo é $120^\circ$, a rede recíproca \textbf{também forma uma rede hexagonal}.
 
 \end{frame}
 
@@ -179,15 +207,13 @@ A Figura \ref{fig:hex_bz} mostra os vetores primitivos da rede recíproca e a zo
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.3\linewidth]{fig/symm_hexago.png}
-\caption{Célula unitária da rede hexagonal e suas simetrias. As linhas pontilhadas vermelhas indicam as reflexões $\textcolor{red}{\sigma_v}$ e as azuis $\textcolor{blue}{\sigma_d}$.}
+\caption{Célula unitária da rede hexagonal e suas simetrias. As linhas pontilhadas vermelhas indicam as reflexões $\textcolor{red}{\sigma_v}$ e as azuis $\textcolor{blue}{\sigma_d}$. Retirada \href{https://www.mdpi.com/2073-8994/5/4/344}{\textcolor{blue}{deste artigo}}.}
 \label{fig:symm_hexago}
 \end{figure}
 
 \begin{itemize}
 \item Rotações $C_6$ (por $60^\circ$ no eixo $z$).
-\n
 \item Reflexões $\sigma_h$, $\sigma_v$ e $\sigma_d$.
-\n
 \item Inversão.
 \end{itemize}
 
@@ -201,14 +227,16 @@ A Figura \ref{fig:hex_bz} mostra os vetores primitivos da rede recíproca e a zo
 
 $\a_1 = a \vu{x}$, $\a_2 = a\vu{y}$ e $\a_3 = a\vu{z}$, $\Omega = a^3$.
 
-\n
+\n\n
 
-Analogamente à rede quadrada, os vetores primitivos da rede cúbica são calculados facilmente como:
+Analogamente à rede quadrada, os vetores primitivos da rede cúbica são
 $$
 \b_1 = \frac{2\pi}{a} \vu{x}, \quad \b_2 = \frac{2\pi}{a} \vu{y}, \quad \b_3 = \frac{2\pi}{a} \vu{z}.
 $$
 
-Assim, sua rede recíproca também é uma rede cúbica, só que com distância de rede $\frac{2\pi}{a}$.
+\n\n
+
+A rede recíproca também é uma rede cúbica, só que com parâmetro de rede $\displaystyle{\frac{2\pi}{a}}$.
 
 \end{frame}
 
@@ -221,7 +249,7 @@ Assim, sua rede recíproca também é uma rede cúbica, só que com distância d
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.6\linewidth]{fig/rot_cubic.png}
-\caption{Eixos de rotação da rede cúbica.}
+\caption{Eixos de rotação da rede cúbica. Retirada \href{https://opengeology.org/Mineralogy/10-crystal-morphology-and-symmetry/}{\textcolor{blue}{deste website}}.}
 \label{fig:rot_cubic}
 \end{figure}
 
@@ -243,14 +271,13 @@ Assim, sua rede recíproca também é uma rede cúbica, só que com distância d
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.6\linewidth]{fig/reflex_cubic.png}
-\caption{Planos de reflexão da rede cúbica.}
+\caption{Planos de reflexão da rede cúbica. Retirada \href{https://opengeology.org/Mineralogy/10-crystal-morphology-and-symmetry/}{\textcolor{blue}{deste website}}.}
 \label{fig:reflex_cubic}
 \end{figure}
 
 
 \begin{itemize}
 \item Reflexões (na Figura \ref{fig:reflex_cubic}).
-\n
 \item Identidade e Inversão.
 \end{itemize}
 
@@ -266,7 +293,7 @@ Rede cúbica de corpo centrado: Nesse caso consideraremos os vetores primitivos 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.35\linewidth]{fig/bcc.png}
-\caption{Vetores primitivos da rede BCC. ($\a^{*} \equiv \a_1, \b^{*} \equiv \a_2, \vb{c}^{*} \equiv \a_3$).}
+\caption{Vetores primitivos da rede BCC. ($\a^{*} \equiv \a_1, \b^{*} \equiv \a_2, \vb{c}^{*} \equiv \a_3$). Retirada \href{https://www.researchgate.net/publication/264872465_Fabrication_and_characterisation_of_three-dimensional_passive_and_active_photonic_crystals}{\textcolor{blue}{desta tese}}.}
 \label{fig:bcc}
 \end{figure}
 
@@ -335,7 +362,7 @@ Perceba que os vetores obtidos formam uma rede de face centrada (FCC):
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.4\linewidth]{fig/fcc.png}
-\caption{Rede FCC e vetores primitivos. ($\a \equiv \b_1, \b \equiv \b_2, \vb{c} \equiv \b_3$).}
+\caption{Rede FCC e vetores primitivos. ($\a \equiv \b_1, \b \equiv \b_2, \vb{c} \equiv \b_3$). Retirada \href{https://www.researchgate.net/publication/264872465_Fabrication_and_characterisation_of_three-dimensional_passive_and_active_photonic_crystals}{\textcolor{blue}{desta tese}}.}
 \label{fig:fcc}
 \end{figure}
 
@@ -350,7 +377,7 @@ Perceba que os vetores obtidos formam uma rede de face centrada (FCC):
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.7\linewidth]{fig/fcc_wignerseitz.png}
-\caption{A rede FCC tem 12 primeiros vizinhos. Sua célula unitária de Wigner-Seitz é um \textit{rhombic dodecahedron}.}
+\caption{A rede FCC tem 12 primeiros vizinhos. Sua célula unitária de Wigner-Seitz é um dodecaedro rômbico. Figuras retiradas dos links \href{https://www.toppr.com/ask/question/the-coordination-number-of-an-atom-in-a-fcc-lattice-is/}{\textcolor{blue}{1}} e \href{https://www.chegg.com/homework-help/questions-and-answers/problem-1-7-points-bcc-fcc-lattices-others-reciprocal-latices-means-example-x-ray-diffract-q35699379}{\textcolor{blue}{2}}}
 \label{fig:fcc_wignerseitz}
 \end{figure}
 
@@ -379,7 +406,7 @@ Tome um ponto $\k$ qualquer do espaço recíproco. Considere os caminhos que sae
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.35\linewidth]{fig/bragg-plane.png}
-\caption{Dado um vetor da rede recíproca $\vb{K}$, o plano de Bragg correspondente é definido como os pontos equidistantes da origem $\vb{O}$ e $\vb{K}$.}
+\caption{Dado um vetor da rede recíproca $\vb{K}$, o plano de Bragg correspondente é definido como os pontos equidistantes da origem $\vb{O}$ e $\vb{K}$. Figura retirada da \href{https://en.wikipedia.org/wiki/Bragg_plane}{\textcolor{blue}{Wikipédia}}}
 \label{fig:bragg-plane}
 \end{figure}
 
@@ -469,9 +496,26 @@ As animações a seguir foram retiradas deste \href{https://www.doitpoms.ac.uk/t
 \end{subfigure}
 \end{figure}
 
-O ``folding'' das zonas de Brillouin pode ser melhor visualizado no link
+\end{frame}
 
-\textcolor{blue}{\url{https://www.doitpoms.ac.uk/tlplib/brillouin_zones/folding.php}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}{(b) ``Folding'' da 2\textsuperscript{\underbar{a}} zona de Brillouin}
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}{.45\textwidth}
+  \centering
+  \includegraphics[width=\linewidth]{fig/2nd_bz-folding_1.png}
+\end{subfigure}%
+\quad \quad
+\begin{subfigure}{.45\textwidth}
+  \centering
+  \includegraphics[width=\linewidth]{fig/2nd_bz-folding_2.png}
+\end{subfigure}
+\end{figure}
 
 \end{frame}
 
@@ -479,25 +523,45 @@ O ``folding'' das zonas de Brillouin pode ser melhor visualizado no link
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\begin{frame}{Anotações para a apresentação}
+\begin{frame}{(b) ``Folding'' da 3\textsuperscript{\underbar{a}} zona de Brillouin}
 
-Espaçar mais os slides e destacar os pontos importantes, seja colorindo ou deixando num \text{boxed}.
+\begin{figure}[H]
+\centering
+\begin{subfigure}{.45\textwidth}
+  \centering
+  \includegraphics[width=\linewidth]{fig/3rd_bz-folding_1.png}
+\end{subfigure}%
+\quad \quad
+\begin{subfigure}{.45\textwidth}
+  \centering
+  \includegraphics[width=\linewidth]{fig/3rd_bz-folding_2.png}
+\end{subfigure}
+\end{figure}
 
-Relembrar rapidamente o que é uma rede de Bravais.
+\end{frame}
 
-Explicar o $\a_3 = (0, 0, 1)$.
 
-Desenhar os vetores $\a_1$ e $\a_2$ da rede hexagonal (Figura \ref{fig:lat-triang}).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Mencionar que a reflexão $\sigma_h$ é equivalente à uma rotação $C_2$ com o mesmo eixo da reflexão.
 
-Levar o cubo mágico para a sala e explicar a rotação \textit{2-fold}.
+\begin{frame}{(b) ``Folding'' da 3\textsuperscript{\underbar{a}} zona de Brillouin}
 
-Retirar o cubo preto da Figura \ref{fig:reflex_cubic}, e explicar que o cubo tem outros planos de reflexão.
+\begin{figure}[H]
+\centering
+\begin{subfigure}{.45\textwidth}
+  \centering
+  \includegraphics[width=\linewidth]{fig/3rd_bz-folding_3.png}
+\end{subfigure}%
+\quad \quad
+\begin{subfigure}{.45\textwidth}
+  \centering
+  \includegraphics[width=\linewidth]{fig/3rd_bz-folding_4.png}
+\end{subfigure}
+\end{figure}
 
-Fazer no papel o ``folding'' das segunda e terceira zonas de Brillouin e indicar nas figuras.
+O ``folding'' das zonas de Brillouin pode ser melhor visualizado no link
+\textcolor{blue}{\url{https://www.doitpoms.ac.uk/tlplib/brillouin_zones/folding.php}}
 
-Citar todos os websites de onde eu tirei as minhas figuras.
 
 \end{frame}
 
