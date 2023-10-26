@@ -1,0 +1,137 @@
+\documentclass[a4paper,10pt]{article}
+\input{preamble}
+
+\title{\Huge{\textbf{Lista 1 - Estado Sólido 1}}}
+\author{Mateus Marques}
+
+\begin{document}
+
+\maketitle
+
+\section{}
+
+(a)
+\begin{itemize}
+\item $\R$ é um vetor que pertence à rede de Bravais, ou seja, $\R = n_1 \a_1 + n_2 \a_2 + n_3 \a_3$, com $n_1,n_2,n_3$
+inteiros e $\a_1,\a_2,\a_3$ os vetores primitivos da rede de Bravais.
+
+\item $\G$ é vetor da rede recíproca, que satisfaz $e^{i \G \vdot \R} = 1$, $\ptodo \R \in$ rede de Bravais.
+
+\item $V_{\G}$ são as componentes da transformada discreta de Fourier do potencial periódico
+$$
+V(\r) = \sum_{\G} V_{\G} e^{i \G \vdot \R}.
+$$
+
+\item $\k$ é um vetor qualquer do espaço recíproco. Mas devido à periodicidade da rede recíproca, podemos tomar $\k \in$ Zona de Brillouin.
+
+\end{itemize}
+
+
+(b) Um ``mesmo ponto'' de diferentes células unitárias diferem-se apenas por vetores $\R \in$ Rede de Bravais. Assim, dadas duas células unitárias $\Omega$ e $\Omega'$, o ``mesmo ponto'' na célula $C'$ é da forma $\r' = \r + \R$. Temos então
+$$
+\psi_\k(\r') = \psi_\k(\r+\R) = e^{i \k \vdot (\r+\R)} \underbrace{u_\k(\r+\R)}_{=u_\k(\r)} =
+e^{i \k \vdot \R} \qty[e^{i\k\vdot\r} u_\k(\r)] = e^{i\k\vdot\R} \psi_\k(\r).
+$$
+
+Portanto
+$$
+\abs{\psi_\k(\r')}^2 = \abs{\psi_\k(\r)}^2,
+$$
+ou seja, a probabilidade de encontrar um elétron (no estado $\k$) no ponto $\r'$ é a mesma de encontrar no ponto $\r$.
+
+
+\pagebreak
+
+\section{}
+
+(a)
+\begin{itemize}
+\item Falso para o espaço recíproco!
+
+Para o espaço direto é indiferente a escolha da origem, pois sempre podemos redefinir os vetores da base, mantendo os vetores primitivos da rede de Bravais.
+
+Para o espaço recíproco importa a escolha da origem devido ao ponto $\Gamma$ (que é o de mais alta simetria) e também porque a energia $\eps(\k)$ depende de $\k$. Por exemplo, no caso de elétrons livres $\eps(\k) = \hbar^2 \k^2 / 2m$. Se deslocarmos a origem do espaço recíproco por um vetor $\vb{Q}$, isso faz com que os elétrons certo momento $\k$ mudem de energia $\eps(\k) = \hbar^2 \k^2 / 2m$ para $\eps(\k+\vb{Q}) = \hbar^2 (\k+\vb{Q})^2 / 2m$.
+
+\item Falso!
+
+Existem infinitas escolhas diferentes de células primitivas tanto para uma dada rede de Bravais. Assim, tanto para o espaço direto quanto para o espaço recíproco a escolha de montagem de células primitivas \textbf{não é única}.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\linewidth]{fig/primitive_cells.png}
+\caption{Diferentes possíveis escolhas de célula primitiva para uma única rede de Bravais. Figura 4.10 do Ashcroft \& Mermin.}
+\label{fig:primitive_cells}
+\end{figure}
+
+
+\item Verdade!
+
+Lendo o Ashcroft \& Mermin (Capítulo 8), aprendemos que \textit{o número de vetores de onda $\k$ permitidos em uma célula primitiva da rede recíproca é igual ao número de sítios no cristal.} Lembre-se também que cada estado $\k$ acomoda 2 elétrons devido ao spin.
+
+A Zona de Brillouin é a célula Wigner-Seitz da rede recíproca, portanto ela se trata de uma célula primitiva da rede recíproca e acomoda $2 N$ elétrons. Se o cristal tem $N$ sítios e 2 elétrons por célula unitária, então o sistema possui um total de $2N$ elétrons, que é exatamente o número de elétrons que a Zona de Brillouin acomoda. Finalmente, concluimos que nesse caso todos os pontos da primeira Zona de Brillouin estarão preenchidos.
+
+\item Falso!
+
+Na página seguinte mostrarei o cálculo da DOS nos casos 1D, 2D e 3D que eu escrevi numa lista da disciplina de Estado Sólido 2, que cursei semestre passado com o Prof. Eric Andrade. No cálculo eu utilizo a convenção $\hbar = 1$.
+
+\pagebreak
+
+A dispersão de elétrons livres é $E(\k) = \frac{k^2}{2m}$, com a substituição $\sum_{\k} \to \frac{V_d}{(2\pi)^d} \int \dd[d]{k}$,
+$$
+\rho_d(\eps) = \sum_{\k, \s} \delta(\eps - E(\k)) =
+\frac{2V_d}{(2\pi)^d} \int \delta\qty(\eps - \frac{k^2}{2m}) \dd[d]{k} =
+\frac{2V_d}{(2\pi)^d} \int \dd{\Omega_d} \int_0^\infty \delta\qty(\eps - \frac{k^2}{2m}) k^{d-1} \dd{k},
+$$
+onde $\Theta_d = \int \dd{\Omega_d}$ é o ângulo sólido de acordo com a dimensão $d$, sendo $\Theta_1 = 2, \Theta_2 = 2\pi$ e $\Theta_3 = 4\pi$.
+
+Vale a seguinte propriedade da função $\delta$ de Dirac:
+$$
+\int_{D} f(x) \delta(g(x)) \dd{x} =
+\sum_{\substack{g(a)=0 \\ a \in D}} \frac{1}{\abs{g'(a)}} \int_{-\infty}^{\infty} f(x) \delta(x-a) \dd{x}=
+\sum_{\substack{g(a)=0 \\ a \in D}} \frac{1}{\abs{g'(a)}} \, f(a).
+$$
+onde a soma é sobre todos os zeros $a \in D$ da função $g(x)$ dentro do domínio de integração $D$.
+
+Definindo $g(k) = \eps - \frac{k^2}{2m}$, temos $\abs{g'(k)} = \abs{k} / m$ e sua única raiz no domínio $D = (0, +\infty)$ é $k = \sqrt{2m \eps}$. Portanto
+$$
+\rho_d(\eps) = \frac{2V_d}{(2\pi)^d} \Theta_d \, \frac{m}{\sqrt{2m\eps}}
+\qty(\sqrt{2m \eps})^{d-1} \implies
+\boxed{ \rho_d(\eps) = \frac{2 m V_d \Theta_d}{(2\pi)^d} \, (2m\eps)^{\frac{d}{2}-1}. }
+$$
+
+Substituindo explicitamente as dimensões $d = 1, 2$ e $3$:
+\begin{itemize}
+\item $d = 1$, $V_1 = L$, $\Theta_1 = 2$:
+$$
+\boxed{\rho_1(\eps) = \frac{2 m L}{\pi} \, \frac{1}{\sqrt{2m\eps}}.}
+$$
+\item $d = 2$, $V_2 = A$, $\Theta_2 = 2\pi$:
+$$
+\boxed{\rho_2(\eps) = \frac{m A}{\pi}.}
+$$
+\item $d = 3$, $V_3 = V$, $\Theta_3 = 4\pi$:
+$$
+\boxed{\rho_3(\eps) = \frac{m V}{\pi^2} \sqrt{2m\eps}.}
+$$
+\end{itemize}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.79\textwidth]{fig/dos-k2.png}
+\caption{Densidade de estados $\rho_d(\eps)$ para as dimensões $d = 1, 2$ e $3$. Parâmetros: $m = L = A = V = 1$.}
+\label{fig:dosk2}
+\end{figure}
+
+\end{itemize}
+
+
+
+\pagebreak
+
+\section{}
+
+\pagebreak
+
+\section{}
+
+\end{document}
