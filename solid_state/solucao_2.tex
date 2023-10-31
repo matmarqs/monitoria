@@ -1,6 +1,8 @@
 \documentclass[a4paper,10pt]{article}
 \input{preamble}
 
+\usepackage[shortlabels]{enumitem}
+
 \title{\Huge{\textbf{Lista 1 - Estado Sólido 1}}}
 \author{Mateus Marques}
 
@@ -44,8 +46,7 @@ ou seja, a probabilidade de encontrar um elétron (no estado $\k$) no ponto $\r'
 
 \section{}
 
-(a)
-\begin{itemize}
+\begin{enumerate}[(a)]
 \item Falso para o espaço recíproco!
 
 Para o espaço direto é indiferente a escolha da origem, pois sempre podemos redefinir os vetores da base, mantendo os vetores primitivos da rede de Bravais.
@@ -122,13 +123,88 @@ $$
 \label{fig:dosk2}
 \end{figure}
 
-\end{itemize}
+\end{enumerate}
 
 
 
 \pagebreak
 
 \section{}
+
+(a) Os vetores primitivos convencionais da rede quadrada são $\a_1 = a \vu{x}$, $\a_2 = a \vu{y}$ e $\a_3 = \vu{z}$. Sendo $\Omega = \abs{\a_1 \vdot (\a_2 \cross \a_2)} = a^2$, podemos calcular os vetores da rede recíproca como
+$$
+\b_1 = \frac{2\pi}{\Omega} (\a_2 \times \a_3) = \frac{2\pi}{a} \vu{x} \e \b_2 = \frac{2\pi}{\Omega}(\a_3 \times \a_1) = \frac{2\pi}{a} \vu{y}.
+$$
+
+A zona de Brillouin e os pontos de alta simetria estão exibidos na Figura \ref{fig:square_lattice_bz}:
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.4\linewidth]{fig/square_lattice_bz.png}
+\caption{Zona de Brillouin da rede quadrada. $\Gamma$, $L$ e $X$ são os pontos de simetria importantes. Os pontos $M_1$, $M_2$ e $M_3$ são os pontos medianos em cada linha de alta simetria.}
+\label{fig:square_lattice_bz}
+\end{figure}
+
+\n
+
+(b) Olhando para a Figura \ref{fig:square_lattice_bz}, é fácil identificar as coordenadas $(k_x, k_y)$ de todos os pontos:
+$$
+\Gamma = \qty(0, 0), \quad
+X = \qty(\frac{\pi}{a}, 0), \quad
+L = \qty(\frac{\pi}{a}, \frac{\pi}{a}), \quad
+M_1 = \qty(\frac{\pi}{2a}, 0), \quad
+M_2 = \qty(\frac{\pi}{a}, \frac{\pi}{2a}), \quad
+M_3 = \qty(\frac{\pi}{2a}, \frac{\pi}{2a}).
+$$
+
+Pela relação de dispersão $\displaystyle{\eps(k_x, k_y) = \frac{\hbar^2 (k_x^2 + k_y^2)}{2m_e}}$ e usando a unidade $\displaystyle{\mathcal{E} = \frac{\hbar^2 \pi^2}{2 m_e a^2}}$, obtemos que
+$$
+\eps(\Gamma) = 0, \quad
+\eps(X) = \frac{\hbar^2 \pi^2}{2 m_e a^2} = \mathcal{E}, \quad
+\eps(L) = \frac{\hbar^2 \pi^2}{m_e a^2} = 2 \mathcal{E},
+$$
+$$
+\eps(M_1) = \frac{\hbar^2 \pi^2}{8 m_e a^2} = \frac{\mathcal{E}}{4}, \quad
+\eps(M_2) = \frac{5\hbar^2 \pi^2}{8 m_e a^2} = \frac{5\mathcal{E}}{4}, \quad
+\eps(M_3) = \frac{\hbar^2 \pi^2}{4 m_e a^2} = \frac{\mathcal{E}}{2}.
+$$
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\linewidth]{fig/band_struct_square_free.png}
+\caption{Primeira banda para elétrons livres na rede quadrada 2D.}
+\label{fig:band_struct_square_free}
+\end{figure}
+
+(c) Na Figura \ref{fig:squarebz} deslocamos as 2\textsuperscript{\underline{a}} e 3\textsuperscript{\underline{a}} zonas de Brillouin para a primeira.
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}{.4\textwidth}
+  \centering
+  \includegraphics[width=\linewidth]{fig/squarebz-2nd.png}
+\end{subfigure}
+\quad \quad
+\begin{subfigure}{.4\textwidth}
+  \centering
+  \includegraphics[width=\linewidth]{fig/squarebz-3rd.png}
+\end{subfigure}
+\caption{Deslocamento da 2\textsuperscript{\underline{a}} e 3\textsuperscript{\underline{a}} zonas de Brillouin, pelos vetores de rede $-\b_1$ e $-\b_2$, respectivamente. Os pontos $\Gamma, X$ e $L$ são deslocados para $\Gamma^*, X^*$ e $L^*$.}
+\label{fig:squarebz}
+\end{figure}
+
+\n\n
+
+Graficando a energia pelo caminho dos pontos deslocados $\Gamma^* \to X^* \to L^* \to \Gamma^*$ para as 2\textsuperscript{\underline{a}} e 3\textsuperscript{\underline{a}} zonas de Brillouin, obtemos a segunda (vermelha) e terceira (violeta) bandas de energia, exibidas na Figura \ref{fig:band_struct_square_free-123}.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\linewidth]{fig/band_struct_square_free-123-labels.png}
+\caption{Três primeiras bandas (azul, vermelha e violeta, respectivamente) para elétrons livres na rede quadrada 2D.}
+\label{fig:band_struct_square_free-123}
+\end{figure}
+
+\n
+
+Identificamos as degenerescências em energia na região da Figura \ref{fig:band_struct_square_free-123} onde duas bandas coincidem. Assim, temos uma degenerescência na linha $X \to L$ entre as bandas 1 e 2 e outra degenerescência na linha $L \to \Gamma$ entre as bandas 2 e 3.
 
 \pagebreak
 
