@@ -171,7 +171,7 @@ $$
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.5\linewidth]{fig/band_struct_square_free.png}
-\caption{Primeira banda para elétrons livres na rede quadrada 2D.}
+\caption{Primeira banda para elétrons livres na rede quadrada 2D graficada no Python.}
 \label{fig:band_struct_square_free}
 \end{figure}
 
@@ -194,7 +194,7 @@ $$
 
 \n\n
 
-Graficando a energia pelo caminho dos pontos deslocados $\Gamma^* \to X^* \to L^* \to \Gamma^*$ para as 2\textsuperscript{\underline{a}} e 3\textsuperscript{\underline{a}} zonas de Brillouin, obtemos a segunda (vermelha) e terceira (violeta) bandas de energia, exibidas na Figura \ref{fig:band_struct_square_free-123}.
+Graficando no Python a energia pelo caminho dos pontos deslocados $\Gamma^* \to X^* \to L^* \to \Gamma^*$ para as 2\textsuperscript{\underline{a}} e 3\textsuperscript{\underline{a}} zonas de Brillouin, obtemos a segunda (vermelha) e terceira (violeta) bandas de energia, exibidas na Figura \ref{fig:band_struct_square_free-123}.
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.7\linewidth]{fig/band_struct_square_free-123-labels.png}
@@ -209,5 +209,74 @@ Identificamos as degenerescências em energia na região da Figura \ref{fig:band
 \pagebreak
 
 \section{}
+
+(a)
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.4\linewidth]{fig/cubicbz.png}
+\caption{Zona de Brillouin da rede cúbica, pontos e linhas de alta simetria.}
+\label{fig:cubicbz}
+\end{figure}
+
+Reaproveitando o script em Python que usei na Figura \ref{fig:band_struct_square_free}, utilizei ele para graficar a estrutura de bandas tight-binding $\eps(\k) = -\eps_0 (\cos k_x a + \cos k_y a + \cos k_z a)$ para a rede cúbica na Figura \ref{fig:band_struct_cubic_free} a seguir.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\linewidth]{fig/band_struct_cubic_free.png}
+\caption{Estrutura de bandas tight-binding para a rede cúbica.}
+\label{fig:band_struct_cubic_free}
+\end{figure}
+
+(b) O tensor massa efetiva é definido por
+$$
+\mathcal{M}^{-1}_{ij} = \frac{1}{\hbar^2} \pdv{\eps}{k_i}{k_j}.
+$$
+
+Para uma mesma direção temos
+$$
+\mathcal{M}_{xx}^{-1} = \frac{1}{\hbar^2} \pdv[2]{\eps}{k_x} = \frac{\eps_0 a^2}{\hbar^2} \cos(k_x a).
+$$
+
+Analogamente, temos $\mathcal{M}_{yy}^{-1} = \frac{\eps_0 a^2}{\hbar^2} \cos(k_y a)$ e $\mathcal{M}_{zz}^{-1} = \frac{\eps_0 a^2}{\hbar^2} \cos(k_z a)$.
+
+\n\n
+
+Para direções diferentes, é fácil ver que
+$$
+\mathcal{M}_{xy}^{-1} = \mathcal{M}_{xz}^{-1} = \mathcal{M}_{yz}^{-1} = 0.
+$$
+
+De maneira que
+$$
+\mathcal{M}(\k) =
+\frac{\hbar^2}{\eps_0 a^2}
+\begin{pmatrix}
+\frac{1}{\cos(k_x a)} & 0 & 0 \\
+0 & \frac{1}{\cos(k_y a)} & 0 \\
+0 & 0 & \frac{1}{\cos(k_z a)} \\
+\end{pmatrix}.
+$$
+
+Em especial, nos pontos $\Gamma$ e $R$:
+$$
+\mathcal{M}(\Gamma) =
+\frac{\hbar^2}{\eps_0 a^2}
+\begin{pmatrix}
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+0 & 0 & 1 \\
+\end{pmatrix},
+$$
+$$
+\mathcal{M}(R) =
+\frac{\hbar^2}{\eps_0 a^2}
+\begin{pmatrix}
+-1 & 0 & 0 \\
+0 & -1 & 0 \\
+0 & 0 & -1 \\
+\end{pmatrix}.
+$$
+
+(c) Notamos então que há comportamento de elétron (massa positiva) no ponto $\Gamma$ (de mais baixa energia $-3\eps_0$) e comportamento de buraco (massa negativa) no ponto $R$ (de mais alta energia $+3\eps_0$). Pela Figura \ref{fig:band_struct_cubic_free} é possível ver que a energia cresce mais rapidamente na direção $\Gamma \to R$ do que na direção $\Gamma \to X$. Isso significa que na direção $\Gamma \to R$ os elétrons são possuem uma massa efetiva mais leve.
 
 \end{document}
