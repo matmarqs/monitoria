@@ -11,37 +11,54 @@
 
 \section*{1) Gases não ideais}
 
-(a) $v$ é o volume por partícula
-
-A pressão é
+(a) Primeiramente, como $\displaystyle{N = \ev{\hat{N}} = \frac{\tr[\hat{N} e^{-\beta(\hat{H} - \mu \hat{N})}]}{Z} = \frac{1}{\beta Z} \pdv{Z}{\mu}}$, temos que
 $$
-P = -\pdvc{F}{V}{T, N},
+\pdvc{N}{\mu}{T,V} = - \frac{\tr[\hat{N} e^{-\beta(\hat{H} - \mu \hat{N})}]}{Z^2} \pdv{Z}{\mu} +
+\beta \frac{\tr[\hat{N}^2 e^{-\beta(\hat{H} - \mu \hat{N})}]}{Z} =
 $$
-com $F = -\frac{1}{\beta} \ln Z$.
-
-
-A compressibilidade é
 $$
-\kappa = - \frac{1}{v} \pdvc{v}{P}{T} = - \frac{1}{V} \pdvc{P}{V}{T}^{-1}
+= \beta \qty{ \ev{\hat{N}^2} - \ev{\hat{N}}^2 }.
 $$
 
-Ideia:
 
-Provar que
+Lembrando que $v = V/N$, temos
 $$
-\ev{N^2} - \ev{N}^2 \propto \pdvc{\ev{N}}{\mu}{T,V}.
+\kappa = - \frac{1}{v} \pdvc{v}{P}{T} = - \frac{N}{V} \pdvc{(V/N)}{P}{T,V} =
+- \frac{N}{\cancel{V}} \, \cancel{V} \pdvc{(1/N)}{P}{T, V} = -N \qty(-\frac{1}{N^2}) \pdvc{N}{P}{T,V}
+$$
+$$
+= \frac{1}{N} \pdvc{N}{\mu}{T,V} \pdvc{\mu}{P}{T}
 $$
 
-Provar que
+Agora de $G(P,T,N) = N \mu(P,T)$, temos
 $$
-\kappa \propto \pdvc{\ev{N}}{\mu}{T,V}
+\dd{G} = -S \dd{T} + V \dd{P} + \cancel{\mu \dd{N}} = \cancel{\mu \dd{N}} + N \dd{\mu} \implies
+\boxed{ -S \dd{T} + V \dd{P} - N \dd{\mu} = 0. }
 $$
-pela relação $0 = - V \dd{p} + S \dd{T} + N \dd{\mu}$.
+Para um processo isotérmico:
+$$
+V \dd{P} = N \dd{\mu} \implies \pdvc{\mu}{P}{T} = \frac{V}{N}.
+$$
+
+Logo
+$$
+\kappa = \frac{V}{N^2} \pdvc{N}{\mu}{T,V} = \frac{\beta V}{N^2} \, \Big(\ev{\hat{N}}^2 - \ev{\hat{N}^2}\Big).
+$$
+
+\n\n\n
 
 (b) Obter $B_2(T)$ e os parâmetros $a$ e $b$ da equação de Van der Waals.
 
+Fatorando a energia livre na parte do gás ideal $F_0$ e na parte de interação, temos
+$$
+F = - k_B T \qty[
+\frac{1}{N!} \int \prod_{i=1}^N \frac{\dd[3]{\r_i} \dd[3]{\p_i}}{(2\pi \hbar)^3} e^{-\beta E(r,p)}
+]
+$$
+<++>
 
-(c) Repetir cálculos das notas de aula.
+
+(c) Repetir cálculos das notas de aula para o ponto crítico.
 
 
 \pagebreak
