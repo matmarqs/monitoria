@@ -1,0 +1,72 @@
+\documentclass[a4paper,10pt]{article}
+
+\input{preamble}
+
+\title{\Huge{\textbf{Lista 3 - Mecânica Estatística}}}
+\author{Mateus Marques}
+
+\begin{document}
+
+\maketitle
+
+\section*{1) Gases não ideais}
+
+(a) $v$ é o volume por partícula
+
+A pressão é
+$$
+P = -\pdvc{F}{V}{T, N},
+$$
+com $F = -\frac{1}{\beta} \ln Z$.
+
+
+A compressibilidade é
+$$
+\kappa = - \frac{1}{v} \pdvc{v}{P}{T} = - \frac{1}{V} \pdvc{P}{V}{T}^{-1}
+$$
+
+Ideia:
+
+Provar que
+$$
+\ev{N^2} - \ev{N}^2 \propto \pdvc{\ev{N}}{\mu}{T,V}.
+$$
+
+Provar que
+$$
+\kappa \propto \pdvc{\ev{N}}{\mu}{T,V}
+$$
+pela relação $0 = - V \dd{p} + S \dd{T} + N \dd{\mu}$.
+
+(b) Obter $B_2(T)$ e os parâmetros $a$ e $b$ da equação de Van der Waals.
+
+
+(c) Repetir cálculos das notas de aula.
+
+
+\pagebreak
+
+\section*{2) Modelo de Ising de alcance infinito}
+
+
+
+\pagebreak
+
+\section*{4) Pontos multicríticos}
+
+
+
+\pagebreak
+
+\section*{5) Parâmetros de ordem acoplados}
+
+%%-----
+%% Referências bibliográficas
+%%-----
+\addcontentsline{toc}{chapter}{\bibname}
+%\bibliographystyle{abntex2-num}
+\bibliography{citations}
+\bibliographystyle{ieeetr}
+
+
+\end{document}
