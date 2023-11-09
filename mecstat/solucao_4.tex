@@ -77,6 +77,130 @@ $$
 
 \section*{5) Parâmetros de ordem acoplados}
 
+Temos
+$$
+f = \frac{1}{2} r_1 m_1^2 + \frac{1}{2} r_2 m_2^2 + u_1 m_1^4 + u_2 m_2^4 + 2 u_{12} m_1^2 m_2^2.
+$$
+
+Primeiramente, como $r_1 = a(T - T_1) = r - g$ e $r_2 = a(T - T_2) = r + g$, assumindo $g > 0$ temos que $g = \frac{a}{2} (T_1 - T_2)$, portanto $T_1 > T_2$.
+
+\n
+
+As fase é caracterizada por mínimos locais da função $f(m_1, m_2)$. Logo, para estudá-las devemos analisar os pontos em que $\grad{f} = \0$ e que o hessiano de $f$ seja \textit{positivo-definido} (a matriz é simétrica e seus autovalores são estritamente positivos).
+
+\n
+
+No caso particular de uma matriz simétrica $M$ de dimensão $2 \times 2$, ser positiva-definida significa que
+$$
+M =
+\begin{pmatrix}
+A & C \\
+C & B
+\end{pmatrix}
+, \quad A > 0, \; B > 0 \; \text{ e } \det(M) = AB - C^2 > 0.
+$$
+
+O gradiente de $f$ é
+$$
+\grad{f} = \qty(\pdv{f}{m_1}, \pdv{f}{m_2}) =
+\qty(r_1 m_1 + 4u_1 m_1^3 + 4u_{12} m_1 m_2^2, \; r_2 m_2 + 4u_2 m_2^3 + 4u_{12} m_2 m_1^2).
+$$
+
+Enquanto isso, o hessiano de $f$ é
+$$
+H_f(x, y) =
+\begin{pmatrix}
+\pdv[2]{f}{m_1} & \pdv{f}{m_1}{m_2} \\
+\pdv{f}{m_2}{m_1} & \pdv[2]{f}{m_2}
+\end{pmatrix}
+=
+\begin{pmatrix}
+r_1 + 12 u_1 m_1^2 + 4 u_{12} m_2^2  & 8 u_{12} m_1 m_2 \\
+8 u_{12} m_1 m_2 & r_2 + 12 u_2 m_2^2 + 4 u_{12} m_1^2
+\end{pmatrix}.
+$$
+
+
+Igualando o gradiente a zero, temos
+$$
+m_1 \Big[
+r_1 + 4 u_1 m_1^2 + 4 u_{12} m_2^2
+\Big] = 0,
+$$
+$$
+m_2 \Big[
+r_2 + 4 u_2 m_2^2 + 4 u_{12} m_1^2
+\Big] = 0.
+$$
+
+Isso nos dá quatro possibilidades:
+\begin{itemize}
+\item $m_1 = m_2 = 0$.
+\item $m_2 = 0$ e $m_1 = m^0_1 = \pm\sqrt{-\frac{r_1}{4 u_1}}$
+\item $m_1 = 0$ e $m_2 = m^0_2 = \pm\sqrt{-\frac{r_2}{4 u_2}}$.
+\item O caso mais complicado
+$$
+\begin{cases}
+\; r_1 + 4 u_1 m_1^2 + 4 u_{12} m_2^2 = 0 \quad [\times (u_{12})] \\
+\; r_2 + 4 u_2 m_2^2 + 4 u_{12} m_1^2 = 0 \quad [\times (-u_{1})]
+\end{cases}
+\implies
+\begin{cases}
+\; + (u_{12} r_1 + \cancel{4 u_1 u_{12} m_1^2} + 4 u_{12}^2 m_2^2) = 0 \\
+\; - (u_1 r_2 + 4 u_1 u_2 m_2^2 + \cancel{4 u_1 u_{12} m_1^2}) = 0
+\end{cases}
+\implies
+$$
+$$
+(u_{12} r_1 - u_1 r_2) + 4 (u_{12}^2 - u_1 u_2) m_2^2 = 0 \implies
+m_2 = m_2^* = \pm \sqrt{\frac{u_{12} r_1 - u_1 r_2}{4 (u_{12}^2 - u_1 u_2)}},
+$$
+e de maneira análoga
+$$
+m_1 = m_1^* = \pm \sqrt{\frac{u_{12} r_2 - u_2 r_1}{4 (u_{12}^2 - u_1 u_2)}}.
+$$
+Note que esse caso só existe se $\boxed{u_{12}^2 > u_1 u_2}$.
+\end{itemize}
+
+Agora calculamos o hessiano de $f$ nessas quatro possibilidades, substituímos $r_1 = a(T-T_1)$, $r_2 = a(T-T_2)$ e diremos quando ele é positivo-definido (p-def).
+$$
+H_f(0, 0) =
+\begin{pmatrix}
+r_1 & 0 \\
+0 & r_2
+\end{pmatrix},
+\text{ p-def para } T > T_1 > T_2. \text{ (fase não-ordenada N)}.
+$$
+$$
+H_f(m_1^0, 0) =
+\begin{pmatrix}
+-2 r_1 & 0 \\
+0 & r_2 - \frac{u_{12}}{u_1} r_1
+\end{pmatrix},
+\text{ p-def para } T < T_1 \text{ e } T > \frac{u_{12} T_1 - u_2 T_2}{u_{12} - u_2}. \text{ (fase ordenada 1)}.
+$$
+$$
+H_f(0, m_2^0) =
+\begin{pmatrix}
+r_1 - \frac{u_{12}}{u_2} r_2 & 0 \\
+0 & -2 r_2
+\end{pmatrix},
+\text{ p-def para } T < T_2 \text{ e } T > \frac{u_{12} T_2 - u_1 T_1}{u_{12} - u_1}. \text{ (fase ordenada 2)}.
+$$
+$$
+H_f(m_1^*, m_2^*) =
+\begin{pmatrix}
+2 r_1 + 2 u_1 \qty(\frac{r_2 u_{12} - r_1 u_2}{u_{12}^2-u_1 u_2}) &
+2 u_{12} \frac{\sqrt{(u_{12} r_2 - u_2 r_1)(u_{12} r_1 - u_1 r_2))}}{\abs{u_{12}^2 - u_1 u_2}} \\
+2 u_{12} \frac{\sqrt{(u_{12} r_2 - u_2 r_1)(u_{12} r_1 - u_1 r_2))}}{\abs{u_{12}^2 - u_1 u_2}} &
+2 r_2 + 2 u_2 \qty(\frac{r_1 u_{12} - r_2 u_1}{u_{12}^2-u_1 u_2})
+\end{pmatrix}.
+$$
+
+
+
+
+
 %%-----
 %% Referências bibliográficas
 %%-----
