@@ -18,27 +18,29 @@ rc('text.latex', preamble=r'\usepackage{physics}')
 #r2 = lambda x: m*A / np.pi + 0*x
 #r3 = lambda x: m*V / np.pi**2 * np.sqrt(2*m*x)
 
-h = 1
-c = 1
-kB = 1
+r  = 1
+u4 = -1
 
-def u(L, T):
-    beta = 1/(kB * T)
-    return 8*np.pi*h*c/L**5 * 1/(np.exp(beta*h*c/L)-1)
+def f(m, u6):
+    return 1/2 * r * m**2 + u4 * m**4 + u6 * m**6
 
 
 def main():
-    Lmin = 0.001; Lmax = 0.4
-    Ls = np.linspace(Lmin, Lmax, 1000)
-    plt.plot(Ls, u(Ls, 4), label=r'$T = 4$')
-    plt.plot(Ls, u(Ls, 5), label=r'$T = 5$')
-    plt.plot(Ls, u(Ls, 6), label=r'$T = 6$')
-    plt.plot(Ls, u(Ls, 7), label=r'$T = 7$')
-    plt.xlabel(r'$\lambda$', fontsize=20)
-    plt.ylabel(r'$u(\lambda)$', fontsize=20)
+    xmin = -1.8; xmax = 1.8
+    xs = np.linspace(xmin, xmax, 1000)
+    plt.plot(xs, f(xs, 2),   label=r'$u_6 = 2$')
+    plt.plot(xs, f(xs, 1),   label=r'$u_6 = 1$')
+    plt.plot(xs, f(xs, 0.5), label=r'$u_6 = 0.5$')
+    plt.plot(xs, f(xs, 0.4), label=r'$u_6 = 0.4$')
+    plt.plot(xs, f(xs, 0.3), label=r'$u_6 = 0.3$')
+    plt.plot(xs, 0 * xs, '--', linewidth=2, color='k')
+    plt.xlabel(r'$m$', fontsize=20)
+    plt.ylabel(r'$f$', fontsize=20)
     plt.legend(fontsize=12)
-    plt.title(r'$u(\lambda) \times \lambda$')
-    plt.savefig("planck-lambda.png", dpi=300, format='png', bbox_inches="tight")
+    plt.xlim(xmin, xmax)
+    plt.ylim(-0.65, 2)
+    plt.title(r'densidade de energia livre de Landau')
+    plt.savefig("landau-free_energy.png", dpi=300, format='png', bbox_inches="tight")
     plt.clf()
 
 # unused code
