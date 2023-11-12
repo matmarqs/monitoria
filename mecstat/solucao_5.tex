@@ -2,6 +2,13 @@
 
 \input{preamble}
 
+\newcommand{\vac}{\ket{vac}}
+\newcommand{\hh}{\tilde{h}}
+\newcommand{\hhh}{\bm{\tilde{h}}}
+\newcommand{\vecs}{(\s^x, \s^y, \s^z)}
+\renewcommand{\ss}{\bm{\sigma}}
+
+
 \title{\Huge{\textbf{Lista 5 - Mecânica Estatística}}}
 \author{Mateus Marques}
 
@@ -271,142 +278,299 @@ O diagrama de fase em $T = 0$ é esquematizado na Figura \ref{fig:qcp} abaixo.
 \label{fig:qcp}
 \end{figure}
 
+\n\n
 
-\n\n\n\n\n\n\n\n\n\n\n
+(b) Utilizaremos teoria de perturbação para $J \to 0$. Primeiramente, quando $J$ é exatamente zero, o estado fundamental é $\vac = \ket{\cdots\up\up\up\up\cdots}$, onde todos os $N$ spins apontam para cima. Nesse caso $J = 0$, a energia dele é $E_0 = -h N$. Agora, considerando uma aproximação apenas de primeira ordem em $J$, as excitações de partícula única são quando apenas um spin no sítio $i$ aponta para baixo, enquanto todos os outros continuam apontando para cima. Chamaremos o estado dessa excitação de $\ket{i}$. Note que se um spin no sítio $j$ está virado para cima, aplicar o operador $\s_j^x$ faz com que ele vire para baixo. Por isso, temos que $\ket{i} = \s_i^x \vac$.
 
-\textbf{DA LISTA DE ESTADO SOLIDO 2}
+\n
 
-(a) Considerando $T = 0$ e olhando a hamiltoniana
+Agora nós consideraremos o subespaço desses estados de excitação de partícula única, em que seu projetor ortogonal ($P^2 = P$, $P^\d = P$) é dado por
 $$
-H = -J \sum_{j} \s_j^x \s_{j+1}^x - h \sum_{j} \s_j^z,
+P = \sum_{i} \dyad{i} = \sum_{i} \s_i^x \dyad{vac} \s_i^x.
 $$
-podemos imaginar o que acontece nos limites $h/J \gg 1$ e $h/J \ll 1$:
+
+\n
+
+No formalismo de perturbação de primeira ordem, consideraremos a hamiltoniana restrita a este subespaço e a diagonalizaremos. Substraindo a energia do estado fundamental, temos então que a hamiltoniana das excitações de partícula única é
+$$
+H' = P(H - E_0) P = P H_0 P + P V P - E_0 P,
+$$
+onde $H = H_0 + V$, $H_0 = -h \sum_{j} \s_j^z$ e $V = -J \sum_{j} \s_j^x \s_{j+1}^x$.
+
+\n\n
+
+É fácil ver que os estados $\ket{i}$ são autoestados de $H_0$, com energia $E_0 + 2 h = -h (N-2)$ (virar um spin para baixo custa $2h$ de energia). Temos então
+$$
+P H_0 P = (E_0 + 2h) P = (E_0 + 2h) \sum_{j} \dyad{j}.
+$$
+
+\n
+
+Para a perturbação $V$, temos que
+$$
+PVP =
+\qty(
+\sum_{i} \dyad{i}
+)
+\qty(
+-J \sum_{j} \s_j^x \s_{j+1}^x
+)
+\qty(
+\sum_{k} \dyad{k}
+)
+$$
+$$
+PVP =
+-J \sum_{ijk} \ket{i}
+\Big(
+\mel{i}{\s_j^x \s_{j+1}^x}{k}
+\Big)
+\bra{k}.
+$$
+
+\n
+
+O elemento de matriz de interesse é $\mel{i}{\s_j^x \s_{j+1}^x}{k}$. Analisaremos ele caso a caso:
 \begin{itemize}
-\item $h / J \gg 1$: Neste limite só a direção $z$ importa e temos um ground-state ferromagnético $\ket{\up\up\up\cdots}$.
-
-\item $h / J \ll 1$: Neste limite só a direção $x$ importa. O ground-state é degenerado, podendo ser combinações lineares de $\ket{\rightarrow\rightarrow\rightarrow\cdots}$ e $\ket{\leftarrow\leftarrow\leftarrow\cdots}$. Porém note que não há nenhuma preferência quanto ao eixo $z$. Isso define uma fase paramagnética.
+\item $i = j$. Nesse caso, o operador $\s_j^x$ vira o spin $\down$ no sítio $i$ de volta para cima. Isso nos dá que $\s_j^x \ket{i} = \s_j^x \ket{j} = \vac$. Assim, temos que
+$$
+\mel{i}{\s_j^x \s_{j+1}^x}{k} = \mel{vac}{\s_{j+1}^x}{k} = \braket{j+1}{k} = \delta_{j+1,k}.
+$$
+\item $i = j+1$. Esse caso é parecido com anterior. Lembre-se que matrizes de Pauli de sítios diferentes comutam. Portanto
+$$
+\mel{i}{\s_j^x \s_{j+1}^x}{k} = \mel{i}{\s_{j+1}^x \s_j^x}{k} = \mel{j+1}{\s_{j+1}^x \s_j^x}{k}
+= \mel{vac}{\s_{j}^x}{k} = \braket{j}{k} = \delta_{j,k}.
+$$
+\item $i \neq j$ e $i \neq j+1$. Como o sítio em $i$ é diferente dos sítios $j$ e $j+1$, temos $\s_{j+1}^x \s_j^x \ket{i} = \ket{i, j, j+1}$, que denota o estado de muitos corpos onde há 3 sítios diferentes ($i$, $j$ e $j+1$) com spins $\down$ e todos os outros sítios possuem spins $\up$. Portanto, nesse caso temos
+$$
+\mel{i}{\s_j^x \s_{j+1}^x}{k} = \braket{i,j,j+1}{k} = 0,
+$$
+pois o estado $\ket{k}$ só possui um spin $\down$, que é ortogonal a $\ket{i,j,j+1}$, que possui três spins $\down$.
 \end{itemize}
 
-O diagrama de fase em $T = 0$ é da forma
-%\begin{figure}[H]
-%\centering
-%\includegraphics[width=0.75\textwidth]{fig/qcp.png}
-%\caption{Diagrama de fase com transição de fase quântica em $T = 0$.}
-%\label{fig:qcp}
-%\end{figure}
-
-
-\n
-
-(b) Com as transformações de Jordan-Wigner
+Interpolando os três casos analisados, concluimos que
 $$
-\s_j^z = 1 - 2 n_j,
-$$
-$$
-\s_j^x = \qty[\prod_{k < j} (1-2n_k)] (c_j + c_j^\d),
-$$
-temos que a hamiltoniana de Ising 1D em campo transverso se escreve
-$$
-H = -J \sum_{j} \s_j^x \s_{j+1}^x - h \sum_{j} \s_j^z =
--J \sum_{j} \qty[\prod_{k<j} (1 - 2n_k)^2] (c_j+c_j^\d)(1-2n_j)(c_{j+1} + c_{j+1}^\d) - h \sum_{j} (1-2n_j).
+\mel{i}{\s_j^x \s_{j+1}^x}{k} = \delta_{ij} \delta_{j+1, k} + \delta_{i,j+1} \delta_{jk}.
 $$
 
-Veja que $(1-2n_k)^2 = 1 - 4 n_k + 4 n_k^2 = 1$. Como $(c_j+c_j^\d)(1-2n_j) = c_j^\d - c_j$, temos
-\begin{equation} \label{eq:hamil_transvising}
-H = -J \sum_{j} \qty[ c_j^\d c_{j+1} + c_{j+1} c_j + \hc ]
-+ 2h \sum_{j} c_j^\d c_j - h \sum_{j} 1.
-\end{equation}
-
-Tomando agora as transformadas $c_j = \frac{1}{\sqrt{N}} \sum_{k} e^{ikj} c_k$:
+Assim, temos
 $$
-H =
--\frac{J}{N} \sum_{j} \sum_{k,k'} \qty[ e^{ik'} e^{-i(k-k')j} c_k^\d c_{k'} + e^{ik'} e^{i(k+k')j} c_{k'} c_k + \hc ]
-+ 2h \sum_{k} c_k^\d c_k - h N.
+PVP =
+-J \sum_{ijk} \ket{i}
+\Big(
+\delta_{ij} \delta_{j+1, k} + \delta_{i,j+1} \delta_{jk}
+\Big)
+\bra{k} =
 $$
 $$
-H =
--J \sum_{k} \qty[ e^{ik} c_k^\d c_{k} + e^{-ik} c_{-k} c_k + \hc ]
-+ h \sum_{k} (c_k^\d c_k - c_{-k} c_{-k}^\d).
-$$
-$$
-H =
-\frac{1}{2}
-\sum_{k}
-\begin{pmatrix}
-c_k^\d & c_{-k}
-\end{pmatrix}
-\begin{pmatrix}
-2(h - J \cos k) & -2iJ \sin k \\
-2iJ \sin k & -2(h - J\cos k)
-\end{pmatrix}
-\begin{pmatrix}
-c_k \\ c_{-k}^\d
-\end{pmatrix}
-+ \cte.
-$$
-
-É imediato que os autovalores são $\omega(k) = \pm 2\sqrt{J^2 + h^2 - 2hJ \cos k}$. A transformação de Bogoliubov que diagonaliza a hamiltoniana é
-$$
-\begin{pmatrix}
-c_k \\ c_{-k}^\d
-\end{pmatrix}
 =
-\begin{pmatrix}
- \cos \theta_k & i\sin \theta_k  \\
-i\sin \theta_k &  \cos \theta_k
-\end{pmatrix}
-\begin{pmatrix}
-a_k \\ a_{-k}^\d
-\end{pmatrix},
+-J \sum_{ijk} \ket{i} \delta_{ij} \delta_{j+1, k} \bra{k}
+-J \sum_{ijk} \ket{i} \delta_{i,j+1} \delta_{jk} \bra{k}
+\implies
 $$
-e fazendo as contas, descobre-se que $\tan(2\theta_k) = \frac{J \sin k}{h - J \cos k}$.
-
-%\begin{figure}[H]
-%\centering
-%\includegraphics[width=0.5\textwidth]{fig/transv_ising.png}
-%\caption{Dispersão $\omega(k) = 2\sqrt{J^2 + h^2 - 2hJ \cos k}$ para várias razões $h/J$. Vemos que para $h/J = 1$ a curva forma um cone (fecha o gap).}
-%\label{fig:transv_ising}
-%\end{figure}
-
-Olhando para a Figura \ref{fig:transv_ising}, podemos identificar que a transição de fase quântica ocorre quando $h/J = 1$, que é o valor em que a dispersão forma um cone em torno de $k = 0$ (fechamento do gap).
+$$
+PVP =
+-J \sum_{j} \Big(
+\dyad{j}{j+1} + \dyad{j+1}{j}
+\Big).
+$$
 
 \n
 
-A magnetização é dada por
+Portanto, a hamiltoniana das excitações de partícula única (em primeira ordem em $J$) é
 $$
-m_z = \frac{1}{N} \sum_{j} \ev{\s_j^z} = 2 \frac{1}{N}\sum_{k} \ev{c_k^\d c_k} - 1.
+\boxed{
+H' = P(H_0 + V - E_0)P =
+2h \sum_{j} \dyad{j}
+-J \sum_{j} \Big(
+\dyad{j}{j+1} + \dyad{j+1}{j}
+\Big).
+}
 $$
 
-Pela transformação de Bogoliubov tem-se
+\n
+
+Perceba que $H'$ é um hamiltoniano de \textit{tight-binding} em 1D no subespaço dos estados $\ket{i}$. É um hamiltoniano muito comum na \textbf{Física do Estado Sólido}, que pode ser diagonalizado no espaço de momentos da Primeira Zona de Brillouin (BZ), que no caso 1D com parâmetro de rede $a$ é o intervalo de momentos $-\pi/a \leq k < \pi/a$.
 $$
-c_k^\d c_k = \cos[2](\theta_k) a_k^\d a_k + \sin[2](\theta_k) a_{-k}a_{-k}^\d
-+ i \sin\theta_k \cos\theta_k (a_{k}^\d a_{-k}^\d - a_{-k} a_{-k})
+\ket{k}_{\text{BZ}} =
+\frac{1}{\sqrt{N}} \sum_{j} e^{-ika j} \ket{j} \implies
+\ket{j} =
+\frac{1}{\sqrt{N}} \sum_{k \in \text{BZ}} e^{ika j} \ket{k} .
 $$
 
-Para $T = 0$ temos que $\ev{X} = \ev{X}{0}$ e que $a_k \ket{0} = 0$. Portanto $\ev{c_k^\d c_k} = \sin[2](\theta_k)$. Usando que $2 \sin[2](x) = \frac{\tan[2](2x)}{1 + \tan[2](2x)}$, obtemos que
+\n
+
+Reescrevendo a hamiltoniana $H$ em termos dos estados de momento, é fácil diagonalizá-la (esse é um cálculo direto e muito frequentemente feito em Estado Sólido):
 $$
-m_z + 1 = \int_{-\pi}^{\pi} \frac{J^2 \sin[2](k)}{[h-J\cos(k)]^2 + J^2\sin[2](k)} \dd{k}.
+H' =
+\sum_{k \in \text{BZ}}
+\Big(2h - 2J \cos ka\Big) \dyad{k} =
+\sum_{k \in \text{BZ}}
+\eps(k) \dyad{k}.
 $$
-Pedindo para o Mathematica resolver a integral acima, ele retorna
+
+\n
+
+A perturbação de primeira ordem nos mostra então que as excitações de partícula única são
 $$
-m_z + 1 =
+\eps(k) = 2h - 2J \cos ka + O(J^2).
+$$
+
+\n
+
+Graficando essa relação de dispersão para diferentes valores de $h/J$, obtemos a Figura \ref{fig:transv_ising} abaixo.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\linewidth]{fig/transv_ising.png}
+\caption{Dispersão $\eps(k) = 2h - 2J \cos ka$ para várias razões $h/J$. Para $h/J = 1$, vemos que a curva fecha o gap (toca em zero). Os parâmetros utilizados no gráfico foram $J = a = 1$.}
+\label{fig:transv_ising}
+\end{figure}
+
+\n
+
+Podemos identificar o ponto crítico quântico como o ponto $h/J$ em que a dispersão $\eps(k)$ não possui gap com relação ao estado fundamental (em analogia com a transição condutor-isolante em Estado Sólido). Olhando a Figura \ref{fig:transv_ising}, vemos que isso acontece quando $h/J = 1$, onde o gap é fechado em $k = 0$. Assim, o ponto crítico quântico é $h = J$, o que está de acordo com a esquematização da Figura \ref{fig:qcp}.
+
+\n\n
+
+(c) Linearizando a hamiltoniana $H$ e desprezando as flutuações de segunda ordem para obter o campo médio ($\delta \s_j^x \, \delta \s_{j+1}^x \approx 0$), temos $\s_j^x = \ev{\s_j^x} + \delta \s_j^x = m_x + \delta \s_j^x$ e
+$$
+\s_j^x \s_{j+1}^x \approx -m_x^2 + m_x (\s_j^x + \s_{x+1}^x).
+$$
+
+\n
+
+Substituindo na hamiltoniana $H$, obtemos a aproximação de campo médio
+$$
+H = J N m_x^2 - 2Jm_x \sum_{j} \s_j^x - h \sum_{j} \s_j^z = J N m_x^2 - \hhh \vdot \ss,
+$$
+onde $\hhh = (2J m_x, 0, h)$ e $\ss = \sum_{j} \ss_j = \sum_{j} \qty(\s_j^x, \s_j^y, \s_j^z)$.
+
+\n
+
+A função de partição de campo médio fica
+$$
+Z = \tr(e^{-\beta H}) = \sum_{\text{many-body states } \ket{\Psi}} \ev**{\exp(-\beta J N m_x^2 + \beta \hhh \vdot \ss)}{\Psi}
+$$
+$$
+Z =
+e^{-\beta J N m_x^2} \sum_{\text{many-body states } \ket{\Psi}} \ev**{\exp(\beta \hhh \vdot \ss)}{\Psi}.
+$$
+
+A soma acima é sobre todos os many-body states da forma
+$$
+\ket{\Psi} = \prod_{j=1}^N \ket{\psi_j},
+$$
+com os estados de partícula única $\ket{\psi_j} = \ket{\up}$ ou $\ket{\down}$. Dessa forma
+$$
+Z =
+e^{-\beta J N m_x^2} \sum_{\text{many-body states } \ket{\Psi}} \ev**{\exp(\sum_{j} \beta \hhh \vdot \ss_j)}{\Psi} =
+$$
+$$
+= e^{-\beta J N m_x^2} \sum_{\ket{\psi_j} = \ket{\up},\ket{\down}} \prod_j \ev**{\exp(\beta \hhh \vdot \ss_j)}{\psi_j} =
+$$
+$$
+= e^{-\beta J N m_x^2} \prod_j \sum_{\ket{\psi_j} = \ket{\up},\ket{\down}} \ev**{\exp(\beta \hhh \vdot \ss_j)}{\psi_j} =
+$$
+$$
+= e^{-\beta J N m_x^2} \qty{\sum_{\ket{\psi} = \ket{\up},\ket{\down}} \ev**{\exp[\beta \hhh \vdot (\s^x, \s^y, \s^z)]}{\psi}}^N
+$$
+
+Para calcular  $\ev**{\exp[\beta \hhh \vdot (\s^x, \s^y, \s^z)]}{\psi}$, lembre que a exponencial de um operador é
+$$
+e^A = \sum_{n=0}^{\infty} \frac{A^n}{n!} \implies
+\ev**{e^A}{\psi} = \sum_{n=0}^{\infty} \frac{\ev**{A^n}{\psi}}{n!}.
+$$
+
+\n
+
+Temos que
+$$
+\ev**{\beta \hhh \vdot \vecs}{\psi} =
+\beta \ev**{(\hh_x \s_j^x + \hh_z \s_j^z)}{\psi} =
+$$
+$$
+=
+\beta \hh_x \cancelto{0}{\ev**{\s^x}{\psi}} +
+\beta \hh_z \ev**{\s^z}{\psi} =
 \begin{cases}
-\; \pi \frac{J^2}{h^2} , \quad h/J \geq 1, \\
-\; \pi , \quad \quad \, h/J < 1. \\
+\; +\beta \hh_z, \quad \ket{\psi} = \ket{\up}, \\
+\; -\beta \hh_z, \quad \ket{\psi} = \ket{\down}.
+\end{cases}
+$$
+$$
+[\beta \hhh \vdot \vecs]^2 = \beta^2 (\hh_x \s^x + \hh_z \s^z)^2 =
+\beta^2 \Big[\hh_x^2 \cancelto{1}{(\s^{x})^2} + \hh_z^2 \cancelto{1}{(\s^{z})^2}
++ \hh_x \hh_z \cancelto{0}{\{\s^x, \s^z\}}\Big] =
+\beta^2 (\hh_x^2 + \hh_y^2) = \qty(\beta \abs{\hhh})^2.
+$$
+
+Portanto, vale que
+$$
+\ev**{\Big[\beta \hhh \vdot \vecs\Big]^{2n}}{\psi} = \qty(\beta \abs{\hhh})^{2n},
+$$
+$$
+\ev**{\Big[\beta \hhh \vdot \vecs\Big]^{2n+1}}{\psi} =
+\begin{cases}
+\; +\beta \hh_z \, \qty(\beta \abs{\hhh})^{2n}, \; \ket{\psi} = \ket{\up}, \\
+\; -\beta \hh_z \, \qty(\beta \abs{\hhh})^{2n}, \; \ket{\psi} = \ket{\down}.
 \end{cases}
 $$
 
-Acho que o resultado acima não faz sentido né... Mas não sei como consertar.
+Esses resultados levam que
+$$
+\ev**{\exp[\beta \hhh \vdot (\s^x, \s^y, \s^z)]}{\up} +
+\ev**{\exp[\beta \hhh \vdot (\s^x, \s^y, \s^z)]}{\down} =
+2 \sum_{n=0}^{\infty} \frac{\qty(\beta \abs{\hhh})^{2n}}{(2n)!} = 2 \cosh(\beta\abs{\hhh}).
+$$
+
+Finalmente, obtemos
+$$
+\boxed{ Z = e^{-\beta J N m_x^2} \qty[2\cosh(\beta \abs{\hhh})]^N } \implies
+\boxed{ f = -\frac{1}{\beta N} \log Z =
+J m_x^2 - \frac{1}{\beta} \log\qty[2\cosh(\beta\sqrt{4J^2 m_x^2 + h^2})]. }
+$$
 
 \n
 
-(d) O hamiltoniano de Kitaev é
+A magnetização $m_x = \ev{\s^x}$ é dada pelo mínimo da energia livre
 $$
-H = -t \sum_{i} (c_{i+1}^\d c_i + \hc) - \mu \sum_{i} c_i^\d c_i
-+ \Delta \sum_{i} (c_{i+1}^\d c_i^\d + \hc).
+0 = \pdv{f}{m} =
+2 J m_x - 4 J^2m_x \, \frac{\tanh(\beta\sqrt{4J^2 m_x^2 + h^2})}{\sqrt{4J^2 m_x^2 + h^2}} \implies
+$$
+$$
+\sqrt{m_x^2 + \qty(\frac{h}{2J})^2} = \tanh(\beta \, 2J \sqrt{m_x^2 + \qty(\frac{h}{2J})^2}).
 $$
 
-É fácil ver que a hamiltoniana do Ising transverso \ref{eq:hamil_transvising} é um caso particular do Kitaev para $\Delta = -J$, $t = J$ e $\mu = -2h$. Como podemos ver em \url{https://topocondmat.org/w1_topointro/1D.html}, para o modelo de Kitaev, a fase trivial acontece para $\abs{\mu} < 2t$ e a topológica para $\abs{\mu} > 2t$. Essas duas fases correspondem à paramagnética e ferromagnética do Ising transversal, respectivamente.
+Definindo $y = \sqrt{m_x^2 + \qty(\frac{h}{2J})^2}$, temos que $y = \tanh(2\beta J y)$. Como vimos em aula, essa equação só tem solução $y \neq 0$ quando $2 \beta J > 1$, o que define a temperatura crítica $2 \beta_c J = 1 \implies T_c = 2J / k_B$.
+
+\n
+
+Para obter o expoente crítico $\beta$, expandimos a tangente hiperbólica em torno de zero para $T \to T_c$
+$$
+y = \tanh(\frac{T_c}{T} y) \approx \frac{T_c}{T} \, y - \frac{1}{3} \, \frac{T_c^3}{T^3} \, y^3 \implies
+y \approx \sqrt{3 \frac{(T_c-T)}{T_c}} \propto (T_c - T)^{1/2},
+$$
+o que nos dá o expoente crítico $\beta = 1/2$.
+
+\n
+
+A magnetização em função de $h$ perto do ponto crítico $T \to T_c$ fica
+$$
+m_x = \sqrt{3 \, \frac{T_c - T}{T_c} - \qty(\frac{h}{2J})^2}.
+$$
+
+\n
+
+Interpretando esta solução, percebemos que o campo $h$ (que é aplicado na direção $z$) tem o efeito contra a magnetização $m_x$, o que faz sentido físico pois se $h$ for grande os spins se alinharão na direção $z$, deixando a magnetização $m_x$ em zero. A magnetização $m_x$ só consegue ser maior que zero abaixo da temperatura crítica $T < T_c$ e se a fração $h/J$ for pequena. No caso do zero absoluto $T = 0$, o ponto crítico quântico é $h = J$, mas para $0 < T < T_c$ esse valor é diferente. Por exemplo, para $T$ perto de $T_c$, o ponto crítico quântico é
+$$
+3 \, \frac{T_c - T}{T_c} - \qty(\frac{h}{2J})^2 \to 0^+ \implies
+h = 2J \sqrt{\frac{3(T_c - T)}{T_c} } \propto J,
+$$
+que também é proporcional a $J$.
+
+
+
+
 
 
 
