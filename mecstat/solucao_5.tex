@@ -538,49 +538,74 @@ $$
 2 J m_x - 4 J^2m_x \, \frac{\tanh(\beta\sqrt{4J^2 m_x^2 + h^2})}{\sqrt{4J^2 m_x^2 + h^2}} \implies
 $$
 $$
-\sqrt{m_x^2 + \qty(\frac{h}{2J})^2} = \tanh(\beta \, 2J \sqrt{m_x^2 + \qty(\frac{h}{2J})^2}).
+\sqrt{m_x^2 + \qty(\frac{h}{2J})^2} = \tanh(2 \beta J \sqrt{m_x^2 + \qty(\frac{h}{2J})^2}).
 $$
 
-Definindo $y = \sqrt{m_x^2 + \qty(\frac{h}{2J})^2}$, temos que $y = \tanh(2\beta J y)$. Como vimos em aula, essa equação só tem solução $y \neq 0$ quando $2 \beta J > 1$, o que define a temperatura crítica $2 \beta_c J = 1 \implies T_c = 2J / k_B$.
+Explorando esse resultado para $T = 0$, temos que $\beta \to +\infty$ e a tangente hiperbólica tende a $1$. Assim, para $T = 0$ temos
+$$
+\sqrt{m_x^2 + \qty(\frac{h}{2J})^2} = 1 \implies \boxed{ m_x = \sqrt{1 - \qty(\frac{h}{2J})^2}. }
+$$
+
+Note que para $m_x \to 0^+$ temos o ponto crítico quântico $h_c = 2J$, que é diferente do ponto crítico quântico $h = J$ que obtivemos no item (b).
 
 \n
 
-Para obter o expoente crítico $\beta$, expandimos a tangente hiperbólica em torno de zero para $T \to T_c$
+Expandindo $\sqrt{1+x} \approx 1 + \frac{1}{2}x$ para $m \to 0^+$ nos dá
 $$
-y = \tanh(\frac{T_c}{T} y) \approx \frac{T_c}{T} \, y - \frac{1}{3} \, \frac{T_c^3}{T^3} \, y^3 \implies
-y \approx \sqrt{3 \frac{(T_c-T)}{T_c}} \propto (T_c - T)^{1/2},
+\frac{h}{2J} \, \sqrt{1 + \qty(\frac{2 m_x J}{h})^2} \approx
+\frac{h}{2J} \qty(1 + \frac{2 m_x^2 J^2}{h^2}) = 1
+\implies
 $$
-o que nos dá o expoente crítico $\beta = 1/2$.
+$$
+\frac{h}{2J}  + \frac{m_x^2 J}{h} = 1 \implies
+m_x = \sqrt{\qty(\frac{h}{J})\qty(1-\frac{h}{2J})}
+$$
+$$
+m_x \approx \sqrt{2\qty(1-\frac{h}{2J})} \implies \boxed{ m_x \propto \qty(1-\frac{h}{2J})^{1/2}. }
+$$
+
+Assim, descobrimos o expoente crítico $\beta = 1/2$.
 
 \n
 
-A magnetização em função de $h$ perto do ponto crítico $T \to T_c$ fica
-$$
-m_x = \sqrt{3 \, \frac{T_c - T}{T_c} - \qty(\frac{h}{2J})^2}.
-$$
-
-\n
-
-Interpretando esta solução, percebemos que o campo $h$ (que é aplicado na direção $z$) tem o efeito contra a magnetização $m_x$, o que faz sentido físico pois se $h$ for grande os spins se alinharão na direção $z$, deixando a magnetização $m_x$ em zero. A magnetização $m_x$ só consegue ser maior que zero abaixo da temperatura crítica $T < T_c$ e se a fração $h/J$ for pequena. No caso do zero absoluto $T = 0$, o ponto crítico quântico é $h = J$, mas para $0 < T < T_c$ esse valor é diferente. Por exemplo, para $T$ perto de $T_c$, o ponto crítico quântico é
-$$
-3 \, \frac{T_c - T}{T_c} - \qty(\frac{h}{2J})^2 \to 0^+ \implies
-h = 2J \sqrt{\frac{3(T_c - T)}{T_c} } \propto J,
-$$
-que também é proporcional a $J$.
+A aproximação de campo médio nos dá o ponto crítico quântico $h_c = 2J$ e o expoente crítico $\beta = 1/2$. A referência \cite{pfeuty} faz o cálculo exato para este modelo em 1D e obtém  ponto crítico $h_c = J$ e o expoente $\beta = 1/8$. Assim, nosso resultado do item (b) $h_c = J$ está correto, enquanto percebemos que a aproximação de campo médio não é válida neste modelo em 1D. Isso é um fenômeno do próprio campo médio, pois só esperamos que ele nos dê o expoente crítico verdadeiro para dimensões maiores que a dimensão crítica superior do modelo, que neste caso é maior do que $d=1$.
 
 
+%Definindo $y = \sqrt{m_x^2 + \qty(\frac{h}{2J})^2}$, temos que $y = \tanh(2\beta J y)$. Como vimos em aula, essa equação só tem solução $y \neq 0$ quando $2 \beta J > 1$, o que define a temperatura crítica $2 \beta_c J = 1 \implies T_c = 2J / k_B$.
+%
+%\n
+%
+%Para obter o expoente crítico $\beta$, expandimos a tangente hiperbólica em torno de zero para $T \to T_c$
+%$$
+%y = \tanh(\frac{T_c}{T} y) \approx \frac{T_c}{T} \, y - \frac{1}{3} \, \frac{T_c^3}{T^3} \, y^3 \implies
+%y \approx \sqrt{3 \frac{(T_c-T)}{T_c}} \propto (T_c - T)^{1/2},
+%$$
+%o que nos dá o expoente crítico $\beta = 1/2$.
+%
+%\n
+%
+%A magnetização em função de $h$ perto do ponto crítico $T \to T_c$ fica
+%$$
+%m_x = \sqrt{3 \, \frac{T_c - T}{T_c} - \qty(\frac{h}{2J})^2}.
+%$$
+%
+%\n
+%
+%Interpretando esta solução, percebemos que o campo $h$ (que é aplicado na direção $z$) tem o efeito contra a magnetização $m_x$, o que faz sentido físico pois se $h$ for grande os spins se alinharão na direção $z$, deixando a magnetização $m_x$ em zero. A magnetização $m_x$ só consegue ser maior que zero abaixo da temperatura crítica $T < T_c$ e se a fração $h/J$ for pequena. No caso do zero absoluto $T = 0$, o ponto crítico quântico é $h = J$, mas para $0 < T < T_c$ esse valor é diferente. Por exemplo, para $T$ perto de $T_c$, o ponto crítico quântico é
+%$$
+%3 \, \frac{T_c - T}{T_c} - \qty(\frac{h}{2J})^2 \to 0^+ \implies
+%h = 2J \sqrt{\frac{3(T_c - T)}{T_c} } \propto J,
+%$$
+%que também é proporcional a $J$.
 
 
-
-
-
-%%%-----
-%%% Referências bibliográficas
-%%%-----
-%\addcontentsline{toc}{chapter}{\bibname}
-%%\bibliographystyle{abntex2-num}
-%\bibliography{citations}
-%\bibliographystyle{ieeetr}
+%%-----
+%% Referências bibliográficas
+%%-----
+\addcontentsline{toc}{chapter}{\bibname}
+%\bibliographystyle{abntex2-num}
+\bibliography{citations}
+\bibliographystyle{ieeetr}
 
 
 \end{document}
