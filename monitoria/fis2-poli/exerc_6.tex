@@ -1,0 +1,89 @@
+\documentclass[a4paper,10pt]{article}
+\input{preamble}
+
+\newcommand{\fbat}{f_{\text{bat}}}
+
+\title{\Huge{\textbf{Exercícios 6}}}
+\author{Mateus Marques}
+
+\begin{document}
+
+\maketitle
+
+\section{Compreensão Semana 10}
+
+\textbf{Exercício 6.2 do Moysés 2}
+
+O alto-falante de um aparelho de som emite $1 \unit{W}$ de potência sonora na frequência
+$f = 100 \unit{Hz}$. Admitindo que o som se distribui uniformemente em todas as direções,
+determine, num ponto situado a $2 \unit{m}$ de distância do alto-falante:
+
+\n\n
+
+(a) o nível sonoro em dB;
+
+Temos que $I = \frac{P}{r^2} = \frac{1}{4} \unit{W/m^2}$, portanto
+$$
+\alpha = 10 \log_{10}\qty(\frac{I}{I_0}) = 10 \log_{10}\qty(\frac{1}{4} \times 10^{12}) = 10 \qty(12 -  )
+$$
+<++>
+
+\n
+
+(b) a amplitude de pressão;
+
+\n
+
+(c) a amplitude de deslocamento.
+
+\n
+
+Tome a densidade do ar como $1.3 \unit{kg/m^3}$ e a velocidade do som como $340 \unit{m/s}$.
+
+(d) A que distância do alto-falante o nível sonoro estará 10 dB abaixo do calculado em (a)?
+
+
+
+\section{Aprofundamento Semana 11}
+
+\textbf{Exercício 27 da Lista 2 - 2022}
+
+
+Duas cordas idênticas sob a mesma tensão $F$ possuem uma frequência fundamental igual a $f_0$. A seguir, a tensão em uma delas é aumentada de um valor bastante pequeno $\Delta F$.
+
+\n\n
+
+(a) Se elas são tocadas ao mesmo em sua frequência fundamental, mostre que a frequência do batimento produzido é
+$$
+f_{\text{bat}} = \frac{1}{2} f_0 \frac{\Delta F}{F}.
+$$
+
+\n
+
+Solução: a frequência de batimento é $\fbat = f_1 - f_2$. Onde $f_1 = \frac{v_1}{2L}$, $f_2 = \frac{v_2}{2L} = F_0$ e $v_j = \sqrt{F_j/\mu}$. No caso temos $F_1 = F + \Delta F$ e $F_2 = F$. Portanto
+$$
+\fbat = \frac{1}{2L\sqrt{\mu}} \qty(\sqrt{F+\Delta F} - \sqrt{F}) \approx
+\frac{1}{2L\sqrt{\mu}} \dv{\sqrt{F}}{F} \Delta F = \frac{1}{4L\sqrt{\mu}} \frac{\Delta F}{\sqrt{F}} =
+\frac{1}{2} \qty(\frac{1}{2L} \sqrt{\frac{F}{\mu}}) \frac{\Delta F}{\sqrt{F}} =\frac{1}{2} f_0 \frac{\Delta F}{F}.
+$$
+
+
+\n
+
+(b) Duas cordas de violino idênticas, quando estão em ressonância e esticadas com
+a mesma tensão, possuem uma frequência fundamental igual a $440 \unit{Hz}$. Uma
+das cordas é afinada novamente, tendo sua tensão aumentada. Quando isso é
+feito, ouvimos $3$ batimentos a cada dois segundos quando as duas cordas são puxadas
+simultaneamente em seus centros. Em que porcentagem variou a tensão na corda?
+
+\n
+
+Solução: Temos $\fbat = 1.5 \unit{Hz}$ e $f_0 = 440 \unit{Hz}$, portanto
+$$
+\frac{\Delta F}{F} = \frac{2 \fbat}{f_0} = \frac{3}{440} \approx 0.0068 = 0.68\%.
+$$
+
+
+
+
+\end{document}
