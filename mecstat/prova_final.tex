@@ -77,29 +77,62 @@ $$
 \n\n
 
 (b) Tomando agora as transformadas $f_j^\d = \frac{1}{\sqrt{N}} \sum_{k} e^{-ikja} f_k^\d$, $f_j = \frac{1}{\sqrt{N}} \sum_{k'} e^{ik'ja} f_{k'}$ e lembrando da relação $\sum_{j} e^{-i(k-k')ja} = N \delta_{k,k'}$ para a transformada discreta de Fourier da função $\delta$, temos
-
-\n
-\textbf{CHECAR AS CONTAS AQUI, TRANSF DE FOURIER E $k \iff -k$}
-\n
-
 $$
 H =
--\frac{J}{N} \sum_{j} \sum_{k,k'} \qty{ \qty[ e^{ik'a} e^{-i(k-k')ja} f_k^\d f_{k'} + e^{ik'a} e^{i(k+k')ja} f_{k'} f_k + \hc ] - 2g \, e^{-i(k-k')ja} f_k^\d f_{k'} + g} =
+-J \sum_{i} \qty[ \Big( f_{i+1} f_i + f_{i+1}^\d f_i + \hc \Big) - 2 g f_i^\d f_i + g] =
+$$
+$$
+H =
+-\frac{J}{N} \sum_{j} \sum_{k,k'} \qty{ \qty[ e^{ik'a} e^{i(k+k')ja} f_{k'} f_k + e^{ik'a} e^{-i(k-k')ja} f_k^\d f_{k'} + \hc ] - 2g \, e^{-i(k-k')ja} f_k^\d f_{k'} + g \, \delta_{k,k'}} =
 $$
 $$
 =
--J \sum_{k} \qty{ \qty[ e^{ika} f_k^\d f_{k} + e^{-ika} f_{-k} f_k + \hc ]
+-J \sum_{k,k'} \qty{ \qty[ e^{ik'a} \delta_{-k,k'} f_{k'} f_k + e^{ik'a} \delta_{k,k'} f_k^\d f_{k'} + \hc ] - 2g \, \delta_{k,k'} f_k^\d f_{k'} + g \, \delta_{k,k'}} =
+$$
+$$
+=
+-J \sum_{k} \qty{ \qty[ e^{-ika} f_{-k} f_k + e^{ika} f_k^\d f_{k} + \hc ]
 - 2 g f_k^\d f_k + g } =
 $$
 $$
 =
--J \sum_{k} \qty{ e^{ika} f_k^\d f_{k} + e^{-ika} f_{-k} f_k + e^{-ika} f_k^\d f_{k} + e^{ika} f_{k}^\d f_{-k}^\d
-- 2 g f_k^\d f_k + g } =
+-J \sum_{k} \qty{ \qty[ e^{-ika} f_{-k} f_k + \boxed{e^{ika} f_k^\d f_{k}} + e^{ika} f_{k}^\d f_{-k}^\d + \boxed{e^{-ika} f_k^\d f_{k}} ]
+\boxed{- 2 g f_k^\d f_k} + g } =
 $$
 $$
 =
-J \sum_{k} \qty{ 2 \qty[g - \cos(ka)] f_k^\d f_{k} + e^{-ika} f_{-k} f_k + e^{ika} f_{k}^\d f_{-k}^\d - g } =
+J \sum_{k} \qty{ 2 \qty[g - \cos(ka)] f_k^\d f_{k} - \qty( e^{-ika} f_{-k} f_k + e^{ika} f_{k}^\d f_{-k}^\d ) - g }.
 $$
+
+O termo acima em parênteses que possui exponenciais complexas pode ser reescrito como (fazendo a média com outra somatória em $-k$)
+$$
+\sum_{k} \qty( e^{-ika} f_{-k} f_k + e^{ika} f_{k}^\d f_{-k}^\d ) =
+\frac{1}{2} \sum_{k} \qty( e^{-ika} f_{-k} f_k + e^{ika} f_{k}^\d f_{-k}^\d ) \; + \;
+\frac{1}{2} \sum_{k} \qty( e^{ika} f_{k} f_{-k} + e^{-ika} f_{-k}^\d f_{k}^\d ) =
+$$
+$$
+=
+\frac{1}{2} \sum_{k} \qty( e^{-ika} f_{-k} f_k - e^{ika} f_{-k}^\d f_{k}^\d ) \; + \;
+\frac{1}{2} \sum_{k} \qty( -e^{ika} f_{-k} f_k + e^{-ika} f_{-k}^\d f_{k}^\d ) =
+$$
+$$
+= \sum_{k} \qty{
+\qty(\frac{e^{-ika} - e^{ika} }{2}) f_{-k} f_k + \qty(\frac{e^{-ika} - e^{ika} }{2}) f_{-k}^\d f_k^\d }
+= \sum_{k} \qty[ -i \sin(ka) \qty(
+f_{-k}^\d f_k^\d + f_{-k} f_k ) ].
+$$
+
+\n
+
+Portanto, a hamiltoniana fica
+$$
+\boxed{ H =
+J \sum_{k} \qty{ 2 \qty[g - \cos(ka)] f_k^\d f_{k} + i \, \sin(ka) \qty( f_{-k}^\d f_k^\d + f_{-k} f_{k} ) - g }. }
+$$
+
+\n\n
+
+(c)
 
 \n\n\n\n\n\n
 $$
