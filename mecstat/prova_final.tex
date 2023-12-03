@@ -132,7 +132,244 @@ $$
 
 \n\n
 
-(c)
+(c) Desenvolvendo a multiplicação de matriz pedida, temos
+$$
+\begin{pmatrix}
+f_k^\d & f_{-k}
+\end{pmatrix}
+\begin{pmatrix}
+g-\cos(ka) & -i\sin(ka) \\
+i\sin(ka) & -[g-\cos(ka)]
+\end{pmatrix}
+\begin{pmatrix}
+f_k \\ f_{-k}^\d
+\end{pmatrix}
+=
+\begin{pmatrix}
+f_k^\d & f_{-k}
+\end{pmatrix}
+\begin{pmatrix}
+[g-\cos(ka)] f_k - i \sin(ka) f_{-k}^\d \\ -[g-\cos(ka)] f_{-k}^\d + i \sin(ka) f_k
+\end{pmatrix}
+=
+$$
+$$
+=
+[g-\cos(ka)] f_k^\d f_k - i\sin(ka) \underbrace{f_k^\d f_{-k}}_{=-f_{-k}^\d f_k^\d}
+- [g-\cos(ka)] \underbrace{f_{-k} f_{-k}^\d}_{=1-f_{-k}^\d f_{-k}} + i \sin(ka) f_{-k} f_k =
+$$
+$$
+=
+[g-\cos(ka)] (f_k^\d f_k + \boxed{f_{-k}^\d f_{-k}}) - g + \boxed{\cos(ka)} + i\sin(ka) (f_{-k}^\d f_{-k}^\d + f_{-k} f_k).
+$$
+
+Considerando os dois termos acima destacados em uma caixa, quando se realiza a somatória em $k$ eles se simplificam:
+$$
+\sum_{k} f_{-k}^\d f_{-k} = \sum_{k} f_{k}^\d f_k, \quad (\text{trocando a somatória por} \, -k),
+$$
+$$
+\sum_{k} \cos(ka) = \frac{1}{2} \sum_{k} e^{ika} + \frac{1}{2} \sum_{k} e^{-ika} = 0,
+$$
+pois $\sum_{k} e^{\pm ika(j-j')} = N \delta_{j,j'} = N \delta_{(j-j', 0)} \implies \sum_{k} e^{\pm ika} = \delta_{1,0} = 0$.
+
+\n
+
+Dessa maneira, esses cálculos mostram que a hamiltoniana se reescreve como
+$$
+J \sum_{k}
+\begin{pmatrix}
+f_k^\d & f_{-k}
+\end{pmatrix}
+\begin{pmatrix}
+g-\cos(ka) & -i\sin(ka) \\
+i\sin(ka) & -g+\cos(ka)
+\end{pmatrix}
+\begin{pmatrix}
+f_k \\ f_{-k}^\d
+\end{pmatrix}
+=
+$$
+$$
+= J \sum_{k} \qty{ 2[g-\cos(ka)] f_k^\d f_k + i\sin(ka) \Big(f_{-k}^\d f_{-k}^\d + f_{-k} f_k\Big) - g } =
+H.
+$$
+
+\n
+
+Usando a transformação de Bogoliubov explicitada
+$$
+f_k = \cos(\frac{\theta_k}{2}) \gamma_k + i \sin(\frac{\theta_k}{2}) \gamma_{-k}^\d \implies
+\begin{pmatrix}
+f_k \\ f_{-k}^\d
+\end{pmatrix}
+=
+\begin{pmatrix}
+\cos(\frac{\theta_k}{2}) & i \sin(\frac{\theta_k}{2}) \\
+i \sin(\frac{\theta_k}{2}) & \cos(\frac{\theta_k}{2})
+\end{pmatrix}
+\begin{pmatrix}
+\gamma_k \\ \gamma_{-k}^\d
+\end{pmatrix} ,
+$$
+com $\theta_{-k} = -\theta_k$, temos
+$$
+\begin{pmatrix}
+f_k^\d & f_{-k}
+\end{pmatrix}
+\begin{pmatrix}
+g-\cos(ka) & -i\sin(ka) \\
+i\sin(ka) & -[g-\cos(ka)]
+\end{pmatrix}
+\begin{pmatrix}
+f_k \\ f_{-k}^\d
+\end{pmatrix}
+=
+$$
+$$
+=
+\begin{pmatrix}
+\gamma_k^\d & \gamma_{-k}
+\end{pmatrix}
+\begin{pmatrix}
+\cos(\frac{\theta_k}{2}) & -i \sin(\frac{\theta_k}{2}) \\
+-i \sin(\frac{\theta_k}{2}) & \cos(\frac{\theta_k}{2})
+\end{pmatrix}
+\begin{pmatrix}
+g-\cos(ka) & -i\sin(ka) \\
+i\sin(ka) & -[g-\cos(ka)]
+\end{pmatrix}
+\begin{pmatrix}
+\cos(\frac{\theta_k}{2}) & i \sin(\frac{\theta_k}{2}) \\
+i \sin(\frac{\theta_k}{2}) & \cos(\frac{\theta_k}{2})
+\end{pmatrix}
+\begin{pmatrix}
+\gamma_k \\ \gamma_{-k}^\d
+\end{pmatrix}.
+$$
+
+Portanto, basta que efetuemos as multiplicações de matrizes:
+$$
+\begin{pmatrix}
+g-\cos(ka) & -i\sin(ka) \\
+i\sin(ka) & -[g-\cos(ka)]
+\end{pmatrix}
+\begin{pmatrix}
+\cos(\frac{\theta_k}{2}) & i \sin(\frac{\theta_k}{2}) \\
+i \sin(\frac{\theta_k}{2}) & \cos(\frac{\theta_k}{2})
+\end{pmatrix}
+=
+$$
+$$
+\begin{pmatrix}
+[g-\cos(ka)] \cos(\frac{\theta_k}{2}) + \sin(ka) \sin(\frac{\theta_k}{2}) &
+[g-\cos(ka)] i \sin(\frac{\theta_k}{2}) - i \sin(ka) \cos(\frac{\theta_k}{2}) \\
+-[g-\cos(ka)] i \sin(\frac{\theta_k}{2}) + i \sin(ka) \cos(\frac{\theta_k}{2}) &
+-[g-\cos(ka)] \cos(\frac{\theta_k}{2}) - \sin(ka) \sin(\frac{\theta_k}{2})
+\end{pmatrix}.
+$$
+$$
+\begin{pmatrix}
+\cos(\frac{\theta_k}{2}) & -i \sin(\frac{\theta_k}{2}) \\
+-i \sin(\frac{\theta_k}{2}) & \cos(\frac{\theta_k}{2})
+\end{pmatrix}
+\times
+$$
+$$
+\times
+\begin{pmatrix}
+[g-\cos(ka)] \cos(\frac{\theta_k}{2}) + \sin(ka) \sin(\frac{\theta_k}{2}) &
+[g-\cos(ka)] i \sin(\frac{\theta_k}{2}) - i \sin(ka) \cos(\frac{\theta_k}{2}) \\
+-[g-\cos(ka)] i \sin(\frac{\theta_k}{2}) + i \sin(ka) \cos(\frac{\theta_k}{2}) &
+-[g-\cos(ka)] \cos(\frac{\theta_k}{2}) - \sin(ka) \sin(\frac{\theta_k}{2})
+\end{pmatrix} =
+$$
+$$
+\tiny{
+\begin{pmatrix}
+[g-\cos(ka)] [\cos[2](\frac{\theta_k}{2}) - \sin[2](\frac{\theta_k}{2})] +
+2 \sin(ka) \sin(\frac{\theta_k}{2}) \cos(\frac{\theta_k}{2}) &
+i [g-\cos(ka)] 2 \sin(\frac{\theta_k}{2}) \cos(\frac{\theta_k}{2}) - i \sin(ka) [\cos[2](\frac{\theta_k}{2}) - \sin[2](\frac{\theta_k}{2})] \\
+- i [g-\cos(ka)] 2 \sin(\frac{\theta_k}{2}) \cos(\frac{\theta_k}{2}) + i \sin(ka) [\cos[2](\frac{\theta_k}{2}) - \sin[2](\frac{\theta_k}{2})] &
+- [g-\cos(ka)] [\cos[2](\frac{\theta_k}{2}) - \sin[2](\frac{\theta_k}{2})] -
+2 \sin(ka) \sin(\frac{\theta_k}{2}) \cos(\frac{\theta_k}{2})
+\end{pmatrix} }
+$$
+$$
+=
+\begin{pmatrix}
+\qty{[g-\cos(ka)] \cos\theta_k + \sin(ka) \sin\theta_k } &
+ i \qty{[g-\cos(ka)] \sin\theta_k - \sin(ka) \cos\theta_k} \\
+-i \qty{[g-\cos(ka)] \sin\theta_k - \sin(ka) \cos\theta_k} &
+-\qty{[g-\cos(ka)] \cos\theta_k + \sin(ka) \sin\theta_k}
+\end{pmatrix}.
+$$
+
+Olhando para a matriz acima, vemos que ela se torna diagonal quando
+$$
+[g-\cos(ka)] \sin\theta_k - \sin(ka) \cos\theta_k = 0 \implies
+\boxed{\tan\theta_k = \frac{\sin(ka)}{g-\cos(ka)}.}
+$$
+
+Usando as relações $\cos\theta_k = \frac{1}{\sqrt{1+\tan^2\theta_k}}$ e
+$\sin\theta_k = \frac{\tan\theta_k}{\sqrt{1+\tan^2\theta_k}}$, é direto mostrar que o termo da diagonal se escreve como
+$$
+[g-\cos(ka)] \cos\theta_k + \sin(ka) \sin\theta_k =
+\sqrt{[g-\cos(ka)]^2 + \sin[2](ka)} = \lambda_k.
+$$
+
+Isso mostra então que
+$$
+H = J \sum_{k}
+\begin{pmatrix}
+\gamma_k^\d & \gamma_{-k}
+\end{pmatrix}
+\begin{pmatrix}
+\lambda_k & 0 \\
+0 & -\lambda_k
+\end{pmatrix}
+\begin{pmatrix}
+\gamma_k \\ \gamma_{-k}^\d
+\end{pmatrix} =
+J \sum_{k} (\lambda_k \gamma_k^\d \gamma_k -
+\lambda_k \underbrace{\gamma_{-k} \gamma_{-k}^\d}_{= 1 - \gamma_{-k}^\d \gamma_{-k}}) =
+\sum_{k} \underbrace{2 J \lambda_k}_{=E_k} \qty(\gamma_k^\d \gamma_k - \frac{1}{2}).
+$$
+
+Assim, identificamos que o autovalor positivo de $M(k)$ é
+$$
+\boxed{ E_k = 2J \lambda_k = 2J \sqrt{1+g^2-2g\cos(ka)}. }
+$$
+
+\n
+
+Na Figura \ref{fig:transv_ising2} fazemos os esboços de $E_k/2J \times ka$ para diferentes valores de $g$. Percebemos que para $g = 1$ o gap da dispersão fecha, e aparece um cone de Dirac ($E_k \propto \abs{k}$ para $k \approx 0$). Isso indica que a transição de fase quântica acontece em $g_c = 1$, devido ao fechamento do gap.
+Note que o gap é dado pelo mínimo de $E_k$ que ocorre quando $k = 0$:
+$$
+\Delta = E_{k=0} = 2J \sqrt{g^2 - 2g + 1} = 2J \sqrt{(g-1)^2} = 2J \abs{g-1}.
+$$
+
+\n
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.6\linewidth]{fig/transv_ising2.png}
+\caption{Dispersão $E_k$ para diferentes valores de $g$. No ponto $g_c = 1$ temos a transição de fase quântica, pois o gap fecha (a curva $E_k$ toca o zero).}
+\label{fig:transv_ising2}
+\end{figure}
+
+
+Em nossas vimos que o comprimento de correlação é definido a partir do propagador $G(\k)$ que obtivemos considerando flutuações espaciais na teoria de Landau:
+$$
+G(\k) = \frac{k_B T / Ja^2}{k^2 + \xi^{-2}}.
+$$
+
+Veja que esse propagador é análogo a de uma partícula relativística, onde $G \propto \frac{1}{k^2 + m^2}$, de maneira que $\xi^{-1}$ faz o papel da massa $m$ da partícula. Por outro lado, se expandirmos $\cos(ka) \approx 1 - \frac{(ka)^2}{2}$ na dispersão $E_k$, nós obtemos
+$$
+E_k \approx 2J \sqrt{1 + g^2 - 2g \qty[1-\frac{(ka)^2}{2}]} =
+\sqrt{2g(ka)^2 + []}
+$$
+<++>
+
 
 \n\n\n\n\n\n
 $$
