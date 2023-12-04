@@ -358,7 +358,7 @@ $$
 \end{figure}
 
 
-Em nossas vimos que o comprimento de correlação é definido a partir do propagador $G(\k)$ que obtivemos considerando flutuações espaciais na teoria de Landau:
+Em nossas aulas vimos que o comprimento de correlação é definido a partir do propagador $G(\k)$ que obtivemos considerando flutuações espaciais na teoria de Landau:
 $$
 G(\k) = \frac{k_B T / Ja^2}{k^2 + \xi^{-2}}.
 $$
@@ -372,7 +372,7 @@ Veja que a dispersão aproximada acima tem a mesma forma de uma expressão relat
 
 \n
 
-Percebendo então ambos $\xi^{-1}$ e $\Delta$ devem ser proporcionais à massa da quase-partícula $\gamma_k$, é razoável e correto tomar que $\xi^{-1} \propto \Delta \propto \abs{g-1} \implies \nu = 1$.
+Percebendo então que ambos $\xi^{-1}$ e $\Delta$ devem ser proporcionais à massa da quase-partícula $\gamma_k$, é razoável e correto tomar que $\xi^{-1} \propto \Delta \propto \abs{g-1} \implies \nu = 1$.
 
 \n
 
@@ -400,17 +400,217 @@ Como $\ln x = \int \frac{\dd{x}}{x}$, vemos que o termo surgido $\displaystyle{\
 
 \section*{2) Mapa clássico quântico}
 
-<++>
+(a) Utilizaremos a fórmula de Trotter (\url{https://en.wikipedia.org/wiki/Lie_product_formula}) para realizarmos um cálculo semelhante à derivação da integral de Feynman. A fórmula de Trotter é
+$$
+e^{A+B} = \lim_{L\to\infty} (e^{\frac{A}{L}} e^{\frac{B}{L}})^L.
+$$
+
+Aplicando-a para o nosso contexto, temos que
+$$
+e^{-\beta H} = e^{\beta h \s^z + \beta B \s^x} = \lim_{L\to\infty}
+(e^{\frac{\beta}{L} h \s^z} e^{\frac{\beta}{L} B \s^x})^L =
+\lim_{L\to\infty} \prod_{\ell = 1}^L (e^{\delta\tau h \s^z} e^{\delta\tau B \s^x}),
+$$
+onde $\delta \tau = \beta / L$. Passando agora à função de partição, omitimos (por simplicidade) o limite $L \to \infty$, nós inserimos relações de completeza considerando a condição periódica de contorno $S_0^z = S_L^z$.
+$$
+Z = \sum_{S^z = \pm 1} \ev{e^{-\beta H}}{S^z} =
+\sum_{S_0^z = \pm 1} \ev{\prod_{\ell=1}^{L} e^{\delta\tau h \s^z} e^{\delta\tau B \s^x}}{S_0^z} =
+$$
+$$
+=
+\sum_{S_0^z}
+\bra{S_0^z}
+e^{\delta\tau h \s^z} e^{\delta\tau B \s^x} \underbrace{1}_{=\sum_{S_1^z} \dyad{S_1^z}}
+e^{\delta\tau h \s^z} e^{\delta\tau B \s^x} \underbrace{1}_{=\sum_{S_2^z} \dyad{S_2^z}} \cdots
+\underbrace{1}_{=\sum_{S_{L-1}^z} \dyad{S_{L-1}^z}} e^{\delta\tau h \s^z} e^{\delta\tau B \s^x}
+\ket{S_L^z}
+$$
+$$
+=
+\sum_{S_0^z, S_1^z, \ldots, S_{L}^z}
+\bra{S_0^z}
+e^{\delta\tau h \s^z} e^{\delta\tau B \s^x} \dyad{S_1^z}
+e^{\delta\tau h \s^z} e^{\delta\tau B \s^x} \ket{S_2^z} \cdots
+\bra{S_{L-1}^z} e^{\delta\tau h \s^z} e^{\delta\tau B \s^x}
+\ket{S_L^z}.
+$$
+
+\n
+
+(b) Primeiramente, como $\ket{S_\ell^z}$ é autovetor de $\sigma^z$, temos
+$$
+\bra{S_{\ell}^z} e^{\delta\tau h \s^z} e^{\delta\tau B \s^x} \ket{S_{\ell+1}^z} =
+e^{\delta\tau h S_{\ell}^z} \bra{S_{\ell}^z} e^{\delta\tau B \s^x} \ket{S_{\ell+1}^z}.
+$$
+
+Agora, desenvolvendo a exponencial (lembrando que $(\s^x)^2 = 1$)
+$$
+e^{\delta\tau B \s^x} = \sum_{n=0}^{\infty} \frac{(\delta\tau B \s^x)^n}{n!} =
+\sum_{n=0}^{\infty} \frac{(\delta\tau B \s^x)^{2n}}{(2n)!} +
+\sum_{n=0}^{\infty} \frac{(\delta\tau B \s^x)^{2n+1}}{(2n+1)!} =
+\underbrace{\sum_{n=0}^{\infty} \frac{(\delta\tau B)^{2n}}{(2n)!}}_{=\cosh(\delta\tau B)} +
+\underbrace{\qty[\sum_{n=0}^{\infty} \frac{(\delta\tau B)^{2n+1}}{(2n+1)!}]}_{=\sinh(\delta\tau B)} \s^x.
+$$
+
+Assim, o elemento de matriz fica
+$$
+\bra{S_{\ell}^z} e^{\delta\tau B \s^x} \ket{S_{\ell+1}^z} =
+\cosh(\delta\tau B) \bra{S_{\ell}^z} \ket{S_{\ell+1}^z} +
+\sinh(\delta\tau B) \bra{S_{\ell}^z} \s^x \ket{S_{\ell+1}^z}.
+$$
+
+Lembrando que $\s^x\ket{+} = \ket{-}$ e $\s^x\ket{-} = \ket{+}$, vemos que
+\begin{itemize}
+\item Se $S_{\ell}^z \neq S_{\ell+1}^z$, então $S_{\ell}^z S_{\ell+1}^z = -1$ e
+$$
+\braket{S_{\ell}^z}{S_{\ell+1}^z} = 0, \quad \quad
+\bra{S_{\ell}^z} \s^x \ket{S_{\ell+1}^z} = 1,
+$$
+$$
+\bra{S_{\ell}^z} e^{\delta\tau B \s^x} \ket{S_{\ell+1}^z} =
+\sinh(\delta\tau B) =
+\frac{1}{2} \qty(e^{\delta\tau B} - e^{-\delta\tau B}) =
+\frac{1}{2} \qty(e^{\delta\tau B} + S_{\ell}^z S_{\ell+1}^z e^{-\delta\tau B}).
+$$
+\item Se $S_{\ell}^z = S_{\ell+1}^z$, então $S_{\ell}^z S_{\ell+1}^z = 1$ e
+$$
+\braket{S_{\ell}^z}{S_{\ell+1}^z} = 1, \quad \quad
+\bra{S_{\ell}^z} \s^x \ket{S_{\ell+1}^z} = 0.
+$$
+$$
+\bra{S_{\ell}^z} e^{\delta\tau B \s^x} \ket{S_{\ell+1}^z} =
+\cosh(\delta\tau B) =
+\frac{1}{2} \qty(e^{\delta\tau B} + e^{-\delta\tau B}) =
+\frac{1}{2} \qty(e^{\delta\tau B} + S_{\ell}^z S_{\ell+1}^z e^{-\delta\tau B}).
+$$
+\end{itemize}
+
+Interpolando, vemos que a igualdade abaixo é válida em ambos os casos
+$$
+\bra{S_{\ell}^z} e^{\delta\tau h \s^z} e^{\delta\tau B \s^x} \ket{S_{\ell+1}^z} =
+e^{\delta\tau h S_{\ell}^z} \frac{1}{2} \qty(e^{\delta\tau B} + S_{\ell}^z S_{\ell+1}^z e^{-\delta\tau B}).
+$$
+
+\n
+
+Agora, avaliando ambos os lados nos dois casos $S_{\ell}^z S_{\ell+1}^z = \pm 1$, verificaremos que a igualdade abaixo é válida:
+\begin{equation} \label{eq:valida}
+\frac{1}{2} \qty(e^{\delta\tau B} + S_{\ell}^z S_{\ell+1}^z e^{-\delta\tau B}) =
+\exp{
+\frac{1}{2} \ln[\coth(\delta\tau B)] S_{\ell}^z S_{\ell+1}^z +
+\frac{1}{2} \ln\qty[\frac{1}{2} \sinh(2\delta\tau B)] }.
+\end{equation}
+
+\begin{itemize}
+\item Caso $S_{\ell}^z S_{\ell+1}^z = -1$.
+
+Lado esquerdo:
+$$
+\frac{1}{2} \qty(e^{\delta\tau B} + S_{\ell}^z S_{\ell+1}^z e^{-\delta\tau B}) =
+\frac{1}{2} \qty(e^{\delta\tau B} - e^{-\delta\tau B}) = \sinh(\delta\tau B).
+$$
+
+Lado direito:
+$$
+\exp{
+- \frac{1}{2} \ln[\coth(\delta\tau B)] +
+\frac{1}{2} \ln\qty[\frac{1}{2} \sinh(2\delta\tau B)] } =
+\exp{
+\frac{1}{2} \ln\qty[ \frac{\sinh(2\delta\tau B)}{2 \coth(\delta\tau B)} ] } =
+$$
+$$
+= \exp{
+\frac{1}{2} \ln\qty[ \frac{\sinh[2](\delta\tau B) \cosh(\delta\tau B)}{\cosh(\delta\tau B)} ] } = \sinh(\delta\tau B).
+$$
 
 
+\item Caso $S_{\ell}^z S_{\ell+1}^z = 1$.
 
-%%%-----
-%%% Referências bibliográficas
-%%%-----
-%\addcontentsline{toc}{chapter}{\bibname}
-%%\bibliographystyle{abntex2-num}
-%\bibliography{citations}
-%\bibliographystyle{ieeetr}
+Lado esquerdo:
+$$
+\frac{1}{2} \qty(e^{\delta\tau B} + S_{\ell}^z S_{\ell+1}^z e^{-\delta\tau B}) =
+\frac{1}{2} \qty(e^{\delta\tau B} + e^{-\delta\tau B}) = \cosh(\delta\tau B).
+$$
+
+Lado direito:
+$$
+\exp{
+\frac{1}{2} \ln[\coth(\delta\tau B)] +
+\frac{1}{2} \ln\qty[\frac{1}{2} \sinh(2\delta\tau B)] } =
+\exp{
+\frac{1}{2} \ln\qty[ \frac{\sinh(2\delta\tau B) \coth(\delta\tau B)}{2} ] } =
+$$
+$$
+= \exp{
+\frac{1}{2} \ln\qty[ \frac{\sinh(\delta\tau B) \cosh[2](\delta\tau B)}{\sinh(\delta\tau B)} ] } = \cosh(\delta\tau B).
+$$
+\end{itemize}
+
+\n
+
+Assim, estabelecemos que a equação \ref{eq:valida} é válida.
+
+\n
+
+Combinando os resultados, temos
+$$
+Z =
+\sum_{S_0^z, S_1^z, \ldots, S_{L}^z}
+\prod_{\ell=0}^{L-1}
+\bra{S_{\ell}^z}
+e^{\delta\tau h \s^z} e^{\delta\tau B \s^x}
+\ket{S_{\ell+1}^z} =
+$$
+$$
+=
+\sum_{S_0^z, S_1^z, \ldots, S_{L}^z}
+\prod_{\ell=0}^{L-1}
+e^{\delta\tau h S_{\ell}^z}
+\exp{
+\frac{1}{2} \ln[\coth(\delta\tau B)] S_{\ell}^z S_{\ell+1}^z +
+\frac{1}{2} \ln\qty[\frac{1}{2} \sinh(2\delta\tau B)] } =
+$$
+$$
+= \exp{\ln\qty[\frac{1}{2} \sinh(2\delta\tau B)]}^{L/2} \sum_{S_0^z, S_1^z, \ldots, S_{L}^z}
+\prod_{\ell}
+\exp{
+\frac{1}{2} \ln[\coth(\delta\tau B)] S_{\ell}^z S_{\ell+1}^z +
+\delta\tau h S_{\ell}^z } =
+$$
+$$
+= \qty[\frac{1}{2} \sinh(2\delta\tau B)]^{L/2} \sum_{S_0^z, S_1^z, \ldots, S_{L}^z}
+\exp{ - \qty[ - \sum_{\ell}
+\qty( \frac{1}{2} \ln[\coth(\delta\tau B)] S_{\ell}^z S_{\ell+1}^z +
+\delta\tau h S_{\ell}^z ) ] } =
+$$
+$$
+= \qty[\frac{1}{2} \sinh(2\delta\tau B)]^{L/2} \sum_{S_0^z, S_1^z, \ldots, S_{L}^z}
+\exp( - \tilde{H} ),
+$$
+onde identificamos
+$$
+\tilde{H} =
+- \sum_{\ell}
+\qty( \tilde{J} S_{\ell}^z S_{\ell+1}^z +
+\tilde{h} S_{\ell}^z ), \quad \quad
+\boxed{\tilde{J} = \frac{1}{2} \ln[\coth(\delta\tau B)],} \quad \quad
+\boxed{\tilde{h} = \delta\tau h.}
+$$
+
+(c) Devido ao modelo de Ising em campo transverso (quântico) em dimensão $d$ e temperatura $T = 0$ corresponder a um modelo de Ising clássico (com parâmetros $\tilde{J}$ e $\tilde{h}$) em dimensão $d+1$ e no limite termodinâmico, concluimos que as propriedades críticas dos dois sistemas são as mesmas. Isso significa que ambos os sistemas pertencem à mesma classe de universalidade (no contexto de grupo de renormalização). De maneira simplificada a ideia é que, mesmo que os dois modelos sejam bastante diferentes em geral, seus comportamentos ficam cada vez mais similares numa escala limite, que no caso é determinada pelas transições de fase ($T \to T_c$ para o Ising clássico e $g \to g_c$ para o Ising campo transverso).
+
+\n
+
+A implicação mais direta dessa correspondência é que, caso queiramos estudar o comportamento crítico do Ising clássico em $d=2$ por exemplo, basta que estudemos o comportamento crítico do Ising campo tranverso em $d = 1$. Como mostrado no artigo \cite{pfeuty}, o Ising em campo transverso em $d=1$ possui uma transição de fase (quântica, $T=0$) com expoente crítico $\beta = 1/8$. Pela correspondência do mapa clássico quântico, concluimos a partir disso que o Ising clássico em $d=2$ também possui uma transição de fase (clássica) e expoente crítico $\beta = 1/8$. Da mesma forma, os outros expoentes críticos $\alpha$, $\gamma$, $\delta$, $\nu$ e $\eta$ dos dois modelos também coincidem por esse fato.
+
+
+%%-----
+%% Referências bibliográficas
+%%-----
+\addcontentsline{toc}{chapter}{\bibname}
+%\bibliographystyle{abntex2-num}
+\bibliography{citations}
+\bibliographystyle{ieeetr}
 
 
 \end{document}
