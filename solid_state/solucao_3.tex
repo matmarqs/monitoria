@@ -16,7 +16,7 @@
 
 \n
 
-Não é verdade que a aproximação do elétron independente leva em consideração o potencial externo de forma completa. Essa aproximação é baseada numa ideia de campo médio, onde as interações elétron-elétron geram um potencial efetivo que age sobre cada elétron. Dessa maneira, a aproximação de elétron independente ignora os efeitos de muitos-corpos com dependência $(\r_1 - \r_2)$, $(\r_1 - \r_3)$, $(\r_1 - \r_4)$,  $(\r_1 - \r_5)$, $(\r_2 - \r_3)$, $(\r_2 - \r_4)$, etc.
+Não é verdade que a aproximação do elétron independente leva em consideração o potencial externo de forma completa. Essa aproximação é baseada numa ideia de campo médio, onde as interações elétron-elétron e o potencial dos caroços geram um potencial efetivo que age sobre cada elétron. Dessa maneira, a aproximação de elétron independente ignora os efeitos de muitos-corpos com dependência $(\r_1 - \r_2)$, $(\r_1 - \r_3)$, $(\r_1 - \r_4)$,  $(\r_1 - \r_5)$, $(\r_2 - \r_3)$, $(\r_2 - \r_4)$, etc. Ela leva em conta o potencial externo dos caroços e dos outros elétrons, mas somente de forma aproximada através de um potencial efetivo.
 
 \n\n
 
@@ -24,170 +24,138 @@ Não é verdade que a aproximação do elétron independente leva em consideraç
 
 \n
 
-Existem muitas aproximações envolvidas no tratamento de Hartree-Fock, \textbf{UMA DELAS É...} (*) que não leva em conta a correlação eletrônica exata.essa
+Embora o Hartree-Fock tente incluir a correlação eletrônica, ele o faz de maneira aproximada através de um campo médio exercido sobre cada elétron e da representação da função de onda como um determinante de Slater. Dessa forma, ele não considera exatamente todos os efeitos de muitos-corpos, que dependem de $(\r_1 - \r_2)$, $(\r_1 - \r_3)$, $(\r_1 - \r_4)$,  $(\r_1 - \r_5)$, $(\r_2 - \r_3)$, $(\r_2 - \r_4)$, etc.
 
 \n\n
 
-(c) \textbf{ACHO QUE É} Verdadeiro!
+(c) Verdadeiro!
 
 \n
 
-\textbf{Como vimos em aula,} temos que o último autovalor corresponde ao potencial de ionização do material.
+No estado fundamental, o último orbital ocupado corresponde ao elétron que necessita de menor energia para ser removido do material. A energia necessária para removê-lo é dada pela diferença entre a energia do estado ionizado e do estado fundamental, que é justamente o autovalor do último orbital ocupado. Portanto, corresponde ao potencial de ionização.
 
 \pagebreak
 
 \section{}
 
-(a) A questão do gap ser direto ou indireto.
-
-\textbf{DAR UMA VERIFICADA ABAIXO.}
+(a) Focalizando a região do gap, a característica principal que distingue os semicondutores é a questão do gap ser direto ou indireto. Examinando cada uma das figuras com cuidado, observando o topo da banda de valência (VBT) e o fundo da banda de condução (CBM), vemos que os semicondutores são dos seguintes tipos.
 
 \begin{itemize}
-\item Si: indireto.
-\item Ge: direto.
-\item GaP: indireto.
-\item GaAs: direto.
-\item ZnSe: direto.
+\item Si: gap indireto.
+\item Ge: gap indireto.
+\item GaP: gap indireto.
+\item GaAs: gap direto.
+\item ZnSe: gap direto.
 \end{itemize}
 
 \n\n
 
-(b) Portadores leves ou pesados, mas todos são do tipo ``buraco''.
+(b) Quanto ao topo da banda de valência, todos os semicondutores listados possuem portadores do tipo ``buraco'', pois a concavidade é negativa (``para baixo''). Olhando as figuras com bastante paciência, podemos classificar se os portadores são leves ou pesados (subjetivamente) com base em quão agudas são as concavidades do topo da banda de valência (mais agudo significa mais leve).
 
 \begin{itemize}
-\item Si: leve.
-\item Ge: leve.
-\item GaP: leve (pesado na real CHATGPT).
-\item GaAs: pesado.
-\item ZnSe: pesado.
+\item Si: portador tipo ``buraco'' leve.
+\item Ge: portador tipo ``buraco'' leve.
+\item GaP: portador tipo ``buraco'' pesado.
+\item GaAs: portador tipo ``buraco'' pesado.
+\item ZnSe: portador tipo ``buraco'' pesado.
 \end{itemize}
 
 \n\n
 
-(c) Portadores leves ou pesados, do tipo elétron.
+(c) Quanto ao fundo da banda de condução, todos os semicondutores listados possuem portadores do tipo ``elétron'', pois a concavidade é positiva (``para cima''). Olhando as figuras com calma, classificamos se os portadores são leves ou pesados (subjetivamente) com base em quão agudas são as concavidades do fundo da banda de condução.
 
 \begin{itemize}
-\item Si: pesado (leve CHATGPT).
-\item Ge: leve.
-\item GaP: pesado.
-\item GaAs: leve.
-\item ZnSe: leve.
+\item Si: portador tipo ``elétron'' pesado.
+\item Ge: portador tipo ``elétron'' pesado.
+\item GaP: portador tipo ``elétron'' pesado.
+\item GaAs: portador tipo ``elétron'' leve.
+\item ZnSe: portador tipo ``elétron'' leve.
 \end{itemize}
 
 \n\n
 
-(d) A principal diferença entre a estrutura de bandas do ZnSe para os demais é que a banda de condução não é degenerada, igual aos demais que sempre possuem degenerescência no trecho $\Gamma \to X$. Essa separação da degenerescência (``splitting'') provavelmente ocorre devido à uma interação spin-órbita, que é relevante para o material ZnSe.
+(d) A principal diferença entre a estrutura de bandas do ZnSe para os demais é que a banda de valência não é degenerada, igual aos demais que sempre possuem degenerescência no trecho $\Gamma \to X$. Essa separação da degenerescência (``splitting'') provavelmente ocorre devido à uma interação spin-órbita, que é relevante para o material ZnSe.
 
 \pagebreak
 
 \section{}
 
-(a) \textbf{CHATGPTOU:}
+(a) A Densidade de Estados (DOS) $D(E)$ é definida de maneira que $D(E) \dd{E}$ seja o número de estados eletrônicos que possuem energia entre $E$ e $E + \dd{E}$. Ela é usada para compreender o comportamento eletrônico dos materiais e é útil para determinar, por exemplo, a condutividade elétrica e susceptibilidade magnética.
 
-A Densidade de Estados (DOS, do inglês Density of States) e a Densidade Conjunta de Estados (JDOS, do inglês Joint Density of States) são conceitos fundamentais na física do estado sólido, particularmente na teoria de bandas em sólidos. Vamos entender cada um desses conceitos:
+\n\n
 
-1. **Densidade de Estados (DOS):**
+A Densidade Conjunta de Estados (JDOS) é uma generalização da DOS que leva em consideração a interação entre diferentes estados, usando duas ou mais variáveis como a energia ou momento. Ela é utilizada na caracterização de processos de excitação, como transições eletrônicas e absorção de fótons. Em aula, vimos que ela é extremamente útil para estudar os processos ópticos nos materiais na região da luz visível.
 
-   - **Definição:** A DOS representa o número de estados eletrônicos disponíveis em um sistema em função da energia. Em outras palavras, ela descreve como os estados eletrônicos estão distribuídos ao longo da escala de energia.
+\n\n
 
-   - **Fórmula:** Se \( D(E) \) é a DOS, então \( D(E) \, dE \) é o número de estados em um intervalo de energia \( dE \) em torno da energia \( E \).
+(b) No caso de um semicondutor de gap direto (GaAs), o gap óptico coincide com o gap eletrônico, já que as transições verticais da VBT para CBM (aproximamos $\Delta k \approx 0$ devido a considerarmos luz visível) são permitidas.
 
-   - **Aplicações/Medidas:**
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.38\linewidth]{fig/dos-jdos-direto.jpeg}
+\caption{Esboço da DOS e JDOS para um semicondutor de gap direto (GaAs).}
+\label{fig:dos-jdos-direto}
+\end{figure}
 
-     - **Caracterização de Materiais:** A DOS é usada para compreender a estrutura eletrônica de materiais, ajudando a prever propriedades como condutividade elétrica, comportamento magnético e óptico.
-
-     - **Semicondutores e Metais:** A forma da DOS influencia se um material é um isolante, um semicondutor ou um metal.
-
-     - **Transições de Fase:** Mudanças na DOS podem indicar transições de fase em materiais.
-
-
-2. **Densidade Conjunta de Estados (JDOS):**
-
-   - **Definição:** A JDOS é uma extensão da DOS e leva em consideração a interação entre diferentes espécies de estados, como estados eletrônicos e estados vibracionais.
-
-   - **Fórmula:** A JDOS considera a densidade de estados em relação a duas ou mais variáveis, como energia e momento.
-
-   - **Aplicações/Medidas:**
-
-     - **Acoplamento Eletrônico-Vibracional:** Em materiais que exibem forte acoplamento entre elétrons e fonons (vibrações cristalinas), a JDOS é essencial para entender como as mudanças na estrutura eletrônica afetam os modos vibracionais e vice-versa.
-
-     - **Processos de Excitação:** Na caracterização de processos de excitação, como transições eletrônicas e absorção de fótons, a JDOS é útil para entender como diferentes tipos de estados contribuem para esses processos.
-
-     - **Dinâmica Quântica:** Para estudar a dinâmica temporal de sistemas, onde a evolução dos estados eletrônicos está acoplada a processos vibracionais, a JDOS fornece uma perspectiva mais completa.
-
-Em resumo, a DOS e a JDOS são ferramentas cruciais para compreender a estrutura eletrônica e as propriedades físicas dos materiais sólidos, sendo aplicáveis em diversas áreas da física do estado sólido e da química de materiais.
 
 \n
 
-(b) \textbf{Fazer gráfico da DOS e JDOS para gap direto (GaAs).}
+(c) No caso de um semicondutor de gap indireto (Si), o gap óptico é naturalmente maior que o gap eletrônico, já que as transições verticais da VBT para CBM não são permitidas. Somente em energias maiores as transições verticais acontecem no processo óptico de absorção.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.38\linewidth]{fig/dos-jdos-indireto.jpeg}
+\caption{Esboço da DOS e JDOS para um semicondutor de gap indireto (Si).}
+\label{fig:dos-jdos-indireto}
+\end{figure}
 
 \n
 
-(c) \textbf{Fazer gráfico da DOS e JDOS para gap indireto (Si).}
+(d) Para aplicações ópticas que dependem da absorção de energia da luz, semicondutores de gap direto (GaAs) são mais adequados. Isso ocorre porque o gap óptico é menor, o que implica em absorções mais eficientes.
 
-\n
-
-(d) Para aplicações ópticas que dependem da absorção de energia da luz, geralmente, semicondutores de gap direto, como o GaAs, são mais adequados. Isso ocorre porque a transição eletrônica de um estado na banda de valência para um estado na banda de condução pode ocorrer com uma quantidade mínima de perda de energia, o que é benéfico para eficientes processos de absorção.
-
-
-No GaAs (arsenieto de gálio), o gap entre a banda de valência e a banda de condução é direto, o que significa que o momento e a energia são conservados simultaneamente durante a transição eletrônica. Esse tipo de material é altamente eficiente na absorção de fótons, especialmente na região do infravermelho próximo e médio.
-
-
-Por outro lado, no silício (Si), que é um semicondutor de gap indireto, a transição eletrônica entre a banda de valência e a banda de condução envolve uma mudança significativa de momento. Isso torna a absorção de fótons menos eficiente e requer uma quantidade maior de energia para excitar elétrons da banda de valência para a banda de condução.
-
-
-Portanto, para dispositivos optoeletrônicos, como fotodetectores, LEDs (Light Emitting Diodes) e lasers, onde a absorção de luz desempenha um papel crucial, semicondutores de gap direto, como o GaAs, são preferíveis devido à sua eficiência na absorção de energia óptica.
+Para semicondutores de gap indireto (Si), a transição entre a banda de valência e a banda de condução envolve um momento maior do fóton incidente. Isso torna a absorção de fótons menos eficiente e requer uma energia maior no processo.
 
 \pagebreak
 
 \section{}
 
-(a) \textbf{CHATGPTOU:}
+(a) A expressão da equação \ref{eq:potquim} é bastante simplificada e envolve diversas aproximações.
+\begin{equation} \label{eq:potquim}
+\mu_i = \frac{1}{2} (E_c + E_v) + \frac{3}{4} k_B T \ln(\frac{m_{hh}^*}{m_c^*}).
+\end{equation}
 
-A expressão simplificada do potencial químico (\(\mu\)) para um semicondutor intrínseco envolve algumas aproximações que simplificam o tratamento matemático, tornando a análise mais acessível. Vamos considerar o contexto de temperatura ambiente para discutir essas aproximações:
-
-1. **Aproximação de Semicondutor Intrínseco:**
-
-   A expressão simplificada para o potencial químico em um semicondutor intrínseco é derivada sob a suposição de que a concentração de portadores de carga (elétrons e lacunas) é predominantemente governada pela temperatura e pela energia térmica, e não por dopantes externos.
-
-2. **Aproximação de Doping Nulo:**
-
-   A expressão assume que o semicondutor é intrinsecamente puro, ou seja, não há dopantes externos presentes para contribuir significativamente para a geração de portadores de carga. Isso simplifica a análise, pois a concentração intrínseca de portadores em um semicondutor puro é predominantemente devido a processos térmicos.
-
-3. **Baixa Densidade de Portadores:**
-
-   A aproximação é válida para baixas densidades de portadores. Em um semicondutor intrínseco a temperaturas moderadas, a densidade de portadores é relativamente baixa, e os elétrons na banda de condução e as lacunas na banda de valência são gerados principalmente por processos térmicos.
-
-4. **Baixa Variação de Temperatura:**
-
-   A expressão é mais precisa em uma faixa limitada de temperatura, geralmente em torno da temperatura ambiente. Variações significativas de temperatura podem introduzir termos adicionais na expressão do potencial químico.
-
-A expressão simplificada do potencial químico em um semicondutor intrínseco a temperatura ambiente (\(T\)) é muitas vezes dada por:
-
-\[ \mu = E_i + \frac{k_B T}{2} \ln\left(\frac{m_p^*}{m_n^*}\right) \]
-
-Onde:
-
-- \(E_i\) é a energia do nível intrínseco de Fermi.
-
-- \(k_B\) é a constante de Boltzmann.
-
-- \(T\) é a temperatura absoluta.
-
-- \(m_p^*\) e \(m_n^*\) são as massas efetivas dos buracos e elétrons, respectivamente.
-
-Essa expressão simplificada assume que a densidade de portadores é dominada por portadores intrínsecos gerados termicamente e que a contribuição externa de dopagem é negligenciável.
-
-É importante notar que, em situações mais complexas, como em semicondutores dopados ou em condições de alta densidade de portadores, a expressão do potencial químico pode ser mais elaborada e requer considerações adicionais.
+Primeiramente, é assumido que a concentração de portadores de carga no semicondutor intrínseco é devida somente aos efeitos da temperatura. Agora, dentre as aproximações envolvidas, assume-se que em temperatura zero o nível de Fermi está exatamente no meio do gap entre a banda de valência e a banda de condução e também é utilizado um modelo simplificado para a DOS (baseado na dispersão de partícula livre) dos elétrons (com massa efetiva $m_c^*$ na banda de condução) e dos buracos (com massa efetiva $m_{hh}^*$ na banda de valência). Além disso, para derivar a equação \ref{eq:potquim}, também assume-se que a temperatura seja suficientemente pequena de maneira que $\displaystyle{\frac{1}{e^{\beta(E-\mu)} + 1} \approx e^{-\beta(E-\mu)}}$.
 
 \n\n
 
-(b) A expressão simplificada do potencial químico para um semicondutor intrínseco, como mencionada anteriormente, é uma formulação geral que pode ser aplicada a semicondutores, independentemente de serem de gap direto ou gap indireto.
+(b) Na derivação da equação \ref{eq:potquim}, o fato do gap ser direto ou indireto não é relevante pois não há menção explícita do momento. Dessa maneira, a equação \ref{eq:potquim} vale tanto para o Si (gap indireto) quanto para o GaAs (gap direto).
 
 \n\n
 
-(c) Fazer cálculos para o Si e GaAs.
+(c) Na tabela 4.1 e no problema 3.18 do livro ``Semiconductor Physics and Devices'' \cite{neamen}, obtemos os dados correspondentes ao Si e ao GaAs na temperatura $T = 300 \unit{K}$. Também assumirei que $E_v = 0 \unit{eV}$ (convenção da energia de Fermi no zero) e o valor da constante $k_B = 8.617 \cdot 10^{-5} \unit{eV/K}$.
+\begin{itemize}
+\item Si à $T = 300 \unit{K}$: $E_g = 1.12 \unit{eV}$, $m_c^* = 1.08 \, m_0$, $m_{hh}^* = 0.56 \, m_0$. Fazendo o cálculo com esses dados do Si, obtemos
+$$
+\boxed{\mu_{\text{Si}, \; 300\unit{K}} = 0.55 \unit{eV}.}
+$$
 
+\n
+
+\item GaAs à $T = 300 \unit{K}$: $E_g = 1.42 \unit{eV}$, $m_c^* = 0.067 \, m_0$, $m_{hh}^* = 0.48 \, m_0$. Fazendo o cálculo com esses dados do GaAs, obtemos
+$$
+\boxed{\mu_{\text{GaAs}, \; 300\unit{K}} = 0.75 \unit{eV}.}
+$$
+\end{itemize}
+
+
+
+%%-----
+%% Referências bibliográficas
+%%-----
+\addcontentsline{toc}{chapter}{\bibname}
+%\bibliographystyle{abntex2-num}
+\bibliography{citations}
+\bibliographystyle{ieeetr}
 
 
 \end{document}
