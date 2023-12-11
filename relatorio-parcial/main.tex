@@ -183,7 +183,16 @@ In the year of 2023 our main activities consisted in the three main steps: the f
 
 \section{Hubbard model and DMFT} \label{sec:dmft}
 
-The Hubbard model is
+
+The Hubbard model was conceived by J. Hubbard with the aim to explore the effects of electron correlations in lattice materials. By its definition, the model is actually simple. We suppose that electrons belong to sites that compose a lattice. They have a constant energy $\eps_d$ (the onsite energy) for belonging to any site. They also have the possibility of hopping to differente sites, which is given by the parameter $t$ (hopping strength). Lastly, when two electrons are on the same site, they have an interaction term given by the parameter $U$. This interaction can be attractive ($U < 0$) or repulsive ($U > 0$), but here we mainly focus in the repulsive case because it leads to the existence of a Mott insulating phase \cite{georges1996} for the Hubbard model.
+
+\n
+
+Putting together the ideas described in the last paragraph, we construct the hamiltonian of the Hubbard model in second quantization, given by
+\begin{equation} \label{eq:hubbard-hamiltonian}
+H = \eps_d \sum_{i, \s} n_{i\s} +  \sum_{\nn{i}{j}, \s} t_{ij} (c_{i\s}^\d c_{j\s} + \hc)
++ U \sum_{i} n_{i\up} n_{i\down}.
+\end{equation}
 
 
 
