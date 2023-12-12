@@ -217,7 +217,18 @@ Dynamical mean-field theory (DMFT) is a powerful method to treat strong correlat
 
 DMFT is motivated by the establishment that it is exact \cite{thesis_dmft_graz} in the limit of infinite lattice coordination $z \to \infty$, once there is a self-consistent mapping between the original hamiltonian onto a local impurity model. In this limit, the self-energy $\displaystyle{\lim_{z \to \infty}\Sigma(\k,\omega) = \Sigma(\omega)}$ becomes \textit{local}, i.e., independent of the momentum $\k$.
 
-Here we are going to describe the DMFT method in the special case of the Hubbard model. In this case, the Hubbard hamiltonian
+Here we are going to describe the DMFT method in the special case of the Hubbard model. In this case, the Hubbard hamiltonian is self-consistently mapped \cite{georges1996} onto the Single Anderson Impurity Model (SIAM) \cite{impurity-solvers}, where a level, indexed by $d$, is coupled to a bath
+\begin{equation} \label{eq:anderson-hamiltonian}
+H_{\text{SIAM}} = \underbrace{U n_{d\up} n_{d\down} + \eps_d \sum_{\s} n_{d\s}}_{H_{\text{imp}}}
++ \underbrace{\sum_{\k,\s} (t_\k c_{d\s}^\d c_{k\s} + \hc)}_{H_{\text{coup}}}
++ \underbrace{\sum_{\k,\s} \eps_\k c_{\k\s}^\d c_{\k\s}}_{H_{\text{bath}}}.
+\end{equation}
+
+In equation \ref{eq:anderson-hamiltonian}, $H_{\text{bath}}$ is the hamiltonian of only the bath, $H_{\text{coup}}$ is the coupling between the bath and the single impurity $d$, and $H_{\text{imp}}$ is the hamiltonian of the impurity. $H_{\text{imp}}$, anologously with the Hubbard hamiltonian in equation \ref{eq:hubbard-hamiltonian}, has an interaction term when two electrons are on the same site.
+
+The SIAM is an impurity problems, which is relatively easier to solve numerically than the Hubbard model. There are several methods, known as impurity solvers, available in the literature that attempt to solve it. To give an overview, the reference \cite{impurity-solvers} make a benchmark of some of these impurity solvers.
+
+By solving an impurity problem, we actually mean determining the retarded Green's function of the impurity site $G_{\text{imp}}(\omega)$, because its knowledge allows us compute the spectral function $A(\omega) = - \frac{1}{\pi} \Im{G_{\text{imp}}(\omega)}$ \cite{bruus} and a manifold of important observables related to quantum transport in materials \cite{pedagogical-gfs}.
 
 \begin{figure}[H]
 \centering
@@ -225,6 +236,46 @@ Here we are going to describe the DMFT method in the special case of the Hubbard
 \caption{Schematization of the mapping between the lattice problem and a single impurity coupled to an effective bath. Figure taken from \cite{thesis_dmft_graz}.}
 \label{fig:dmft-mapping}
 \end{figure}
+
+Having in mind this map onto a impurity problem, the DMFT scheme is based on the approximation
+\begin{equation} \label{eq:dmft-approx}
+\Sigma(\k, \omega) \approx \Sigma(\omega),
+\end{equation}
+where the self-energy is independent of $\k$, motivated by the fact that this approximation is an equality in the limit where $z \to \infty$. Along with this approximation, we the self-consistency guarantees us that the local lattice Green's function $G_{\text{loc}}(\omega)$ coincides with the impurity model's Green function $G_{\text{imp}}(\omega)$, and this translates into a convergence criterion for the DMFT algorithm.
+
+Hence, using equation \ref{eq:dmft-approx}, the local lattice Green's function in the continuum limit can be written as
+\begin{equation} \label{eq:Gf-local}
+G_{\text{loc}}(\omega) = \sum_{\k} \frac{1}{\omega-\eps_\k-\Sigma(\k, \omega)} \approx
+\int \dd{\eps} \frac{\rho_0(\eps)}{\omega - \eps - \Sigma(\omega)},
+\end{equation}
+where $\rho_0(\eps)$ is the non-interacting density of states (DOS) and depends only on the considered lattice structure, defined by
+$$
+\rho_0(\eps) = \sum_{\k} \delta(\eps-\eps_\k).
+$$
+
+Now, the DMFT algorithm works as follows. Firstly, we start with an initial guess for the self-energy $\Sigma(\omega)$ and compute $G_{\text{loc}}(\omega)$ by equation \ref{eq:Gf-local}. On the other hand, we compute $G_{\text{imp}}(\omega)$ by solving the SIAM with an impurity solver of choice. We compare $G_{\text{loc}}$ and $G_{\text{imp}}$ with some convergence criterion and, if this criterion is still not satisfied, we update the self-energy by
+\begin{equation} \label{eq:self-energy-update}
+\Sigma(\omega) = \omega - \eps_d - G_{\text{imp}}^{-1}(\omega).
+\end{equation}
+
+\section{Bethe lattice} \label{sec:bethe}
+
+In our DMFT work, we focused on the special case of Bethe lattice with infinite coordination $z\to\infty$, which was extensively studied in the literature \cite{georges1996, thesis_dmft_graz} and serves as a benchmark for the DMFT algorithm.
+
+The Bethe lattice is an infinite lattice where each site has $z$ neighbors and any two sites are connected by a unique shortest path. Figure \ref{fig:bethe-lattice} represents a Bethe lattice in the case where $z = 4$.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.4\linewidth]{fig/bethe-lattice.png}
+\caption{Schematization of the Bethe lattice with coordination number $z = 4$. The lattice is actually infinite and all sites equivalent. Figure taken from \cite{thesis_dmft_graz}.}
+\label{fig:bethe-lattice}
+\end{figure}
+
+For the Bethe lattice, the non-interacting DOS $\rho(\eps)$ has a semicircular form \cite{georges1996}, given by
+$$
+\rho_0(\eps) = \frac{2}{\pi D} \sqrt{1-\qty(\frac{\omega}{D})^2}.
+$$
+<++>
+
 
 
 %\chapter{Realizações do período}\label{chp:realizacoes}
@@ -606,35 +657,32 @@ Here we are going to describe the DMFT method in the special case of the Hubbard
 %Em nossa simulação, o número total de eventos sem oscilação foi $N_{\text{no-osc}} = 371.5 \pm 24.1$ enquanto que número total de eventos com oscilação para os valores dos parâmetros de melhor ajuste do NuFIT + (eventos de fundo) foi $N_{\text{osc}} = 253.1 \pm 16.5$.
 %
 %Durante o período considerado, o experimento KamLAND detectou 258 eventos no total e a estimativa sem oscilação reportada em \cite{spectral-distortion} foi $365.2 \pm 23.7$ eventos.
-%
-%\section{Conclusões}
-%
-%Na seção \ref{sec:solar-nu} simulamos numericamente os neutrinos solares para diferentes reações. Os resultados obtidos na Figura \ref{fig:surv_prob} para a média no ponto de produção da probabilidade de sobrevivência ao sair do Sol estão de acordo com \cite{winslow}. Foi importante a implementação do algoritmo M4 \cite{efficient-nu}, que acelerou a execução do código na ordem de $10^3$ vezes.
-%
-%
-%Na seção \ref{sec:kamland} simulamos os eventos detectados pelo experimento KamLAND e obtivemos a Figura \ref{fig:kamland-events}, que está qualitativamente de acordo com os resultados de \cite{spectral-distortion}. Ainda mais, os resultados obtidos para o número total de eventos $N_{\text{no-osc}} = 371.5 \pm 24.1$ e $N_{\text{osc}} = 253.1 \pm 16.5$ são estatisticamente compatíveis dentro de uma incerteza com os 258 eventos realmente detectados pelo KamLAND e com a estimativa de $365.2 \pm 23.7$ eventos sem oscilação \cite{spectral-distortion}. Isso nos leva a concluir que os parâmetros atuais do NuFIT \cite{nufit} são compatíveis com o ajuste do KamLAND no período coberto por \cite{spectral-distortion}.
-%
-%
-%\chapter{Descrição e avaliação do Apoio Institucional recebido no período}\label{chp:apoioInst}
-%
-%Durante o período correspondente a este relatório, o estudante não fez uso da reserva técnica.
-%
-%\chapter{Participação em eventos científicos}\label{chp:particEvento}
-%
-%O estudante apresentou seu projeto de iniciação científica na $30^{\text{a}}$ edição do \href{https://siicusp.prp.usp.br/pt/home/}{SIICUSP} e também participou de três workshops todos promovidos pelo \href{https://www.ictp-saifr.org/}{ICTP-SAIFR}:
-%\begin{itemize}
-%\item \href{http://journeys.ictp-saifr.org/}{V Journeys into Theoretical Physics, 2022}.
-%\item \href{https://www.ictp-saifr.org/qc2022/}{School on Quantum Computation, 2022}.
-%\item \href{https://www.ictp-saifr.org/cmtm2022/}{II ICTP-SAIFR Condensed Matter Theory in the Metropolis, 2022}.
-%\end{itemize}
-%
-%\chapter{Disciplinas cursadas no período}
-%
-%Durante o período coberto por este relatório, o estudante concluiu sua graduação em Física Bacharelado, havendo cursado apenas duas disciplinas em seu último semestre: ``Filosofia da Física'' e ``Aprendizado de Máquina e Reconhecimento de Padrões''.
-%
-%\pagebreak
+
+\section{Conclusions}
+
+Na seção \ref{sec:solar-nu} simulamos numericamente os neutrinos solares para diferentes reações. Os resultados obtidos na Figura \ref{fig:surv_prob} para a média no ponto de produção da probabilidade de sobrevivência ao sair do Sol estão de acordo com \cite{winslow}. Foi importante a implementação do algoritmo M4 \cite{efficient-nu}, que acelerou a execução do código na ordem de $10^3$ vezes.
 
 
+Na seção \ref{sec:kamland} simulamos os eventos detectados pelo experimento KamLAND e obtivemos a Figura \ref{fig:kamland-events}, que está qualitativamente de acordo com os resultados de \cite{spectral-distortion}. Ainda mais, os resultados obtidos para o número total de eventos $N_{\text{no-osc}} = 371.5 \pm 24.1$ e $N_{\text{osc}} = 253.1 \pm 16.5$ são estatisticamente compatíveis dentro de uma incerteza com os 258 eventos realmente detectados pelo KamLAND e com a estimativa de $365.2 \pm 23.7$ eventos sem oscilação \cite{spectral-distortion}. Isso nos leva a concluir que os parâmetros atuais do NuFIT \cite{nufit} são compatíveis com o ajuste do KamLAND no período coberto por \cite{spectral-distortion}.
+
+
+\chapter{Evaluation of the Institutional Support received during the period} \label{chp:apoioInst}
+%\chapter{Description and evaluation of the Institutional Support received during the period} \label{chp:apoioInst}
+
+Durante o período correspondente a este relatório, o estudante não fez uso da reserva técnica.
+
+\chapter{Participation in scientific events} \label{chp:particEvento}
+
+O estudante apresentou seu projeto de iniciação científica na $30^{\text{a}}$ edição do \href{https://siicusp.prp.usp.br/pt/home/}{SIICUSP} e também participou de três workshops todos promovidos pelo \href{https://www.ictp-saifr.org/}{ICTP-SAIFR}:
+\begin{itemize}
+\item \href{http://journeys.ictp-saifr.org/}{V Journeys into Theoretical Physics, 2022}.
+\item \href{https://www.ictp-saifr.org/qc2022/}{School on Quantum Computation, 2022}.
+\item \href{https://www.ictp-saifr.org/cmtm2022/}{II ICTP-SAIFR Condensed Matter Theory in the Metropolis, 2022}.
+\end{itemize}
+
+\chapter{Subjects taken during the period}
+
+Durante o período coberto por este relatório, o estudante concluiu sua graduação em Física Bacharelado, havendo cursado apenas duas disciplinas em seu último semestre: ``Filosofia da Física'' e ``Aprendizado de Máquina e Reconhecimento de Padrões''.
 
 %%-----
 %% Referências bibliográficas
