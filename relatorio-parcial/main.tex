@@ -175,18 +175,25 @@ In the year of 2023 our main activities consisted in the three main steps: the f
 \begin{itemize}
 \item The student took the three courses Solid States I, II and Statistical Mechanics. They were very important to provide the necessary tools to study many-body systems. In particular, the MATBG system can be modelled in the second quantization formalism in a way that is very similar to the Hubbard Model, which was studied in the Solid State II course.
 
-\item We extensively studied the Hubbard model \cite{hubbard1963} as a test case to build our numerical DMFT code. In Section \ref{sec:dmft} we describe the techniques and ideas involved in the DMFT method, and show our results in respect to the Mott metal-insulator transition.
+\item We extensively studied the Hubbard model \cite{hubbard1963} as a test case to build our numerical DMFT code. In Section \ref{sec:dmft} we describe the techniques and ideas involved in the DMFT method, and show our results in respect to the Mott metal-insulator transition. The student also took the brief course ``Strong coupling theories for metal-insulator transitions: DMFT and beyond'', given by Professor Vladimir Dobrosavljevic at USP in the first semester of 2023.
 
-\item We studied the basic theory of
+\item We studied the basic theory of the twisted bilayer graphene system through \cite{handbook2019}, which our main objective was to understand the Bistritzer-MacDonald model \cite{macdonald2011}.
 \end{itemize}
 <++>
 
-\section{Hubbard model and DMFT} \label{sec:dmft}
+\section{Hubbard model} \label{sec:hubbard}
 
 
-The Hubbard model was conceived by J. Hubbard with the aim to explore the effects of electron correlations in lattice materials. By its definition, the model is actually simple. We suppose that electrons belong to sites that compose a lattice. They have a constant energy $\eps_d$ (the onsite energy) for belonging to any site. They also have the possibility of hopping to differente sites, which is given by the parameter $t$ (hopping strength). Lastly, when two electrons are on the same site, they have an interaction term given by the parameter $U$. This interaction can be attractive ($U < 0$) or repulsive ($U > 0$), but here we mainly focus in the repulsive case because it leads to the existence of a Mott insulating phase \cite{georges1996} for the Hubbard model.
+The Hubbard model was conceived by J. Hubbard with the aim to explore the effects of electron correlations in lattice materials. By its definition, the model is actually simple. We suppose that electrons belong to sites that compose a lattice. They have a constant energy $\eps_d$ (the onsite energy) for belonging to any site. They also have the possibility of hopping to differente sites, which is given by the parameter $t$ (hopping strength). Lastly, when two electrons are on the same site, they have an interaction term given by the parameter $U$. This interaction can be attractive ($U < 0$) or repulsive ($U > 0$), but here we mainly focus in the repulsive case because it leads to the existence of a Mott insulating phase \cite{georges1996} for the half-filled Hubbard model. Figure \ref{fig:hubbard_model-scheme} gives an schematization of the model and an intuition of the $t$ and $U$ parameters in the model.
 
 \n
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.4\linewidth]{fig/hubbard_model-scheme.png}
+\caption{Schematization of the Hubbard model on a 2D square lattice. Electrons move to neighboring sites with a hopping $t$, and when two electrons are on the same site they feel a Coulomb repulsion $U$. Figure taken from \cite{thesis_dmft_graz}.}
+\label{fig:hubbard_model-scheme}
+\end{figure}
 
 Putting together the ideas described in the last paragraph, we construct the hamiltonian of the Hubbard model in second quantization, given by
 \begin{equation} \label{eq:hubbard-hamiltonian}
@@ -194,11 +201,30 @@ H = \eps_d \sum_{i, \s} n_{i\s} +  \sum_{\nn{i}{j}, \s} t_{ij} (c_{i\s}^\d c_{j\
 + U \sum_{i} n_{i\up} n_{i\down}.
 \end{equation}
 
+\n
 
+The Hubbard model, although somewhat simples to define, does not have an analytic solution for general lattices. Therefore, to this grasp the behaviour of this system, we must work with approximate solutions. Actually, Hubbard himself gave a simple approximate solution to the hamiltonian \ref{eq:hubbard-hamiltonian} in his seminal article, which is today known as ``Hubbard I Approximation'' (HIA). This method uses the technique of retarted Green's functions described by Zubarev \cite{zubarev1960}, which we studied in the book \cite{bruus}.
 
+\n
 
+While the HIA solution gives simples expressions for common observables in the Hubbard model, it does not capture the metal-insulator quantum phase transition in the case of half-filling. In order to describe this transition, we went beyond and started learning the general method of Dynamical Mean-Field Theory (DMFT) \cite{georges1996}, which is gives a reasonable treatment for the effects of electron correlations. In the next section we describe it.
 
+\section{DMFT} \label{sec:dmft}
 
+Dynamical mean-field theory (DMFT) is a powerful method to treat strong correlations in materials. Its combination along with Density Functional Theory (DFT) provides a computational tools to determine properties of real correlated electron materials \cite{hauleweb, haule_real_materials}.
+
+\n
+
+DMFT is motivated by the establishment that it is exact \cite{thesis_dmft_graz} in the limit of infinite lattice coordination $z \to \infty$, once there is a self-consistent mapping between the original hamiltonian onto a local impurity model. In this limit, the self-energy $\displaystyle{\lim_{z \to \infty}\Sigma(\k,\omega) = \Sigma(\omega)}$ becomes \textit{local}, i.e., independent of the momentum $\k$.
+
+Here we are going to describe the DMFT method in the special case of the Hubbard model. In this case, the Hubbard hamiltonian
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.6\linewidth]{fig/dmft-mapping}
+\caption{Schematization of the mapping between the lattice problem and a single impurity coupled to an effective bath. Figure taken from \cite{thesis_dmft_graz}.}
+\label{fig:dmft-mapping}
+\end{figure}
 
 
 %\chapter{Realizações do período}\label{chp:realizacoes}

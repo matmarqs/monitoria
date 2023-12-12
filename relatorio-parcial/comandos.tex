@@ -35,7 +35,7 @@
    \begin{minipage}[t]{0.4\textwidth}
    \hspace{0.6cm}
    \begin{tikzpicture}
-   \node[anchor=south east,inner sep = 0](signF){\includegraphics[width=5cm]{example-image-a}};
+   \node[anchor=south east,inner sep = 0](signF){\includegraphics[width=1cm]{#2}};
    \end{tikzpicture}
    \vspace*{0.1cm}  % leave some space above the horizontal line
    \hrule
@@ -108,9 +108,10 @@
 
 
         %% Assinatura assinatura ASSINATURA
-        \namegroup{Researcher}{}
+        %\namegroup{Researcher}{example-image-a}
+        \namegroup{Researcher}{fig/placeholder.png}
         \hspace{1.5cm}
-        \namegroup{Advisor}{}
+        \namegroup{Advisor}{fig/placeholder.png}
 
         %\begin{minipage}[t]{0.4\textwidth}
         %\vspace*{1.5cm}
