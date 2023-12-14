@@ -260,7 +260,11 @@ Now, the DMFT algorithm works as follows. Firstly, we start with an initial gues
 
 \section{Bethe lattice} \label{sec:bethe}
 
-In our DMFT work, we focused on the special case of Bethe lattice with infinite coordination $z\to\infty$, which was extensively studied in the literature \cite{georges1996, thesis_dmft_graz} and serves as a benchmark for the DMFT algorithm.
+In our DMFT work, we focused on the special case of Bethe lattice with infinite coordination $z\to\infty$, which was extensively studied in the literature \cite{georges1996, thesis_dmft_graz} and serves as a benchmark for the DMFT algorithm because the expressions simplify a lot in this lattice. But the Hubbard hamiltonian in equation \ref{eq:hubbard-hamiltonian} only makes sense for a Bethe lattice with $z\to\infty$ if the hopping amplitude is renormalized as \cite{thesis_bruno}
+\begin{equation} \label{eq:hopping-renormalization}
+t = \frac{t_*}{\sqrt{z}},
+\end{equation}
+where $t_*$ is the renormalized hopping parameter.
 
 The Bethe lattice is an infinite lattice where each site has $z$ neighbors and any two sites are connected by a unique shortest path. Figure \ref{fig:bethe-lattice} represents a Bethe lattice in the case where $z = 4$.
 \begin{figure}[H]
@@ -271,9 +275,18 @@ The Bethe lattice is an infinite lattice where each site has $z$ neighbors and a
 \end{figure}
 
 For the Bethe lattice, the non-interacting DOS $\rho(\eps)$ has a semicircular form \cite{georges1996}, given by
+\begin{equation} \label{eq:bethe-dos}
+\rho_0(\eps) = \frac{2}{\pi D} \sqrt{1-\qty(\frac{\omega}{D})^2},
+\end{equation}
+where $D = 2t^*$ is the half-bandwidth.
+
+Using equation \ref{eq:bethe-dos} and integrating equation \ref{eq:Gf-local}, we get the hybridization function \cite{thesis_bruno}
 $$
-\rho_0(\eps) = \frac{2}{\pi D} \sqrt{1-\qty(\frac{\omega}{D})^2}.
+\Delta(\omega) = t_*^2 \, G_{\text{imp}}(\omega).
 $$
+
+\section{Results}
+
 <++>
 
 
