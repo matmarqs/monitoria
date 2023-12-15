@@ -31,11 +31,11 @@
 \newcommand{\periodoRelatorio}[1]{\def\periodRelat{#1}}
 \newcommand{\orientador}[1]{\def\nomeOrientador{#1}}
 
-\newcommand\namegroup[2]{%
+\newcommand\namegroup[3]{%
    \begin{minipage}[t]{0.4\textwidth}
    \hspace{0.6cm}
    \begin{tikzpicture}
-   \node[anchor=south east,inner sep = 0](signF){\includegraphics[width=1cm]{#2}};
+   \node[anchor=south east,inner sep = 0](signF){\includegraphics[width=#3]{#2}};
    \end{tikzpicture}
    \vspace*{0.1cm}  % leave some space above the horizontal line
    \hrule
@@ -109,9 +109,9 @@
 
         %% Assinatura assinatura ASSINATURA
         %\namegroup{Researcher}{example-image-a}
-        \namegroup{Researcher}{fig/placeholder.png}
+        \namegroup{Researcher}{fig/assinatura-mateus.png}{5cm}
         \hspace{1.5cm}
-        \namegroup{Advisor}{fig/placeholder.png}
+        \namegroup{Advisor}{fig/placeholder.png}{1cm}
 
         %\begin{minipage}[t]{0.4\textwidth}
         %\vspace*{1.5cm}
