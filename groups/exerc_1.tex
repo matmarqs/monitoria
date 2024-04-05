@@ -1,0 +1,92 @@
+\documentclass[a4paper,10pt]{article}
+\input{preamble}
+
+\title{\Huge{\textbf{Teoria de grupos - Exercício 1}}}
+\author{Mateus Marques}
+
+\begin{document}
+
+\maketitle
+
+\section*{Grupo da molécula de amônia NH$_3$}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\linewidth]{fig/C3v.png}
+\caption{Grupo $C_{3\text{v}}$ associado à molécula de amônia.}
+\label{fig:C3v}
+\end{figure}
+
+Nos slides da Aula 3 (Figura \ref{fig:C3v}), a professora deu como exemplo o grupo $C_{3\text{v}}$ da amônia. Este grupo contém 6 elementos, sendo eles
+\begin{itemize}
+\item a identidade $E$;
+ \item as três reflexões $\sigma_{\text{v}1}$, $\sigma_{\text{v}2}$ e $\sigma_{\text{v}3}$ representadas na Figura \ref{fig:C3v};
+\item as rotações $C_3$ (por $120^\circ)$ e $C_3^2$ (por $240^\circ$) pelo eixo que passa pelo átomo de nitrogênio N e o baricentro do triângulo definido pelos três átomos de hidrogênio H.
+\end{itemize}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\linewidth]{fig/triangulo.png}
+\caption{Grupo do triângulo visto na Aula 2.}
+\label{fig:triangulo}
+\end{figure}
+
+Nos slides da Aula 2 (Figura \ref{fig:triangulo}) a professora passou o grupo do triângulo. Note bem que se compararmos as Figuras \ref{fig:C3v} e \ref{fig:triangulo}, conseguimos estabelecer diretamente um isomorfismo entre o grupo do triângulo e o grupo $C_{3\text{v}}$. De fato, colocando os dois desenhos lado a lado na Figura \ref{fig:comp} vemos imediatamente a identificação:
+\begin{equation} \label{eq:identificacao}
+E \leftrightarrow E, \quad
+\sigma_{\text{v}1} \leftrightarrow B, \quad
+\sigma_{\text{v}2} \leftrightarrow A, \quad
+\sigma_{\text{v}3} \leftrightarrow C, \quad
+C_3 \leftrightarrow D, \quad
+C_3^2 \leftrightarrow F.
+\end{equation}
+
+Devido a esse isomorfismo, todas as propriedades algébricas entre os grupos seram iguais, em particular a tabela de multiplicação e a partição do grupo em classes.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.6\linewidth]{fig/comp.png}
+\caption{Identificação imediata entre os elementos do grupo do triângulo e o grupo $C_{3\text{v}}$.}
+\label{fig:comp}
+\end{figure}
+
+
+\subsection*{1. Ordem}
+
+O grupo se escreve $C_{3\text{v}} = \{E, \sigma_{\text{v}1}, \sigma_{\text{v}2}, \sigma_{\text{v}3}, C_3, C_3^2\}$ e possui ordem $6$.
+
+\subsection*{2. Tabela de Multiplicação}
+
+Pelo isomorfismo, a tabela de multiplicação do grupo $C_{3\text{v}}$ é idêntica ao do grupo do triângulo (mostrada na Figura \ref{fig:triangulo}), dado que façamos a identificação \ref{eq:identificacao}. Portanto ela é:
+
+\begin{table}[ht]
+\caption{Tabela de multiplicação do grupo $C_{3\text{v}}$, construída pela tabela de multiplicação do grupo do triângulo (Figura \ref{fig:triangulo}) e o isomorfismo da equação \ref{eq:identificacao}.}
+\centering
+\begin{tabular}{ |c|c c c c c c| }
+\hline
+\phantom{x}          & $E$                  & $\sigma_{\text{v}1}$   & $\sigma_{\text{v}2}$ & $\sigma_{\text{v}3}$ & $C_3$                & $C_3^2$ \\
+\hline
+$E$                  & $E$                  & $\sigma_{\text{v}1}$   & $\sigma_{\text{v}2}$ & $\sigma_{\text{v}3}$ & $C_3$                & $C_3^2$ \\
+$\sigma_{\text{v}1}$ & $\sigma_{\text{v}1}$ & $E$                    & $C_3$                & $C_3^2$              & $\sigma_{\text{v}1}$ & $\sigma_{\text{v}3}$ \\
+$\sigma_{\text{v}2}$ & $\sigma_{\text{v}2}$ & $C_3^2$                & $E$                  & $C_3$                & $\sigma_{\text{v}3}$ & $\sigma_{\text{v}2}$ \\
+$\sigma_{\text{v}3}$ & $\sigma_{\text{v}3}$ & $C_3$                  & $C_3^2$              & $E$                  & $\sigma_{\text{v}2}$ & $\sigma_{\text{v}1}$ \\
+$C_3$                & $C_3$                & $\sigma_{\text{v}3}$   & $\sigma_{\text{v}2}$ & $\sigma_{\text{v}1}$ & $C_3^2$              & $E$ \\
+$C_3^2$              & $C_3^2$              & $\sigma_{\text{v}1}$   & $\sigma_{\text{v}3}$ & $\sigma_{\text{v}2}$ & $E$                  & $C_3$ \\
+\hline
+\end{tabular}
+\label{tab:mult}
+\end{table}
+
+\subsection*{3. Cíclico?}
+
+Como vemos na tabela de multiplicação \ref{tab:mult}, ela não é simétrica e portanto o grupo não é abeliano. Assim, ele também não é cíclico (não existe um único elemento gerador que gera todo o grupo).
+
+\subsection*{4. Abeliano?}
+
+A tabela de multiplicação \ref{tab:mult} não é simétrica, logo o grupo não é abeliano.
+
+\subsection*{5. Classes}
+
+As classes do grupo $C_{3\text{v}}$ são idênticas às classes do grupo do triângulo, ao realizarmos a identificação na equação \ref{eq:identificacao}. Portanto, olhando na Figura \ref{fig:triangulo} vemos que as três classes são $\{E\}$, $\{\sigma_{\text{v}1}, \sigma_{\text{v}2}, \sigma_{\text{v}3}\}$ e $\{C_3, C_3^2\}$.
+
+\end{document}
