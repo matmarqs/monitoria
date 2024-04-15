@@ -66,8 +66,8 @@ def generate_D3d():
     C21 = Element(Perm([6,5,4,3,2,1,8,7]), r'$C_2^{(1)}$')
     C22 = Element(Perm([5,4,6,2,1,3,8,7]), r'$C_2^{(2)}$')
     C23 = Element(Perm([4,6,5,1,3,2,8,7]), r'$C_2^{(3)}$')
-    S6 = Element(C32.perm * I.perm, r'$S_6$')
-    S65 = Element(C3.perm * I.perm, r'$S_6^5$')
+    S6 = Element(C3.perm * I.perm, r'$S_6$')
+    S65 = Element(C32.perm * I.perm, r'$S_6^5$')
     Sigma_d1 = Element(C21.perm * I.perm, r'$\sigma_d^{(1)}$')
     Sigma_d2 = Element(C22.perm * I.perm, r'$\sigma_d^{(2)}$')
     Sigma_d3 = Element(C23.perm * I.perm, r'$\sigma_d^{(3)}$')
@@ -99,12 +99,11 @@ def print_MultiplicationTable(group, group_name):
 
 
 def main():
+    #D3h = generate_D3h()
+    #print_MultiplicationTable(D3h, r'$D_{3h}$')
 
-    #D3d = generate_D3d()
-    #print_MultiplicationTable(D3d, r'$D_{3d}$')
-
-    D3h = generate_D3h()
-    print_MultiplicationTable(D3h, r'$D_{3h}$')
+    D3d = generate_D3d()
+    print_MultiplicationTable(D3d, r'$D_{3d}$')
 
 if __name__ == '__main__':
     main()
