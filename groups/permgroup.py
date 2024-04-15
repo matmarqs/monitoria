@@ -11,6 +11,9 @@ class Element:
     def __init__(self, perm, name):
         self.perm = perm
         self.name = name
+    #### DEBUG #####
+    def show(self):
+        self.perm.show()
 
 class Perm:
     def __init__(self, L):
@@ -56,9 +59,22 @@ def generate_D3h():
     return D3h
 
 def generate_D3d():
-    return []
+    E = Element(ident(8), r'$E$')
+    C3 = Element(Perm([2,3,1,5,6,4,7,8]), r'$C_3$')
+    C32 = Element(C3.perm.inv(), r'$C_3^2$')
+    I = Element(Perm([6,4,5,2,3,1,8,7]), r'$i$')
+    C21 = Element(Perm([6,5,4,3,2,1,8,7]), r'$C_2^{(1)}$')
+    C22 = Element(Perm([5,4,6,2,1,3,8,7]), r'$C_2^{(2)}$')
+    C23 = Element(Perm([4,6,5,1,3,2,8,7]), r'$C_2^{(3)}$')
+    S6 = Element(C32.perm * I.perm, r'$S_6$')
+    S65 = Element(C3.perm * I.perm, r'$S_6^5$')
+    Sigma_d1 = Element(C21.perm * I.perm, r'$\sigma_d^{(1)}$')
+    Sigma_d2 = Element(C22.perm * I.perm, r'$\sigma_d^{(2)}$')
+    Sigma_d3 = Element(C23.perm * I.perm, r'$\sigma_d^{(3)}$')
+    D3d = Group([E, C3, C32, C21, C22, C23, Sigma_d1, Sigma_d2, Sigma_d3, I, S6, S65])
+    return D3d
 
-def print_MultiplicationTable(group):
+def print_MultiplicationTable(group, group_name):
     elem = group.elements
     order = len(elem)
     def tabular_string(n):
@@ -69,6 +85,7 @@ def print_MultiplicationTable(group):
         return s
     print(r'\begin{tabular} { %s }' % tabular_string(order))
     print(r'\hline')
+    print(group_name+' ', end='')
     for j in range(order):
         print(f'& {elem[j].name} ', end='') if j < order-1 else print(f'& {elem[j].name} \\\\')
     print(r'\hline')
@@ -82,8 +99,12 @@ def print_MultiplicationTable(group):
 
 
 def main():
+
+    #D3d = generate_D3d()
+    #print_MultiplicationTable(D3d, r'$D_{3d}$')
+
     D3h = generate_D3h()
-    print_MultiplicationTable(D3h)
+    print_MultiplicationTable(D3h, r'$D_{3h}$')
 
 if __name__ == '__main__':
     main()
