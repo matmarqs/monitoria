@@ -1,17 +1,19 @@
 class Element:
-    def __init__():
+    def __init__(self, perm, name):
+        self.perm = perm
+        self.name = name
 
 class Perm:
     def __init__(self, L):
         self.n = len(L)
-        self.perm = [i-1 for i in L]
+        self.list = [i-1 for i in L]
     def __eq__(self, other):
-        return self.perm == other.perm
+        return self.list == other.list
     def __mul__(self, other):
-        return Perm([self.perm[i]+1 for i in other.perm])
+        return Perm([self.list[i]+1 for i in other.list])
     def find(self, j):
         for i in range(self.n):
-            if self.perm[i] == j:
+            if self.list[i] == j:
                 return i
     def inv(self):
         return Perm([self.find(j)+1 for j in range(self.n)])
@@ -20,30 +22,77 @@ class Perm:
         for i in range(self.n):
             print(f'{i+1} ', end='')
         print(')\n( ', end='')
-        for i in self.perm:
+        for i in self.list:
             print(f'{i+1} ', end='')
         print(')\n')
 
-def ident(n)
+def ident(n):
     return Perm([i for i in range(1, n+1)])
 
-def
+def FindInGroup(perm, group):
+    for g in group:
+        if perm == g.perm:
+            return g
+    return None
+
+def table_string(n):
+    s = "|c|"
+    while n > 0:
+        s = s+"c " if n > 1 else s+"c |"
+        n -= 1
+    return s
 
 def main():
-    E = ident(n)
-    C3 = Perm([3,4,5,6,1,2,7,8])
-    C32 = C3.inv()
-    Sigma_h = Perm([2,1,4,3,6,5,8,7])
-    C21 = Perm([2,1,6,5,4,3,8,7])
-    C22 = Perm([6,5,4,3,2,1,8,7])
-    C23 = Perm([4,3,2,1,6,5,8,7])
-    S3 = C3 * Sigma_h
-    S32 = C32 * Sigma_h
-    Sigma_v1 = C21 * Sigma_h
-    Sigma_v2 = C22 * Sigma_h
-    Sigma_v3 = C23 * Sigma_h
+    E = Element(ident(8), r'$E$')
+    C3 = Element(Perm([3,4,5,6,1,2,7,8]), r'$C_3$')
+    C32 = Element(C3.perm.inv(), r'$C_3^2$')
+    Sigma_h = Element(Perm([2,1,4,3,6,5,8,7]), r'$\sigma_h$')
+    C21 = Element(Perm([2,1,6,5,4,3,8,7]), r'$C_2^{(1)}$')
+    C22 = Element(Perm([6,5,4,3,2,1,8,7]), r'$C_2^{(2)}$')
+    C23 = Element(Perm([4,3,2,1,6,5,8,7]), r'$C_2^{(3)}$')
+    S3 = Element(C3.perm * Sigma_h.perm, r'$S_3$')
+    S32 = Element(C32.perm * Sigma_h.perm, r'$S_3^2$')
+    Sigma_v1 = Element(C21.perm * Sigma_h.perm, r'$\sigma_v^{(1)}$')
+    Sigma_v2 = Element(C22.perm * Sigma_h.perm, r'$\sigma_v^{(2)}$')
+    Sigma_v3 = Element(C23.perm * Sigma_h.perm, r'$\sigma_v^{(3)}$')
+
+    #E = Element(ident(8), r'E')
+    #C3 = Element(Perm([3,4,5,6,1,2,7,8]), r'C_3')
+    #C32 = Element(C3.perm.inv(), r'C_3^2')
+    #Sigma_h = Element(Perm([2,1,4,3,6,5,8,7]), r'\sigma_h')
+    #C21 = Element(Perm([2,1,6,5,4,3,8,7]), r'C_2^{(1)}')
+    #C22 = Element(Perm([6,5,4,3,2,1,8,7]), r'C_2^{(2)}')
+    #C23 = Element(Perm([4,3,2,1,6,5,8,7]), r'C_2^{(3)}')
+    #S3 = Element(C3.perm * Sigma_h.perm, r'S_3')
+    #S32 = Element(C32.perm * Sigma_h.perm, r'S_3^2')
+    #Sigma_v1 = Element(C21.perm * Sigma_h.perm, r'\sigma_v^{(1)}')
+    #Sigma_v2 = Element(C22.perm * Sigma_h.perm, r'\sigma_v^{(2)}')
+    #Sigma_v3 = Element(C23.perm * Sigma_h.perm, r'\sigma_v^{(3)}')
 
     D3h = [E, C3, C32, C21, C22, C23, Sigma_v1, Sigma_v2, Sigma_v3, Sigma_h, S3, S32]
+
+    #print(r'\begin{bmatrix}')
+    #for j in range(len(D3h)):
+    #    print(f'& {D3h[j].name} ', end='') if j < len(D3h)-1 else print(f'& {D3h[j].name} \\\\')
+    #for i in range(len(D3h)):
+    #    print(f'{D3h[i].name} & ', end='')
+    #    for j in range(len(D3h)):
+    #        res = FindInGroup(D3h[i].perm * D3h[j].perm, D3h)
+    #        print(f'{res.name} & ', end='') if j < len(D3h)-1 else print(f'{res.name} \\\\')
+    #print(r'\end{bmatrix}')
+
+    print(r'\begin{tabular} { %s }' % table_string(12))
+    print(r'\hline')
+    for j in range(len(D3h)):
+        print(f'& {D3h[j].name} ', end='') if j < len(D3h)-1 else print(f'& {D3h[j].name} \\\\')
+    print(r'\hline')
+    for i in range(len(D3h)):
+        print(f'{D3h[i].name} & ', end='')
+        for j in range(len(D3h)):
+            res = FindInGroup(D3h[i].perm * D3h[j].perm, D3h)
+            print(f'{res.name} & ', end='') if j < len(D3h)-1 else print(f'{res.name} \\\\')
+    print(r'\hline')
+    print(r'\end{tabular}')
 
 if __name__ == '__main__':
     main()
