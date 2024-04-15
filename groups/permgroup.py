@@ -1,3 +1,12 @@
+class Group:
+    def __init__(self, elements):
+        self.elements = elements
+    def find(self, perm):
+        for g in self.elements:
+            if perm == g.perm:
+                return g
+        return None
+
 class Element:
     def __init__(self, perm, name):
         self.perm = perm
@@ -17,6 +26,7 @@ class Perm:
                 return i
     def inv(self):
         return Perm([self.find(j)+1 for j in range(self.n)])
+    #### DEBUG #####
     def show(self):
         print('( ', end='')
         for i in range(self.n):
@@ -29,20 +39,7 @@ class Perm:
 def ident(n):
     return Perm([i for i in range(1, n+1)])
 
-def FindInGroup(perm, group):
-    for g in group:
-        if perm == g.perm:
-            return g
-    return None
-
-def table_string(n):
-    s = "|c|"
-    while n > 0:
-        s = s+"c " if n > 1 else s+"c |"
-        n -= 1
-    return s
-
-def main():
+def generate_D3h():
     E = Element(ident(8), r'$E$')
     C3 = Element(Perm([3,4,5,6,1,2,7,8]), r'$C_3$')
     C32 = Element(C3.perm.inv(), r'$C_3^2$')
@@ -55,44 +52,38 @@ def main():
     Sigma_v1 = Element(C21.perm * Sigma_h.perm, r'$\sigma_v^{(1)}$')
     Sigma_v2 = Element(C22.perm * Sigma_h.perm, r'$\sigma_v^{(2)}$')
     Sigma_v3 = Element(C23.perm * Sigma_h.perm, r'$\sigma_v^{(3)}$')
+    D3h = Group([E, C3, C32, C21, C22, C23, Sigma_v1, Sigma_v2, Sigma_v3, Sigma_h, S3, S32])
+    return D3h
 
-    #E = Element(ident(8), r'E')
-    #C3 = Element(Perm([3,4,5,6,1,2,7,8]), r'C_3')
-    #C32 = Element(C3.perm.inv(), r'C_3^2')
-    #Sigma_h = Element(Perm([2,1,4,3,6,5,8,7]), r'\sigma_h')
-    #C21 = Element(Perm([2,1,6,5,4,3,8,7]), r'C_2^{(1)}')
-    #C22 = Element(Perm([6,5,4,3,2,1,8,7]), r'C_2^{(2)}')
-    #C23 = Element(Perm([4,3,2,1,6,5,8,7]), r'C_2^{(3)}')
-    #S3 = Element(C3.perm * Sigma_h.perm, r'S_3')
-    #S32 = Element(C32.perm * Sigma_h.perm, r'S_3^2')
-    #Sigma_v1 = Element(C21.perm * Sigma_h.perm, r'\sigma_v^{(1)}')
-    #Sigma_v2 = Element(C22.perm * Sigma_h.perm, r'\sigma_v^{(2)}')
-    #Sigma_v3 = Element(C23.perm * Sigma_h.perm, r'\sigma_v^{(3)}')
+def generate_D3d():
+    return []
 
-    D3h = [E, C3, C32, C21, C22, C23, Sigma_v1, Sigma_v2, Sigma_v3, Sigma_h, S3, S32]
-
-    #print(r'\begin{bmatrix}')
-    #for j in range(len(D3h)):
-    #    print(f'& {D3h[j].name} ', end='') if j < len(D3h)-1 else print(f'& {D3h[j].name} \\\\')
-    #for i in range(len(D3h)):
-    #    print(f'{D3h[i].name} & ', end='')
-    #    for j in range(len(D3h)):
-    #        res = FindInGroup(D3h[i].perm * D3h[j].perm, D3h)
-    #        print(f'{res.name} & ', end='') if j < len(D3h)-1 else print(f'{res.name} \\\\')
-    #print(r'\end{bmatrix}')
-
-    print(r'\begin{tabular} { %s }' % table_string(12))
+def print_MultiplicationTable(group):
+    elem = group.elements
+    order = len(elem)
+    def tabular_string(n):
+        s = "|c|"
+        while n > 0:
+            s = s+"c " if n > 1 else s+"c |"
+            n -= 1
+        return s
+    print(r'\begin{tabular} { %s }' % tabular_string(order))
     print(r'\hline')
-    for j in range(len(D3h)):
-        print(f'& {D3h[j].name} ', end='') if j < len(D3h)-1 else print(f'& {D3h[j].name} \\\\')
+    for j in range(order):
+        print(f'& {elem[j].name} ', end='') if j < order-1 else print(f'& {elem[j].name} \\\\')
     print(r'\hline')
-    for i in range(len(D3h)):
-        print(f'{D3h[i].name} & ', end='')
-        for j in range(len(D3h)):
-            res = FindInGroup(D3h[i].perm * D3h[j].perm, D3h)
-            print(f'{res.name} & ', end='') if j < len(D3h)-1 else print(f'{res.name} \\\\')
+    for i in range(order):
+        print(f'{elem[i].name} & ', end='')
+        for j in range(order):
+            res = group.find(elem[i].perm * elem[j].perm)
+            print(f'{res.name} & ', end='') if j < order-1 else print(f'{res.name} \\\\')
     print(r'\hline')
     print(r'\end{tabular}')
+
+
+def main():
+    D3h = generate_D3h()
+    print_MultiplicationTable(D3h)
 
 if __name__ == '__main__':
     main()
