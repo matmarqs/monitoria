@@ -1,16 +1,41 @@
 class Group:    # lista de Element
-    def __init__(self, elements):
+    def __init__(self, elements, name):
         self.elements = elements
+        self.name = name
     def find(self, perm):
         for g in self.elements:
             if perm == g.perm:
                 return g
         return None
+    def printtable(self):
+        elem = self.elements
+        group_name = self.name
+        order = len(elem)
+        def tabular_string(n):
+            s = "|c|"
+            while n > 0:
+                s = s+"c " if n > 1 else s+"c |"
+                n -= 1
+            return s
+        print(r'\begin{tabular} { %s }' % tabular_string(order))
+        print(r'\hline')
+        print(group_name+' ', end='')
+        for j in range(order):
+            print(f'& {elem[j].eqname} ', end='') if j < order-1 else print(f'& {elem[j].eqname} \\\\')
+        print(r'\hline')
+        for i in range(order):
+            print(f'{elem[i].eqname} & ', end='')
+            for j in range(order):
+                res = self.find(elem[i].perm * elem[j].perm)
+                print(f'{res.eqname} & ', end='') if j < order-1 else print(f'{res.eqname} \\\\')
+        print(r'\hline')
+        print(r'\end{tabular}')
 
 class Element:  # Permutacao e o nome
     def __init__(self, perm, name):
         self.perm = perm
-        self.name = name
+        self.name = name[1:-1]  # remove '$$' from latex equation
+        self.eqname = name
     #### DEBUG #####
     def show(self):
         self.perm.show()
@@ -55,7 +80,7 @@ def generate_D3h():
     Sigma_v1 = Element(C21.perm * Sigma_h.perm, r'$\sigma_v^{(1)}$')
     Sigma_v2 = Element(C22.perm * Sigma_h.perm, r'$\sigma_v^{(2)}$')
     Sigma_v3 = Element(C23.perm * Sigma_h.perm, r'$\sigma_v^{(3)}$')
-    D3h = Group([E, C3, C32, C21, C22, C23, Sigma_v1, Sigma_v2, Sigma_v3, Sigma_h, S3, S32])
+    D3h = Group([E, C3, C32, C21, C22, C23, Sigma_v1, Sigma_v2, Sigma_v3, Sigma_h, S3, S32], r'$D_{3h}$')
     return D3h
 
 def generate_D3d():
@@ -71,39 +96,34 @@ def generate_D3d():
     Sigma_d1 = Element(C21.perm * I.perm, r'$\sigma_d^{(1)}$')
     Sigma_d2 = Element(C22.perm * I.perm, r'$\sigma_d^{(2)}$')
     Sigma_d3 = Element(C23.perm * I.perm, r'$\sigma_d^{(3)}$')
-    D3d = Group([E, C3, C32, C21, C22, C23, Sigma_d1, Sigma_d2, Sigma_d3, I, S6, S65])
+    D3d = Group([E, C3, C32, C21, C22, C23, Sigma_d1, Sigma_d2, Sigma_d3, I, S6, S65], r'$D_{3d}$')
     return D3d
 
-def print_MultiplicationTable(group, group_name):
-    elem = group.elements
-    order = len(elem)
-    def tabular_string(n):
-        s = "|c|"
-        while n > 0:
-            s = s+"c " if n > 1 else s+"c |"
-            n -= 1
-        return s
-    print(r'\begin{tabular} { %s }' % tabular_string(order))
-    print(r'\hline')
-    print(group_name+' ', end='')
-    for j in range(order):
-        print(f'& {elem[j].name} ', end='') if j < order-1 else print(f'& {elem[j].name} \\\\')
-    print(r'\hline')
-    for i in range(order):
-        print(f'{elem[i].name} & ', end='')
-        for j in range(order):
-            res = group.find(elem[i].perm * elem[j].perm)
-            print(f'{res.name} & ', end='') if j < order-1 else print(f'{res.name} \\\\')
-    print(r'\hline')
-    print(r'\end{tabular}')
+def conjugacy_classes(group):
+    classes = set()
+    for g in group.elements:
+        g_class = set()
+        for A in group.elements:
+            g_class.add(group.find(A.perm.inv() * g.perm * A.perm))
+        g_class = frozenset(g_class)
+        classes.add(g_class)
+    return classes
 
+def print_conjclass(cl):
+    string = r"\{ "
+    for g in cl:
+        string += "%s, " % g.name
+    string = string[:-2] + r" \}"   # delete last two characters ", " and append " \}"
+    print(string)
 
 def main():
-    #D3h = generate_D3h()
-    #print_MultiplicationTable(D3h, r'$D_{3h}$')
+    group = generate_D3d()
+    #group = generate_D3h()
+    group.printtable()
 
-    #D3d = generate_D3d()
-    #print_MultiplicationTable(D3d, r'$D_{3d}$')
+    classes = conjugacy_classes(group)
+    for cl in classes:
+        print_conjclass(cl)
 
 if __name__ == '__main__':
     main()
