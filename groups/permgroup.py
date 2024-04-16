@@ -1,4 +1,4 @@
-class Group:
+class Group:    # lista de Element
     def __init__(self, elements):
         self.elements = elements
     def find(self, perm):
@@ -7,7 +7,7 @@ class Group:
                 return g
         return None
 
-class Element:
+class Element:  # Permutacao e o nome
     def __init__(self, perm, name):
         self.perm = perm
         self.name = name
@@ -15,7 +15,7 @@ class Element:
     def show(self):
         self.perm.show()
 
-class Perm:
+class Perm:     # permutacao C3 = Perm([2, 3, 1])
     def __init__(self, L):
         self.n = len(L)
         self.list = [i-1 for i in L]
@@ -102,8 +102,8 @@ def main():
     #D3h = generate_D3h()
     #print_MultiplicationTable(D3h, r'$D_{3h}$')
 
-    D3d = generate_D3d()
-    print_MultiplicationTable(D3d, r'$D_{3d}$')
+    #D3d = generate_D3d()
+    #print_MultiplicationTable(D3d, r'$D_{3d}$')
 
 if __name__ == '__main__':
     main()
