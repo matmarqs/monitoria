@@ -21,21 +21,27 @@ class Group:    # lista de Element
         print(r'\hline')
         print(group_name+' ', end='')
         for j in range(order):
-            print(f'& {elem[j].eqname} ', end='') if j < order-1 else print(f'& {elem[j].eqname} \\\\')
+            if j < order-1:
+                print(f'& {elem[j].eqname} ', end='')
+            else:
+                print(f'& {elem[j].eqname} \\\\')
         print(r'\hline')
         for i in range(order):
             print(f'{elem[i].eqname} & ', end='')
             for j in range(order):
                 res = self.find(elem[i].perm * elem[j].perm)
-                print(f'{res.eqname} & ', end='') if j < order-1 else print(f'{res.eqname} \\\\')
+                if j < order-1:
+                    print(f'{res.eqname} & ', end='')
+                else:
+                    print(f'{res.eqname} \\\\')
         print(r'\hline')
         print(r'\end{tabular}')
 
 class Element:  # Permutacao e o nome
-    def __init__(self, perm, name):
+    def __init__(self, perm, eqname):
         self.perm = perm
-        self.name = name[1:-1]  # remove '$$' from latex equation
-        self.eqname = name
+        self.name = eqname[1:-1]  # remove '$$' from latex equation
+        self.eqname = eqname
     #### DEBUG #####
     def show(self):
         self.perm.show()

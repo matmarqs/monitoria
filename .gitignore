@@ -11,5 +11,7 @@
 **/*.snm
 **/*.nav
 **/*.fdb_latexmk
+**/*.listing
+**/_minted*
 topology/
 brilliant/

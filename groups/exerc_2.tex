@@ -1,6 +1,26 @@
 \documentclass[a4paper,10pt]{article}
 \input{preamble}
 
+\usepackage{minted}
+\usemintedstyle{vs}
+\definecolor{bg}{rgb}{0.85,0.85,0.85}
+\setmintedinline{bgcolor=bg}
+\newcommand{\python}[1]{\mintinline{python}{#1}}
+\usepackage{tcolorbox}
+\tcbuselibrary{minted,skins}
+\newtcblisting{Python}{
+  listing engine=minted,
+  colback=bg,
+  colframe=black!70,
+  listing only,
+  minted style=vs,
+  minted language=python,
+  minted options={texcl=true},
+  left=1mm,
+}
+
+\newcommand{\lr}{\leftrightarrow}
+
 \title{\Huge{\textbf{Teoria de grupos - Exercício 2}}}
 \author{Mateus Marques}
 
@@ -9,10 +29,192 @@
 
 \maketitle
 
-\section*{Etano eclipsado C$_2$H$_6$}
+Minha abordagem para este exercício será computacional. Irei gerar as tabelas de multiplicação através de programação orientada a objetos no \python{python}. Para isso definirei \python{class Element}, associada aos elementos do grupo em questão, que serão definidos de acordo com permutações da \python{class Perm}.
+
+
+\section*{1. Etano eclipsado C$_2$H$_6$}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.3\linewidth]{fig/etano_eclipsado.png}
+\caption{Etano eclipsado C$_2$H$_6$ com seus átomos enumerados.}
+\label{fig:etano_eclipsado}
+\end{figure}
+
+Para o etano eclipsado, nós labelamos seus átomos de hidrogênio com os números $1,2,3,4,5,6$ e seus átomos de carbono com os números $7,8$, de acordo com a Figura \ref{fig:etano_eclipsado}. A título de exemplo, então podemos definir a permutação identidade $E$ e a reflexão $\sigma_h$ (no plano $xz$).
+\begin{equation} \label{eq:E-Sigma_h}
+E =
+\begin{pmatrix}
+1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 \\
+1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 \\
+\end{pmatrix}
+\e
+\sigma_h =
+\begin{pmatrix}
+1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 \\
+2 & 1 & 4 & 3 & 6 & 5 & 8 & 7 \\
+\end{pmatrix}.
+\end{equation}
+Isso pois a reflexão $\sigma_h$ troca $1 \lr 2$, $3 \lr 4$, $5 \lr 6$ e $7 \lr 8$. No caso de nossa implementação no \python{python}, o que faremos é associar esses dois elementos $E$ e $\sigma_h$ às listas (definida dentro da \python{class Perm})
+\begin{Python}
+Perm([1,2,3,4,5,6,7,8])     # para o elemento identidade $E$
+Perm([2,1,4,3,6,5,8,7])     # para a reflexão $\sigma_h$
+\end{Python}
+que são essencialmente a segunda linha das matrizes da equação \ref{eq:E-Sigma_h}.
+
+A definição da \python{class Perm} é
+\begin{Python}
+class Perm:
+    def __init__(self, L):  # inicialização a partir de uma lista
+        self.n = len(L)
+        self.list = [i-1 for i in L]  # subtrair 1 para indexar a partir do zero
+    def __eq__(self, other):
+        return self.list == other.list  # são iguais se as listas são iguais
+    def __mul__(self, other):  # multiplicação de duas permutações
+        return Perm([self.list[i]+1 for i in other.list])  # composição
+    def find(self, j):  # método auxiliar para achar a posição de um número na lista
+        for i in range(self.n):
+            if self.list[i] == j:
+                return i
+    def inv(self):  # calcula a inversa de uma permutação
+        return Perm([self.find(j)+1 for j in range(self.n)])
+\end{Python}
+
+O método \python{__mul__(self, other)} define como é a multiplicação de dois elementos. Para exemplificar, considere as permutações do triângulo $A$ e $B$, definidas por
+$$
+A = C_3 =
+\begin{pmatrix}
+1 & 2 & 3 \\
+2 & 3 & 1
+\end{pmatrix}
+\e
+B = \sigma_{\text{v}1} =
+\begin{pmatrix}
+1 & 2 & 3 \\
+1 & 3 & 2
+\end{pmatrix},
+$$
+que no \python{python} seriam definidas por
+\begin{Python}
+A = Perm([2,3,1])   # == Perm( [A[1], A[2], A[3]] )
+B = Perm([1,3,2])   # == Perm( [B[1], B[2], B[3]] )
+\end{Python}
+
+Essas permutações têm como regras
+$$
+\begin{cases}
+\; A: 1 \to 2, \; 2 \to 3, \; 3 \to 1; \\
+\; B: 1 \to 1, \; 2 \to 3, \; 3 \to 2.
+\end{cases}
+$$
+
+Portanto, a multiplicação é $BA: 1 \to 3, \; 2 \to 2, \; 3 \to 1$, sendo representada por
+$$
+BA = \sigma_{\text{v}2} =
+\begin{pmatrix}
+1 & 2 & 3 \\
+3 & 2 & 1
+\end{pmatrix},
+$$
+que no \python{python} seria
+\begin{Python}
+B*A = Perm([3,2,1])   # = Perm( [B[A[1]], B[A[2]], B[A[3]]] )
+\end{Python}
+
+Por isso o método \python{__mul__(self, other)} é definido como
+\begin{Python}
+def __mul__(self, other):
+    return Perm([self.list[i]+1 for i in other.list])
+\end{Python}
+
+No fundo estamos fazendo a composição \python{[ B[A[i]] for i in [1,2,...] ]}. Um detalhe é que realizamos a soma \python{+1} devido ao \python{python} indexar os números a partir do zero.
+
+A explicação acima do método \python{__mul__} é a essência de nossa implementação. Para calcularmos as propriedades do grupo $D_{3h}$ basta que definamos seus elementos com a \python{class Element}, que nada mais é que uma \textit{data structure} com a permutação \python{Perm} e o nome do elemento.
+\begin{Python}
+class Element:  # permutacao e o nome
+    def __init__(self, perm, eqname):
+        self.perm = perm
+        self.name = eqname[1:-1]  # remove '\$\$' from latex equation
+        self.eqname = eqname
+\end{Python}
+
+No caso, o atributo \python{Element.eqname} significa o código em \LaTeX do elemento em questão. Por exemplo, para o $\sigma_h$ seria \python{r'$\sigma_h$'}. Eu faço isso pois planejo fazer meu programa printar a tabela já em formato de \LaTeX.
+
+A função que gera o grupo $D_{3h}$ é definida por
+\begin{Python}
+def generate_D3h():
+    E = Element(ident(8), r'$E$')
+    C3 = Element(Perm([3,4,5,6,1,2,7,8]), r'$C_3$')
+    C32 = Element(C3.perm.inv(), r'$C_3^2$')
+    Sigma_h = Element(Perm([2,1,4,3,6,5,8,7]), r'$\sigma_h$')
+    C21 = Element(Perm([2,1,6,5,4,3,8,7]), r'$C_2^{(1)}$')
+    C22 = Element(Perm([6,5,4,3,2,1,8,7]), r'$C_2^{(2)}$')
+    C23 = Element(Perm([4,3,2,1,6,5,8,7]), r'$C_2^{(3)}$')
+    S3 = Element(C3.perm * Sigma_h.perm, r'$S_3$')
+    S32 = Element(C32.perm * Sigma_h.perm, r'$S_3^2$')
+    Sigma_v1 = Element(C21.perm * Sigma_h.perm, r'$\sigma_v^{(1)}$')
+    Sigma_v2 = Element(C22.perm * Sigma_h.perm, r'$\sigma_v^{(2)}$')
+    Sigma_v3 = Element(C23.perm * Sigma_h.perm, r'$\sigma_v^{(3)}$')
+    D3h = Group([E, C3, C32, C21, C22, C23, Sigma_v1,
+                 Sigma_v2, Sigma_v3, Sigma_h, S3, S32], r'$D_{3h}$')
+    return D3h
+\end{Python}
+
+O que esta função \python{generate_D3h()} é basicamente definir cada elemento de acordo com a representação de permutação com os rótulos da Figura \ref{fig:etano_eclipsado}.
+
+Com nosso grupo $D_{3h}$ definido, o código que gera a tabela de multiplicação já em formato \LaTeX são métodos da \python{class Group}:
+\begin{Python}
+class Group:    # essencialmente uma lista de 'Element' e o nome do grupo
+    def __init__(self, elements, name):
+        self.elements = elements
+        self.name = name
+    def find(self, perm):  # procura um elemento que corresponde a uma permutação
+        for g in self.elements:
+            if perm == g.perm:
+                return g
+        return None
+    def printtable(self):  # função que printa a tabela de multiplicação em LaTeX
+        elem = self.elements
+        group_name = self.name
+        order = len(elem)
+        def tabular_string(n):
+            s = "|c|"
+            while n > 0:
+                s = s+"c " if n > 1 else s+"c |"
+                n -= 1
+            return s
+        print(r'\begin{tabular} { %s }' % tabular_string(order))
+        print(r'\hline')
+        print(group_name+' ', end='')
+        for j in range(order):
+            if j < order-1:
+                print(f'& {elem[j].eqname} ', end='')
+            else:
+                print(f'& {elem[j].eqname} \\\\')
+        print(r'\hline')
+        for i in range(order):
+            print(f'{elem[i].eqname} & ', end='')
+            for j in range(order):
+                res = self.find(elem[i].perm * elem[j].perm)
+\end{Python}
+\begin{Python}
+                if j < order-1:
+                    print(f'{res.eqname} & ', end='')
+                else:
+                    print(f'{res.eqname} \\\\')
+        print(r'\hline')
+        print(r'\end{tabular}')
+\end{Python}
+
+Definindo a função \python{def main()} para printar a tabela de multiplicação, obtemos para o grupo $D_{3h}$ a Tabela \ref{tab:mult_D3h}.
+\begin{Python}
+def main():
+    group = generate_D3h()
+    group.printtable()
+\end{Python}
 
 \begin{table}[ht]
-\caption{Etano eclipsado $D_{3h}$}
+\caption{Tabela de multiplicação para o grupo $D_{3h}$ da molécula do Etano eclipsado.}
 \centering
 
 \begin{tabular} { |c|c c c c c c c c c c c c | }
@@ -34,7 +236,7 @@ $S_3^2$ & $S_3^2$ & $\sigma_h$ & $S_3$ & $\sigma_v^{(2)}$ & $\sigma_v^{(3)}$ & $
 \hline
 \end{tabular}
 
-\label{tab:mult}
+\label{tab:mult_D3h}
 \end{table}
 
 $$
@@ -83,7 +285,7 @@ $S_6^5$ & $S_6^5$ & $i$ & $S_6$ & $\sigma_d^{(2)}$ & $\sigma_d^{(3)}$ & $\sigma_
 \hline
 \end{tabular}
 
-\label{tab:mult}
+\label{tab:mult_D3d}
 \end{table}
 
 $$
