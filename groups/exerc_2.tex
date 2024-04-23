@@ -302,14 +302,6 @@ def conjugacy_classes(group):
 \end{Python}
 
 Definindo a função \python{def main()} para printar a tabela de multiplicação e as classes de conjugação, obtemos para o grupo $D_{3h}$ a Tabela \ref{tab:mult_D3h} e as classes na equação \ref{eq:D3h-classes}.
-\begin{Python}
-def main():
-    group = generate_D3h()
-    group.printtable()
-    classes = conjugacy_classes(group)
-    for cl in classes:
-        print_conjclass(cl)
-\end{Python}
 
 \begin{table}[ht]
 \caption{Tabela de multiplicação para o grupo $D_{3h}$ da molécula do etano eclipsado.}
@@ -353,9 +345,92 @@ Classes de conjugação do grupo $D_{3h}$ do etano eclipsado:
 
 Devido às classes na equação \ref{eq:D3h-classes} do grupo $D_{3h}$ não serem de elementos únicos, o grupo $D_{3h}$ não é abeliano e, por consequência, também não é cíclico.
 
+\n
+
+Para gerar os subgrupos, adicionamos a função \python{powerset} (que gera todos os subconjuntos) e os seguintes métodos da \python{class Group}:
+\begin{Python}
+# https://github.com/priyanshupant/group-theory-python/blob/main/GROUP.py
+def powerset(input_list):
+    powerset_list = []
+    n = len(input_list)
+    for i in range(2 ** n):
+        subset = set([input_list[j] for j in range(n) if (i >> j) & 1])
+        powerset_list.append(subset)
+    return powerset_list
+
+class Group:
+    # https://math.stackexchange.com/questions/1758649/
+    # an-algorithm-to-find-a-subgroup-generated-by-a-subset-of-a-finite-group
+    def gen_subgroup(self, subset):
+        queue = [self.E]    # fila (queue) auxiliar
+        H = set()   # subgrupo H gerado por um subconjunto
+        while queue:
+            x = queue.pop()
+            if x in H:
+                continue
+            H.add(x)
+            for s in subset:
+                queue.append(self.find(x.perm * s.perm))
+        return H
+    # um subset é um subgrupo se ele for igual ao subgrupo gerado por ele mesmo
+    def is_subgroup(self, subset):
+        return self.gen_subgroup(subset) == subset
+\end{Python}
+
+\begin{Python}
+    def get_subgroups(self):
+        subgroups = []
+        subsets = [subset for subset in powerset(self.elements) if subset]
+        for subset in subsets:
+            if len(subset) != 0:
+                if self.order % len(subset) == 0:
+                    if self.is_subgroup(subset):
+                        subgroups.append(subset)
+        return subgroups
+\end{Python}
+
+\n
+
+Rodando o código para achar todos os subgrupos (explícito no Apêndice), obtemos os subgrupos:
+
+\begin{itemize}
+\item Ordem 1:
+$$
+\{ E \} \text{ (impróprio)}
+$$
+\item Ordem 2:
+$$
+\{ C_2^{(1)}, E \} , \{ C_2^{(2)}, E \} , \{ C_2^{(3)}, E \} \to C_2
+$$
+$$
+\{ \sigma_v^{(1)}, E \}, \{ \sigma_v^{(2)}, E \} , \{ \sigma_v^{(3)}, E \}, \{ E, \sigma_h \} \to C_s
+$$
+\item Ordem 3:
+$$
+\{ E, C_3, C_3^2 \} \to C_3
+$$
+\item Ordem 4:
+$$
+\{ C_2^{(1)}, \sigma_h, E, \sigma_v^{(1)} \} , \{ C_2^{(2)}, \sigma_h, E, \sigma_v^{(2)} \} , \{ \sigma_v^{(3)}, C_2^{(3)}, E, \sigma_h \} \to C_{2v}
+$$
+\item Ordem 6:
+$$
+\{ C_2^{(2)}, E, C_3, C_2^{(1)}, C_2^{(3)}, C_3^2 \} \to D_3
+$$
+$$
+\{ \sigma_v^{(1)}, \sigma_v^{(3)}, E, C_3, \sigma_v^{(2)}, C_3^2 \} \to C_{3v}
+$$
+$$
+\{ S_3, E, \sigma_h, C_3, S_3^2, C_3^2 \} \to C_{3h}
+$$
+\item Ordem 12:
+$$
+\{ C_2^{(2)}, \sigma_v^{(1)}, \sigma_v^{(3)}, S_3, E, \sigma_h, C_3, C_2^{(1)}, C_2^{(3)}, \sigma_v^{(2)}, S_3^2, C_3^2 \} \to D_{3h} \text{ (impróprio)}
+$$
+\end{itemize}
+
 
 \pagebreak
-
 
 \section*{2. Etano estrelado C$_2$H$_6$}
 
@@ -481,7 +556,7 @@ def generate_D3d():
     return D3d
 \end{Python}
 
-Utilizando as mesmas funções e métodos do \python{python} já codadas anteriormente, nosso código retorna a Tabela \ref{tab:mult_D3d} e as classes da equação \ref{eq:D3d-classes}.
+Utilizando as mesmas funções e métodos do \python{python} já codadas anteriormente, nosso código retorna a Tabela \ref{tab:mult_D3d}, as classes da equação \ref{eq:D3d-classes} e os subgrupos abaixo.
 
 \begin{table}[ht]
 \caption{Tabela de multiplicação para o grupo $D_{3d}$ da molécula do etano estrelado.}
@@ -525,6 +600,55 @@ Classes de conjugação do grupo $D_{3d}$ do etano estrelado:
 
 Devido às classes na equação \ref{eq:D3d-classes} do grupo $D_{3d}$ não serem de elementos únicos, o grupo $D_{3d}$ não é abeliano e, por consequência, também não é cíclico.
 
+\n
+
+Subgrupos:
+\begin{itemize}
+\item Ordem 1:
+$$
+\{ E \} \text{ (impróprio)}
+$$
+\item Ordem 2:
+$$
+\{ E, C_2^{(1)} \},
+\{ C_2^{(2)}, E \},
+\{ C_2^{(3)}, E \} \to C_2
+$$
+$$
+\{ \sigma_d^{(1)}, E \} ,
+\{ \sigma_d^{(2)}, E \} ,
+\{ \sigma_d^{(3)}, E \} \to C_s
+$$
+$$
+\{ i, E \} \to C_i
+$$
+\item Ordem 3:
+$$
+\{ C_3, C_3^2, E \} \to C_3
+$$
+\item Ordem 4:
+$$
+\{ i, \sigma_d^{(1)}, E, C_2^{(1)} \},
+\{ i, C_2^{(2)}, \sigma_d^{(2)}, E \},
+\{ i, C_2^{(3)}, \sigma_d^{(3)}, E \} \to C_{2h}
+$$
+\item Ordem 6:
+$$
+\{ C_2^{(3)}, E, C_2^{(1)}, C_3, C_2^{(2)}, C_3^2 \} \to D_3
+$$
+$$
+\{ E, \sigma_d^{(3)}, \sigma_d^{(2)}, C_3, C_3^2, \sigma_d^{(1)} \} \to C_{3v}
+$$
+$$
+\{ E, S_6^5, i, C_3, C_3^2, S_6 \} \to S_6
+$$
+\item Ordem 12:
+$$
+\{ C_2^{(3)}, E, C_2^{(1)}, S_6, \sigma_d^{(3)}, \sigma_d^{(2)}, S_6^5, C_3, C_2^{(2)}, i, C_3^2, \sigma_d^{(1)} \}
+\to D_{3d} \text{ (impróprio)}
+$$
+\end{itemize}
+
 \pagebreak
 
 \section*{Hexafluoreto de enxofre SF$_6$}
@@ -541,14 +665,18 @@ Encontrar os 48 elementos de simetria do grupo $O_h$.
 class Group:    # structure definida como uma lista de 'Element' e o nome do grupo
     def __init__(self, elements, name):
         self.elements = elements
+        self.order = len(elements)
         self.name = name
+        self.E = elements[0]    # identity element
     def find(self, perm):  # procura o elemento correspondente a uma permutação dada
         for g in self.elements:
             if perm == g.perm:
                 return g
         return None
     def printtable(self):  # método que printa a tabela de multiplicação em LaTeX
-        elem = self.elements; group_name = self.name; order = len(elem)
+        elem = self.elements
+        group_name = self.name
+        order = self.order
         def tabular_string(n):
             s = "|c|"
             while n > 0:
@@ -574,8 +702,35 @@ class Group:    # structure definida como uma lista de 'Element' e o nome do gru
                     print(f'{res.eqname} \\\\')
         print(r'\hline')
         print(r'\end{tabular}')
+# https://math.stackexchange.com/questions/1758649/
+# an-algorithm-to-find-a-subgroup-generated-by-a-subset-of-a-finite-group
+    def gen_subgroup(self, subset):
+        queue = [self.E]    # auxiliary queue
+        H = set()   # subgroup generated by subset
+        while queue:
+            x = queue.pop()
+            if x in H:
+                continue
+            H.add(x)
+            for s in subset:
+                queue.append(self.find(x.perm * s.perm))
+        return H
+    def is_subgroup(self, subset):
+        return self.gen_subgroup(subset) == subset
+\end{Python}
 
-class Element:  # permutacao e o nome
+\begin{Python}
+    def get_subgroups(self):
+        subgroups = []
+        subsets = [subset for subset in powerset(self.elements) if subset]
+        for subset in subsets:
+            if len(subset) != 0:
+                if self.order % len(subset) == 0:
+                    if self.is_subgroup(subset):
+                        subgroups.append(subset)
+        return subgroups
+
+class Element:  # Permutacao e o nome
     def __init__(self, perm, eqname):
         self.perm = perm
         self.name = eqname[1:-1]  # remove '\$\$' from latex equation
@@ -595,16 +750,40 @@ class Perm:
                 return i
     def inv(self):  # calcula a inversa de uma permutação
         return Perm([self.find(j)+1 for j in range(self.n)])
-\end{Python}
 
-\section*{Apêndice: código source do programa em \python{python}}
-
-\begin{Python}
 def ident(n):   # elemento identidade
     return Perm([i for i in range(1, n+1)])
 
+def conjugacy_classes(group):
+    classes = set()     # conjunto de classes
+    for g in group.elements:
+        g_class = set() # classe: conjunto de elementos
+        for A in group.elements:
+            g_class.add(group.find(A.perm.inv() * g.perm * A.perm)) # $A G A^{-1}$
+        g_class = frozenset(g_class)  # frozenset para criar conjunto de conjuntos
+        classes.add(g_class)
+    return classes
+
+def print_SetofElements(S):
+    string = r"\{ "
+    for g in S:
+        string += "%s, " % g.name
+    string = string[:-2] + r" \}"   # delete last two characters ", " and append " \}"
+    print(string)
+
+# https://github.com/priyanshupant/group-theory-python/blob/main/GROUP.py
+def powerset(input_list):
+    powerset_list = []
+    n = len(input_list)
+    for i in range(2 ** n):
+        subset = set([input_list[j] for j in range(n) if (i >> j) & 1])
+        powerset_list.append(subset)
+    return powerset_list
+\end{Python}
+
+\begin{Python}
 def generate_D3h():
-    E = Element(Perm([1,2,3,4,5,6,7,8]), r'$E$')
+    E = Element(ident(8), r'$E$')
     C3 = Element(Perm([3,4,5,6,1,2,7,8]), r'$C_3$')
     C32 = Element(C3.perm.inv(), r'$C_3^2$')                            # $C_3^{-1}$
     Sigma_h = Element(Perm([2,1,4,3,6,5,8,7]), r'$\sigma_h$')
@@ -637,34 +816,24 @@ def generate_D3d():
                  Sigma_d1, Sigma_d2, Sigma_d3, I, S6, S65], r'$D_{3d}$')
     return D3d
 
-def conjugacy_classes(group):
-    classes = set()     # conjunto de classes
-    for g in group.elements:
-        g_class = set() # classe: conjunto de elementos
-        for A in group.elements:
-            g_class.add(group.find(A.perm.inv() * g.perm * A.perm)) # $A G A^{-1}$
-        g_class = frozenset(g_class)  # frozenset para criar conjunto de conjuntos
-        classes.add(g_class)
-    return classes
-
-def print_conjclass(cl):
-    string = r"\{ "
-    for g in cl:
-        string += "%s, " % g.name
-    string = string[:-2] + r" \}"
-    print(string)
-\end{Python}
-
-\section*{Apêndice: código source do programa em \python{python}}
-
-\begin{Python}
 def main():
     group = generate_D3h()
     #group = generate\_D3d()
+    print("MULTIPLICATION TABLE")
     group.printtable()
+    print()
+
     classes = conjugacy_classes(group)
+    print("CONJUGACY CLASSES")
     for cl in classes:
-        print_conjclass(cl)
+        print_SetofElements(cl)
+    print()
+
+    subgroups = group.get_subgroups()
+    print("SUBGROUPS")
+    for H in subgroups:
+        print_SetofElements(H)
+    print()
 
 if __name__ == '__main__':
     main()
