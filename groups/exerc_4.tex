@@ -130,6 +130,23 @@ Com a Tabela \ref{tab:proj} podemos realizar a soma da equação \ref{eq:project
 
 \n
 
+Utilizando a aproximação de Hückel, $H_{ii} = \alpha$ e $H_{ij} = \beta$ para primeiros vizinhos e olhando a Figura \ref{fig:orbitais_pz-naft}, a hamiltoniana na base $(\vphi_1, \vphi_2, \vphi_3, \vphi_4, \vphi_5, \vphi_6, \vphi_7, \vphi_8, \vphi_9, \vphi_{10})$ é
+$$
+H=
+\begin{pmatrix}
+\alpha & \beta & 0 & 0 & 0 & 0 & 0 & 0 & \beta & 0 \\
+\beta & \alpha & \beta & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+0 & \beta & \alpha & \beta & 0 & 0 & 0 & 0 & 0 & 0 \\
+0 & 0 & \beta & \alpha & 0 & 0 & 0 & 0 & 0 & \beta \\
+0 & 0 & 0 & 0 & \alpha & \beta & 0 & 0 & 0 & \beta \\
+0 & 0 & 0 & 0 & \beta & \alpha & \beta & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 & \beta & \alpha & \beta & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 & 0 & \beta & \alpha & \beta & 0 \\
+\beta & 0 & 0 & 0 & 0 & 0 & 0 & \beta & \alpha & \beta \\
+0 & 0 & 0 & \beta & \beta & 0 & 0 & 0 & \beta & \alpha \\
+\end{pmatrix}
+$$
+
 O código utilizado foi:
 
 \begin{Python}
@@ -241,45 +258,52 @@ if __name__ == '__main__':
 
 Eu utilizei a função \python{sympy.matrices.GramSchmidt} para ortonormalizar os orbitais. O código printa os orbitais diretamente em formato \LaTeX. Obtive:
 
-\begin{itemize}
-\item $B_{2g}$:
 $$
-\frac{\varphi_{1}}{2} - \frac{\varphi_{4}}{2} - \frac{\varphi_{5}}{2} + \frac{\varphi_{8}}{2}
+\psi_{B_{2g}}^{(1)} = \frac{\varphi_{1}}{2} - \frac{\varphi_{4}}{2} - \frac{\varphi_{5}}{2} + \frac{\varphi_{8}}{2}
 $$
 $$
-\frac{\varphi_{2}}{2} - \frac{\varphi_{3}}{2} - \frac{\varphi_{6}}{2} + \frac{\varphi_{7}}{2}
+\psi_{B_{2g}}^{(2)} = \frac{\varphi_{2}}{2} - \frac{\varphi_{3}}{2} - \frac{\varphi_{6}}{2} + \frac{\varphi_{7}}{2}
 $$
 $$
-- \frac{\sqrt{2} \varphi_{10}}{2} + \frac{\sqrt{2} \varphi_{9}}{2}
-$$
-
-\item $B_{3g}$:
-$$
-\frac{\varphi_{1}}{2} + \frac{\varphi_{4}}{2} - \frac{\varphi_{5}}{2} - \frac{\varphi_{8}}{2}
+\psi_{B_{2g}}^{(3)} = - \frac{\sqrt{2} \varphi_{10}}{2} + \frac{\sqrt{2} \varphi_{9}}{2}
 $$
 $$
-\frac{\varphi_{2}}{2} + \frac{\varphi_{3}}{2} - \frac{\varphi_{6}}{2} - \frac{\varphi_{7}}{2}
-$$
-
-\item $A_{2u}$:
-$$
-\frac{\varphi_{1}}{2} - \frac{\varphi_{4}}{2} + \frac{\varphi_{5}}{2} - \frac{\varphi_{8}}{2}
+\psi_{B_{3g}}^{(1)} = \frac{\varphi_{1}}{2} + \frac{\varphi_{4}}{2} - \frac{\varphi_{5}}{2} - \frac{\varphi_{8}}{2}
 $$
 $$
-\frac{\varphi_{2}}{2} - \frac{\varphi_{3}}{2} + \frac{\varphi_{6}}{2} - \frac{\varphi_{7}}{2}
-$$
-
-\item $B_{1u}$:
-$$
-\frac{\varphi_{1}}{2} + \frac{\varphi_{4}}{2} + \frac{\varphi_{5}}{2} + \frac{\varphi_{8}}{2}
+\psi_{B_{3g}}^{(2)} = \frac{\varphi_{2}}{2} + \frac{\varphi_{3}}{2} - \frac{\varphi_{6}}{2} - \frac{\varphi_{7}}{2}
 $$
 $$
-\frac{\varphi_{2}}{2} + \frac{\varphi_{3}}{2} + \frac{\varphi_{6}}{2} + \frac{\varphi_{7}}{2}
+\psi_{A_{u}}^{(1)} = \frac{\varphi_{1}}{2} - \frac{\varphi_{4}}{2} + \frac{\varphi_{5}}{2} - \frac{\varphi_{8}}{2}
 $$
 $$
-\frac{\sqrt{2} \varphi_{10}}{2} + \frac{\sqrt{2} \varphi_{9}}{2}
+\psi_{A_{u}}^{(2)} = \frac{\varphi_{2}}{2} - \frac{\varphi_{3}}{2} + \frac{\varphi_{6}}{2} - \frac{\varphi_{7}}{2}
 $$
-\end{itemize}
+$$
+\psi_{B_{1u}}^{(1)} = \frac{\varphi_{1}}{2} + \frac{\varphi_{4}}{2} + \frac{\varphi_{5}}{2} + \frac{\varphi_{8}}{2}
+$$
+$$
+\psi_{B_{1u}}^{(2)} = \frac{\varphi_{2}}{2} + \frac{\varphi_{3}}{2} + \frac{\varphi_{6}}{2} + \frac{\varphi_{7}}{2}
+$$
+$$
+\psi_{B_{1u}}^{(3)} = \frac{\sqrt{2} \varphi_{10}}{2} + \frac{\sqrt{2} \varphi_{9}}{2}
+$$
+$$
+H_{B_{2g}} = \begin{pmatrix}\alpha & \beta & \sqrt{2} \beta\\\beta & \alpha - \beta & 0\\\sqrt{2} \beta & 0 & \alpha - \beta\end{pmatrix}
+\Rightarrow\begin{cases}\; E_{B_{2g}}^{(1)} = \alpha - \beta \approx \alpha - \beta \\\; E_{B_{2g}}^{(2)} = \alpha - \frac{\beta}{2} + \frac{\sqrt{13} \beta}{2} \approx \alpha + 1.3 \beta \\\; E_{B_{2g}}^{(3)} = \alpha - \frac{\sqrt{13} \beta}{2} - \frac{\beta}{2} \approx \alpha - 2.3 \beta \\\end{cases}\begin{pmatrix}0 & \frac{\sqrt{2}}{4} + \frac{\sqrt{26}}{4} & - \frac{\sqrt{26}}{4} + \frac{\sqrt{2}}{4}\\- \sqrt{2} & \frac{\sqrt{2}}{2} & \frac{\sqrt{2}}{2}\\1 & 1 & 1\end{pmatrix}
+$$
+$$
+H_{B_{3g}} = \begin{pmatrix}\alpha & \beta\\\beta & \alpha + \beta\end{pmatrix}
+\Rightarrow\begin{cases}\; E_{B_{3g}}^{(1)} = \alpha + \frac{\beta}{2} + \frac{\sqrt{5} \beta}{2} \approx \alpha + 1.6 \beta \\\; E_{B_{3g}}^{(2)} = \alpha - \frac{\sqrt{5} \beta}{2} + \frac{\beta}{2} \approx \alpha - 0.62 \beta \\\end{cases}\begin{pmatrix}- \frac{1}{2} + \frac{\sqrt{5}}{2} & - \frac{\sqrt{5}}{2} - \frac{1}{2}\\1 & 1\end{pmatrix}
+$$
+$$
+H_{A_{u}} = \begin{pmatrix}\alpha & \beta\\\beta & \alpha - \beta\end{pmatrix}
+\Rightarrow\begin{cases}\; E_{A_{u}}^{(1)} = \alpha - \frac{\beta}{2} + \frac{\sqrt{5} \beta}{2} \approx \alpha + 0.62 \beta \\\; E_{A_{u}}^{(2)} = \alpha - \frac{\sqrt{5} \beta}{2} - \frac{\beta}{2} \approx \alpha - 1.6 \beta \\\end{cases}\begin{pmatrix}\frac{1}{2} + \frac{\sqrt{5}}{2} & \frac{1}{2} - \frac{\sqrt{5}}{2}\\1 & 1\end{pmatrix}
+$$
+$$
+H_{B_{1u}} = \begin{pmatrix}\alpha & \beta & \sqrt{2} \beta\\\beta & \alpha + \beta & 0\\\sqrt{2} \beta & 0 & \alpha + \beta\end{pmatrix}
+\Rightarrow\begin{cases}\; E_{B_{1u}}^{(1)} = \alpha + \beta \approx \alpha + \beta \\\; E_{B_{1u}}^{(2)} = \alpha + \frac{\beta}{2} + \frac{\sqrt{13} \beta}{2} \approx \alpha + 2.3 \beta \\\; E_{B_{1u}}^{(3)} = \alpha - \frac{\sqrt{13} \beta}{2} + \frac{\beta}{2} \approx \alpha - 1.3 \beta \\\end{cases}\begin{pmatrix}0 & - \frac{\sqrt{2}}{4} + \frac{\sqrt{26}}{4} & - \frac{\sqrt{26}}{4} - \frac{\sqrt{2}}{4}\\- \sqrt{2} & \frac{\sqrt{2}}{2} & \frac{\sqrt{2}}{2}\\1 & 1 & 1\end{pmatrix}
+$$
 
 
 \end{document}

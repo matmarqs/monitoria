@@ -1,17 +1,17 @@
-from sympy import symbols, sqrt, latex
+from sympy import symbols, sqrt, latex, pprint, simplify, print_latex
 from sympy.matrices import Matrix, GramSchmidt
 
 f1, f2, f3, f4, f5, f6, f7, f8, f9, f10 = symbols(
 'varphi_1 varphi_2 varphi_3 varphi_4 varphi_5 varphi_6 varphi_7 varphi_8 varphi_9 varphi_10')
 
 h = 8   # order of the group
-dim = [1, 1, 1, 1]  # degeneracies of the irreps $B_{2g}$, $B_{3g}$, $A_{2u}$, $B_{1u}$
+dim = [1, 1, 1, 1]  # degeneracies of the irreps $B_{2g}$, $B_{3g}$, $A_{u}$, $B_{1u}$
 
-# chi is the 4x8 matrix for the characters of the irreps [B2g, B3g, A2u, B1u] of the group D_2h
+# chi is the 4x8 matrix for the characters of the irreps [B2g, B3g, Au, B1u] of the group D_2h
 #         $E$  $C_{2z}$  $C_{2y}$  $C_{2x}$   $i$   $\sigma_h$   $\sigma_{xz}$  $\sigma_{yz}$
 chi = [ [ 1,     -1,        1,       -1,       1,       -1,           1,             -1,    ],     #  $B_{2g}$, index 0
         [ 1,     -1,       -1,        1,       1,       -1,          -1,              1,    ],     #  $B_{3g}$, index 1
-        [ 1,      1,        1,        1,      -1,       -1,          -1,             -1,    ],     #  $A_{2u}$, index 2
+        [ 1,      1,        1,        1,      -1,       -1,          -1,             -1,    ],     #  $A_{u}$, index 2
         [ 1,      1,       -1,       -1,      -1,       -1,           1,              1,    ], ]   #  $B_{1u}$, index 3
 
 class Proj:     # element of symmetry from D_2h
@@ -28,7 +28,7 @@ D2h = [ Proj( f1,  f2, f9),   Proj( f5,  f6, f10),
 #           $\sigma_{xz}$        $\sigma_{yz}$
         Proj( f8,  f7, f9),   Proj( f4,  f3, f10),  ]
 
-# irrep is the index 0, 1, 2, 3 for $B_{2g}$, $B_{3g}$, $A_{2u}$, $B_{1u}$
+# irrep is the index 0, 1, 2, 3 for $B_{2g}$, $B_{3g}$, $A_{u}$, $B_{1u}$
 # phi is the index 0, 1, 2 for phi_1, phi_2, phi_3
 def proj_irrep(irrep, phi):
     soma = 0
@@ -60,9 +60,15 @@ def get_var(coeffs, vars):
         var += coeffs[i] * vars[i]
     return var
 
+def print_eig(D, strS):
+    print(r'\begin{cases}', end='')
+    for i in range(len(D[0,:])):
+        print(r'\; E_{%s}^{(%d)} = %s \approx %s \\' % (strS, i+1, latex(D[i,i]), latex(D[i,i].evalf(2))), end='')
+    print(r'\end{cases}', end='')
+
 def main():
     vars = [f1, f2, f3, f4, f5, f6, f7, f8, f9, f10]
-    # irrep is the index 0, 1, 2, 3 for $B_{2g}$, $B_{3g}$, $A_{2u}$, $B_{1u}$
+    # irrep is the index 0, 1, 2, 3 for $B_{2g}$, $B_{3g}$, $A_{u}$, $B_{1u}$
     # phi is the index 0, 1, 2 for phi_1, phi_2, phi_3
     psis = []
     myappend(vars, psis, proj_irrep(irrep=0, phi=0))    # $\mathcal{P}^{B_{2g}} \varphi_1$
@@ -70,68 +76,58 @@ def main():
     myappend(vars, psis, proj_irrep(irrep=0, phi=2))    # $\mathcal{P}^{B_{2g}} \varphi_9$
     myappend(vars, psis, proj_irrep(irrep=1, phi=0))    # $\mathcal{P}^{B_{3g}} \varphi_1$
     myappend(vars, psis, proj_irrep(irrep=1, phi=1))    # $\mathcal{P}^{B_{3g}} \varphi_2$
-    myappend(vars, psis, proj_irrep(irrep=2, phi=0))    # $\mathcal{P}^{A_{2u}} \varphi_1$
-    myappend(vars, psis, proj_irrep(irrep=2, phi=1))    # $\mathcal{P}^{A_{2u}} \varphi_2$
+    myappend(vars, psis, proj_irrep(irrep=2, phi=0))    # $\mathcal{P}^{A_{u}} \varphi_1$
+    myappend(vars, psis, proj_irrep(irrep=2, phi=1))    # $\mathcal{P}^{A_{u}} \varphi_2$
     myappend(vars, psis, proj_irrep(irrep=3, phi=0))    # $\mathcal{P}^{B_{1u}} \varphi_1$
     myappend(vars, psis, proj_irrep(irrep=3, phi=1))    # $\mathcal{P}^{B_{1u}} \varphi_2$
     myappend(vars, psis, proj_irrep(irrep=3, phi=2))    # $\mathcal{P}^{B_{1u}} \varphi_9$
 
-    #print(psis[0])
-    #print(psis[1])
-    #print(psis[2])
-    #print(psis[3])
-    #print(psis[4])
-    #print(psis[5])
-    #print(psis[6])
-    #print(psis[7])
-    #print(psis[8])
-    #print(psis[9])
-
-    print("B2g")
     out_B2g = GramSchmidt(psis[0:3], orthonormal=True)
-    print("$$")
-    print(latex(get_var(out_B2g[0], vars)))  # $\Psi_{B_{2g}}^{(1)}$
-    print("$$")
-    print("$$")
-    print(latex(get_var(out_B2g[1], vars)))  # $\Psi_{B_{2g}}^{(2)}$
-    print("$$")
-    print("$$")
-    print(latex(get_var(out_B2g[2], vars)))  # $\Psi_{B_{2g}}^{(3)}$
-    print("$$")
-    print()
-
-    print("B3g")
     out_B3g = GramSchmidt(psis[3:5], orthonormal=True)
-    print("$$")
-    print(latex(get_var(out_B3g[0], vars)))  # $\Psi_{B_{3g}}^{(1)}$
-    print("$$")
-    print("$$")
-    print(latex(get_var(out_B3g[1], vars)))  # $\Psi_{B_{3g}}^{(2)}$
-    print("$$")
-    print()
-
-    print("A2u")
-    out_A2u = GramSchmidt(psis[5:7], orthonormal=True)
-    print("$$")
-    print(latex(get_var(out_A2u[0], vars)))  # $\Psi_{A_{2u}}^{(1)}$
-    print("$$")
-    print("$$")
-    print(latex(get_var(out_A2u[1], vars)))  # $\Psi_{A_{2u}}^{(2)}$
-    print("$$")
-    print()
-
-    print("B1u")
+    out_Au = GramSchmidt(psis[5:7], orthonormal=True)
     out_B1u = GramSchmidt(psis[7:10], orthonormal=True)
-    print("$$")
-    print(latex(get_var(out_B1u[0], vars)))  # $\Psi_{B_{1u}}^{(1)}$
-    print("$$")
-    print("$$")
-    print(latex(get_var(out_B1u[1], vars)))  # $\Psi_{B_{1u}}^{(2)}$
-    print("$$")
-    print("$$")
-    print(latex(get_var(out_B1u[2], vars)))  # $\Psi_{B_{1u}}^{(3)}$
-    print("$$")
-    print()
+    subspaces = [out_B2g, out_B3g, out_Au, out_B1u]
+    subsp_latex = [r'B_{2g}', r'B_{3g}', r'A_{u}', r'B_{1u}']
+    for s in range(len(subspaces)):
+        for i in range(len(subspaces[s])):
+            S = subspaces[s]; strS = subsp_latex[s]
+            print(r'$$')
+            print(r'\psi_{%s}^{(%d)} = ' % (strS, i+1), end='')
+            print_latex(get_var(S[i], vars))
+            print(r'$$')
+
+
+    alpha, beta = symbols('alpha beta')
+
+    H = Matrix( [ [ alpha, beta, 0, 0, 0, 0, 0, 0, beta, 0,    ],
+                  [ beta, alpha, beta, 0, 0, 0, 0, 0, 0, 0,    ],
+                  [ 0, beta, alpha, beta, 0, 0, 0, 0, 0, 0,    ],
+                  [ 0, 0, beta, alpha, 0, 0, 0, 0, 0, beta,    ],
+                  [ 0, 0, 0, 0, alpha, beta, 0, 0, 0, beta,    ],
+                  [ 0, 0, 0, 0, beta, alpha, beta, 0, 0, 0,    ],
+                  [ 0, 0, 0, 0, 0, beta, alpha, beta, 0, 0,    ],
+                  [ 0, 0, 0, 0, 0, 0, beta, alpha, beta, 0,    ],
+                  [ beta, 0, 0, 0, 0, 0, 0, beta, alpha, beta, ],
+                  [ 0, 0, 0, beta, beta, 0, 0, 0, beta, alpha, ], ] )
+
+    for s in range(len(subspaces)):
+        S = subspaces[s]; strS = subsp_latex[s]
+        mat = []
+        for vec_i in S:
+            row = []
+            for vec_j in S:
+                res = vec_i.T * H * vec_j
+                row.append(simplify(res[0,0]))
+            mat.append(row)
+        mmat = Matrix(mat)
+        P, D = mmat.diagonalize()
+        print(r'$$')
+        print(r'H_{%s} = ' % (strS), end='')
+        print_latex(mmat, mat_str='pmatrix', mat_delim='')
+        print(r'\Rightarrow', end='')
+        print_eig(D, strS)
+        print_latex(P, mat_str='pmatrix', mat_delim='')
+        print(r'$$')
 
 if __name__ == '__main__':
     main()
