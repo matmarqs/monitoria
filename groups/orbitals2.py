@@ -60,11 +60,17 @@ def get_var(coeffs, vars):
         var += coeffs[i] * vars[i]
     return var
 
-def print_eig(D, strS):
-    print(r'\begin{cases}', end='')
-    for i in range(len(D[0,:])):
-        print(r'\; E_{%s}^{(%d)} = %s \approx %s \\' % (strS, i+1, latex(D[i,i]), latex(D[i,i].evalf(2))), end='')
-    print(r'\end{cases}', end='')
+def print_eig(D, strS, P, S, vars):
+    mdim = len(D[0,:])
+    for i in range(mdim):
+        orb = P[0, i] * S[0]
+        for j in range(1, mdim):
+            orb += P[j, i] * S[j]
+        orb_var = get_var(orb, vars)
+        if orb_var.coeff(f1) < 0 or orb_var.coeff(f2) < 0:  # get pretty signal
+            orb_var *= -1
+        print(r'\; E_{%s}^{(%d)} &\approx %s, & \Psi_{%s}^{(%d)} &= %s \\' % (strS, i+1,
+            latex(D[i,i].evalf(2)), strS, i+1, latex(orb_var.evalf(2))))
 
 def main():
     vars = [f1, f2, f3, f4, f5, f6, f7, f8, f9, f10]
@@ -120,14 +126,17 @@ def main():
                 row.append(simplify(res[0,0]))
             mat.append(row)
         mmat = Matrix(mat)
-        P, D = mmat.diagonalize()
+        P, D = mmat.diagonalize(normalize=True)
+        print(r'\normalsize')
         print(r'$$')
         print(r'H_{%s} = ' % (strS), end='')
         print_latex(mmat, mat_str='pmatrix', mat_delim='')
-        print(r'\Rightarrow', end='')
-        print_eig(D, strS)
-        print_latex(P, mat_str='pmatrix', mat_delim='')
+        print(r'\Rightarrow')
         print(r'$$')
+        print(r'\footnotesize')
+        print(r'\begin{align*}')
+        print_eig(D, strS, P, S, vars)
+        print(r'\end{align*}')
 
 if __name__ == '__main__':
     main()
