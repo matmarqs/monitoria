@@ -126,11 +126,7 @@ $P_{\sigma_{xz}} \vphi_1 = \vphi_8, P_{\sigma_{xz}} \vphi_2 = \vphi_7, P_{\sigma
 \label{tab:proj}
 \end{table}
 
-Com a Tabela \ref{tab:proj} podemos realizar a soma da equação \ref{eq:projection}. Porém, além disso resultar em muitos cálculos, ainda teremos que ortonormalizar os orbitais. Por isso, preferi reaproveitar o programa em \python{python} que escrevi para resolver o Exercício 3 da molécula de benzeno. Utilizei a biblioteca \python{sympy} para realizar os cálculos simbólicos.
-
-\n
-
-Utilizando a aproximação de Hückel, $H_{ii} = \alpha$ e $H_{ij} = \beta$ para primeiros vizinhos e olhando a Figura \ref{fig:orbitais_pz-naft}, a hamiltoniana na base $(\vphi_1, \vphi_2, \vphi_3, \vphi_4, \vphi_5, \vphi_6, \vphi_7, \vphi_8, \vphi_9, \vphi_{10})$ é
+Com a Tabela \ref{tab:proj} podemos realizar a soma da equação \ref{eq:projection}. Eu reaproveitei o programa em \python{python} que escrevi para resolver o Exercício 3 da molécula de benzeno. Utilizei a biblioteca \python{sympy} para realizar os cálculos simbólicos. Utilizando a aproximação de Hückel, $H_{ii} = \alpha$ e $H_{ij} = \beta$ para primeiros vizinhos, e olhando a Figura \ref{fig:orbitais_pz-naft}, a hamiltoniana na base $(\vphi_1, \vphi_2, \vphi_3, \vphi_4, \vphi_5, \vphi_6, \vphi_7, \vphi_8, \vphi_9, \vphi_{10})$ é
 $$
 H=
 \begin{pmatrix}
@@ -144,66 +140,69 @@ H=
 0 & 0 & 0 & 0 & 0 & 0 & \beta & \alpha & \beta & 0 \\
 \beta & 0 & 0 & 0 & 0 & 0 & 0 & \beta & \alpha & \beta \\
 0 & 0 & 0 & \beta & \beta & 0 & 0 & 0 & \beta & \alpha \\
-\end{pmatrix}
+\end{pmatrix}.
 $$
 
 O código utilizado foi:
 
 \begin{Python}
-from sympy import symbols, Poly, sqrt, latex
+from sympy import symbols, sqrt, latex, pprint, simplify, print_latex, preorder_traversal, Float
 from sympy.matrices import Matrix, GramSchmidt
 
-f1, f2, f3, f4, f5, f6 = symbols('varphi_1 varphi_2 varphi_3 varphi_4 varphi_5 varphi_6')
+f1, f2, f3, f4, f5, f6, f7, f8, f9, f10 = symbols(
+'varphi_1 varphi_2 varphi_3 varphi_4 varphi_5 varphi_6 varphi_7 varphi_8 varphi_9 varphi_10')
 
-h = 24  # order of the group
-dim = [1, 2, 1, 2]  # the dimensions of the irreps $B_{2g}$, $E_{1g}$, $A_{2u}$, $E_{2u}$
+h = 8   # order of the group
+dim = [1, 1, 1, 1]  # dimensions of the irreps $B_{2g}$, $B_{3g}$, $A_{u}$, $B_{1u}$
 
-# chi is the 4x24 matrix for the characters from the irreps [$B_{2g}$, $E_{1g}$, $A_{2u}$, $E_{2u}$] and group $D_{6h}$
-#         $E$  $2 C_6$    $2 C_3$  $C_2$     $3 C_2'$      $3 C_2''$      $i$    $2 S_3$     $2 S_6$  $\sigma_h$    $3 \sigma_d$     $3 \sigma_v$
-chi = [ [ 1, -1,-1,  1, 1, -1,  -1,-1,-1,  1, 1, 1,   1,  -1,-1,   1, 1, -1, -1,-1,-1, 1,1,1, ],     #  $B_{2g}$, index 0
-        [ 2,  1, 1, -1,-1, -2,   0, 0, 0,  0, 0, 0,   2,   1, 1,  -1,-1, -2,  0, 0, 0, 0,0,0, ],     #  $E_{1g}$, index 1
-        [ 1,  1, 1,  1, 1,  1,  -1,-1,-1, -1,-1,-1,  -1,  -1,-1,  -1,-1, -1,  1, 1, 1, 1,1,1, ],     #  $A_{2u}$, index 2
-        [ 2, -1,-1, -1,-1,  2,   0, 0, 0,  0, 0, 0,  -2,   1, 1,   1, 1, -2,  0, 0, 0, 0,0,0, ], ]   #  $E_{2u}$, index 3
+# chi is the 4x8 matrix for the characters of the irreps [B2g, B3g, Au, B1u] of the group D2h
+#         $E$  $C_{2z}$  $C_{2y}$  $C_{2x}$   $i$   $\sigma_h$   $\sigma_{xz}$  $\sigma_{yz}$
+chi = [ [ 1,  -1,   1,   -1,    1,  -1,   1,   -1,    ],     #  $B_{2g}$, index 0
+        [ 1,  -1,  -1,    1,    1,  -1,  -1,    1,    ],     #  $B_{3g}$, index 1
+        [ 1,   1,   1,    1,   -1,  -1,  -1,   -1,    ],     #  $A_{u}$, index 2
+        [ 1,   1,  -1,   -1,   -1,  -1,   1,    1,    ], ]   #  $B_{1u}$, index 3
 
-class Proj:     # element of symmetry from D\_6h
-    def __init__(self, Pf1, Pf2):
-        self.P = [Pf1, Pf2]     # action on orbitals $\varphi_1$ and $\varphi_2$
+class Proj:     # element of symmetry from D2h
+    def __init__(self, Pf1, Pf2, Pf9):
+        self.P = [Pf1, Pf2, Pf9]
 
-# D6h is a list with 24 elements
-#              E               C6             C6\^5            C3            C3\^2             C2
-D6h = [ Proj( f1,  f2), Proj( f6,  f1), Proj( f2,  f3), Proj( f5,  f6), Proj( f3,  f4), Proj( f4,  f5),
-#            C2'(1)          C2'(2)         C2'(3)         C2''(1)        C2''(2)          C2''(3)
-        Proj(-f3, -f6), Proj(-f5, -f2), Proj(-f1, -f4), Proj(-f2, -f1), Proj(-f4, -f3), Proj(-f6, -f5),
-#              i              S3             S3\^2             S6           S6\^5            sigma\_h
-        Proj(-f4, -f5), Proj(-f5, -f6), Proj(-f3, -f4), Proj(-f6, -f1), Proj(-f2, -f3), Proj(-f1, -f2),
-#           sigma\_d(1)     sigma\_d(2)      sigma\_d(3)     sigma\_v(1)      sigma\_v(2)     sigma\_v(3)
-        Proj( f2,  f1), Proj( f4,  f3), Proj( f6,  f5), Proj( f1,  f2), Proj( f3,  f4), Proj( f5,  f6),  ]
+# D2h is a list with 8 elements of class Proj
+#             $E$                   $C_{2z}$
+D2h = [ Proj( f1,  f2, f9),   Proj( f5,  f6, f10),
+#             $C_{2y}$                 $C_{2x}$
+        Proj(-f4, -f3, -f10), Proj(-f8, -f7, -f9),
+#             $i$                    $\sigma_h$
+        Proj(-f5, -f6, -f10), Proj(-f1, -f2, -f9),
+#            $\sigma_{xz}$                   $\sigma_{yz}$
+        Proj( f8,  f7, f9),   Proj( f4,  f3, f10),  ]
 
-# irrep is the index 0, 1, 2, 3 for $B_{2g}$, $E_{1g}$, $A_{2u}$, $E_{2u}$
-# phi is the index 0, 1 for $\varphi_1$ or $\varphi_2$
+# irrep is the index 0, 1, 2, 3 for $B_{2g}$, $B_{3g}$, $A_{u}$, $B_{1u}$
+# phi is the index 0, 1, 2 for phi1, phi2, phi9
 def proj_irrep(irrep, phi):
     soma = 0
-    for R in range(len(D6h)):
-        soma += chi[irrep][R] * D6h[R].P[phi]   # soma da equação (1)
+    for R in range(len(D2h)):
+        soma += chi[irrep][R] * D2h[R].P[phi]
     return soma * dim[irrep] / h
 
-def norm(u):  # norma de um vetor
+def norm(u):
     soma = 0
     for e in u:
         soma += e**2
     return sqrt(soma)
 
-def normalize(L):   # normaliza um vetor, especificado pela lista L
+def normalize(L):
     norma = norm(L)
     for i in range(len(L)):
         L[i] /= norma
 
-def myappend(psis, proj):   # macro para montar a lista de vetores
-    psi = Poly(proj).coeffs()
+def myappend(vars, psis, proj):
+    psi = []
+    for v in vars:
+        psi.append(proj.coeff(v))
     normalize(psi)
     psis.append(Matrix(psi))
 
-def get_var(coeffs, vars):  # colocar em formato de variável simbólica do sympy
+def get_var(coeffs, vars):
     var = 0
     for i in range(len(coeffs)):
         var += coeffs[i] * vars[i]
@@ -211,52 +210,98 @@ def get_var(coeffs, vars):  # colocar em formato de variável simbólica do symp
 \end{Python}
 
 \begin{Python}
+def round_sympy(expr, num):
+    ex = expr
+    for f in preorder_traversal(expr):
+        if isinstance(f, Float):
+            ex = ex.subs(f, round(f, num))
+    return ex
+
+def print_eig(D, strS, P, S, vars):
+    mdim = len(D[0,:])
+    for i in range(mdim):
+        orb = P[0, i] * S[0]
+        for j in range(1, mdim):
+            orb += P[j, i] * S[j]
+        orb_var = get_var(orb, vars)
+        if orb_var.coeff(f1) < 0 or orb_var.coeff(f2) < 0:  # get pretty signal
+            orb_var *= -1
+        print(r'\; E_{%s}^{(%d)} &= %s, & \Psi_{%s}^{(%d)} &= %s \\' % (strS, i+1,
+            latex(round_sympy(D[i,i].evalf(),1)), strS, i+1, latex(round_sympy(orb_var.evalf(), 2))))
+
+def fmt_string(n):
+    s = "("
+    for i in range(1,n):
+        s += "%s, "
+    s += "%s)"
+    return s
+
 def main():
-    vars = [f1, f2, f3, f4, f5, f6]
-    psis = []
-    myappend(psis, proj_irrep(0, 0))    # $\mathcal{P}^{(B_{2g})} \varphi_1$
-    myappend(psis, proj_irrep(1, 0))    # $\mathcal{P}^{(E_{1g})} \varphi_1$
-    myappend(psis, proj_irrep(1, 1))    # $\mathcal{P}^{(E_{1g})} \varphi_2$
-    myappend(psis, proj_irrep(2, 0))    # $\mathcal{P}^{(A_{2u})} \varphi_1$
-    myappend(psis, proj_irrep(3, 0))    # $\mathcal{P}^{(E_{2u})} \varphi_1$
-    myappend(psis, proj_irrep(3, 1))    # $\mathcal{P}^{(E_{2u})} \varphi_2$
+    vars = [f1, f2, f3, f4, f5, f6, f7, f8, f9, f10]
+    # irrep is the index 0, 1, 2, 3 for $B_{2g}$, $B_{3g}$, $A_{u}$, $B_{1u}$
+    # phi is the index 0, 1, 2 for phi1, phi2, phi3
+    psis = []; deg = [3, 2, 2, 3]  # degeneracies of each irrep
+    for i in range(len(dim)):
+        for j in range(deg[i]):
+            myappend(vars, psis, proj_irrep(irrep=i, phi=j))
 
-    print("B2g")
-    print("$$")
-    print(latex(get_var(psis[0], vars)))  # $\mathcal{P}^{(B_{2g})} \varphi_1$
-    print("$$")
-    print()
+    out_B2g = GramSchmidt(psis[0:3], orthonormal=True)
+    out_B3g = GramSchmidt(psis[3:5], orthonormal=True)
+    out_Au = GramSchmidt(psis[5:7], orthonormal=True)
+    out_B1u = GramSchmidt(psis[7:10], orthonormal=True)
+    subspaces = [out_B2g, out_B3g, out_Au, out_B1u]
+    subsp_latex = [r'B_{2g}', r'B_{3g}', r'A_{u}', r'B_{1u}']
+    for s in range(len(subspaces)):
+        for i in range(len(subspaces[s])):
+            S = subspaces[s]; strS = subsp_latex[s]
+            print(r'$$')
+            print(r'\psi_{%s}^{(%d)} = ' % (strS, i+1), end='')
+            print_latex(get_var(S[i], vars))
+            print(r'$$')
 
-    print("E1g")
-    out_E1g = GramSchmidt(psis[1:3], orthonormal=True)  # ortonormalização por Gram-Schmidt em $E_{1g}$
-    print("$$")
-    print(latex(get_var(out_E1g[0], vars)))  # $\mathcal{P}^{(E_{1g})} \varphi_1$
-    print("$$")
-    print("$$")
-    print(latex(get_var(out_E1g[1], vars)))  # $\mathcal{P}^{(E_{1g})} \varphi_2$
-    print("$$")
-    print()
 
-    print("A2u")
-    print("$$")
-    print(latex(get_var(psis[3], vars)))  # $\mathcal{P}^{(B_{2g})} \varphi_1$
-    print("$$")
-    print()
+    alpha, beta = symbols('alpha beta')
 
-    print("E2u")
-    out_E2u = GramSchmidt(psis[4:6], orthonormal=True)  # ortonormalização por Gram-Schmidt em $E_{2u}$
-    print("$$")
-    print(latex(get_var(out_E2u[0], vars)))  # $\mathcal{P}^{(E_{2u})} \varphi_1$
-    print("$$")
-    print("$$")
-    print(latex(get_var(out_E2u[1], vars)))  # $\mathcal{P}^{(E_{2u})} \varphi_2$
-    print("$$")
+    H = Matrix( [ [ alpha, beta, 0, 0, 0, 0, 0, 0, beta, 0,    ],
+                  [ beta, alpha, beta, 0, 0, 0, 0, 0, 0, 0,    ],
+                  [ 0, beta, alpha, beta, 0, 0, 0, 0, 0, 0,    ],
+                  [ 0, 0, beta, alpha, 0, 0, 0, 0, 0, beta,    ],
+                  [ 0, 0, 0, 0, alpha, beta, 0, 0, 0, beta,    ],
+                  [ 0, 0, 0, 0, beta, alpha, beta, 0, 0, 0,    ],
+                  [ 0, 0, 0, 0, 0, beta, alpha, beta, 0, 0,    ],
+                  [ 0, 0, 0, 0, 0, 0, beta, alpha, beta, 0,    ],
+                  [ beta, 0, 0, 0, 0, 0, 0, beta, alpha, beta, ],
+                  [ 0, 0, 0, beta, beta, 0, 0, 0, beta, alpha, ], ] )
+
+    for s in range(len(subspaces)):
+        S = subspaces[s]; strS = subsp_latex[s]
+        mat = []
+        for vec_i in S:
+            row = []
+            for vec_j in S:
+                res = vec_i.T * H * vec_j
+                row.append(simplify(res[0,0]))
+            mat.append(row)
+        mmat = Matrix(mat)
+        P, D = mmat.diagonalize(normalize=True)
+        print(r'\normalsize')
+        print(r'$$')
+        print(r'H_{%s} = ' % (strS), end='')
+        print_latex(mmat, mat_str='pmatrix', mat_delim='')
+        mdim = len(mmat[0,:])
+        L = [r'\psi_{%s}^{(%d)}' % (strS, i+1) for i in range(mdim)]
+        print(r'\text{, na base }%s' % (fmt_string(mdim) % tuple(L)))
+        print(r'$$')
+        print(r'\footnotesize')
+        print(r'\begin{align*}')
+        print_eig(D, strS, P, S, vars)
+        print(r'\end{align*}')
 
 if __name__ == '__main__':
     main()
 \end{Python}
 
-Eu utilizei a função \python{sympy.matrices.GramSchmidt} para ortonormalizar os orbitais. O código printa os orbitais diretamente em formato \LaTeX. Obtive:
+O código acima calcula os orbitais, os ortonormaliza, diagonaliza a hamiltoniana e no final printa todos os resultados diretamente em formato \LaTeX. Obtive:
 
 $$
 \psi_{B_{2g}}^{(1)} = \frac{\varphi_{1}}{2} - \frac{\varphi_{4}}{2} - \frac{\varphi_{5}}{2} + \frac{\varphi_{8}}{2}
@@ -277,8 +322,7 @@ $$
 \psi_{A_{u}}^{(1)} = \frac{\varphi_{1}}{2} - \frac{\varphi_{4}}{2} + \frac{\varphi_{5}}{2} - \frac{\varphi_{8}}{2}
 $$
 $$
-\psi_{A_{u}}^{(2)} = \frac{\varphi_{2}}{2} - \frac{\varphi_{3}}{2} + \frac{\varphi_{6}}{2} - \frac{\varphi_{7}}{2}
-$$
+\psi_{A_{u}}^{(2)} = \frac{\varphi_{2}}{2} - \frac{\varphi_{3}}{2} + \frac{\varphi_{6}}{2} - \frac{\varphi_{7}}{2} $$
 $$
 \psi_{B_{1u}}^{(1)} = \frac{\varphi_{1}}{2} + \frac{\varphi_{4}}{2} + \frac{\varphi_{5}}{2} + \frac{\varphi_{8}}{2}
 $$
@@ -291,45 +335,55 @@ $$
 \normalsize
 $$
 H_{B_{2g}} = \begin{pmatrix}\alpha & \beta & \sqrt{2} \beta\\\beta & \alpha - \beta & 0\\\sqrt{2} \beta & 0 & \alpha - \beta\end{pmatrix}
-\Rightarrow
+\text{, na base }(\psi_{B_{2g}}^{(1)}, \psi_{B_{2g}}^{(2)}, \psi_{B_{2g}}^{(3)})
 $$
 \footnotesize
 \begin{align*}
-\; E_{B_{2g}}^{(1)} &\approx \alpha - \beta, & \Psi_{B_{2g}}^{(1)} &= 0.41 \varphi_{10} + 0.41 \varphi_{2} - 0.41 \varphi_{3} - 0.41 \varphi_{6} + 0.41 \varphi_{7} - 0.41 \varphi_{9} \\
-\; E_{B_{2g}}^{(2)} &\approx \alpha + 1.3 \beta, & \Psi_{B_{2g}}^{(2)} &= 0.4 \varphi_{1} - 0.35 \varphi_{10} + 0.17 \varphi_{2} - 0.17 \varphi_{3} - 0.4 \varphi_{4} - 0.4 \varphi_{5} - 0.17 \varphi_{6} + 0.17 \varphi_{7} + 0.4 \varphi_{8} + 0.35 \varphi_{9} \\
-\; E_{B_{2g}}^{(3)} &\approx \alpha - 2.3 \beta, & \Psi_{B_{2g}}^{(3)} &= 0.3 \varphi_{1} + 0.46 \varphi_{10} - 0.23 \varphi_{2} + 0.23 \varphi_{3} - 0.3 \varphi_{4} - 0.3 \varphi_{5} + 0.23 \varphi_{6} - 0.23 \varphi_{7} + 0.3 \varphi_{8} - 0.46 \varphi_{9} \\
+\; E_{B_{2g}}^{(1)} &= \alpha - \beta, & \Psi_{B_{2g}}^{(1)} &= 0.41 \varphi_{10} + 0.41 \varphi_{2} - 0.41 \varphi_{3} - 0.41 \varphi_{6} + 0.41 \varphi_{7} - 0.41 \varphi_{9} \\
+\; E_{B_{2g}}^{(2)} &= \alpha + 1.3 \beta, & \Psi_{B_{2g}}^{(2)} &= 0.4 \varphi_{1} - 0.35 \varphi_{10} + 0.17 \varphi_{2} - 0.17 \varphi_{3} - 0.4 \varphi_{4} - 0.4 \varphi_{5} - 0.17 \varphi_{6} + 0.17 \varphi_{7} + 0.4 \varphi_{8} + 0.35 \varphi_{9} \\
+\; E_{B_{2g}}^{(3)} &= \alpha - 2.3 \beta, & \Psi_{B_{2g}}^{(3)} &= 0.3 \varphi_{1} + 0.46 \varphi_{10} - 0.23 \varphi_{2} + 0.23 \varphi_{3} - 0.3 \varphi_{4} - 0.3 \varphi_{5} + 0.23 \varphi_{6} - 0.23 \varphi_{7} + 0.3 \varphi_{8} - 0.46 \varphi_{9} \\
 \end{align*}
 \normalsize
 $$
 H_{B_{3g}} = \begin{pmatrix}\alpha & \beta\\\beta & \alpha + \beta\end{pmatrix}
-\Rightarrow
+\text{, na base }(\psi_{B_{3g}}^{(1)}, \psi_{B_{3g}}^{(2)})
 $$
 \footnotesize
 \begin{align*}
-\; E_{B_{3g}}^{(1)} &\approx \alpha + 1.6 \beta, & \Psi_{B_{3g}}^{(1)} &= 0.26 \varphi_{1} + 0.43 \varphi_{2} + 0.43 \varphi_{3} + 0.26 \varphi_{4} - 0.26 \varphi_{5} - 0.43 \varphi_{6} - 0.43 \varphi_{7} - 0.26 \varphi_{8} \\
-\; E_{B_{3g}}^{(2)} &\approx \alpha - 0.62 \beta, & \Psi_{B_{3g}}^{(2)} &= 0.42 \varphi_{1} - 0.26 \varphi_{2} - 0.26 \varphi_{3} + 0.42 \varphi_{4} - 0.42 \varphi_{5} + 0.26 \varphi_{6} + 0.26 \varphi_{7} - 0.42 \varphi_{8} \\
+\; E_{B_{3g}}^{(1)} &= \alpha + 1.6 \beta, & \Psi_{B_{3g}}^{(1)} &= 0.26 \varphi_{1} + 0.43 \varphi_{2} + 0.43 \varphi_{3} + 0.26 \varphi_{4} - 0.26 \varphi_{5} - 0.43 \varphi_{6} - 0.43 \varphi_{7} - 0.26 \varphi_{8} \\
+\; E_{B_{3g}}^{(2)} &= \alpha - 0.6 \beta, & \Psi_{B_{3g}}^{(2)} &= 0.43 \varphi_{1} - 0.26 \varphi_{2} - 0.26 \varphi_{3} + 0.43 \varphi_{4} - 0.43 \varphi_{5} + 0.26 \varphi_{6} + 0.26 \varphi_{7} - 0.43 \varphi_{8} \\
 \end{align*}
 \normalsize
 $$
 H_{A_{u}} = \begin{pmatrix}\alpha & \beta\\\beta & \alpha - \beta\end{pmatrix}
-\Rightarrow
+\text{, na base }(\psi_{A_{u}}^{(1)}, \psi_{A_{u}}^{(2)})
 $$
 \footnotesize
 \begin{align*}
-\; E_{A_{u}}^{(1)} &\approx \alpha + 0.62 \beta, & \Psi_{A_{u}}^{(1)} &= 0.42 \varphi_{1} + 0.26 \varphi_{2} - 0.26 \varphi_{3} - 0.42 \varphi_{4} + 0.42 \varphi_{5} + 0.26 \varphi_{6} - 0.26 \varphi_{7} - 0.42 \varphi_{8} \\
-\; E_{A_{u}}^{(2)} &\approx \alpha - 1.6 \beta, & \Psi_{A_{u}}^{(2)} &= 0.26 \varphi_{1} - 0.43 \varphi_{2} + 0.43 \varphi_{3} - 0.26 \varphi_{4} + 0.26 \varphi_{5} - 0.43 \varphi_{6} + 0.43 \varphi_{7} - 0.26 \varphi_{8} \\
+\; E_{A_{u}}^{(1)} &= \alpha + 0.6 \beta, & \Psi_{A_{u}}^{(1)} &= 0.43 \varphi_{1} + 0.26 \varphi_{2} - 0.26 \varphi_{3} - 0.43 \varphi_{4} + 0.43 \varphi_{5} + 0.26 \varphi_{6} - 0.26 \varphi_{7} - 0.43 \varphi_{8} \\
+\; E_{A_{u}}^{(2)} &= \alpha - 1.6 \beta, & \Psi_{A_{u}}^{(2)} &= 0.26 \varphi_{1} - 0.43 \varphi_{2} + 0.43 \varphi_{3} - 0.26 \varphi_{4} + 0.26 \varphi_{5} - 0.43 \varphi_{6} + 0.43 \varphi_{7} - 0.26 \varphi_{8} \\
 \end{align*}
 \normalsize
 $$
 H_{B_{1u}} = \begin{pmatrix}\alpha & \beta & \sqrt{2} \beta\\\beta & \alpha + \beta & 0\\\sqrt{2} \beta & 0 & \alpha + \beta\end{pmatrix}
-\Rightarrow
+\text{, na base }(\psi_{B_{1u}}^{(1)}, \psi_{B_{1u}}^{(2)}, \psi_{B_{1u}}^{(3)})
 $$
 \footnotesize
 \begin{align*}
-\; E_{B_{1u}}^{(1)} &\approx \alpha + \beta, & \Psi_{B_{1u}}^{(1)} &= - 0.41 \varphi_{10} + 0.41 \varphi_{2} + 0.41 \varphi_{3} + 0.41 \varphi_{6} + 0.41 \varphi_{7} - 0.41 \varphi_{9} \\
-\; E_{B_{1u}}^{(2)} &\approx \alpha + 2.3 \beta, & \Psi_{B_{1u}}^{(2)} &= 0.3 \varphi_{1} + 0.46 \varphi_{10} + 0.23 \varphi_{2} + 0.23 \varphi_{3} + 0.3 \varphi_{4} + 0.3 \varphi_{5} + 0.23 \varphi_{6} + 0.23 \varphi_{7} + 0.3 \varphi_{8} + 0.46 \varphi_{9} \\
-\; E_{B_{1u}}^{(3)} &\approx \alpha - 1.3 \beta, & \Psi_{B_{1u}}^{(3)} &= 0.4 \varphi_{1} - 0.35 \varphi_{10} - 0.17 \varphi_{2} - 0.17 \varphi_{3} + 0.4 \varphi_{4} + 0.4 \varphi_{5} - 0.17 \varphi_{6} - 0.17 \varphi_{7} + 0.4 \varphi_{8} - 0.35 \varphi_{9} \\
+\; E_{B_{1u}}^{(1)} &= \alpha + \beta, & \Psi_{B_{1u}}^{(1)} &= - 0.41 \varphi_{10} + 0.41 \varphi_{2} + 0.41 \varphi_{3} + 0.41 \varphi_{6} + 0.41 \varphi_{7} - 0.41 \varphi_{9} \\
+\; E_{B_{1u}}^{(2)} &= \alpha + 2.3 \beta, & \Psi_{B_{1u}}^{(2)} &= 0.3 \varphi_{1} + 0.46 \varphi_{10} + 0.23 \varphi_{2} + 0.23 \varphi_{3} + 0.3 \varphi_{4} + 0.3 \varphi_{5} + 0.23 \varphi_{6} + 0.23 \varphi_{7} + 0.3 \varphi_{8} + 0.46 \varphi_{9} \\
+\; E_{B_{1u}}^{(3)} &= \alpha - 1.3 \beta, & \Psi_{B_{1u}}^{(3)} &= 0.4 \varphi_{1} - 0.35 \varphi_{10} - 0.17 \varphi_{2} - 0.17 \varphi_{3} + 0.4 \varphi_{4} + 0.4 \varphi_{5} - 0.17 \varphi_{6} - 0.17 \varphi_{7} + 0.4 \varphi_{8} - 0.35 \varphi_{9} \\
 \end{align*}
+
+\normalsize
+
+Por fim, lembrando que $\beta < 0$, de acordo com nossos resultados, obtemos o diagrama de energia:
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.6\linewidth]{fig/diagrama_energia.png}
+\caption{Níveis de energias e orbitais moleculares simetrizados correspondentes.}
+\label{fig:diagrama_energia}
+\end{figure}
 
 
 \end{document}

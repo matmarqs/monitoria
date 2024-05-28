@@ -1,20 +1,20 @@
-from sympy import symbols, sqrt, latex, pprint, simplify, print_latex
+from sympy import symbols, sqrt, latex, pprint, simplify, print_latex, preorder_traversal, Float
 from sympy.matrices import Matrix, GramSchmidt
 
 f1, f2, f3, f4, f5, f6, f7, f8, f9, f10 = symbols(
 'varphi_1 varphi_2 varphi_3 varphi_4 varphi_5 varphi_6 varphi_7 varphi_8 varphi_9 varphi_10')
 
 h = 8   # order of the group
-dim = [1, 1, 1, 1]  # degeneracies of the irreps $B_{2g}$, $B_{3g}$, $A_{u}$, $B_{1u}$
+dim = [1, 1, 1, 1]  # dimensions of the irreps $B_{2g}$, $B_{3g}$, $A_{u}$, $B_{1u}$
 
-# chi is the 4x8 matrix for the characters of the irreps [B2g, B3g, Au, B1u] of the group D_2h
+# chi is the 4x8 matrix for the characters of the irreps [B2g, B3g, Au, B1u] of the group D2h
 #         $E$  $C_{2z}$  $C_{2y}$  $C_{2x}$   $i$   $\sigma_h$   $\sigma_{xz}$  $\sigma_{yz}$
 chi = [ [ 1,     -1,        1,       -1,       1,       -1,           1,             -1,    ],     #  $B_{2g}$, index 0
         [ 1,     -1,       -1,        1,       1,       -1,          -1,              1,    ],     #  $B_{3g}$, index 1
         [ 1,      1,        1,        1,      -1,       -1,          -1,             -1,    ],     #  $A_{u}$, index 2
         [ 1,      1,       -1,       -1,      -1,       -1,           1,              1,    ], ]   #  $B_{1u}$, index 3
 
-class Proj:     # element of symmetry from D_2h
+class Proj:     # element of symmetry from D2h
     def __init__(self, Pf1, Pf2, Pf9):
         self.P = [Pf1, Pf2, Pf9]
 
@@ -29,7 +29,7 @@ D2h = [ Proj( f1,  f2, f9),   Proj( f5,  f6, f10),
         Proj( f8,  f7, f9),   Proj( f4,  f3, f10),  ]
 
 # irrep is the index 0, 1, 2, 3 for $B_{2g}$, $B_{3g}$, $A_{u}$, $B_{1u}$
-# phi is the index 0, 1, 2 for phi_1, phi_2, phi_3
+# phi is the index 0, 1, 2 for phi1, phi2, phi3
 def proj_irrep(irrep, phi):
     soma = 0
     for R in range(len(D2h)):
@@ -60,6 +60,13 @@ def get_var(coeffs, vars):
         var += coeffs[i] * vars[i]
     return var
 
+def round_sympy(expr, num):
+    ex = expr
+    for f in preorder_traversal(expr):
+        if isinstance(f, Float):
+            ex = ex.subs(f, round(f, num))
+    return ex
+
 def print_eig(D, strS, P, S, vars):
     mdim = len(D[0,:])
     for i in range(mdim):
@@ -69,24 +76,24 @@ def print_eig(D, strS, P, S, vars):
         orb_var = get_var(orb, vars)
         if orb_var.coeff(f1) < 0 or orb_var.coeff(f2) < 0:  # get pretty signal
             orb_var *= -1
-        print(r'\; E_{%s}^{(%d)} &\approx %s, & \Psi_{%s}^{(%d)} &= %s \\' % (strS, i+1,
-            latex(D[i,i].evalf(2)), strS, i+1, latex(orb_var.evalf(2))))
+        print(r'\; E_{%s}^{(%d)} &= %s, & \Psi_{%s}^{(%d)} &= %s \\' % (strS, i+1,
+            latex(round_sympy(D[i,i].evalf(),1)), strS, i+1, latex(round_sympy(orb_var.evalf(), 2))))
+
+def fmt_string(n):
+    s = "("
+    for i in range(1,n):
+        s += "%s, "
+    s += "%s)"
+    return s
 
 def main():
     vars = [f1, f2, f3, f4, f5, f6, f7, f8, f9, f10]
     # irrep is the index 0, 1, 2, 3 for $B_{2g}$, $B_{3g}$, $A_{u}$, $B_{1u}$
-    # phi is the index 0, 1, 2 for phi_1, phi_2, phi_3
-    psis = []
-    myappend(vars, psis, proj_irrep(irrep=0, phi=0))    # $\mathcal{P}^{B_{2g}} \varphi_1$
-    myappend(vars, psis, proj_irrep(irrep=0, phi=1))    # $\mathcal{P}^{B_{2g}} \varphi_2$
-    myappend(vars, psis, proj_irrep(irrep=0, phi=2))    # $\mathcal{P}^{B_{2g}} \varphi_9$
-    myappend(vars, psis, proj_irrep(irrep=1, phi=0))    # $\mathcal{P}^{B_{3g}} \varphi_1$
-    myappend(vars, psis, proj_irrep(irrep=1, phi=1))    # $\mathcal{P}^{B_{3g}} \varphi_2$
-    myappend(vars, psis, proj_irrep(irrep=2, phi=0))    # $\mathcal{P}^{A_{u}} \varphi_1$
-    myappend(vars, psis, proj_irrep(irrep=2, phi=1))    # $\mathcal{P}^{A_{u}} \varphi_2$
-    myappend(vars, psis, proj_irrep(irrep=3, phi=0))    # $\mathcal{P}^{B_{1u}} \varphi_1$
-    myappend(vars, psis, proj_irrep(irrep=3, phi=1))    # $\mathcal{P}^{B_{1u}} \varphi_2$
-    myappend(vars, psis, proj_irrep(irrep=3, phi=2))    # $\mathcal{P}^{B_{1u}} \varphi_9$
+    # phi is the index 0, 1, 2 for phi1, phi2, phi3
+    psis = []; deg = [3, 2, 2, 3]  # degeneracies of each irrep
+    for i in range(len(dim)):
+        for j in range(deg[i]):
+            myappend(vars, psis, proj_irrep(irrep=i, phi=j))
 
     out_B2g = GramSchmidt(psis[0:3], orthonormal=True)
     out_B3g = GramSchmidt(psis[3:5], orthonormal=True)
@@ -131,7 +138,9 @@ def main():
         print(r'$$')
         print(r'H_{%s} = ' % (strS), end='')
         print_latex(mmat, mat_str='pmatrix', mat_delim='')
-        print(r'\Rightarrow')
+        mdim = len(mmat[0,:])
+        L = [r'\psi_{%s}^{(%d)}' % (strS, i+1) for i in range(mdim)]
+        print(r'\text{, na base }%s' % (fmt_string(mdim) % tuple(L)))
         print(r'$$')
         print(r'\footnotesize')
         print(r'\begin{align*}')
