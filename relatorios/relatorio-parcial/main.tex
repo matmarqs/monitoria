@@ -62,6 +62,7 @@
 \input{comandos}
 \input{preamble}
 \input{preamble_tbg}
+\input{preamble_groups}
 %
 %%-----
 %% Página de título
@@ -175,7 +176,7 @@ We plan to address the MATBG by initially studying a single impurity site locali
 
 To establish a robust initial implementation of the impurity solver and DMFT, we begin our studies with the Hubbard model \cite{hubbard1963} on a Bethe lattice at the coordination number limit $z\to\infty$. This choice is motivated by the model's relative simplicity and its suitability as a benchmark for our DMFT code. In Section \ref{sec:hubbard}, we address the technical details of applying DMFT to this benchmark system and show our numerical results, which demonstrate the Metal-Insulator phase transition in both the particle-hole symmetric (PHS) case ($\epsilon_d = U/2$) and the asymmetric case.
 
-In Section \ref{sec:tbg}, we present our progress in understanding the MATBG system by studying its geometry \cite{handbook2019}, the Bistritzer-MacDonald (BM) model \cite{macdonald2011}, and the Wannier obstruction phenomenon \cite{zou}. The Wannier obstruction, arising from the non-trivial topology, refers to the impossibility of representing the flat bands using exponentially localized Wannier functions that preserve all symmetries of the band structure.
+In Section \ref{sec:tbg}, we present our progress in understanding the MATBG system by studying its geometry \cite{handbook2019}, the Bistritzer-MacDonald (BM) model \cite{macdonald2011}, and the Wannier obstruction phenomenon \cite{zou2018}. The Wannier obstruction, arising from the non-trivial topology, refers to the impossibility of representing the flat bands using exponentially localized Wannier functions that preserve all symmetries of the band structure.
 
 \pagebreak
 
@@ -189,7 +190,7 @@ Throughout the period outlined in this report, our advancements comprised three 
 
 \item While our initial intention was to utilize the Hubbard model only for benchmarking DMFT, our endeavor led us to a comprehensive exploration of the Mott transition within this system, yielding original findings. In Section \ref{sec:hubbard}, we describe the techniques and concepts intrinsic to the DMFT framework, presenting our results on the Metal-Insulator transition. Additionally, the student enrolled in the supplementary course titled "Strong coupling theories for metal-insulator transitions: DMFT and beyond" at USP during the first semester of 2023. This course proved invaluable, offering insights into extending DMFT to complex systems.
 
-\item We initiated our exploration of the MATBG theory with reference to \cite{handbook2019}, aiming primarily to comprehend the Moiré pattern geometry and the Bistritzer-MacDonald continuous model \cite{macdonald2011}. Subsequently, our focus shifted to analyzing the system's symmetries \cite{thesis_rennella}, which are pivotal, with implications such as the Wannier obstruction \cite{zou}. In Section \ref{sec:tbg}, we elucidate our studies.
+\item We initiated our exploration of the MATBG theory with reference to \cite{handbook2019}, aiming primarily to comprehend the Moiré pattern geometry and the Bistritzer-MacDonald continuous model \cite{macdonald2011}. Subsequently, our focus shifted to analyzing the system's symmetries \cite{thesis_rennella}, which are pivotal, with implications such as the Wannier obstruction \cite{zou2018}. In Section \ref{sec:tbg}, we elucidate our studies.
 \end{itemize}
 
 
@@ -263,13 +264,13 @@ which simplifies the loop, since $\Delta(\omega)$ can be directly inserted in th
 
 \subsection{Impurity Solver} \label{sec:impurity-solver}
 
-As our main objective was to establish a working code for DMFT, we chose to use the Non-Crossing Approximation (NCA) impurity solver. As can be seen in Table 1 of \cite{impurity-solvers}, the NCA has a low computational-cost while still giving reasonable qualitative results but, as discussed in \cite{vildosola2015}, \ALERT{it is important to keep in mind that it does not return accurate quantitative values} for critical interactions $U_{c1}$, $U_{c2}$ and Kondo temperature $T_{\text{K}}$ \cite{haule_real_materials, vildosola2015}. The NCA method also has the advantage of quickly accessing a versatile range of temperatures. The details of NCA can be found in Section 2.2 of \cite{thesis_bruno}. For our work, we used the code developed by Kristjan Haule available on the website \cite{hauleweb}.
+As our main objective was to establish a working code for DMFT, we chose to use the Non-Crossing Approximation (NCA) impurity solver. As shown in Table 1 of \cite{impurity-solvers}, the NCA has a low computational cost while still providing reasonable qualitative results. However, as discussed in \cite{vildosola2015}, it is important to note that it does not return accurate quantitative values for critical interactions $U_{c1}$, $U_{c2}$, and the Kondo temperature $T_{\text{K}}$ \cite{haule_real_materials, vildosola2015}. The NCA method also has the advantage of quickly accessing a versatile range of temperatures. The details of NCA can be found in Section 2.2 of \cite{thesis_bruno}. For our work, we used the code developed by Kristjan Haule available on the website \cite{hauleweb}.
 
 \subsection{Results, \ALERT{$\eps_d \to \eps_d/U$, Figure \ref{fig:UxT-rho0}(e-f)}} \label{sec:results}
 
-Firstly, we explored the standard setting $\eps_d = U/2$ in the literature \cite{georges1996}, where the system has particle-hole symmetry (PHS) and is always at half-filling ($n=1$). When the temperature is low enough, there are two values of $U$ where the system experiences a phase transition. When one starts from an Mott insulating solution at large $U$ and slowly decreases it, the system reaches a critical value $U_{c_1}$ for which it becomes metallic. On the other hand, when starting from a metal at low $U$ and increasing it, the system reaches another critical value $U_{c2} > U_{c1}$, for which it becomes an insulator. To characterize these two phases, we use the spectral density at zero energy \cite{georges1996} and the filling $n$, because half-filling is a necessary condition for the existence of the insulating phase.
+We explored how the system behaves when one deviates from PHS ($\eps_d = U/2$). When the temperature is sufficiently low, the system undergoes a phase transition at two distinct values of $U$. Starting from a Mott insulating solution at large $U$ and gradually decreasing it, the system reaches a critical value $U_{c_1}$, at which it becomes metallic. Conversely, starting from a metallic state at low $U$ and increasing it, the system reaches another critical value $U_{c2} > U_{c1}$, at which it transitions back to an insulator. To characterize these two phases, we use the spectral density at zero energy \cite{georges1996} and the filling $n$, as half-filling is a necessary condition for the insulating phase.
 
-Figure \ref{fig:UxT-rho0} is a color plot of $\rho(0) = (\rho_{\text{metal}}(0) + \rho_{\text{insul}}(0))/2$ as a function of $U \times T$, where the ``metal'' and ``insul'' labels mean starting with a metallic (low $U$) or insulating (high $U$) solution. The blue region (where $\rho(0) = 0$) corresponds to the insulating phase and the red region (where $\rho(0)$ is maximum) to the metallic phase. The green region is a coexistence phase, where $\rho(0)$ changes abruptally if the temperature is low enough. The critical point $(U_c, T_c)$ \ALERT{corresponds} to the ``vertice of the green triangle''.
+Figure \ref{fig:UxT-rho0} is a color plot of $\rho(0) = (\rho_{\text{metal}}(0) + \rho_{\text{insul}}(0))/2$ as a function of $U \times T$, where the ``metal'' and ``insul'' labels mean starting with a metallic (low $U$) or insulating (high $U$) solution. The blue region (where $\rho(0) = 0$) corresponds to the insulating phase and the red region (where $\rho(0)$ is maximum) to the metallic phase. The green region is a coexistence phase, where $\rho(0)$ changes abruptally to an intermediate value. The critical point $(U_c, T_c)$ identify the vertice of the coexistence region (``green triangle'').
 
 %\begin{center}
 %\ALERT{NAS FIGURAS DO Uc e Tc DEVERIA SER O XLABEL $\eps_d/U$.}
@@ -277,13 +278,13 @@ Figure \ref{fig:UxT-rho0} is a color plot of $\rho(0) = (\rho_{\text{metal}}(0) 
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.7\columnwidth]{fig/fig2-abcd-eps-converted-to.pdf}
-\includegraphics[width=0.42\columnwidth]{fig/fig2-ef-eps-converted-to.pdf}
+\includegraphics[width=0.8\columnwidth]{fig/fig2-abcd-eps-converted-to.pdf}
+\includegraphics[width=0.48\columnwidth]{fig/fig2-ef-eps-converted-to.pdf}
 \caption{(a-d) Phase diagrams $U \times T$ as $\eps_d$ is moved away from $U/2$. (a) $\epsilon_d=0.5U$ (b) $\epsilon_d=0.485U$ (c) $\epsilon_d=0.475U$ (d) $\epsilon_d=0.465U$. (e-f) $U_c, T_c$ as functions of $\eps_d/U$. }
 \label{fig:UxT-rho0}
 \end{figure}
 
-Figure \ref{fig:T0002-butterfly} shows $U \times \eps_d$ phase diagrams for the fixed temperature $T = 0.002$, where $\Delta \rho(0) = \rho_{\text{metal}}(0) - \rho_{\text{insul}}(0)$, $n = (n_{\text{metal}} + n_{\text{insul}})/2$, $\Delta n = n_{\text{metal}} - n_{\text{insul}}$. The ``smile pattern'' of Figures \ref{fig:T0002-butterfly}(a,b,d) characterize the coexistence region.
+Figure \ref{fig:T0002-butterfly} shows $U \times \eps_d$ phase diagrams for the fixed temperature $T = 0.002$, where $\Delta \rho(0) = \rho_{\text{metal}}(0) - \rho_{\text{insul}}(0)$, $n = (n_{\text{metal}} + n_{\text{insul}})/2$, $\Delta n = n_{\text{metal}} - n_{\text{insul}}$. The ``smile pattern'' of Figures \ref{fig:T0002-butterfly}(a,b,d) identifies the coexistence region.
 
 \begin{figure}[H]
 \centering
@@ -296,9 +297,9 @@ Figure \ref{fig:T0002-butterfly} shows $U \times \eps_d$ phase diagrams for the 
 
 \section{\ALERT{Twisted Bilayer Graphene}} \label{sec:tbg}
 
-\subsection{Geometric description} \label{sec:tbg_geom}
+\subsection{Commensurate structures} \label{sec:tbg_geom}
 
-The TBG system can be characterized by a rotation angle $\theta$ from the initial AB stacking stable setting. The two slightly misaligned layers form an interference Moiré pattern, which can be commensurate (form a superlattice) or not. In the commensurate case, one can define primitive lattice vectors $\vb{L}_1$, $\vb{L}_2$ as the least common multiple of the unit vectors of two layers. Figure \ref{fig:latvec} shows an example of this.
+The TBG system can be characterized by a rotation angle $\theta$ from the initial AB stacking configuration. The two slightly misaligned layers create an interference Moiré pattern, which can be either commensurate (forming a superlattice) or incommensurate. In the commensurate case, one can define the primitive lattice vectors $\vb{L}_1$ and $\vb{L}_2$ as the least common multiples of the unit vectors of the monolayers. Figure \ref{fig:latvec} illustrates an example of a commensurate structure where $\theta = 21.8^\circ$.
 
 \begin{figure}[H]
 \centering
@@ -314,7 +315,7 @@ The TBG system can be characterized by a rotation angle $\theta$ from the initia
   \caption{}
   \label{fig:bzminibz}
 \end{subfigure}
-\caption{(a) Commensurate case and lattice vectors $\vb{L}_1$, $\vb{L}_2$. (b) Monolayers (red and green) and mini BZ's with $(m,n) = (1,2)$ and $\theta = 21.8^\circ$. Figures taken from \cite{koshino2012}.}
+\caption{(a) Commensurate structure and lattice vectors $\vb{L}_1$, $\vb{L}_2$. (b) Monolayers (red and green) and mini BZ's with $(m,n) = (1,2)$ and $\theta = 21.8^\circ$. Figures taken from \cite{koshino2012}.}
 \label{fig:geometry}
 \end{figure}
 
@@ -330,31 +331,44 @@ The TBG system can be characterized by a rotation angle $\theta$ from the initia
 %\vb{a}_1^{(2)} \vdot \vb{a}_2^{(1)} &= a^2 \cos(60^\circ - \theta).
 %\end{align}
 
-The superlattice vectors $\vb{L}_1$, $\vb{L}_2$ are related by a $60^\circ$ rotation. In general, because $\vb{L}_1$ belongs to the lattices of both layers, it is written by integers $m,n,m',n'$ as
+The superlattice vectors $\vb{L}_1$, $\vb{L}_2$ are related by a $60^\circ$ rotation. In general, because $\vb{L}_1$ belongs to the lattices of both layers, it can be parameterized by integers $m,n,m',n'$ as
 \begin{equation} \label{eq:L1}
-\vb{L}_1 = m\vb{a}_1^{(1)} + n\vb{a}_2^{(1)} = m'\vb{a}_1^{(2)} + n'\vb{a}_2^{(2)}.
+\vb{L}_1 = m\vb{a}_1^{(1)} + n\vb{a}_2^{(1)} = m'\vb{a}_1^{(2)} + n'\vb{a}_2^{(2)},
 \end{equation}
+where $\vb{a}_j^{(\ell)}$ is the $j$-th unit vector of layer $\ell$.
 
-There is an appropriate choice of lattice vectors $\vb{a}_1^{(1)}, \vb{a}_2^{(1)}, \vb{a}_1^{(2)}, \vb{a}_2^{(2)}$ such that the indices $(m',n')$ can be made equal to $(n,m)$ \cite{koshino2012}. With this in mind, one obtains the condition of commensurability for the twist angle
+There is an appropriate choice of vectors $\vb{a}_i^{(\ell)}$ such that the indices $(m',n')$ are equal to $(n,m)$ \cite{koshino2012}. With this choice, one obtains the condition of commensurability
 \begin{equation} \label{eq:costheta}
 \cos\theta = \frac{m^2 + n^2 + 4mn}{2(m^2 + n^2 + mn)} = \frac{3 m^2 + 3mr + r^2/2}{3m^2 + 3mr + r^2},
 \end{equation}
 where $r = n-m$, and $\gcd(m,n) = \gcd(m,r)=1$. By taking the norm of $\vb{L}_1$ from equation \ref{eq:L1} and using the angle relation in equation \ref{eq:costheta}, the superlattice constant $L = \abs{\vb{L}_1} = \abs{\vb{L}_2}$ is given by
-\begin{equation} \label{eq:}
-L = a\sqrt{m^2 + n^2 + mn} = \frac{\abs{m-n}}{2 \sin(\theta/2)} \, a.
+\begin{equation} \label{eq:commensurate-constant}
+L(\theta) = a\sqrt{m^2 + n^2 + mn} = \frac{\abs{m-n}}{2 \sin(\theta/2)} \, a.
 \end{equation}
 
-The area of an unit cell of the superlattice is $A = \frac{\sqrt{3}}{2} L^2 = (m^2 + n^2 + mn) \, A_1$, where $A_1 = \frac{\sqrt{3}}{2} \, a^2$ is the area of unit cell of monolayer graphene. Considering the BZ, we get
+The area of an unit cell of the superlattice is $A = \frac{\sqrt{3}}{2} L^2 = (m^2 + n^2 + mn) \, A_1$, where $A_1 = \frac{\sqrt{3}}{2} \, a^2$ is the area of unit cell of monolayer graphene. Considering the Brillouin Zone area (BZ), we have
 \begin{equation} \label{eq:bz-volume}
 \Omega = \frac{\Omega_1}{m^2 + n^2 + mn},
 \end{equation}
 where $\Omega_1 = (2\pi)^2/A$ is the monolayer's BZ area and $\Omega$ is the area of the moiré mini BZ. As an example, for $(m,n) = (1,2)$ we have $\theta = 21.8^\circ$ and $m^2 + n^2 + mn = 7$, therefore the monolayer BZ fits 7 mini BZ's in its area, as we see in Figure \ref{fig:bzminibz}.
 
+\n
+
+From the derivation above, one would conclude that a commensurate TBG system should have a translational symmetry with lattice constant $L(\theta)$ given by equation \ref{eq:commensurate-constant}. However, as discussed in \cite{zou2018}, scanning tunneling microscopy (STM) experiments actually observe a moiré lattice constant
+\begin{equation} \label{eq:STM-constant}
+L'(\theta) = \frac{a}{2 \sin(\theta/2)} \leq L(\theta).
+\end{equation}
+
+This can be interpreted as MATBG exhibiting an approximate translational symmetry with superlattice constant $L'(\theta)$, despite optionally possessing an exact translational symmetry with $L(\theta)$ in the commensurate case. The Bistritzer-MacDonald (also known as continuum theory) to derived in Section \ref{sec:BM-model} incorporates this translational symmetry and others ``good'' emergent symmetries that MATBG displays in experiments.
+
+
+\subsection{Bistritzer-MacDonald model} \label{sec:BM-model}
+
 The atoms positions of each layer are given by
 \begin{equation} \label{eq:position-atoms-tbg}
 \r = n_1 \a_{\ell,1} + n_2 \a_{\ell,2} + \vtau_{\ell,\alpha},
 \end{equation}
-where $\alpha = A,B$ indexes the type of the site, and $\tau_{\ell,\alpha}$ are basis vectors. The lattice vectors are the rotated $\a_{\ell,j} = R_{\theta_\ell} \a_{j}$, where
+where $\alpha = A,B$ indexes the site type, and $\tau_{\ell,\alpha}$ are basis vectors. The lattice vectors are the rotated $\a_{j}^{(\ell)} = R_{\theta_\ell} \a_{j}$, where
 \begin{equation} \label{eq:rotation-matrix}
 R_\theta =
 \begin{pmatrix}
@@ -362,28 +376,23 @@ R_\theta =
 \sin\theta & \cos\theta
 \end{pmatrix},
 \end{equation}
-is the rotation matrix by an angle $\theta$ and we use $\theta_1 = -\theta/2$ and $\theta_2 = +\theta/2$. We shall consider AB-stacking as our starting position, because this is the most stable configuration for bilayer graphene. In this case, the translation vectors are given by
+is the rotation matrix by an angle $\theta$ and we use the reference frame which $\theta_1 = -\theta/2$ and $\theta_2 = +\theta/2$. We shall consider AB-stacking as the starting position ($\theta=0$), because this is the most stable configuration for bilayer graphene \cite{handbook2019}. In this case, the translation vectors are given by
 \begin{align}
 \tau_{1,A} &= R_{-\theta/2}(0,0), \quad \tau_{2,A} = R_{\theta/2} [(0,-d) + \vtau_0], \label{eq:tauA} \\
 \tau_{1,B} &= R_{-\theta/2}(0,d), \quad \tau_{2,B} = R_{\theta/2} [(0,0) + \vtau_0], \label{eq:tauB}
 \end{align}
 where $\vtau_0$ is an arbitrary translation. For example, $\vtau_0 = (0,0)$ corresponds to AB-stacking and $\vtau_0 = (0, d)$ corresponds to AA-stacking.
 
-\subsection{Bistritzer-MacDonald model}
-
-Here we will review the Bistritzer-MacDonald (BM) model \cite{macdonald2011}. Defining the wave vectors $\vb{G}_{\ell,1} = \vb{b}_{\ell,1}$, $\vb{G}_{\ell,2} = \vb{b}_{\ell,2}$ and $\vb{G}_{\ell,3} = \vb{b}_{\ell,1} - \vb{b}_{\ell,2}$, the moiré pattern can be interpreted by an beat effect with periodicity $\vb{b}_k^{\text{m}} = \vb{G}_{1,k} - \vb{G}_{2,k}$, \cite{handbook2019}:
+Defining the wave vectors $\vb{G}_{\ell,1} = \vb{b}_{\ell,1}$, $\vb{G}_{\ell,2} = \vb{b}_{\ell,2}$ and $\vb{G}_{\ell,3} = \vb{b}_{\ell,1} - \vb{b}_{\ell,2}$, the moiré pattern can be interpreted by an beat effect with periodicity $\vb{b}_k^{\text{m}} = \vb{G}_{1,k} - \vb{G}_{2,k}$, \cite{handbook2019}:
 \begin{equation} \label{eq:moire-bvecs}
 \vb{b}_1^{\text{m}} = \sqrt{3} \abs{\Delta \K} \qty( \frac{1}{2}, -\frac{\sqrt{3}}{2}), \quad
 \vb{b}_2^{\text{m}} = \sqrt{3} \abs{\Delta \K} \qty( \frac{1}{2},  \frac{\sqrt{3}}{2}),
 \end{equation}
-where $\abs{\Delta \K} = 2 \abs{\K} \sin(\theta/2)$ and $\abs{\K} = 4\pi/(3a)$.
+where $\K$ is a Dirac point of an unrotated monolayer, and $\Delta\K = \K_1-\K_2$ with $\abs{\Delta \K} = 2 \abs{\K} \sin(\theta/2)$.
 
-The area of the moiré lattice unit cell is
-\begin{equation} \label{eq:moire-unitcell}
-A_{\text{m.u.c.}} = \frac{(2\pi)^2}{\abs{\b_1^{\text{m}} \cross \b_2^{\text{m}}}} = \frac{\sqrt{3} a^2}{8 \sin[2](\theta/2)}.
-\end{equation}
+\n
 
-The starting point is a tight-binding model $ H = H_1 + H_2 + H_{\perp} $, where $H_\ell$ is the hamiltonian of the layer $\ell$, and $H_\perp = V_{12} + V_{12}^\d$ describes the interlayer hybridization. We write this hamiltonian in terms of Bloch waves
+The Hamiltonian $H$ of the model comes from a tight-binding approach $H = H_1 + H_2 + H_{\perp}$, where $H_\ell$ is the hamiltonian of the layer $\ell$, and $H_\perp = V_{12} + V_{12}^\d$ describes the interlayer hybridization. We write this hamiltonian in terms of Bloch waves
 \begin{equation} \label{eq:BM-blochwave}
 \ket{\psi_{\ell, \k, \alpha}} = \frac{1}{\sqrt{N_\ell}} \sum_{\R_\ell} e^{i \k \vdot (\R_\ell + \vtau_{\ell,\alpha})} \ket{\ell, R_\ell, \alpha},
 \end{equation}
@@ -399,12 +408,13 @@ where we expanded $\k = \pm \K_\ell + \q$ to first-order in $\q$.
 
 \n
 
-Now, the tight-binding interlayer Hamiltonian in second quantization reads
+The interlayer Hamiltonian in second quantization reads
 \begin{equation} \label{eq:interlayer-hopping}
 V_{12} = \sum_{\R_1,\alpha,\R_2,\beta} c_{1,\alpha}^\d t_{12}^{\alpha\beta}(\R_1,\R_2) c_{2,\beta}(\R_2), \quad
 t_{12}^{\alpha\beta}(\R_1,\R_2) =
 \mel{1,\R_1,\alpha}{V_{12}}{2,\R_2,\beta}.
 \end{equation}
+
 Performing the Fourier transformation
 \begin{equation} \label{eq:blg-fourier}
 c_{\ell,\alpha}^\d(\R_\ell) = \frac{1}{\sqrt{N_\ell}} \sum_{\k_\ell}
@@ -420,7 +430,7 @@ T_{12}^{\alpha\beta}(\k_1,\k_2) =
 t_{12}^{\alpha\beta}(\R_1,\R_2) e^{i\k_2\vdot(\R_2+\vtau_{2,\beta})}.
 \end{equation}
 
-Assuming the interlayer hopping $t_{12}^{\alpha\beta}(\R_1,\R_2)$ is only a function of the separation between the centers of the two orbitals, its Fourier transform is
+Assuming the interlayer hopping $t_{12}^{\alpha\beta}(\R_1,\R_2)$ is only a function of the separation between the centers of the two orbitals, we can apply a Fourier transformation
 \begin{equation} \label{eq:interlayer-hopping-fourier}
 t_{12}^{\alpha\beta}(\R_1,\R_2) = t_{12}^{\alpha\beta}(\R_1+\vtau_{1,\alpha}-\R_2-\vtau_{2,\beta}) =
 \int \frac{\dd[2]{\p}}{(2\pi)^2} e^{i \p \vdot (\R_1+\vtau_{1,\alpha}-\R_2-\vtau_{2,\beta})} t_{12}^{\alpha\beta}(\p).
@@ -428,76 +438,213 @@ t_{12}^{\alpha\beta}(\R_1,\R_2) = t_{12}^{\alpha\beta}(\R_1+\vtau_{1,\alpha}-\R_
 
 Plugging equation \ref{eq:interlayer-hopping-fourier} in equation \ref{eq:interlayer-hopping-Tkspace}, we obtain
 \begin{equation} \label{eq:interlayer-hopping-simplified}
-T_{12}^{\alpha\beta}(\k_1,\k_2) = \frac{1}{\sqrt{A_{u.c.1} A_{u.c.2}}}
+T_{12}^{\alpha\beta}(\k_1,\k_2) = \frac{1}{A_1}
 \sum_{\G_1, \G_2} e^{i\G_1\vdot\vtau_{1,\alpha}} t_{12}^{\alpha\beta}(\p)
 e^{-i\G_2\vdot\vtau_{2,\beta}} \delta_{\k_1+\G_1, \k_2+\G_2},
 \end{equation}
-where the crystal momentum coupling $\k_1 + \G_1 = \k_2 + \G_2 $ is known as generalized umklapp condition.
+where the crystal momentum coupling $\k_1 + \G_1 = \k_2 + \G_2$ is known as generalized umklapp condition.
 
 \n
 
-Equation \ref{eq:interlayer-hopping-simplified} depends on the functional form of $t_{12}^{\alpha\beta}(\p)$. \ALERT{We now make further assumptions to make progress}. Since both $A$ and $B$ sites of graphene correspond to a $p_z$ orbital of carbos, we assume that $t_{12}^{\alpha\beta}(\r) = t_\perp(\r)$ does not depend on $\alpha,\beta$. In \cite{tperp-laissardiere2012}, the authors model the behavior of $t_\perp(\r)$ by employing Slater-Koster parameters, and numerically evaluate $t_\perp(\p)$ through equation \ref{eq:interlayer-hopping-fourier}. They conclude that $t_\perp(\p)$ is only a function of $\abs{\p}$ and decays very rapidly. This has important consequences, because only few umklapp processes with contribute to the coupling.
+Equation \ref{eq:interlayer-hopping-simplified} relies on the functional form of $t_{12}^{\alpha\beta}(\mathbf{p})$. To make further progress, we introduce additional assumptions. Given that both $A$ and $B$ sites of graphene correspond to a $p_z$ orbital of carbon atoms, we assume that $t_{12}^{\alpha\beta}(\r) = t_\perp(\r)$ does not depend on $\alpha$ or $\beta$. In \cite{tperp-laissardiere2012}, the authors characterize the behavior of $t_\perp(\r)$ using Slater-Koster parameters and numerically evaluate $t_\perp(\mathbf{p})$ through equation \ref{eq:interlayer-hopping-fourier}. They establish that $t_\perp(\p)$ is solely a function of $\abs{\p}$ with rapid decay. This has significant implications, as only a few umklapp processes contribute to the coupling in equation \ref{eq:interlayer-hopping-simplified}.
 
-%\subsection{\textcolor{red}{Small rotation limit}}
+\n
 
-In the small angle limit $\theta \lesssim 10^\circ$, we can expand around the Dirac points of each layer $\k_\ell = \K_\ell + \q_\ell$ with $\abs{\q_\ell} \sim \abs{\Delta \K} \ll \abs{\K}$. Approximating $t_\perp(\K_1+\q_1+\G_1) \approx t_\perp(\K_1+\G_1)$, the interlayer coupling becomes
-$$
-T_{12}^{\alpha\beta}(\q_1,\q_2) = \frac{1}{A_{\text{u.c.}}} \sum_{\G_1,\G_2} e^{i\G_1\vdot\vtau_{1,\alpha}}
+In the small angle limit $\theta \lesssim 10^\circ$, we can expand $\k_\ell = \K_\ell + \q_\ell$ around the Dirac points of each layer, with $\abs{\q_\ell} \sim \abs{\Delta \K} \ll \abs{\K}$. Approximating $t_\perp(\K_1+\q_1+\G_1) \approx t_\perp(\K_1+\G_1)$, the interlayer coupling becomes
+\begin{equation} \label{eq:interlayer-hopping-truncation}
+T_{12}^{\alpha\beta}(\q_1,\q_2) = \frac{1}{A_{1}} \sum_{\G_1,\G_2} e^{i\G_1\vdot\vtau_{1,\alpha}}
 t_{12}^{\alpha\beta}(\K_1+\G_1) e^{-i\G_2\vdot\vtau_{2,\beta}}
 \delta_{\K_1+\q_1+\G_1,\K_2+\q_2+\G_2}.
-$$
+\end{equation}
 
-As $t_\perp(\p)$ decays rapidly with $\abs{\p}$, we truncate $t_\perp(\p) \approx 0$ for $\abs{\p} > \abs{\K}$. This leaves us only three options for $\G_\ell$, being $\g_{\ell 1} = \0$, $\g_{\ell 2} = \b_{\ell 2}$ or $\g_{\ell 3} = -\b_{\ell 1}$. They correspond to the three equivalent Dirac points on the monolayer BZ. Thus, the only quantity that matters is $t_\perp(\abs{\K})$. We have the term
-$$
+As $t_\perp(\p)$ rapidly decays with $\abs{\p}$, we truncate $t_\perp(\p) \approx 0$ for $\abs{\p} > \abs{\K}$. This leaves us with only three options for $\G_\ell$, where it can be either $\g_{\ell 1} = 0$, $\g_{\ell 2} = \b_{\ell 2}$, or $\g_{\ell 3} = -\b_{\ell 1}$. These options correspond to the three equivalent Dirac points on the monolayer Brillouin zone. Therefore, the crucial quantity becomes $t\perp(\abs{\K})$. This truncation leaves us with the term
+\begin{equation} \label{eq:delta-term}
 \delta_{\K_1+\q_1+\G_1,\K_2+\q_2+\G_2} = \delta_{\q_2-\q_1,\K_1-\K_2+\G_1-\G_2}.
-$$
-We call $\Delta\K = \K_1-\K_2$. Due to $\abs{\q_\ell} \ll \abs{\K}$, we only have that $\q_2-\q_1 = \K_1-\K_2+\G_1-\G_2$ if $\G_1 = \g_{1n}$ and $\G_2 = \g_{2n}$ have the same index $n$. Therefore, we have three possibilities
-$$
-\q_\text{b} = \K_1 - \K_2 = \abs{\Delta \K} \qty(0, -1),
-$$
-$$
-\q_\text{tr} = (\K_1 - \K_2) + (\g_{12} - \g_{22}) = \abs{\Delta \K} \qty(\frac{\sqrt{3}}{2}, \frac{1}{2}),
-$$
-$$
-\q_\text{tl} = (\K_1 - \K_2) + (\g_{13} - \g_{23}) = \abs{\Delta \K} \qty(-\frac{\sqrt{3}}{2}, \frac{1}{2}),
-$$
-where $\abs{\Delta \K} = 2 \sin(\theta/2) \abs{\K}$.
+\end{equation}
 
-The interlayer coupling has only three terms
-$$
+Because $\abs{\q_\ell} \ll \abs{\K}$, we find that the condition $\q_2-\q_1 = \K_1-\K_2+\G_1-\G_2$ is true only when $\G_1 = \g_{1n}$ and $\G_2 = \g_{2n}$ have the same index $n$. Consequently, we encounter three possibilities of momentum transfer:
+\begin{equation} \label{eq:qb}
+\q_\text{b} = \K_1 - \K_2 = \abs{\Delta \K} \, \qty(0, -1),
+\end{equation}
+\begin{equation} \label{eq:qtr}
+\q_\text{tr} = (\K_1 - \K_2) + (\g_{12} - \g_{22}) = \abs{\Delta \K} \, \qty(\frac{\sqrt{3}}{2}, \frac{1}{2}),
+\end{equation}
+\begin{equation} \label{eq:qtl}
+\q_\text{tl} = (\K_1 - \K_2) + (\g_{13} - \g_{23}) = \abs{\Delta \K} \, \qty(-\frac{\sqrt{3}}{2}, \frac{1}{2}),
+\end{equation}
+
+Finally, the interlayer coupling ends up with only three terms
+\begin{equation} \label{eq:interlayer-3terms}
 T_{12}^{\alpha\beta}(\q_1,\q_2) =
 T^{\alpha\beta}_{\q_\text{b}} \delta_{\q_1-\q_2, \q_\text{b}} +
 T^{\alpha\beta}_{\q_\text{tr}} \delta_{\q_1-\q_2, -\q_\text{tr}} +
 T^{\alpha\beta}_{\q_\text{tl}} \delta_{\q_1-\q_2, -\q_\text{tl}},
-$$
-where $T^{\alpha\beta}_{\q_n} = \frac{t_\perp(\abs{\K})}{A_{\text{u.c.}}} e^{i \g_{1n} \vdot \bm{\tau}_{1\alpha}}
-e^{-i \g_{2n} \vdot \bm{\tau}_{2\beta}}$. Writing it in the $A, B$ basis we get
-$$
+\end{equation}
+where
+\begin{equation} \label{eq:interlayer-tensor}
+T^{\alpha\beta}_{\q_n} = \frac{t_\perp(\abs{\K})}{A_{\text{u.c.}}} e^{i \g_{1n} \vdot \bm{\tau}_{1\alpha}}
+e^{-i \g_{2n} \vdot \bm{\tau}_{2\beta}}.
+\end{equation}
+
+Writing matrices in the $A, B$ basis we get
+\begin{equation} \label{eq:T-qb}
 T_{\q_\text{b}} = \frac{t_\perp(\abs{\K})}{A_{\text{u.c.}}}
 \begin{pmatrix}
 1 & 1 \\
 1 & 1
 \end{pmatrix},
-$$
-$$
-\textcolor{red}{
+\end{equation}
+\begin{equation} \label{eq:T-qtr}
 T_{\q_\text{tr}} = \frac{t_\perp(\abs{\K})}{A_{\text{u.c.}}} e^{-i \g_{12} \vdot \vtau_0}
 \begin{pmatrix}
 e^{i\phi} & 1 \\
 e^{-i\phi} & e^{i\phi}
 \end{pmatrix},
-}
-$$
-$$
-\textcolor{red}{
+\end{equation}
+\begin{equation} \label{eq:T-qtl}
 T_{\q_\text{tl}} = \frac{t_\perp(\abs{\K})}{A_{\text{u.c.}}} e^{-i \g_{13} \vdot \vtau_0}
 \begin{pmatrix}
 e^{-i\phi} & 1 \\
 e^{i\phi} & e^{-i\phi}
 \end{pmatrix},
-}
+\end{equation}
+where $\phi = 2\pi/3$.
+
+
+\subsection{Symmetry analysis in MATBG}
+
+As discussed in \cite{zou2018}, at currently accessible energy scales, experiments indicate that MATBG exhibits some approximate symmetries. These include translational symmetry characterized by the constant $L' = a / (2 \sin\theta/2)$, valley symmetry $U_v(1)$, $C_{2z} \mathcal{T}$, and $D_6$ point group symmetry, which are not fully captured by a generic commensurate structure described in Section \ref{sec:tbg_geom}. The continuum model outlined in Section \ref{sec:BM-model} incorporates all these ``good'' symmetries. In this section, we will delve into some symmetry aspects that will be important later to understand the Wannier Obstruction and the Topological Heavy Fermion model of MATBG.
+
+\subsubsection{Space Groups}
+
+The term \textit{space group} refers to the spatial symmetries that preserve a crystal's structure. While translations and point group symmetries are the most evident, it can also contain compound operations which add further complexity to the analysis. The presence of these compound operations leads to the classification of space groups into symmorphic and non-symmorphic groups.
+
+\ALERT{COLOCAR SCREW AXIS AND GLIDE PLANES?}
+
+We denote an element of a space group $G$ as $\sg{R_\alpha}{\vtau}$, where $R_\alpha$ is a point group operation such as rotations, reflections, inversions or improper rotations, and $\vtau$ is a translation. An useful matrix representation for $G$ is
+\begin{equation} \label{eq:spacegroup-rep}
+\sg{R_\alpha}{\vtau} =
+\begin{pmatrix}
+1 & 0 \\
+\vtau & R_\alpha
+\end{pmatrix},
+\end{equation}
+where $0$ is a row of three zeros, $\vtau$ is a column vector and $R_\alpha$ is $3\times 3$ rotation matrix.
+
+In this representation, the product of two elements can be evaluated by multiplying the corresponding matrices:
+\small
+\begin{align}
+\begin{split}
+\sg{R_\beta}{\vtau_2} \sg{R_\alpha}{\vtau_1} &=
+\begin{pmatrix}
+1 & 0 \\
+\vtau_2 & R_\beta
+\end{pmatrix}
+\begin{pmatrix}
+1 & 0 \\
+\vtau_1 & R_\alpha
+\end{pmatrix} \\
+&= \begin{pmatrix}
+1 & 0 \\
+R_\beta \vtau_1 + \vtau_2 & R_\beta R_\alpha
+\end{pmatrix}
+= \sg{R_\beta R_\alpha}{R_\beta \vtau_1 + \vtau_2}.
+\end{split}
+\end{align}
+
+\normalsize
+
+The inverse of an element is given by
 $$
-with $\phi = 2\pi/3$.
+\sg{R_\alpha}{\vtau}^{-1} =
+\begin{pmatrix}
+1 & 0 \\
+-R_\alpha^{-1}\vtau & R_\alpha^{-1}
+\end{pmatrix} =
+\sg{R_\alpha^{-1}}{-R_\alpha^{-1}\vtau}
+$$
+
+\ALERT{Beyond pure operations, we may find compound operations that combine translations and point group operations. The two possible types are \textit{glide planes} and \textit{screw axes}.}
+
+%\begin{figure}[H]
+%\centering
+%\includegraphics[width=0.5\linewidth]{fig/glideplane-screwaxis.png}
+%\caption{(a) The glide plane takes $A$ into $A'$. (b) Right- and left-hand screw axis.}
+%\label{fig:glideplane-screwaxis}
+%\end{figure}
+
+\subsection{\ALERT{Translation subgroup}}
+
+All the elements $\sg{\eps}{\tau}$ of the the space group $G$ constitute the translation group $T$. It is a subgroup of $G$ and defines the Bravais lattice. More than that, $T$ is a normal subgroup of $G$, which means that $g T g^{-1} = T$ for every $g \in G$. Because of that, the cosets
+$$
+\{ \sg{R_\alpha}{\tau'} \sg{\eps}{\tau} \mid \sg{\eps}{\tau} \in T \} \in G/T
+$$
+form a factor group of the space group $G$.
+
+This factor group $G/T$ is actually isomorphic to the point group of $G$.
+
+\subsection{\ALERT{Symmorphic and Nonsymmorphic Space Groups}}
+
+In a space group $G$, we can always rewrite its elements in the form
+$$
+\sg{R_\alpha}{\tau} = \sg{R_\alpha}{r_n + \tau} = \sg{\eps}{r_n} \sg{R_\alpha}{\tau_\alpha},
+$$
+where $r_n$ is a general vector of the Bravais lattice and $\tau_\alpha$ is either zero or a non-primitive Bravais lattice translation. Basically, we will have $\tau_\alpha = 0$ for simple group operations and $\tau_\alpha \neq 0$ for glide planes or screw axis.
+
+If, with a suitable choice of origin, all the elements of $G$ can be written in the form $\sg{R_\alpha}{\tau} = \sg{R_\alpha}{r_n} = \sg{\eps}{r_n} \sg{R_\alpha}{0}$ ($\tau_\alpha = 0$ for every symmetry operation), then call $G$ a \textit{symmorphic} space group.
+
+\subsection{\ALERT{Site-symmetry group and Wyckoff position}}
+
+Let $G$ be a space group associated with its corresponding lattice and a choice of origin. The subgroup of all symmetry operations of $G$ that leaves a point $P$ of the real space inveriant is called the \textit{site-symmetry group} of $P$. This point $P$ is called \textit{of special position} with respect to $G$ if there is at least one non-trivial (not the identity) symmetry operation of $G$ that leaves $P$ invariant.
+
+For a general operation $g$ of $G$, the point $P$ will be mapped into some other point $Q = g P$. If $P$ is of special position with site-symmetry group $G_P$, then $Q$ will also be of special position and its site-symmetry group $G_Q$ will be a conjugate group of $G_P$, namely $G_Q = g G_P g^{-1}$. In fact, we have
+$$
+G_Q Q = g G_P g^{-1} Q = g G_P P = g P = Q.
+$$
+
+If we apply of all operations of $G$ to $P$, we obtain the \textit{crystallographic orbit} of $P$, which is the set of points $Q$ with site-symmetry groups conjugate to $G_P$. If $P$ is of special position, we call its crystallographic orbit a \textit{Wyckoff position} of the space group $G$. Therefore, the concept of Wyckoff position refers to a \textbf{set of points of special position with site-symmetry groups conjugates of each other}.
+
+\section{\ALERT{Space groups in Reciprocal Space}}
+
+\subsection{\ALERT{Group of the wave vector $G_{\k}$ and the Star of $\k$}}
+
+If we have
+$$
+(\hat{P}_\alpha \R_n) \vdot \K_m = 2 \pi N,
+$$
+than
+$$
+\R_n \vdot (\hat{P}_\alpha^{-1} \K_m) = 2 \pi N.
+$$
+
+Thus, the effect of an operator $\hat{P}_\alpha$ on a direct lattice vector $\R_n$ is equivalent to the effect of the operator $\hat{P}_\alpha^{-1}$ on the corresponding reciprocal lattice vector $\K_m$.
+
+\n
+
+The group of the wave vector is formed by the set of space group operations which transform $\k$ into itself, or into an equivalent $\k = \k + \K_m$, where $\K_m$ is a vector of the reciprocal lattice.
+
+All the symmetry operation of the space group $G$ take the point $\k = 0$ into an equivalent point, so that the group of the wave vector at $\k = 0$ corresponds to $G$. Furthermore, the $G_\k$ for $\k \neq 0$ remains a subgroup of $G$.
+
+\n
+
+The set of wave vectors $\k'$ which are obtained by carrying out all the point group operations on $\k$ is called \textit{star of} $\k$.
+
+\n
+
+In summary
+$$
+\text{real space} \iff \text{reciprocal space}
+$$
+$$
+\text{site-symmetry group} \iff \text{group of wave vector }G_\k
+$$
+$$
+\text{Wyckoff position} \iff \text{star of }\k
+$$
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \pagebreak
 
