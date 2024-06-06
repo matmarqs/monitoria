@@ -294,82 +294,67 @@ Figure \ref{fig:T0002-butterfly} shows $U \times \eps_d$ phase diagrams for the 
 
 
 
+\section{\ALERT{Twisted Bilayer Graphene}} \label{sec:tbg}
 
-\section{\ALERT{Bilayer graphene}} \label{sec:tbg}
+\subsection{Geometric description} \label{sec:tbg_geom}
 
-
-\subsection{TBG Geometry} \label{sec:tbg_geom}
-
-The TBG system can be characterized by a rotation angle $\theta$ from the initial AB stacking stable setting. The two slightly misaligned layers then from an interference Moiré pattern, which can be commensurate (form a superlattice) or not. In the commensurate case, one can define primitive lattice vectors $\vb{L}_1$, $\vb{L}_2$ as the least common multiple of the unit vectors of two layers. Figure \ref{fig:latvec} shows an example of this.
+The TBG system can be characterized by a rotation angle $\theta$ from the initial AB stacking stable setting. The two slightly misaligned layers form an interference Moiré pattern, which can be commensurate (form a superlattice) or not. In the commensurate case, one can define primitive lattice vectors $\vb{L}_1$, $\vb{L}_2$ as the least common multiple of the unit vectors of two layers. Figure \ref{fig:latvec} shows an example of this.
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.4\textwidth]{fig/latvec.png}
-\caption{Commensurate angle case and lattice vectors $\vb{L}_1$, $\vb{L}_2$. Figure taken from \cite{koshino2012}.}
-\label{fig:latvec}
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[height=.7\linewidth]{fig/latvec.png}
+  \caption{}
+  \label{fig:latvec}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[height=.7\linewidth]{fig/bzminibz.png}
+  \caption{}
+  \label{fig:bzminibz}
+\end{subfigure}
+\caption{(a) Commensurate case and lattice vectors $\vb{L}_1$, $\vb{L}_2$. (b) Monolayers (red and green) and mini BZ's with $(m,n) = (1,2)$ and $\theta = 21.8^\circ$. Figures taken from \cite{koshino2012}.}
+\label{fig:geometry}
 \end{figure}
 
-As drawn in Figure \ref{fig:latvec}, we have
-\begin{align}
-\label{eq:scalarprods1}
-\vb{a}_1^{(1)} \vdot \vb{a}_2^{(1)} &= a^2 \cos(60^\circ) = a^2/2; \\
-\label{eq:scalarprods2}
-\vb{a}_1^{(1)} \vdot \vb{a}_1^{(2)} &= a^2 \cos\theta; \\
-\label{eq:scalarprods3}
-\vb{a}_1^{(1)} \vdot \vb{a}_2^{(2)} &= a^2 \cos(60^\circ + \theta); \\
-\label{eq:scalarprods4}
-\vb{a}_1^{(2)} \vdot \vb{a}_2^{(1)} &= a^2 \cos(60^\circ - \theta).
-\end{align}
+%As drawn in Figure \ref{fig:latvec}, we have
+%\begin{align}
+%\label{eq:scalarprods1}
+%\vb{a}_1^{(1)} \vdot \vb{a}_2^{(1)} &= a^2 \cos(60^\circ) = a^2/2; \\
+%\label{eq:scalarprods2}
+%\vb{a}_1^{(1)} \vdot \vb{a}_1^{(2)} &= a^2 \cos\theta; \\
+%\label{eq:scalarprods3}
+%\vb{a}_1^{(1)} \vdot \vb{a}_2^{(2)} &= a^2 \cos(60^\circ + \theta); \\
+%\label{eq:scalarprods4}
+%\vb{a}_1^{(2)} \vdot \vb{a}_2^{(1)} &= a^2 \cos(60^\circ - \theta).
+%\end{align}
 
-The superlattice vectors $\vb{L}_1$, $\vb{L}_2$ are related by a $60^\circ$ rotation. In general, because $\vb{L}_1$ is a point that belongs to the lattices of both layers, it is written by integers $m,n,m',n'$ as
+The superlattice vectors $\vb{L}_1$, $\vb{L}_2$ are related by a $60^\circ$ rotation. In general, because $\vb{L}_1$ belongs to the lattices of both layers, it is written by integers $m,n,m',n'$ as
 \begin{equation} \label{eq:L1}
 \vb{L}_1 = m\vb{a}_1^{(1)} + n\vb{a}_2^{(1)} = m'\vb{a}_1^{(2)} + n'\vb{a}_2^{(2)}.
 \end{equation}
 
-Because there is an appropriate choice of lattice vectors $\vb{a}_1^{(1)}, \vb{a}_2^{(1)}, \vb{a}_1^{(2)}, \vb{a}_2^{(2)}$ (satisfying equations \ref{eq:scalarprods1} to \ref{eq:scalarprods4}) such that the indices $(m',n')$ can be made equal to $(n,m)$ \cite{koshino2012}, then by taking the scalar products of equation \ref{eq:L1} with $\vb{a}_1^{(1)}$ and $\vb{a}_1^{(2)}$, we get
-\begin{equation} \label{eq:mn-system}
-\begin{cases}
-\; mn + n^2/2 = n^2 \cos\theta + mn \qty(\frac{\cos\theta}{2}
-- \frac{\sqrt{3} \sin\theta}{2}); \\
-\; m^2/2 + mn = m^2 \cos\theta + mn \qty(\frac{\cos\theta}{2}
-+ \frac{\sqrt{3} \sin\theta}{2}).
-\end{cases}
-\end{equation}
-
-Summing the two equations above gives us
+There is an appropriate choice of lattice vectors $\vb{a}_1^{(1)}, \vb{a}_2^{(1)}, \vb{a}_1^{(2)}, \vb{a}_2^{(2)}$ such that the indices $(m',n')$ can be made equal to $(n,m)$ \cite{koshino2012}. With this in mind, one obtains the condition of commensurability for the twist angle
 \begin{equation} \label{eq:costheta}
-\cos\theta = \frac{1}{2} \cdot \frac{m^2 + n^2 + 4mn}{m^2 + n^2 + mn}.
+\cos\theta = \frac{m^2 + n^2 + 4mn}{2(m^2 + n^2 + mn)} = \frac{3 m^2 + 3mr + r^2/2}{3m^2 + 3mr + r^2},
 \end{equation}
-
-
-By taking the norm of $\vb{L}_1$ from equation \ref{eq:L1} and using the angle relation in equation \ref{eq:costheta}, we find that the superlattice constant $L = \abs{\vb{L}_1} = \abs{\vb{L}_2}$ is given by
+where $r = n-m$, and $\gcd(m,n) = \gcd(m,r)=1$. By taking the norm of $\vb{L}_1$ from equation \ref{eq:L1} and using the angle relation in equation \ref{eq:costheta}, the superlattice constant $L = \abs{\vb{L}_1} = \abs{\vb{L}_2}$ is given by
 \begin{equation} \label{eq:}
 L = a\sqrt{m^2 + n^2 + mn} = \frac{\abs{m-n}}{2 \sin(\theta/2)} \, a.
 \end{equation}
 
-The area of an unit cell of the superlattice is $A = \frac{\sqrt{3}}{2} L^2 = (m^2 + n^2 + mn) \, A_1$, where $A_1 = \frac{\sqrt{3}}{2} \, a^2$ is the area of unit cell of monolayer graphene. If we now consider the area of the Brillouin Zone (BZ), we get
+The area of an unit cell of the superlattice is $A = \frac{\sqrt{3}}{2} L^2 = (m^2 + n^2 + mn) \, A_1$, where $A_1 = \frac{\sqrt{3}}{2} \, a^2$ is the area of unit cell of monolayer graphene. Considering the BZ, we get
 \begin{equation} \label{eq:bz-volume}
 \Omega = \frac{\Omega_1}{m^2 + n^2 + mn},
 \end{equation}
-where $\Omega_1 = (2\pi)^2/A$ is the BZ area of the monolayer and $\Omega$ is the area of the moiré mini BZ.
+where $\Omega_1 = (2\pi)^2/A$ is the monolayer's BZ area and $\Omega$ is the area of the moiré mini BZ. As an example, for $(m,n) = (1,2)$ we have $\theta = 21.8^\circ$ and $m^2 + n^2 + mn = 7$, therefore the monolayer BZ fits 7 mini BZ's in its area, as we see in Figure \ref{fig:bzminibz}.
 
-As an example, for $(m,n) = (1,2)$ we have $\theta = 21.8^\circ$ and $m^2 + n^2 + mn = 7$, therefore the monolayer BZ fits 7 mini BZ's in its area, as we see in Figure \ref{fig:bzminibz}.
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.4\linewidth]{fig/bzminibz.png}
-\caption{Monolayers (red and green) and mini BZ's with $(m,n) = (1,2)$ and $\theta = 21.8^\circ$. Figure taken from \cite{koshino2012}.}
-\label{fig:bzminibz}
-\end{figure}
-
-\section{BM Model}
-
-\subsection{Geometry}
-
-The atoms positions of the each layer are given by
+The atoms positions of each layer are given by
 \begin{equation} \label{eq:position-atoms-tbg}
 \r = n_1 \a_{\ell,1} + n_2 \a_{\ell,2} + \vtau_{\ell,\alpha},
 \end{equation}
-where $\alpha = A,B$ indexes the type of the site, and $\tau_{\ell,\alpha}$ are basis vectors. The lattice vectors of each layer are the rotated $\a_{\ell,j} = R_{\theta_\ell} \a_{j}$, where
+where $\alpha = A,B$ indexes the type of the site, and $\tau_{\ell,\alpha}$ are basis vectors. The lattice vectors are the rotated $\a_{\ell,j} = R_{\theta_\ell} \a_{j}$, where
 \begin{equation} \label{eq:rotation-matrix}
 R_\theta =
 \begin{pmatrix}
@@ -377,33 +362,16 @@ R_\theta =
 \sin\theta & \cos\theta
 \end{pmatrix},
 \end{equation}
-is the rotation matrix by an angle $\theta$ and we use the reference frame where $\theta_1 = -\theta/2$ and $\theta_2 = +\theta/2$.
-
-We shall consider AB-stacking. In this case, the translation vectors are given by
+is the rotation matrix by an angle $\theta$ and we use $\theta_1 = -\theta/2$ and $\theta_2 = +\theta/2$. We shall consider AB-stacking as our starting position, because this is the most stable configuration for bilayer graphene. In this case, the translation vectors are given by
 \begin{align}
 \tau_{1,A} &= R_{-\theta/2}(0,0), \quad \tau_{2,A} = R_{\theta/2} [(0,-d) + \vtau_0], \label{eq:tauA} \\
 \tau_{1,B} &= R_{-\theta/2}(0,d), \quad \tau_{2,B} = R_{\theta/2} [(0,0) + \vtau_0], \label{eq:tauB}
 \end{align}
-where $\vtau_0$ is an additional arbitrary translation considered in layer 2 for the sake of generalization. For example, $\vtau_0 = (0,0)$ corresponds to AB-stacking and $\vtau_0 = (0, d)$ corresponds to AA-stacking.
+where $\vtau_0$ is an arbitrary translation. For example, $\vtau_0 = (0,0)$ corresponds to AB-stacking and $\vtau_0 = (0, d)$ corresponds to AA-stacking.
 
-\subsection{Moiré pattern}
+\subsection{Bistritzer-MacDonald model}
 
-Here we will review the Bistritzer-MacDonald (BM) model \cite{macdonald2011}. First of all, the moiré pattern can be interpreted by a beat effect. Define the functions $h_\ell(\r)$, for each layer $\ell = 1, 2$, that describe their periodicity
-\begin{equation} \label{eq:beat-functions}
-h_\ell(\r) = \sum_{k=1}^{3} \cos(\vb{G}_{\ell,k} \vdot \r),
-\end{equation}
-where the wave vectors $\vb{G}_{\ell,1} = \vb{b}_{\ell,1}$, $\vb{G}_{\ell,2} = \vb{b}_{\ell,2}$ and $\vb{G}_{\ell,3} = \vb{b}_{\ell,1} - \vb{b}_{\ell,2}$ give the directions for nearest neightbor hoppings in the hexagonal lattice. The moiré pattern will then be an interference between $h_1(\r)$ and $h_2(\r)$,
-\begin{equation} \label{eq:beat-effect}
-h_{\text{m}}(\r) = h_1(\r) + h_2(\r) =
-\sum_{k=1}^{3}
-\, 2 \cos(\frac{\vb{G}_{1,k}+\vb{G}_{2,k}}{2} \vdot \r) \cos(\frac{\vb{G}_{1,k}-\vb{G}_{2,k}}{2} \vdot \r).
-\end{equation}
-
-The moiré pattern oscillates with $\vb{b}_k^{\text{m}} = \vb{G}_{1,k} - \vb{G}_{2,k}$, \cite{handbook2019}.
-
-\n
-
-Working on a coordinate system where the layer 2 is rotated by $\theta/2$ and layer 1 by $-\theta/2$, we have
+Here we will review the Bistritzer-MacDonald (BM) model \cite{macdonald2011}. Defining the wave vectors $\vb{G}_{\ell,1} = \vb{b}_{\ell,1}$, $\vb{G}_{\ell,2} = \vb{b}_{\ell,2}$ and $\vb{G}_{\ell,3} = \vb{b}_{\ell,1} - \vb{b}_{\ell,2}$, the moiré pattern can be interpreted by an beat effect with periodicity $\vb{b}_k^{\text{m}} = \vb{G}_{1,k} - \vb{G}_{2,k}$, \cite{handbook2019}:
 \begin{equation} \label{eq:moire-bvecs}
 \vb{b}_1^{\text{m}} = \sqrt{3} \abs{\Delta \K} \qty( \frac{1}{2}, -\frac{\sqrt{3}}{2}), \quad
 \vb{b}_2^{\text{m}} = \sqrt{3} \abs{\Delta \K} \qty( \frac{1}{2},  \frac{\sqrt{3}}{2}),
@@ -415,35 +383,23 @@ The area of the moiré lattice unit cell is
 A_{\text{m.u.c.}} = \frac{(2\pi)^2}{\abs{\b_1^{\text{m}} \cross \b_2^{\text{m}}}} = \frac{\sqrt{3} a^2}{8 \sin[2](\theta/2)}.
 \end{equation}
 
-\subsection{Hamiltonian}
-
-Our starting point will be a tight-binding model $ H = H_1 + H_2 + H_{\perp} $, where $H_\ell$ is the hamiltonian of the layer $\ell$, and $H_\perp = V_{12} + V_{12}^\d$ describes the interlayer hybridization. Working with a tight-binding model, it is natural to write this hamiltonian in terms of Bloch waves
+The starting point is a tight-binding model $ H = H_1 + H_2 + H_{\perp} $, where $H_\ell$ is the hamiltonian of the layer $\ell$, and $H_\perp = V_{12} + V_{12}^\d$ describes the interlayer hybridization. We write this hamiltonian in terms of Bloch waves
 \begin{equation} \label{eq:BM-blochwave}
 \ket{\psi_{\ell, \k, \alpha}} = \frac{1}{\sqrt{N_\ell}} \sum_{\R_\ell} e^{i \k \vdot (\R_\ell + \vtau_{\ell,\alpha})} \ket{\ell, R_\ell, \alpha},
 \end{equation}
-where $\ell$ labels the layer, $N_\ell$ is the number of unit cells, $\R_\ell$ are the positions of the underlying Bravais lattice, $\vtau_{\ell,\alpha}$ are the orbital centers (of sublattice $\alpha = A,B$) in the unit cell, and $\ket{\ell,\R_\ell,\alpha}$ are localized Wannier states. In this basis, considering only nearest-neighbor intralayer hopping the hamiltonian of each layer is analogous to equation \ref{eq:monolayer-tight-binding2}, given by
-\begin{equation} \label{eq:blg-eachlayer-hamil}
-H_\ell(\k) =
-\begin{pmatrix}
-0 & -t f_\ell(\k) \\
--t f_\ell(\k) & 0
-\end{pmatrix},
-\end{equation}
-with $f_\ell(\k) = \sum_{i=1}^{3} e^{i\k \vdot \vdelta_\ell}$.
-
-In order to describe low energy states, we expand $\k = \pm \K_\ell + \q$, where $\pm \K_\ell$ are the Dirac points of each layer. To first-order in $\q$, the low-energy hamiltonian becomes
+where $\ell$ labels the layer, $N_\ell$ is the number of unit cells, $\R_\ell$ are the positions of the underlying Bravais lattice, $\vtau_{\ell,\alpha}$ are the orbital centers (of sublattice $\alpha = A,B$) in the unit cell, and $\ket{\ell,\R_\ell,\alpha}$ are localized Wannier states. In this basis, considering only nearest-neighbor intralayer hopping, the low-energy hamiltonian of each layer is
 \begin{equation} \label{eq:blg-eachlayer-hamil-lowenergy}
 H^{\pm \K}(\q) = \hbar v_F \abs{\q}
 \begin{pmatrix}
 0 & e^{\mp i (\theta_\q - \theta_\ell)} \\
 e^{\pm i (\theta_\q - \theta_\ell)} & 0
-\end{pmatrix}.
+\end{pmatrix},
 \end{equation}
+where we expanded $\k = \pm \K_\ell + \q$ to first-order in $\q$.
 
+\n
 
-\subsection{Interlayer hamiltonian}
-
-The tight-binding interlayer Hamiltonian in second quantization reads
+Now, the tight-binding interlayer Hamiltonian in second quantization reads
 \begin{equation} \label{eq:interlayer-hopping}
 V_{12} = \sum_{\R_1,\alpha,\R_2,\beta} c_{1,\alpha}^\d t_{12}^{\alpha\beta}(\R_1,\R_2) c_{2,\beta}(\R_2), \quad
 t_{12}^{\alpha\beta}(\R_1,\R_2) =
@@ -464,55 +420,34 @@ T_{12}^{\alpha\beta}(\k_1,\k_2) =
 t_{12}^{\alpha\beta}(\R_1,\R_2) e^{i\k_2\vdot(\R_2+\vtau_{2,\beta})}.
 \end{equation}
 
-Now we assume that the interlayer hopping $t_{12}^{\alpha\beta}(\R_1,\R_2)$ is only a function of the separation between the centers of the two orbitals, and we write its Fourier transform
+Assuming the interlayer hopping $t_{12}^{\alpha\beta}(\R_1,\R_2)$ is only a function of the separation between the centers of the two orbitals, its Fourier transform is
 \begin{equation} \label{eq:interlayer-hopping-fourier}
 t_{12}^{\alpha\beta}(\R_1,\R_2) = t_{12}^{\alpha\beta}(\R_1+\vtau_{1,\alpha}-\R_2-\vtau_{2,\beta}) =
 \int \frac{\dd[2]{\p}}{(2\pi)^2} e^{i \p \vdot (\R_1+\vtau_{1,\alpha}-\R_2-\vtau_{2,\beta})} t_{12}^{\alpha\beta}(\p).
 \end{equation}
 
-Plugging equation \ref{eq:interlayer-hopping-fourier} in equation \ref{eq:interlayer-hopping-Tkspace}, we have
-$$
-T_{12}^{\alpha\beta}(\k_1,\k_2) = \frac{1}{\sqrt{N_1 N_2}} \int \frac{\dd[2]{\p}}{(2\pi)^2}
-\sum_{\R_1} e^{-i(\k_1-\p)\vdot(\R_1+\vtau_{1,\alpha})} t_{12}^{\alpha\beta}(\p)
-\sum_{\R_2} e^{i(\k_2-\p)\vdot(\R_2+\vtau_{2,\beta})} =
-$$
-$$
-= \sqrt{N_1 N_2} \int \frac{\dd[2]{\p}}{(2\pi)^2}
-\sum_{\G_1, \G_2} e^{-i\G_1\vdot\vtau_{1,\alpha}} t_{12}^{\alpha\beta}(\p)
-e^{i\G_2\vdot\vtau_{2,\beta}} \delta_{\k_1-\p,\G_1} \delta_{\k_2-\p,\G_2},
-$$
-where we have used the relation $\sum_{\R_\ell} e^{i\k\vdot\R_\ell} = N_\ell \sum_{\G_\ell} \delta_{\k,\G_\ell}$. By elementary Dirac delta properties, \textcolor{red}{substituting $\G_\ell \to -\G_\ell$}, and remembering that $A = A_{u.c.1} N_1 = A_{u.c.2} N_2$, we obtain
+Plugging equation \ref{eq:interlayer-hopping-fourier} in equation \ref{eq:interlayer-hopping-Tkspace}, we obtain
 \begin{equation} \label{eq:interlayer-hopping-simplified}
 T_{12}^{\alpha\beta}(\k_1,\k_2) = \frac{1}{\sqrt{A_{u.c.1} A_{u.c.2}}}
-\sum_{\G_1, \G_2} \textcolor{red}{e^{i\G_1\vdot\vtau_{1,\alpha}}} t_{12}^{\alpha\beta}(\p)
-\textcolor{red}{e^{-i\G_2\vdot\vtau_{2,\beta}}} \delta_{\k_1+\G_1, \k_2+\G_2},
+\sum_{\G_1, \G_2} e^{i\G_1\vdot\vtau_{1,\alpha}} t_{12}^{\alpha\beta}(\p)
+e^{-i\G_2\vdot\vtau_{2,\beta}} \delta_{\k_1+\G_1, \k_2+\G_2},
 \end{equation}
-where the momentum conservation $ \k_1 + \G_1 = \k_2 + \G_2 $ is known as generalized umklapp condition.
+where the crystal momentum coupling $\k_1 + \G_1 = \k_2 + \G_2 $ is known as generalized umklapp condition.
 
 \n
 
-\textcolor{red}{
-Now we try to guess the behavior of $t_{12}(\r)$. We often see in the literature the estimate in terms of Slater-Koster parameters $V_{pp\s}$ and $V_{pp\pi}$, where they are assumed to exponentially decay. Making some rough estimates, they conclude that $t_\perp(\p)$ is only a function of $\abs{\p}$ and decays very rapidly as $\abs{\p}$ increases.
-}
+Equation \ref{eq:interlayer-hopping-simplified} depends on the functional form of $t_{12}^{\alpha\beta}(\p)$. \ALERT{We now make further assumptions to make progress}. Since both $A$ and $B$ sites of graphene correspond to a $p_z$ orbital of carbos, we assume that $t_{12}^{\alpha\beta}(\r) = t_\perp(\r)$ does not depend on $\alpha,\beta$. In \cite{tperp-laissardiere2012}, the authors model the behavior of $t_\perp(\r)$ by employing Slater-Koster parameters, and numerically evaluate $t_\perp(\p)$ through equation \ref{eq:interlayer-hopping-fourier}. They conclude that $t_\perp(\p)$ is only a function of $\abs{\p}$ and decays very rapidly. This has important consequences, because only few umklapp processes with contribute to the coupling.
 
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.6\linewidth]{fig/tperp.png}
-\caption{Fourier transform for the interlayer hopping in tBLG. The vertical dashed line marks the position
-of the Dirac point. Taken from \cite{handbook2019}.}
-\label{fig:tperp}
-\end{figure}
+%\subsection{\textcolor{red}{Small rotation limit}}
 
-\subsection{\textcolor{red}{Small rotation limit}}
-
-When the rotation angle $\theta \lesssim 10^\circ$ is small enough, we can expand around the Dirac points of each layer $\k_\ell = \K_\ell + \q_\ell$ with $\abs{\q_\ell} \sim \abs{\Delta \K} \ll \abs{\K}$. Approximating $t_\perp(\K_1+\q_1+\G_1) \approx t_\perp(\K_1+\G_1)$, the interlayer coupling becomes
+In the small angle limit $\theta \lesssim 10^\circ$, we can expand around the Dirac points of each layer $\k_\ell = \K_\ell + \q_\ell$ with $\abs{\q_\ell} \sim \abs{\Delta \K} \ll \abs{\K}$. Approximating $t_\perp(\K_1+\q_1+\G_1) \approx t_\perp(\K_1+\G_1)$, the interlayer coupling becomes
 $$
 T_{12}^{\alpha\beta}(\q_1,\q_2) = \frac{1}{A_{\text{u.c.}}} \sum_{\G_1,\G_2} e^{i\G_1\vdot\vtau_{1,\alpha}}
 t_{12}^{\alpha\beta}(\K_1+\G_1) e^{-i\G_2\vdot\vtau_{2,\beta}}
 \delta_{\K_1+\q_1+\G_1,\K_2+\q_2+\G_2}.
 $$
 
-As $t_\perp(\p)$ decays rapidly with $\abs{\p}$, we truncate $t_\perp(\p) \approx 0$ for $\abs{\p} > \abs{\K}$. This leaves us only three options for $\G_1$, being $\g_{11} = \0$, $\g_{12} = \b_{12}$, $\g_{13} = -\b_{11}$. These three vectors correspond to the three $\K$ equivalent points on the monolayer BZ. Because of the indifference between layer 1 and 2, the same goes for $\G_2$. Notice that $\abs{\K_1+\g_{1n}} = \abs{\K}$, because they are equivalent $\K$ points. Thus, the only quantity that matters is $t_\perp(\abs{\K})$. We have the term
+As $t_\perp(\p)$ decays rapidly with $\abs{\p}$, we truncate $t_\perp(\p) \approx 0$ for $\abs{\p} > \abs{\K}$. This leaves us only three options for $\G_\ell$, being $\g_{\ell 1} = \0$, $\g_{\ell 2} = \b_{\ell 2}$ or $\g_{\ell 3} = -\b_{\ell 1}$. They correspond to the three equivalent Dirac points on the monolayer BZ. Thus, the only quantity that matters is $t_\perp(\abs{\K})$. We have the term
 $$
 \delta_{\K_1+\q_1+\G_1,\K_2+\q_2+\G_2} = \delta_{\q_2-\q_1,\K_1-\K_2+\G_1-\G_2}.
 $$
