@@ -11,6 +11,7 @@ clean:
 	rm -rf *.dvi
 	rm -rf *.fls
 	rm -rf *.log
+	rm -rf *.listing
 	rm -rf *.out
 	rm -rf *.toc
 	rm -rf *.fdb_latexmk

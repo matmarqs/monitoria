@@ -176,7 +176,7 @@ We plan to address the MATBG by initially studying a single impurity site locali
 
 To establish a robust initial implementation of the impurity solver and DMFT, we begin our studies with the Hubbard model \cite{hubbard1963} on a Bethe lattice at the coordination number limit $z\to\infty$. This choice is motivated by the model's relative simplicity and its suitability as a benchmark for our DMFT code. In Section \ref{sec:hubbard}, we address the technical details of applying DMFT to this benchmark system and show our numerical results, which demonstrate the Metal-Insulator phase transition in both the particle-hole symmetric (PHS) case ($\epsilon_d = U/2$) and the asymmetric case.
 
-In Section \ref{sec:tbg}, we present our progress in understanding the MATBG system by studying its geometry \cite{handbook2019}, the Bistritzer-MacDonald (BM) model \cite{macdonald2011}, and the Wannier obstruction phenomenon \cite{zou2018}. The Wannier obstruction, arising from the non-trivial topology, refers to the impossibility of representing the flat bands using exponentially localized Wannier functions that preserve all symmetries of the band structure.
+In Section \ref{sec:tbg}, we present our progress in understanding the MATBG system by studying its geometry \cite{handbook2019}, the Bistritzer-MacDonald (BM) model \cite{macdonald2011}, and its symmetry properties. Symmetry analysis is a prerequisite for comprehending the Wannier obstruction phenomenon, which arises from the non-trivial topology of the electronic bands. It refers to the impossibility of representing the flat bands using exponentially localized Wannier functions that preserve all symmetries of the band structure.
 
 \pagebreak
 
@@ -188,7 +188,7 @@ Throughout the period outlined in this report, our advancements comprised three 
 \begin{itemize}
 \item The student completed four courses: Solid State I and II, Statistical Mechanics, and Group Theory Applied to Molecules and Solids. Each course was vital for understanding the general theory of many-body systems and for beginning the study of the MATBG system in question. In particular, the Group Theory course was crucial for comprehending the symmetry and topology aspects of MATBG. Additionally, the Hubbard model was extensively studied in Solid State II.
 
-\item While our initial intention was to utilize the Hubbard model only for benchmarking DMFT, our endeavor led us to a comprehensive exploration of the Mott transition within this system, yielding original findings. In Section \ref{sec:hubbard}, we describe the techniques and concepts intrinsic to the DMFT framework, presenting our results on the Metal-Insulator transition. Additionally, the student enrolled in the supplementary course titled "Strong coupling theories for metal-insulator transitions: DMFT and beyond" at USP during the first semester of 2023. This course proved invaluable, offering insights into extending DMFT to complex systems.
+\item While our initial intention was to utilize the Hubbard model only for benchmarking DMFT, our endeavor led us to a comprehensive exploration of the Mott transition within this system, yielding original findings. In Section \ref{sec:hubbard}, we describe the techniques and concepts intrinsic to the DMFT framework, presenting our results on the Metal-Insulator transition. Additionally, the student enrolled in the supplementary course titled ``Strong coupling theories for metal-insulator transitions: DMFT and beyond'' at USP during the first semester of 2023. This course proved invaluable, offering insights into extending DMFT to complex systems.
 
 \item We initiated our exploration of the MATBG theory with reference to \cite{handbook2019}, aiming primarily to comprehend the Moiré pattern geometry and the Bistritzer-MacDonald continuous model \cite{macdonald2011}. Subsequently, our focus shifted to analyzing the system's symmetries \cite{thesis_rennella}, which are pivotal, with implications such as the Wannier obstruction \cite{zou2018}. In Section \ref{sec:tbg}, we elucidate our studies.
 \end{itemize}
@@ -266,7 +266,8 @@ which simplifies the loop, since $\Delta(\omega)$ can be directly inserted in th
 
 As our main objective was to establish a working code for DMFT, we chose to use the Non-Crossing Approximation (NCA) impurity solver. As shown in Table 1 of \cite{impurity-solvers}, the NCA has a low computational cost while still providing reasonable qualitative results. However, as discussed in \cite{vildosola2015}, it is important to note that it does not return accurate quantitative values for critical interactions $U_{c1}$, $U_{c2}$, and the Kondo temperature $T_{\text{K}}$ \cite{haule_real_materials, vildosola2015}. The NCA method also has the advantage of quickly accessing a versatile range of temperatures. The details of NCA can be found in Section 2.2 of \cite{thesis_bruno}. For our work, we used the code developed by Kristjan Haule available on the website \cite{hauleweb}.
 
-\subsection{Results, \ALERT{$\eps_d \to \eps_d/U$, Figure \ref{fig:UxT-rho0}(e-f)}} \label{sec:results}
+\subsection{Results} \label{sec:results}
+% \ALERT{$\eps_d \to \eps_d/U$, Figure \ref{fig:UxT-rho0}(e-f)}
 
 We explored how the system behaves when one deviates from PHS ($\eps_d = U/2$). When the temperature is sufficiently low, the system undergoes a phase transition at two distinct values of $U$. Starting from a Mott insulating solution at large $U$ and gradually decreasing it, the system reaches a critical value $U_{c_1}$, at which it becomes metallic. Conversely, starting from a metallic state at low $U$ and increasing it, the system reaches another critical value $U_{c2} > U_{c1}$, at which it transitions back to an insulator. To characterize these two phases, we use the spectral density at zero energy \cite{georges1996} and the filling $n$, as half-filling is a necessary condition for the insulating phase.
 
@@ -295,23 +296,29 @@ Figure \ref{fig:T0002-butterfly} shows $U \times \eps_d$ phase diagrams for the 
 
 
 
-\section{\ALERT{Twisted Bilayer Graphene}} \label{sec:tbg}
+\section{Twisted Bilayer Graphene} \label{sec:tbg}
 
 \subsection{Commensurate structures} \label{sec:tbg_geom}
 
-The TBG system can be characterized by a rotation angle $\theta$ from the initial AB stacking configuration. The two slightly misaligned layers create an interference Moiré pattern, which can be either commensurate (forming a superlattice) or incommensurate. In the commensurate case, one can define the primitive lattice vectors $\vb{L}_1$ and $\vb{L}_2$ as the least common multiples of the unit vectors of the monolayers. Figure \ref{fig:latvec} illustrates an example of a commensurate structure where $\theta = 21.8^\circ$.
+TBG is characterized by a rotation angle $\theta$ between the two stacked layers of graphene. The slightly misaligned layers create an interference Moiré pattern, which can be either commensurate (forming a superlattice) or incommensurate. Figure \ref{fig:moireD6} shows this Moiré pattern for a commensurate structure with $D_6$ point group symmetry. The AA, AB, and BA regions indicate whether $A$ or $B$ carbon atoms from the layers are stacked on top of each other. Generally, a commensurate structure can have different symmetry groups depending on the choice of origin, but the largest point symmetry group it can have is $D_6$, due to its underlying honeycomb Bravais lattice. In the commensurate case, one can define the primitive lattice vectors $\vb{L}_1$ and $\vb{L}_2$ as the least common multiples of the unit vectors of the monolayers. Figure \ref{fig:latvec} illustrates an example where $\theta = 21.8^\circ$.
+\begin{figure}[H]
+\centering
+\includegraphics[height=.32\columnwidth]{fig/moireD6.png}
+\caption{Commensurate $D_6$-type structure obtained by twisting the two layers from the initial AA stacking configuration, with the origin chosen as the center of the hexagons. Figure taken from \cite{thesis_rennella}.}
+\label{fig:moireD6}
+\end{figure}
 
 \begin{figure}[H]
 \centering
 \begin{subfigure}{.5\textwidth}
   \centering
-  \includegraphics[height=.7\linewidth]{fig/latvec.png}
+  \includegraphics[height=.6\linewidth]{fig/latvec.png}
   \caption{}
   \label{fig:latvec}
 \end{subfigure}%
 \begin{subfigure}{.5\textwidth}
   \centering
-  \includegraphics[height=.7\linewidth]{fig/bzminibz.png}
+  \includegraphics[height=.6\linewidth]{fig/bzminibz.png}
   \caption{}
   \label{fig:bzminibz}
 \end{subfigure}
@@ -354,12 +361,12 @@ where $\Omega_1 = (2\pi)^2/A$ is the monolayer's BZ area and $\Omega$ is the are
 
 \n
 
-From the derivation above, one would conclude that a commensurate TBG system should have a translational symmetry with lattice constant $L(\theta)$ given by equation \ref{eq:commensurate-constant}. However, as discussed in \cite{zou2018}, scanning tunneling microscopy (STM) experiments actually observe a moiré lattice constant
+From the discussion above, one would conclude that a commensurate TBG system should have a translational symmetry with lattice constant $L(\theta)$ given by equation \ref{eq:commensurate-constant}. However, as discussed in \cite{zou2018}, scanning tunneling microscopy (STM) experiments actually observe a moiré lattice constant
 \begin{equation} \label{eq:STM-constant}
 L'(\theta) = \frac{a}{2 \sin(\theta/2)} \leq L(\theta).
 \end{equation}
 
-This can be interpreted as MATBG exhibiting an approximate translational symmetry with superlattice constant $L'(\theta)$, despite optionally possessing an exact translational symmetry with $L(\theta)$ in the commensurate case. The Bistritzer-MacDonald (also known as continuum theory) to derived in Section \ref{sec:BM-model} incorporates this translational symmetry and others ``good'' emergent symmetries that MATBG displays in experiments.
+This can be interpreted as MATBG exhibiting an approximate translational symmetry with superlattice constant $L'(\theta)$, despite optionally possessing an exact translational symmetry with $L(\theta)$ in the commensurate case. The Bistritzer-MacDonald (also known as continuum theory) to be derived in Section \ref{sec:BM-model} incorporates this translational symmetry and others ``good'' emergent symmetries that MATBG displays in experiments.
 
 
 \subsection{Bistritzer-MacDonald model} \label{sec:BM-model}
@@ -511,17 +518,13 @@ e^{i\phi} & e^{-i\phi}
 where $\phi = 2\pi/3$.
 
 
-\subsection{Symmetry analysis in MATBG}
+\subsection{Group theory} \label{sec:grouptheory}
 
-As discussed in \cite{zou2018}, at currently accessible energy scales, experiments indicate that MATBG exhibits some approximate symmetries. These include translational symmetry characterized by the constant $L' = a / (2 \sin\theta/2)$, valley symmetry $U_v(1)$, $C_{2z} \mathcal{T}$, and $D_6$ point group symmetry, which are not fully captured by a generic commensurate structure described in Section \ref{sec:tbg_geom}. The continuum model outlined in Section \ref{sec:BM-model} incorporates all these ``good'' symmetries. In this section, we will delve into some symmetry aspects that will be important later to understand the Wannier Obstruction and the Topological Heavy Fermion model of MATBG.
+As discussed in \cite{zou2018}, at currently accessible energy scales, experiments indicate that MATBG exhibits some approximate symmetries. These include translational symmetry characterized by the constant $L' = a / (2 \sin\theta/2)$, valley symmetry $U_v(1)$, $C_{2z} \mathcal{T}$, and $D_6$ point group symmetry, which are not fully captured by a generic commensurate structure described in Section \ref{sec:tbg_geom}. The continuum model outlined in Section \ref{sec:BM-model} incorporates all these ``good'' symmetries. In this section, we will explore group theory concepts that will later be applied to understand the Wannier Obstruction and the Topological Heavy Fermion model of MATBG.
 
-\subsubsection{Space Groups}
+\subsubsection{Space groups} \label{sec:spacegroups}
 
-The term \textit{space group} refers to the spatial symmetries that preserve a crystal's structure. While translations and point group symmetries are the most evident, it can also contain compound operations which add further complexity to the analysis. The presence of these compound operations leads to the classification of space groups into symmorphic and non-symmorphic groups.
-
-\ALERT{COLOCAR SCREW AXIS AND GLIDE PLANES?}
-
-We denote an element of a space group $G$ as $\sg{R_\alpha}{\vtau}$, where $R_\alpha$ is a point group operation such as rotations, reflections, inversions or improper rotations, and $\vtau$ is a translation. An useful matrix representation for $G$ is
+The concept \textit{space group} refers to the spatial symmetries that preserve a crystal's structure. We denote an element of a space group $G$ as $\sg{R_\alpha}{\vtau}$, where $R_\alpha$ represents a point group operation such as rotations, reflections, inversions, or improper rotations, and $\vtau$ is a translation. A useful matrix representation for $G$ is:
 \begin{equation} \label{eq:spacegroup-rep}
 \sg{R_\alpha}{\vtau} =
 \begin{pmatrix}
@@ -532,7 +535,6 @@ We denote an element of a space group $G$ as $\sg{R_\alpha}{\vtau}$, where $R_\a
 where $0$ is a row of three zeros, $\vtau$ is a column vector and $R_\alpha$ is $3\times 3$ rotation matrix.
 
 In this representation, the product of two elements can be evaluated by multiplying the corresponding matrices:
-\small
 \begin{align}
 \begin{split}
 \sg{R_\beta}{\vtau_2} \sg{R_\alpha}{\vtau_1} &=
@@ -552,99 +554,60 @@ R_\beta \vtau_1 + \vtau_2 & R_\beta R_\alpha
 \end{split}
 \end{align}
 
-\normalsize
-
 The inverse of an element is given by
-$$
+\begin{equation} \label{eq:inv-spacegroup}
 \sg{R_\alpha}{\vtau}^{-1} =
 \begin{pmatrix}
 1 & 0 \\
 -R_\alpha^{-1}\vtau & R_\alpha^{-1}
 \end{pmatrix} =
-\sg{R_\alpha^{-1}}{-R_\alpha^{-1}\vtau}
-$$
+\sg{R_\alpha^{-1}}{-R_\alpha^{-1}\vtau}.
+\end{equation}
 
-\ALERT{Beyond pure operations, we may find compound operations that combine translations and point group operations. The two possible types are \textit{glide planes} and \textit{screw axes}.}
+The pure translations and point group symmetries are the most evident, but a space group can also include compound operations, adding further complexity. The presence of these compound operations leads to the classification of space groups into \textit{symmorphic} or \textit{non-symmorphic}. We say that $G$ is symmorphic if, with a suitable choice of origin, all its elements can be decomposed in the form $\sg{R_\alpha}{\vtau} = \sg{1}{\R} \sg{R_\alpha}{0}$, where $\R$ is a Bravais lattice vector. In other words, $G$ is said to be symmorphic if it is a semi-direct product of the translation and point groups. For our purposes, the MATBG system exhibits emergent symmetries compatible with the $P622$ space group \cite{thesis_rennella}, which is symmorphic and associated with the $D_6$ point group.
 
-%\begin{figure}[H]
-%\centering
-%\includegraphics[width=0.5\linewidth]{fig/glideplane-screwaxis.png}
-%\caption{(a) The glide plane takes $A$ into $A'$. (b) Right- and left-hand screw axis.}
-%\label{fig:glideplane-screwaxis}
-%\end{figure}
+\begin{table}[H]
+\caption{Character table of point group $D_6$.}
+\centering
+\begin{tabular} { c c c c c c c  }
+\specialrule{0.05em}{0em}{0.2em}
+$\P$ & $\P E$ & $\P C_2$ & $\P2C_3$ & $\P2C_6$ & $\P3C_2'$ & $\P3C_2''$ \\
+\specialrule{0.01em}{0.2em}{0.2em}
+$A_1$ & $\P1$ & $\P1$ & $\P1$ & $\P1$ & $\P1$ & $\P1$ \\
+\specialrule{0.01em}{0.2em}{0.2em}
+$A_2$ & $\P1$ & $\P1$ & $\P1$ & $\P1$ & $ -1$ & $ -1$ \\
+\specialrule{0.01em}{0.2em}{0.2em}
+$B_1$ & $\P1$ & $ -1$ & $\P1$ & $ -1$ & $\P1$ & $ -1$ \\
+\specialrule{0.01em}{0.2em}{0.2em}
+$B_2$ & $\P1$ & $ -1$ & $\P1$ & $ -1$ & $ -1$ & $\P1$ \\
+\specialrule{0.01em}{0.2em}{0.2em}
+$E_1$ & $\P2$ & $ -2$ & $ -1$ & $\P1$ & $\P0$ & $\P0$ \\
+\specialrule{0.01em}{0.2em}{0.2em}
+$E_1$ & $\P2$ & $\P2$ & $ -1$ & $ -1$ & $\P0$ & $\P0$ \\
+\specialrule{0.05em}{0.2em}{0em}
+\end{tabular}
+\label{tab:D6}
+\end{table}
 
-\subsection{\ALERT{Translation subgroup}}
+Although the continuum model incorporates the point group $D_6$, the regions of interest for localizing Wannier orbitals are the AB and BA regions of Figure \ref{fig:moireD6} as they are the most stable. These regions share certain symmetry properties, which can be described by the concept of \textit{Wyckoff position}, to be defined in the following section \ref{sec:wyckoff}. Once these concepts are understood, we can utilize the character table \ref{tab:D6} and its irreducible representations to construct Wannier orbitals centered at AB and BA regions.
 
-All the elements $\sg{\eps}{\tau}$ of the the space group $G$ constitute the translation group $T$. It is a subgroup of $G$ and defines the Bravais lattice. More than that, $T$ is a normal subgroup of $G$, which means that $g T g^{-1} = T$ for every $g \in G$. Because of that, the cosets
-$$
-\{ \sg{R_\alpha}{\tau'} \sg{\eps}{\tau} \mid \sg{\eps}{\tau} \in T \} \in G/T
-$$
-form a factor group of the space group $G$.
+\subsubsection{Site-symmetry group and Wyckoff position} \label{sec:wyckoff}
 
-This factor group $G/T$ is actually isomorphic to the point group of $G$.
+Let $G$ be a space group associated with its corresponding lattice and choice of origin. The subgroup of all symmetry operations of $G$ that leave a point $P$ in real space invariant is called the \textit{site-symmetry group} of $P$. This point $P$ is called \textit{of special position} with respect to $G$ if there is at least one non-trivial (not the identity) symmetry operation of $G$ that leaves $P$ invariant.
 
-\subsection{\ALERT{Symmorphic and Nonsymmorphic Space Groups}}
-
-In a space group $G$, we can always rewrite its elements in the form
-$$
-\sg{R_\alpha}{\tau} = \sg{R_\alpha}{r_n + \tau} = \sg{\eps}{r_n} \sg{R_\alpha}{\tau_\alpha},
-$$
-where $r_n$ is a general vector of the Bravais lattice and $\tau_\alpha$ is either zero or a non-primitive Bravais lattice translation. Basically, we will have $\tau_\alpha = 0$ for simple group operations and $\tau_\alpha \neq 0$ for glide planes or screw axis.
-
-If, with a suitable choice of origin, all the elements of $G$ can be written in the form $\sg{R_\alpha}{\tau} = \sg{R_\alpha}{r_n} = \sg{\eps}{r_n} \sg{R_\alpha}{0}$ ($\tau_\alpha = 0$ for every symmetry operation), then call $G$ a \textit{symmorphic} space group.
-
-\subsection{\ALERT{Site-symmetry group and Wyckoff position}}
-
-Let $G$ be a space group associated with its corresponding lattice and a choice of origin. The subgroup of all symmetry operations of $G$ that leaves a point $P$ of the real space inveriant is called the \textit{site-symmetry group} of $P$. This point $P$ is called \textit{of special position} with respect to $G$ if there is at least one non-trivial (not the identity) symmetry operation of $G$ that leaves $P$ invariant.
-
-For a general operation $g$ of $G$, the point $P$ will be mapped into some other point $Q = g P$. If $P$ is of special position with site-symmetry group $G_P$, then $Q$ will also be of special position and its site-symmetry group $G_Q$ will be a conjugate group of $G_P$, namely $G_Q = g G_P g^{-1}$. In fact, we have
-$$
+For a general operation $g$ of $G$, the point $P$ will be mapped to some other point $Q = g P$. If $P$ is of special position with site-symmetry group $G_P$, then $Q$ will also be of special position, and its site-symmetry group $G_Q$ will be a conjugate group of $G_P$, namely $G_Q = g G_P g^{-1}$. In fact, we have:
+\begin{equation} \label{eq:special-position}
 G_Q Q = g G_P g^{-1} Q = g G_P P = g P = Q.
-$$
+\end{equation}
 
-If we apply of all operations of $G$ to $P$, we obtain the \textit{crystallographic orbit} of $P$, which is the set of points $Q$ with site-symmetry groups conjugate to $G_P$. If $P$ is of special position, we call its crystallographic orbit a \textit{Wyckoff position} of the space group $G$. Therefore, the concept of Wyckoff position refers to a \textbf{set of points of special position with site-symmetry groups conjugates of each other}.
-
-\section{\ALERT{Space groups in Reciprocal Space}}
-
-\subsection{\ALERT{Group of the wave vector $G_{\k}$ and the Star of $\k$}}
-
-If we have
-$$
-(\hat{P}_\alpha \R_n) \vdot \K_m = 2 \pi N,
-$$
-than
-$$
-\R_n \vdot (\hat{P}_\alpha^{-1} \K_m) = 2 \pi N.
-$$
-
-Thus, the effect of an operator $\hat{P}_\alpha$ on a direct lattice vector $\R_n$ is equivalent to the effect of the operator $\hat{P}_\alpha^{-1}$ on the corresponding reciprocal lattice vector $\K_m$.
+When we apply all operations of $G$ to $P$, we obtain the \textit{crystallographic orbit} of $P$, which is the set of points $Q$ with site-symmetry groups conjugate to $G_P$. If $P$ is of special position, we call its crystallographic orbit a \textit{Wyckoff position} of the space group $G$. Therefore, the concept of a Wyckoff position refers to a set of points of special position with site-symmetry groups that are conjugates of each other.
 
 \n
 
-The group of the wave vector is formed by the set of space group operations which transform $\k$ into itself, or into an equivalent $\k = \k + \K_m$, where $\K_m$ is a vector of the reciprocal lattice.
+For TBG, we focus on the Wyckoff position $2c$, corresponding to the AB and BA regions of interest in Figure \ref{fig:moireD6}. The site-symmetry groups of these regions are all isomorphic to the point group $D_3$, a subgroup of $D_6$. In contrast, the $AA$ regions belong to Wyckoff position $1a$, and their site-symmetry groups have higher symmetry $D_6$.
 
-All the symmetry operation of the space group $G$ take the point $\k = 0$ into an equivalent point, so that the group of the wave vector at $\k = 0$ corresponds to $G$. Furthermore, the $G_\k$ for $\k \neq 0$ remains a subgroup of $G$.
+Our next step will involve studying how to find the set of Wannier orbitals centered on the $2c$ Wyckoff position of the Moiré pattern and implementing a corresponding tight-binding model \cite{thesis_rennella}.
 
-\n
-
-The set of wave vectors $\k'$ which are obtained by carrying out all the point group operations on $\k$ is called \textit{star of} $\k$.
-
-\n
-
-In summary
-$$
-\text{real space} \iff \text{reciprocal space}
-$$
-$$
-\text{site-symmetry group} \iff \text{group of wave vector }G_\k
-$$
-$$
-\text{Wyckoff position} \iff \text{star of }\k
-$$
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \pagebreak
 
@@ -664,15 +627,15 @@ The student attended the following scientific events/courses:
 \item Listener at \href{https://www.ictp-saifr.org/apsmarch23/}{APS/ICTP-SAIFR Satellite March Meeting}.
 \item Member of Luis Gregório G. V. Dias da Silva's research group Journal Club.
 \item Attended the \href{https://american-chemical-society.zoom.us/webinar/register/WN_FISEv0_ySkK2jPVB0nbsRw#/registration}{2023 ACS Communication and Scientific Writing Course}.
-\item Presented \ALERT{a poster of his DMFT results} at \href{https://www1.fisica.org.br/~eosbf/2024/index.php/en/}{2024 Autumn Meeting of the Brazilian Physical Society}.
+\item Presented the DMFT results of Section \ref{sec:results} in a poster at \href{https://www1.fisica.org.br/~eosbf/2024/index.php/en/}{2024 Autumn Meeting of the Brazilian Physical Society}.
 \end{itemize}
 
 
-\chapter{\ALERT{Conclusions and Future Activities}} \label{chp:conclusions}
+\chapter{Conclusions and Future Activities} \label{chp:conclusions}
 
-In Section \ref{sec:hubbard} we established a fully working DMFT algorithm and were able to explore the phase diagrams for the Metal-Insulator transition. In Figure \ref{fig:UxT-rho0} we could reproduce an already known result \cite{georges1996}, but we also investigated the asymmetric case, which is a little more obscure in the literature. In particular, in Figure \ref{fig:T0002-butterfly} we were able to identify the growth of the coexistence region as $\eps_d$ approaches the symmetric case $U/2$ and the ``smile'' pattern in the $U \times \eps_d$ phase diagram in Figure \ref{fig:T0002-butterfly}. With respect to our DMFT code, we expect to improve and extend the algorithm to multi-orbital systems in order to study the TBG.
+In Section \ref{sec:hubbard}, we established a fully operational DMFT algorithm and extensively explored the phase diagrams for the Metal-Insulator transition. In Figure \ref{fig:UxT-rho0}(a), we successfully replicated a known result from the literature for $\eps_d = U/2$ \cite{georges1996}. Additionally, we conducted a thorough investigation of the asymmetric case, which has received comparatively less attention in the literature. Notably, we analyzed the expansion of the coexistence region as we deviated from the particle-hole symmetric (PHS) case and observed the distinctive ``smile'' pattern in the $U \times \eps_d$ phase diagrams of Figure \ref{fig:T0002-butterfly}. Looking ahead to our DMFT progress, our goal is to enhance and extend the algorithm for the study of TBG. However, before developing a practical implementation, we acknowledge the necessity of comprehensively understanding the intrinsic properties of the system through a rigorous analysis of its symmetries.
 
-In Section \ref{sec:tbg} we shared a little of what we studied about the TBG, but there is a lot more to understand. Firstly, we hope to fully understand the structure and implications of the BM model \cite{macdonald2011}. After that, we are going to focus on studying all the symmetries and topological issues in the topological heavy fermion model \cite{topoheavyfermion2022}. This will enable us to make progress on the practical DMFT implementation of TBG system.
+In Section \ref{sec:tbg}, we presented our research on TBG theory. We derived the Bistritzer-MacDonald model \cite{macdonald2011} in Section \ref{sec:BM-model}. Our intention is to utilize this knowledge to develop our own code for analyzing the electronic properties of the system. The BM model is advantageous as it is independent of whether a configuration of TBG is commensurate or not, and it also incorporates all the emergent symmetries observed in experiments \cite{zou2018}. In order to construct the Wannier orbitals localized on the AB and BA regions of interest, we recognized the necessity of thoroughly reviewing concepts of group theory in Section \ref{sec:grouptheory}. Our studies will enable us to employ group theory to elucidate the Wannier Obstruction and the Topological Heavy Fermion model \cite{topoheavyfermion2022}.
 
 %%-----
 %% Referências bibliográficas
