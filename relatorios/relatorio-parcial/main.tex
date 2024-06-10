@@ -299,11 +299,11 @@ where $\K$ is a Dirac point of an unrotated monolayer, and $\Delta\K = \K_1-\K_2
 
 \n
 
-The Hamiltonian $H$ of the model comes from a tight-binding approach $H = H_1 + H_2 + H_{\perp}$, where $H_\ell$ is the hamiltonian of the layer $\ell$, and $H_\perp = V_{12} + V_{12}^\d$ describes the interlayer hybridization. We write this hamiltonian in terms of Bloch waves
+The Hamiltonian $H$ of the model comes from a tight-binding approach $H = H_1 + H_2 + H_{\perp}$, where $H_\ell$ is the Hamiltonian of the layer $\ell$, and $H_\perp = V_{12} + V_{12}^\d$ describes the interlayer hybridization. We write this Hamiltonian in terms of Bloch waves
 \begin{equation} \label{eq:BM-blochwave}
 \ket{\psi_{\ell, \k, \alpha}} = \frac{1}{\sqrt{N_\ell}} \sum_{\R_\ell} e^{i \k \vdot (\R_\ell + \vtau_{\ell,\alpha})} \ket{\ell, R_\ell, \alpha},
 \end{equation}
-where $\ell$ labels the layer, $N_\ell$ is the number of unit cells, $\R_\ell$ are the positions of the underlying Bravais lattice, $\vtau_{\ell,\alpha}$ are the orbital centers (of sublattice $\alpha = A,B$) in the unit cell, and $\ket{\ell,\R_\ell,\alpha}$ are localized Wannier states. In this basis, considering only nearest-neighbor intralayer hopping, the low-energy hamiltonian of each layer is
+where $\ell$ labels the layer, $N_\ell$ is the number of unit cells, $\R_\ell$ are the positions of the underlying Bravais lattice, $\vtau_{\ell,\alpha}$ are the orbital centers (of sublattice $\alpha = A,B$) in the unit cell, and $\ket{\ell,\R_\ell,\alpha}$ are localized Wannier states. In this basis, considering only nearest-neighbor intralayer hopping, the low-energy Hamiltonian of each layer is
 \begin{equation} \label{eq:blg-eachlayer-hamil-lowenergy}
 H^{\pm \K}(\q) = \hbar v_F \abs{\q}
 \begin{pmatrix}
@@ -530,7 +530,7 @@ H_{\text{SIAM}} = \underbrace{U n_{d\up} n_{d\down} + \eps_d \sum_{\s} n_{d\s}}_
 + \underbrace{\sum_{\k,\s} \eps_\k c_{\k\s}^\d c_{\k\s}}_{H_{\text{bath}}}.
 \end{equation}
 
-In Eq. \eqref{eq:anderson-hamiltonian}, $H_{\text{bath}}$ is the Hamiltonian of the bath, $H_{\text{coup}}$ is the coupling between the bath and the single impurity $d$, and $H_{\text{imp}}$ is the hamiltonian of the impurity. The impurity Hamiltonian $H_{\text{imp}}$  has an interaction $U$ when two electrons are on the same site, anologous to the Hubbard Hamiltonian in Eq. \eqref{eq:hubbard-hamiltonian},.
+In Eq. \eqref{eq:anderson-hamiltonian}, $H_{\text{bath}}$ is the Hamiltonian of the bath, $H_{\text{coup}}$ is the coupling between the bath and the single impurity $d$, and $H_{\text{imp}}$ is the Hamiltonian of the impurity. The impurity Hamiltonian $H_{\text{imp}}$  has an interaction $U$ when two electrons are on the same site, anologous to the Hubbard Hamiltonian in Eq. \eqref{eq:hubbard-hamiltonian},.
 
 There are several methods, known as impurity solvers, available in the literature which are designed to solve systems such as the SIAM. Reference \cite{impurity-solvers} gives an overview and a benchmark of some impurity solvers. By ``solving an impurity problem'', we actually mean determining the retarded Green's function of the impurity site $G_{\text{imp}}(\omega)$, because its knowledge allows us compute the spectral function $\displaystyle{\rho(\omega) = - \Im{G_{\text{imp}}(\omega)}} / \pi$ and a manifold of important observables related to transport \cite{pedagogical-gfs}.
 
