@@ -168,132 +168,30 @@
 %%-----
 %% Resumo do projeto
 %%-----
-\chapter{Summary} \label{chp:abstract}
+\chapter{Summary of the Research Project} \label{chp:abstract}
 
-The twisted bilayer graphene (TBG) is a fascinating system that displays a plethora of intriguing physical phenomena such as correlated insulators, superconductivity \cite{cao2018}, and unconventional quantum Hall effects \cite{unconv_QHE_tbg_2006}, among others. Several recent experiments have demonstrated the rich electronic properties of TBG, which exhibits correlated insulating and superconducting phases. In spite of such a vast amount of experimental data, there are still several open questions regarding the theoretical description of this material in different regimes. While there is some consensus that these phenomena are related to the formation of flat bands near the Fermi level captured by non-interacting band structure models \cite{macdonald2011}, the description of TBG as a strongly correlated system is nonetheless challenging. In this Master's project, we propose a description of the correlated electronic properties of Magic-Angle TBG (MATBG) in terms of multi-orbital topological Anderson models (both as a single impurity and as a periodic Anderson lattice), building on the framework recently developed describing MATBG as a topological heavy fermion problem \cite{topoheavyfermion2022}. By employing a combination of analytical and numerical methods, we aim to study the low-energy physics of such models and identify the emergent energy scales and the nature of the Mott transition.
+Twisted bilayer graphene (TBG) is a fascinating system that displays a plethora of intriguing physical phenomena such as correlated insulators \cite{cao2018_correlated}, superconductivity \cite{cao2018}, and unconventional quantum Hall effects \cite{unconv_QHE_tbg_2006}, among others. Several recent experiments have demonstrated the rich electronic properties of TBG, which exhibits correlated insulating and superconducting phases. Despite the vast amount of experimental data, there remain several open questions regarding the theoretical description of this material in different regimes. While there is some consensus that these phenomena are related to the formation of flat bands near the Fermi level, captured by non-interacting band structure models \cite{macdonald2011}, describing TBG as a strongly correlated system remains challenging.
 
-We plan to address the MATBG by initially studying a single impurity site localized at the origin using an impurity solver method. Our primary choice is the Non-Crossing Approximation (NCA) solver due to its low computational cost and capability to explore temperature effects \cite{impurity-solvers}. Following this, we aim to extend our approach to a periodic multi-orbital Anderson model by implementing the Dynamical Mean-Field Theory (DMFT) algorithm \cite{georges1996}, which involves iteratively calling the impurity solver at each step.
+In this Master's project, we aim to describe the correlated electronic properties of Magic-Angle TBG (MATBG) using multi-orbital topological Anderson models. Building on the recently developed topological heavy fermion (THF) model \cite{topoheavyfermion2022}, we will employ both analytical and numerical methods to study the low-energy physics of these models, focusing on emergent energy scales and the Mott transition. This project has two main objectives: (a) to understand the development of the THF model, and (b) to describe its properties within a single-impurity approach and as a periodic Anderson lattice using numerical techniques.
 
-To establish a robust initial implementation of the impurity solver and DMFT, we begin our studies with the Hubbard model \cite{hubbard1963} on a Bethe lattice at the coordination number limit $z\to\infty$. This choice is motivated by the model's relative simplicity and its suitability as a benchmark for our DMFT code. In Section \ref{sec:hubbard}, we address the technical details of applying DMFT to this benchmark system and show our numerical results, which demonstrate the Metal-Insulator phase transition in both the particle-hole symmetric (PHS) case ($\epsilon_d = U/2$) and the asymmetric case.
+Regarding (a), in Section \ref{sec:tbg}, we present our progress in understanding the MATBG system by studying its geometry \cite{handbook2019}, the Bistritzer-MacDonald (BM) model \cite{macdonald2011}, and its symmetry properties \cite{thesis_rennella}. Symmetry analysis is a prerequisite for comprehending the Wannier obstruction phenomenon \cite{zou2018}, which arises from the non-trivial topology of the electronic bands. This phenomenon refers to the impossibility of representing the flat bands using exponentially localized Wannier functions that preserve all symmetries of the band structure. In contrast, the THF model addresses this issue by providing a fully symmetric framework that reformulates and maps the interacting MATBG as a topological heavy fermion system \cite{topoheavyfermion2022}.
 
-In Section \ref{sec:tbg}, we present our progress in understanding the MATBG system by studying its geometry \cite{handbook2019}, the Bistritzer-MacDonald (BM) model \cite{macdonald2011}, and its symmetry properties. Symmetry analysis is a prerequisite for comprehending the Wannier obstruction phenomenon, which arises from the non-trivial topology of the electronic bands. It refers to the impossibility of representing the flat bands using exponentially localized Wannier functions that preserve all symmetries of the band structure.
+We plan to address point (b) by initially studying a single impurity site localized at the origin using an impurity solver method. Our primary choice is the Non-Crossing Approximation (NCA) solver due to its low computational cost and capability to explore temperature effects \cite{impurity-solvers}. Following this, we aim to extend our approach to a periodic multi-orbital Anderson model by implementing the Dynamical Mean-Field Theory (DMFT) algorithm \cite{georges1996}, which involves iteratively calling the impurity solver at each step. To establish a robust initial implementation of the impurity solver and DMFT, we begin our studies with the Hubbard model \cite{hubbard1963} on a Bethe lattice at the coordination number limit $z\to\infty$. This choice is motivated by the model's relative simplicity and its suitability as a benchmark for our DMFT code. In Section \ref{sec:hubbard}, we address the technical details of applying DMFT to this benchmark system and show our numerical results, which demonstrate the Mott transition in the particle-hole symmetric and asymmetric case.
 
 \pagebreak
 
 
 \chapter{Accomplishments in the period} \label{chp:accomplishments}
 
-Throughout the period outlined in this report, our advancements comprised three primary activities: acquainting ourselves with the theory of Condensed Matter Physics, delving into numerical techniques (such as NCA and DMFT), and thoroughly reviewing the literature pertaining to the MATBG system of interest.
+Throughout the period outlined in this report, our advancements comprised three primary activities: acquainting ourselves with the theory of Condensed Matter Physics, thoroughly reviewing the literature pertaining to the MATBG system of interest, and delving into numerical techniques (such as NCA and DMFT).
 
 \begin{itemize}
-\item The student completed four courses: Solid State I and II, Statistical Mechanics, and Group Theory Applied to Molecules and Solids. Each course was vital for understanding the general theory of many-body systems and for beginning the study of the MATBG system in question. In particular, the Group Theory course was crucial for comprehending the symmetry and topology aspects of MATBG. Additionally, the Hubbard model was extensively studied in Solid State II.
-
-\item While our initial intention was to utilize the Hubbard model only for benchmarking DMFT, our endeavor led us to a comprehensive exploration of the Mott transition within this system, yielding original findings. In Section \ref{sec:hubbard}, we describe the techniques and concepts intrinsic to the DMFT framework, presenting our results on the Metal-Insulator transition. Additionally, the student enrolled in the supplementary course titled ``Strong coupling theories for metal-insulator transitions: DMFT and beyond'' at USP during the first semester of 2023. This course proved invaluable, offering insights into extending DMFT to complex systems.
+\item The student completed four courses: Solid State I and II, Statistical Mechanics, and Group Theory Applied to Molecules and Solids. Each course was vital for understanding the general theory of many-body systems and for beginning the study of the MATBG system in question. In particular, the Group Theory course was crucial for comprehending the symmetry and topology aspects of MATBG.
 
 \item We initiated our exploration of the MATBG theory with reference to \cite{handbook2019}, aiming primarily to comprehend the Moiré pattern geometry and the Bistritzer-MacDonald continuous model \cite{macdonald2011}. Subsequently, our focus shifted to analyzing the system's symmetries \cite{thesis_rennella}, which are pivotal, with implications such as the Wannier obstruction \cite{zou2018}. In Section \ref{sec:tbg}, we elucidate our studies.
+
+\item While our initial intention was to utilize the Hubbard model only for benchmarking DMFT, our endeavor led us to a comprehensive exploration of the Mott transition within this system, yielding original findings. In Section \ref{sec:hubbard}, we describe the techniques and concepts intrinsic to the DMFT framework, presenting our results on the Metal-Insulator (Mott) transition. Additionally, the student enrolled in the supplementary course titled ``Strong coupling theories for metal-insulator transitions: DMFT and beyond'' at USP during the first semester of 2023. This course proved invaluable, offering insights into extending DMFT to complex systems.
 \end{itemize}
-
-
-\section{DMFT Benchmark: The Hubbard model} \label{sec:hubbard}
-
-Considering hopping only between nearest-neighbors, in second quantization the Hubbard Hamiltonian reads
-\begin{equation} \label{eq:hubbard-hamiltonian}
-H = \eps_d \sum_{i, \s} n_{i\s} +  \sum_{\nn{i}{j}, \s} t_{ij} (c_{i\s}^\d c_{j\s} + \hc)
-+ U \sum_{i} n_{i\up} n_{i\down},
-\end{equation}
-where $\eps_d$ is the on-site energy, $t$ is the hopping amplitude, $U$ is represents the Coulomb repulsion, $c_{i\s}^\d$ ($c_{i\s}$) is the creation (annihilator) operator, and $n_{i\s} = c_{i\s}^\d c_{i\s}$.
-
-The relatively simple Hamiltonian in equation \ref{eq:hubbard-hamiltonian} features a Mott Metal-Insulator transition at half-filling ($n = \sum_{i\s} \ev{n_{i\s}} / N = 1$). In order to capture this transition, one needs to go beyond mean-field theory. One powerful approach is DMFT \cite{georges1996}, which offers a robust framework to study real strongly correlated materials \cite{haule_real_materials}.
-
-\subsection{DMFT} \label{sec:dmft}
-
-DMFT works through a self-consistent mapping of the original Hamiltonian onto a local impurity model \cite{thesis_dmft_graz}. Its applicability stems from its exactness in the limit of infinite lattice coordination ($z \to \infty$) \cite{georges1996}. In this limit, the self-energy $\displaystyle{\lim_{z \to \infty}\Sigma(\mathbf{k},\omega) = \Sigma(\omega)}$ becomes independent of the momentum $\mathbf{k}$. This property proves itself very reliable in capturing the essential physics of strongly correlated systems.
-
-In the context of the Hubbard model, the hamiltonian is self-consistently mapped onto the Single Anderson Impurity Model (SIAM) \cite{impurity-solvers, georges1996}, where the impurity level, indexed by $d$, is coupled to an external bath:
-\begin{equation} \label{eq:anderson-hamiltonian}
-H_{\text{SIAM}} = \underbrace{U n_{d\up} n_{d\down} + \eps_d \sum_{\s} n_{d\s}}_{H_{\text{imp}}}
-+ \underbrace{\sum_{\k,\s} (t_\k c_{d\s}^\d c_{k\s} + \hc)}_{H_{\text{coup}}}
-+ \underbrace{\sum_{\k,\s} \eps_\k c_{\k\s}^\d c_{\k\s}}_{H_{\text{bath}}}.
-\end{equation}
-
-In equation \ref{eq:anderson-hamiltonian}, $H_{\text{bath}}$ is the hamiltonian of the bath, $H_{\text{coup}}$ is the coupling between the bath and the single impurity $d$, and $H_{\text{imp}}$ is the hamiltonian of the impurity. $H_{\text{imp}}$  has an interaction $U$ when two electrons are on the same site, anologous to the Hubbard hamiltonian in equation \ref{eq:hubbard-hamiltonian},.
-
-There are several methods, known as impurity solvers, available in the literature that attempt to solve systems such as the SIAM. Reference \cite{impurity-solvers} gives an overview and a benchmark of some impurity solvers. By solving an impurity problem, we actually mean determining the retarded Green's function of the impurity site $G_{\text{imp}}(\omega)$, because its knowledge allows us compute the spectral function $\displaystyle{\rho(\omega) = - \Im{G_{\text{imp}}(\omega)}} / \pi$ and a manifold of important observables related to transport \cite{pedagogical-gfs}.
-
-Having in mind this auxiliary impurity problem, the DMFT scheme is based on the approximation
-\begin{equation} \label{eq:dmft-approx}
-\Sigma(\k, \omega) \approx \Sigma(\omega),
-\end{equation}
-where we assume that the self-energy is approximately independent of $\k$. Additionally, the self-consistency tells us that the local lattice Green's function $G_{\text{loc}}(\omega)$ coincides with the impurity model's Green function $G_{\text{imp}}(\omega)$, and this fact translates into a convergence criterion for the DMFT algorithm.
-
-Using equation \ref{eq:dmft-approx}, the local Green's function in the continuum limit is
-\begin{equation} \label{eq:Gf-local}
-G_{\text{loc}}(\omega) = \sum_{\k} \frac{1}{\omega-\eps_\k-\Sigma(\k, \omega)} \approx
-\int \dd{\eps} \frac{\rho_0(\eps)}{\omega - \eps - \Sigma(\omega)},
-\end{equation}
-where $\rho_0(\eps)$ is the non-interacting density of states (DOS) and depends only on the considered lattice structure.
-
-In essence, the general DMFT algorithm works as follows. Firstly, we start with an initial guess for the self-energy $\Sigma(\omega)$ and compute $G_{\text{loc}}(\omega)$ by equation \ref{eq:Gf-local}. Next, the impurity solver takes as input the bath hybridization function
-\begin{equation} \label{eq:hybridization-func}
-\Delta(\omega) = \omega - \eps_d - G_{\text{loc}}^{-1}(\omega) - \Sigma(\omega),
-\end{equation}
-and computes $G_{\text{imp}}(\omega)$. Next, $G_{\text{loc}}$ and $G_{\text{imp}}$ are compared with some convergence criterion and, if not satisfied, we update the self-energy by equation \ref{eq:self-energy-update} and come back to the beginning of the loop.
-\begin{equation} \label{eq:self-energy-update}
-\Sigma(\omega) = \omega - \eps_d - G_{\text{imp}}^{-1}(\omega)
-\end{equation}
-
-Finally, the filling $n$ is given by \cite{bruus}
-\begin{equation} \label{eq:filling}
-n = \int_{-\infty}^{\infty} f(\omega, T) \rho(\omega) \dd{\omega},
-\end{equation}
-where $f(\omega, T) = (e^{\omega/k_B T} + 1)^{-1}$ is the Fermi-Dirac distribution at temperature $T$.
-
-\subsection{Bethe lattice} \label{sec:bethe}
-
-The Bethe lattice is an infinite lattice where each site has $z$ neighbors and any two sites are connected by a unique shortest path. In our work, we focused on the special case of the Bethe lattice with infinite coordination $z\to\infty$, because DMFT is exact and its algorithm simplifies in this setting. The Hubbard Hamiltonian in equation \ref{eq:hubbard-hamiltonian} only makes sense with $z\to\infty$ if the hopping amplitude is renormalized as \cite{thesis_bruno}
-\begin{equation} \label{eq:hopping-renormalization}
-t = \frac{t_*}{\sqrt{z}},
-\end{equation}
-where $t_*$ is the renormalized hopping, which we used $2t^* = 1$ as our energy unit.
-
-For the Bethe lattice, one can obtain the simplified relation \cite{thesis_bruno}
-\begin{equation} \label{eq:simple-hybridization-bethe}
-\Delta(\omega) = t_*^2 \, G_{\text{imp}}(\omega),
-\end{equation}
-which simplifies the loop, since $\Delta(\omega)$ can be directly inserted in the impurity solver.
-
-\subsection{Impurity Solver} \label{sec:impurity-solver}
-
-As our main objective was to establish a working code for DMFT, we chose to use the Non-Crossing Approximation (NCA) impurity solver. As shown in Table 1 of \cite{impurity-solvers}, the NCA has a low computational cost while still providing reasonable qualitative results. However, as discussed in \cite{vildosola2015}, it is important to note that it does not return accurate quantitative values for critical interactions $U_{c1}$, $U_{c2}$, and the Kondo temperature $T_{\text{K}}$ \cite{haule_real_materials, vildosola2015}. The NCA method also has the advantage of quickly accessing a versatile range of temperatures. The details of NCA can be found in Section 2.2 of \cite{thesis_bruno}. For our work, we used the code developed by Kristjan Haule available on the website \cite{hauleweb}.
-
-\subsection{Results} \label{sec:results}
-% \ALERT{$\eps_d \to \eps_d/U$, Figure \ref{fig:UxT-rho0}(e-f)}
-
-We explored how the system behaves when one deviates from PHS ($\eps_d = U/2$). When the temperature is sufficiently low, the system undergoes a phase transition at two distinct values of $U$. Starting from a Mott insulating solution at large $U$ and gradually decreasing it, the system reaches a critical value $U_{c_1}$, at which it becomes metallic. Conversely, starting from a metallic state at low $U$ and increasing it, the system reaches another critical value $U_{c2} > U_{c1}$, at which it transitions back to an insulator. To characterize these two phases, we use the spectral density at zero energy \cite{georges1996} and the filling $n$, as half-filling is a necessary condition for the insulating phase.
-
-Figure \ref{fig:UxT-rho0} is a color plot of $\rho(0) = (\rho_{\text{metal}}(0) + \rho_{\text{insul}}(0))/2$ as a function of $U \times T$, where the ``metal'' and ``insul'' labels mean starting with a metallic (low $U$) or insulating (high $U$) solution. The blue region (where $\rho(0) = 0$) corresponds to the insulating phase and the red region (where $\rho(0)$ is maximum) to the metallic phase. The green region is a coexistence phase, where $\rho(0)$ changes abruptally to an intermediate value. The critical point $(U_c, T_c)$ identify the vertice of the coexistence region (``green triangle'').
-
-%\begin{center}
-%\ALERT{NAS FIGURAS DO Uc e Tc DEVERIA SER O XLABEL $\eps_d/U$.}
-%\end{center}
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.8\columnwidth]{fig/fig2-abcd-eps-converted-to.pdf}
-\includegraphics[width=0.48\columnwidth]{fig/fig2-ef-eps-converted-to.pdf}
-\caption{(a-d) Phase diagrams $U \times T$ as $\eps_d$ is moved away from $U/2$. (a) $\epsilon_d=0.5U$ (b) $\epsilon_d=0.485U$ (c) $\epsilon_d=0.475U$ (d) $\epsilon_d=0.465U$. (e-f) $U_c, T_c$ as functions of $\eps_d/U$. }
-\label{fig:UxT-rho0}
-\end{figure}
-
-Figure \ref{fig:T0002-butterfly} shows $U \times \eps_d$ phase diagrams for the fixed temperature $T = 0.002$, where $\Delta \rho(0) = \rho_{\text{metal}}(0) - \rho_{\text{insul}}(0)$, $n = (n_{\text{metal}} + n_{\text{insul}})/2$, $\Delta n = n_{\text{metal}} - n_{\text{insul}}$. The ``smile pattern'' of Figures \ref{fig:T0002-butterfly}(a,b,d) identifies the coexistence region.
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=\columnwidth]{fig/fig4-abcd-eps-converted-to.pdf}
-\caption{Phase diagrams $U \times \epsilon_d$ for $T=0.002$. (a,b) avg. $(\text{M}+\text{I})/2$ and diff. $(\text{M}-\text{I})$ for $\rho(\omega=0)$. (c,d) avg. and diff. for the filling $n$. }
-\label{fig:T0002-butterfly}
-\end{figure}
-
 
 
 \section{Twisted Bilayer Graphene} \label{sec:tbg}
@@ -348,7 +246,7 @@ There is an appropriate choice of vectors $\vb{a}_i^{(\ell)}$ such that the indi
 \begin{equation} \label{eq:costheta}
 \cos\theta = \frac{m^2 + n^2 + 4mn}{2(m^2 + n^2 + mn)} = \frac{3 m^2 + 3mr + r^2/2}{3m^2 + 3mr + r^2},
 \end{equation}
-where $r = n-m$, and $\gcd(m,n) = \gcd(m,r)=1$. By taking the norm of $\vb{L}_1$ from equation \ref{eq:L1} and using the angle relation in equation \ref{eq:costheta}, the superlattice constant $L = \abs{\vb{L}_1} = \abs{\vb{L}_2}$ is given by
+where $r = n-m$, and $\gcd(m,n) = \gcd(m,r)=1$. By taking the norm of $\vb{L}_1$ from Eq. \eqref{eq:L1} and using the angle relation in Eq. \eqref{eq:costheta}, the superlattice constant $L = \abs{\vb{L}_1} = \abs{\vb{L}_2}$ is given by
 \begin{equation} \label{eq:commensurate-constant}
 L(\theta) = a\sqrt{m^2 + n^2 + mn} = \frac{\abs{m-n}}{2 \sin(\theta/2)} \, a.
 \end{equation}
@@ -361,7 +259,7 @@ where $\Omega_1 = (2\pi)^2/A$ is the monolayer's BZ area and $\Omega$ is the are
 
 \n
 
-From the discussion above, one would conclude that a commensurate TBG system should have a translational symmetry with lattice constant $L(\theta)$ given by equation \ref{eq:commensurate-constant}. However, as discussed in \cite{zou2018}, scanning tunneling microscopy (STM) experiments actually observe a moiré lattice constant
+From the discussion above, one would conclude that a commensurate TBG system should have a translational symmetry with lattice constant $L(\theta)$ given by Eq. \eqref{eq:commensurate-constant}. However, as discussed in \cite{zou2018}, scanning tunneling microscopy (STM) experiments actually observe a moiré lattice constant
 \begin{equation} \label{eq:STM-constant}
 L'(\theta) = \frac{a}{2 \sin(\theta/2)} \leq L(\theta).
 \end{equation}
@@ -443,7 +341,7 @@ t_{12}^{\alpha\beta}(\R_1,\R_2) = t_{12}^{\alpha\beta}(\R_1+\vtau_{1,\alpha}-\R_
 \int \frac{\dd[2]{\p}}{(2\pi)^2} e^{i \p \vdot (\R_1+\vtau_{1,\alpha}-\R_2-\vtau_{2,\beta})} t_{12}^{\alpha\beta}(\p).
 \end{equation}
 
-Plugging equation \ref{eq:interlayer-hopping-fourier} in equation \ref{eq:interlayer-hopping-Tkspace}, we obtain
+Plugging Eq. \eqref{eq:interlayer-hopping-fourier} in Eq. \eqref{eq:interlayer-hopping-Tkspace}, we obtain
 \begin{equation} \label{eq:interlayer-hopping-simplified}
 T_{12}^{\alpha\beta}(\k_1,\k_2) = \frac{1}{A_1}
 \sum_{\G_1, \G_2} e^{i\G_1\vdot\vtau_{1,\alpha}} t_{12}^{\alpha\beta}(\p)
@@ -453,7 +351,7 @@ where the crystal momentum coupling $\k_1 + \G_1 = \k_2 + \G_2$ is known as gene
 
 \n
 
-Equation \ref{eq:interlayer-hopping-simplified} relies on the functional form of $t_{12}^{\alpha\beta}(\mathbf{p})$. To make further progress, we introduce additional assumptions. Given that both $A$ and $B$ sites of graphene correspond to a $p_z$ orbital of carbon atoms, we assume that $t_{12}^{\alpha\beta}(\r) = t_\perp(\r)$ does not depend on $\alpha$ or $\beta$. In \cite{tperp-laissardiere2012}, the authors characterize the behavior of $t_\perp(\r)$ using Slater-Koster parameters and numerically evaluate $t_\perp(\mathbf{p})$ through equation \ref{eq:interlayer-hopping-fourier}. They establish that $t_\perp(\p)$ is solely a function of $\abs{\p}$ with rapid decay. This has significant implications, as only a few umklapp processes contribute to the coupling in equation \ref{eq:interlayer-hopping-simplified}.
+Equation \eqref{eq:interlayer-hopping-simplified} relies on the functional form of $t_{12}^{\alpha\beta}(\mathbf{p})$. In order to make further progress, we introduce additional assumptions. Given that both $A$ and $B$ sites of graphene correspond to a $p_z$ orbital of carbon atoms, we assume that $t_{12}^{\alpha\beta}(\r) = t_\perp(\r)$ does not depend on $\alpha$ or $\beta$. In \cite{tperp-laissardiere2012}, the authors characterize the behavior of $t_\perp(\r)$ using Slater-Koster parameters and numerically evaluate $t_\perp(\mathbf{p})$ through Eq. \eqref{eq:interlayer-hopping-fourier}. They establish that $t_\perp(\p)$ is solely a function of $\abs{\p}$ with rapid decay. This has significant implications, as only a few umklapp processes contribute to the coupling in Eq. \eqref{eq:interlayer-hopping-simplified}.
 
 \n
 
@@ -469,7 +367,7 @@ As $t_\perp(\p)$ rapidly decays with $\abs{\p}$, we truncate $t_\perp(\p) \appro
 \delta_{\K_1+\q_1+\G_1,\K_2+\q_2+\G_2} = \delta_{\q_2-\q_1,\K_1-\K_2+\G_1-\G_2}.
 \end{equation}
 
-Because $\abs{\q_\ell} \ll \abs{\K}$, we find that the condition $\q_2-\q_1 = \K_1-\K_2+\G_1-\G_2$ is true only when $\G_1 = \g_{1n}$ and $\G_2 = \g_{2n}$ have the same index $n$. Consequently, we encounter three possibilities of momentum transfer:
+Since $\abs{\q_\ell} \ll \abs{\K}$, we find that the condition $\q_2-\q_1 = \K_1-\K_2+\G_1-\G_2$ is true only when $\G_1 = \g_{1n}$ and $\G_2 = \g_{2n}$ have the same index $n$. Consequently, we encounter three possibilities of momentum transfer:
 \begin{equation} \label{eq:qb}
 \q_\text{b} = \K_1 - \K_2 = \abs{\Delta \K} \, \qty(0, -1),
 \end{equation}
@@ -518,9 +416,9 @@ e^{i\phi} & e^{-i\phi}
 where $\phi = 2\pi/3$.
 
 
-\subsection{Group theory} \label{sec:grouptheory}
+\subsection{Aspects of Group Theory applied to MATBG} \label{sec:grouptheory}
 
-As discussed in \cite{zou2018}, at currently accessible energy scales, experiments indicate that MATBG exhibits some approximate symmetries. These include translational symmetry characterized by the constant $L' = a / (2 \sin\theta/2)$, valley symmetry $U_v(1)$, $C_{2z} \mathcal{T}$, and $D_6$ point group symmetry, which are not fully captured by a generic commensurate structure described in Section \ref{sec:tbg_geom}. The continuum model outlined in Section \ref{sec:BM-model} incorporates all these ``good'' symmetries. In this section, we will explore group theory concepts that will later be applied to understand the Wannier Obstruction and the Topological Heavy Fermion model of MATBG.
+As discussed in \cite{zou2018}, at currently accessible energy scales, experiments indicate that MATBG exhibits some approximate symmetries. These include translational symmetry characterized by the constant $L' = a / (2 \sin\theta/2)$, valley symmetry $U_v(1)$, $C_{2z} \mathcal{T}$, and $D_6$ point group symmetry, which are not fully captured by a generic commensurate structure described in Section \ref{sec:tbg_geom}. The continuum model outlined in Section \ref{sec:BM-model} incorporates all these ``good'' symmetries. In this section, we will explore group theory concepts that will later be applied to understand the Wannier Obstruction \cite{zou2018} and the Topological Heavy Fermion model of MATBG \cite{topoheavyfermion2022}.
 
 \subsubsection{Space groups} \label{sec:spacegroups}
 
@@ -591,7 +489,7 @@ $E_1$ & $\P2$ & $\P2$ & $ -1$ & $ -1$ & $\P0$ & $\P0$ \\
 
 Although the continuum model incorporates the point group $D_6$, the regions of interest for localizing Wannier orbitals are the AB and BA regions of Figure \ref{fig:moireD6} as they are the most stable. These regions share certain symmetry properties, which can be described by the concept of \textit{Wyckoff position}, to be defined in the following section \ref{sec:wyckoff}. Once these concepts are understood, we can utilize the character table \ref{tab:D6} and its irreducible representations to construct Wannier orbitals centered at AB and BA regions.
 
-\subsubsection{Site-symmetry group and Wyckoff position} \label{sec:wyckoff}
+\subsubsection{Site-symmetry group and Wyckoff positions} \label{sec:wyckoff}
 
 Let $G$ be a space group associated with its corresponding lattice and choice of origin. The subgroup of all symmetry operations of $G$ that leave a point $P$ in real space invariant is called the \textit{site-symmetry group} of $P$. This point $P$ is called \textit{of special position} with respect to $G$ if there is at least one non-trivial (not the identity) symmetry operation of $G$ that leaves $P$ invariant.
 
@@ -608,6 +506,109 @@ For TBG, we focus on the Wyckoff position $2c$, corresponding to the AB and BA r
 
 Our next step will involve studying how to find the set of Wannier orbitals centered on the $2c$ Wyckoff position of the Moiré pattern and implementing a corresponding tight-binding model \cite{thesis_rennella}.
 
+\section{DMFT Benchmark: The Hubbard model} \label{sec:hubbard}
+
+Considering hopping only between nearest-neighbors, in second quantization the Hubbard Hamiltonian reads
+\begin{equation} \label{eq:hubbard-hamiltonian}
+H = \eps_d \sum_{i, \s} n_{i\s} +  \sum_{\nn{i}{j}, \s} t_{ij} (c_{i\s}^\d c_{j\s} + \hc)
++ U \sum_{i} n_{i\up} n_{i\down},
+\end{equation}
+where $\eps_d$ is the on-site energy, $t$ is the hopping amplitude, $U$ is represents the Coulomb repulsion, $c_{i\s}^\d$ ($c_{i\s}$) is the creation (annihilator) operator, and $n_{i\s} = c_{i\s}^\d c_{i\s}$.
+
+The relatively simple Hamiltonian in Eq. \eqref{eq:hubbard-hamiltonian} exhibits a Metal-Insulator transition at half-filling ($n = \sum_{i\sigma} \ev{n_{i\sigma}} / N = 1$). To capture this transition, methods that account for electron correlations are essential. A powerful approach to achieve this is Dynamical Mean-Field Theory (DMFT) \cite{georges1996}, which provides a robust framework for studying real strongly correlated materials \cite{haule_real_materials}.
+
+\subsection{Dynamical Mean-Field Theory (DMFT)} \label{sec:dmft}
+
+The Dynamical Mean-Field Theory (DMFT) consists in a self-consistent mapping of the original Hamiltonian onto a local impurity model \cite{thesis_dmft_graz}. Its applicability stems from its exactness in the limit of infinite lattice coordination ($z \to \infty$) \cite{georges1996}. In this limit, the self-energy $\displaystyle{\lim_{z \to \infty}\Sigma(\mathbf{k},\omega) = \Sigma(\omega)}$ becomes independent of the momentum $\mathbf{k}$. This property proves itself very reliable in capturing the essential physics of strongly correlated systems.
+
+In the context of the Hubbard model, the Hamiltonian is self-consistently mapped onto the Single Anderson Impurity Model (SIAM) \cite{impurity-solvers, georges1996}, where an interacting impurity, indexed by $d$, is coupled to a non-interacting external bath:
+\begin{equation} \label{eq:anderson-hamiltonian}
+H_{\text{SIAM}} = \underbrace{U n_{d\up} n_{d\down} + \eps_d \sum_{\s} n_{d\s}}_{H_{\text{imp}}}
++ \underbrace{\sum_{\k,\s} (t_\k c_{d\s}^\d c_{k\s} + \hc)}_{H_{\text{coup}}}
++ \underbrace{\sum_{\k,\s} \eps_\k c_{\k\s}^\d c_{\k\s}}_{H_{\text{bath}}}.
+\end{equation}
+
+In Eq. \eqref{eq:anderson-hamiltonian}, $H_{\text{bath}}$ is the Hamiltonian of the bath, $H_{\text{coup}}$ is the coupling between the bath and the single impurity $d$, and $H_{\text{imp}}$ is the hamiltonian of the impurity. The impurity Hamiltonian $H_{\text{imp}}$  has an interaction $U$ when two electrons are on the same site, anologous to the Hubbard Hamiltonian in Eq. \eqref{eq:hubbard-hamiltonian},.
+
+There are several methods, known as impurity solvers, available in the literature which are designed to solve systems such as the SIAM. Reference \cite{impurity-solvers} gives an overview and a benchmark of some impurity solvers. By solving an impurity problem, we actually mean determining the retarded Green's function of the impurity site $G_{\text{imp}}(\omega)$, because its knowledge allows us compute the spectral function $\displaystyle{\rho(\omega) = - \Im{G_{\text{imp}}(\omega)}} / \pi$ and a manifold of important observables related to transport \cite{pedagogical-gfs}.
+
+Having in mind this auxiliary impurity problem, the DMFT scheme is based on the approximation
+\begin{equation} \label{eq:dmft-approx}
+\Sigma(\k, \omega) \approx \Sigma(\omega),
+\end{equation}
+where we assume that the self-energy is approximately independent of $\k$. Additionally, the self-consistency condition implies that the local lattice Green's function $G_{\text{loc}}(\omega)$ coincides with the impurity model's Green function $G_{\text{imp}}(\omega)$, and this fact translates into a convergence criterion for the DMFT algorithm.
+
+Using Eq. \eqref{eq:dmft-approx}, the local Green's function in the continuum limit is
+\begin{equation} \label{eq:Gf-local}
+G_{\text{loc}}(\omega) = \sum_{\k} \frac{1}{\omega-\eps_\k-\Sigma(\k, \omega)} \approx
+\int \dd{\eps} \frac{\rho_0(\eps)}{\omega - \eps - \Sigma(\omega)},
+\end{equation}
+where $\rho_0(\eps)$ is the non-interacting density of states (DOS) and depends only on the considered lattice structure.
+
+In essence, the general DMFT algorithm works as follows. Firstly, we start with an initial guess for the self-energy $\Sigma(\omega)$ and compute $G_{\text{loc}}(\omega)$ by Eq. \eqref{eq:Gf-local}. Next, the impurity solver takes as input the bath hybridization function
+\begin{equation} \label{eq:hybridization-func}
+\Delta(\omega) = \omega - \eps_d - G_{\text{loc}}^{-1}(\omega) - \Sigma(\omega),
+\end{equation}
+and computes $G_{\text{imp}}(\omega)$. Next, $G_{\text{loc}}$ and $G_{\text{imp}}$ are compared with some convergence criterion and, if not satisfied, we update the self-energy by Eq. \eqref{eq:self-energy-update} and come back to the beginning of the loop.
+\begin{equation} \label{eq:self-energy-update}
+\Sigma(\omega) = \omega - \eps_d - G_{\text{imp}}^{-1}(\omega)
+\end{equation}
+
+Finally, the filling $n$ is given by \cite{bruus}
+\begin{equation} \label{eq:filling}
+n = \int_{-\infty}^{\infty} f(\omega, T) \rho(\omega) \dd{\omega},
+\end{equation}
+where $f(\omega, T) = (e^{\omega/k_B T} + 1)^{-1}$ is the Fermi-Dirac distribution at temperature $T$.
+
+\subsection{Bethe lattice} \label{sec:bethe}
+
+The Bethe lattice is an infinite lattice where each site has $z$ neighbors and any two sites are connected by a unique shortest path. In our work, we focused on the special case of the Bethe lattice with infinite coordination $z\to\infty$, because DMFT is exact and its algorithm simplifies in this setting. The Hubbard Hamiltonian in Eq. \eqref{eq:hubbard-hamiltonian} only makes sense with $z\to\infty$ if the hopping amplitude is renormalized as \cite{thesis_bruno}
+\begin{equation} \label{eq:hopping-renormalization}
+t = \frac{t_*}{\sqrt{z}},
+\end{equation}
+where $t_*$ is the renormalized hopping, which we used $2t^* = 1$ as our energy unit.
+
+For the Bethe lattice, one can obtain the simplified relation \cite{thesis_bruno}
+\begin{equation} \label{eq:simple-hybridization-bethe}
+\Delta(\omega) = t_*^2 \, G_{\text{imp}}(\omega),
+\end{equation}
+which simplifies the loop, since $\Delta(\omega)$ can be directly inserted in the impurity solver.
+
+\subsection{Impurity Solver} \label{sec:impurity-solver}
+
+As our main objective was to establish a working code for DMFT, we chose to use the Non-Crossing Approximation (NCA) impurity solver. As shown in Table 1 of \cite{impurity-solvers}, the NCA has a low computational cost while still providing reasonable qualitative results. However, as discussed in \cite{vildosola2015}, it is important to note that it does not return accurate quantitative values for the critical values $U_{c1}$, $U_{c2}$, and the Kondo temperature $T_{\text{K}}$ \cite{haule_real_materials, vildosola2015}. The NCA method also has the advantage of quickly accessing a versatile range of temperatures. The details of the NCA can be found in Section 2.2 of \cite{thesis_bruno}. For our work, we used the code developed by Kristjan Haule, which is publicly available at \cite{hauleweb}.
+
+
+\subsection{Results} \label{sec:results}
+% \ALERT{$\eps_d \to \eps_d/U$, Figure \ref{fig:UxT-rho0}(e-f)}
+
+We explored how the system behaves when one deviates from particle-hole symmetry (PHS), where $\eps_d = U/2$. When the temperature is sufficiently low, the system undergoes a phase transition at two distinct values of $U$. Starting from a Mott insulating solution at large $U$ and gradually decreasing it, the system reaches a critical value $U_{c_1}$, at which it becomes metallic. Conversely, starting from a metallic state at low $U$ and increasing it, the system reaches another critical value $U_{c2} > U_{c1}$, at which it transitions back to an insulator. To characterize these two phases, we use the spectral density at zero energy \cite{georges1996} and the filling $n$, as half-filling is a necessary condition for the insulating phase.
+
+Figure \ref{fig:UxT-rho0} is a color plot of $\rho(0) = (\rho_{\text{metal}}(0) + \rho_{\text{insul}}(0))/2$ as a function of $U \times T$, where the ``metal'' and ``insul'' labels mean starting with a metallic (low $U$) or insulating (high $U$) solution. The blue region (where $\rho(0) = 0$) corresponds to the insulating phase and the red region (where $\rho(0)$ is maximum) to the metallic phase. The green region is a coexistence phase, where $\rho(0)$ changes abruptally to an intermediate value. The critical point $(U_c, T_c)$ identify the vertice of the coexistence region (``green triangle'').
+
+%\begin{center}
+%\ALERT{NAS FIGURAS DO Uc e Tc DEVERIA SER O XLABEL $\eps_d/U$.}
+%\end{center}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\columnwidth]{fig/fig2-abcd-eps-converted-to.pdf}
+\includegraphics[width=0.48\columnwidth]{fig/fig2-ef-eps-converted-to.pdf}
+\caption{(a-d) Phase diagrams $U \times T$ as $\eps_d$ is moved away from $U/2$. (a) $\epsilon_d=0.5U$ (b) $\epsilon_d=0.485U$ (c) $\epsilon_d=0.475U$ (d) $\epsilon_d=0.465U$. (e-f) $U_c, T_c$ as functions of $\eps_d/U$. }
+\label{fig:UxT-rho0}
+\end{figure}
+
+Figure \ref{fig:T0002-butterfly} shows $U \times \eps_d$ phase diagrams for the fixed temperature $T = 0.002$, where $\Delta \rho(0) = \rho_{\text{metal}}(0) - \rho_{\text{insul}}(0)$, $n = (n_{\text{metal}} + n_{\text{insul}})/2$, $\Delta n = n_{\text{metal}} - n_{\text{insul}}$. The ``smile pattern'' of Figures \ref{fig:T0002-butterfly}(a,b,d) identifies the coexistence region.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\columnwidth]{fig/fig4-abcd-eps-converted-to.pdf}
+\caption{Phase diagrams $U \times \epsilon_d$ for $T=0.002$. (a,b) average $(\text{M}+\text{I})/2$ and difference $(\text{M}-\text{I})$ for $\rho(\omega=0)$. (c,d) average and difference for the filling $n$. }
+\label{fig:T0002-butterfly}
+\end{figure}
+
+
+
 
 \pagebreak
 
@@ -620,22 +621,21 @@ During the period covered by this report, the student used the Research Overhead
 
 \chapter{Participation in scientific events} \label{chp:particEvento}
 
-The student attended the following scientific events/courses:
+The student participated in the following scientific events/courses:
 
 \begin{itemize}
-\item Listener at \href{https://www.ictp-saifr.org/qm2023/}{Workshop on Strong Electron Correlations in Quantum Materials: Inhomogeneities, Frustration, and Topology}.
-\item Listener at \href{https://www.ictp-saifr.org/apsmarch23/}{APS/ICTP-SAIFR Satellite March Meeting}.
-\item Member of Luis Gregório G. V. Dias da Silva's research group Journal Club.
-\item Attended the \href{https://american-chemical-society.zoom.us/webinar/register/WN_FISEv0_ySkK2jPVB0nbsRw#/registration}{2023 ACS Communication and Scientific Writing Course}.
-\item Presented the DMFT results of Section \ref{sec:results} in a poster at \href{https://www1.fisica.org.br/~eosbf/2024/index.php/en/}{2024 Autumn Meeting of the Brazilian Physical Society}.
+\item Attended as a listener the \href{https://www.ictp-saifr.org/apsmarch23/}{APS/ICTP-SAIFR Satellite March Meeting} held on March 20-22, 2023, at ICTP-SAIFR.
+\item Attended as a listener the \href{https://www.ictp-saifr.org/qm2023/}{Workshop on Strong Electron Correlations in Quantum Materials: Inhomogeneities, Frustration, and Topology} held on June 19-23, 2023, at ICTP-SAIFR.
+\item Participated in Luis Gregório G. V. Dias da Silva's research group Journal Club during 2023 and 2024 at USP.
+\item Presented the results from Section \ref{sec:results} in a poster entitled ``Charge density signatures of the Mott transition in the particle-hole asymmetric Hubbard model at finite temperatures'' at the \href{https://www1.fisica.org.br/~eosbf/2024/index.php/en/}{2024 Autumn Meeting of the Brazilian Physical Society} held on May 19-23, 2024, at UFSC, Florianópolis - SC.
 \end{itemize}
 
 
 \chapter{Conclusions and Future Activities} \label{chp:conclusions}
 
-In Section \ref{sec:hubbard}, we established a fully operational DMFT algorithm and extensively explored the phase diagrams for the Metal-Insulator transition. In Figure \ref{fig:UxT-rho0}(a), we successfully replicated a known result from the literature for $\eps_d = U/2$ \cite{georges1996}. Additionally, we conducted a thorough investigation of the asymmetric case, which has received comparatively less attention in the literature. Notably, we analyzed the expansion of the coexistence region as we deviated from the particle-hole symmetric (PHS) case and observed the distinctive ``smile'' pattern in the $U \times \eps_d$ phase diagrams of Figure \ref{fig:T0002-butterfly}. Looking ahead to our DMFT progress, our goal is to enhance and extend the algorithm for the study of TBG. However, before developing a practical implementation, we acknowledge the necessity of comprehensively understanding the intrinsic properties of the system through a rigorous analysis of its symmetries.
+In Section \ref{sec:tbg}, we presented our research on TBG theory. We derived the Bistritzer-MacDonald model \cite{macdonald2011} in Section \ref{sec:BM-model}. Our intention is to utilize this knowledge to develop our own code for analyzing the electronic properties of the system. The BM model is advantageous as it is independent of whether a configuration of TBG is commensurate or not, and it also incorporates all the emergent symmetries observed in experiments \cite{zou2018}. In order to construct the Wannier orbitals localized on the AB and BA regions of interest, we recognized the necessity of thoroughly reviewing concepts of group theory in Section \ref{sec:grouptheory}. Our studies will enable us to employ group theory to elucidate the Wannier Obstruction \cite{zou2018} and the Topological Heavy Fermion model \cite{topoheavyfermion2022}.
 
-In Section \ref{sec:tbg}, we presented our research on TBG theory. We derived the Bistritzer-MacDonald model \cite{macdonald2011} in Section \ref{sec:BM-model}. Our intention is to utilize this knowledge to develop our own code for analyzing the electronic properties of the system. The BM model is advantageous as it is independent of whether a configuration of TBG is commensurate or not, and it also incorporates all the emergent symmetries observed in experiments \cite{zou2018}. In order to construct the Wannier orbitals localized on the AB and BA regions of interest, we recognized the necessity of thoroughly reviewing concepts of group theory in Section \ref{sec:grouptheory}. Our studies will enable us to employ group theory to elucidate the Wannier Obstruction and the Topological Heavy Fermion model \cite{topoheavyfermion2022}.
+In Section \ref{sec:hubbard}, we established a fully operational DMFT algorithm and extensively explored the phase diagrams for the Metal-Insulator transition. In Figure \ref{fig:UxT-rho0}(a), we successfully replicated a known result from the literature for $\eps_d = U/2$ \cite{georges1996}. Additionally, we conducted a thorough investigation of the asymmetric case, which has received comparatively less attention in the literature. Notably, we analyzed the expansion of the coexistence region as we deviated from the particle-hole symmetric (PHS) case and observed the distinctive ``smile'' pattern in the $U \times \eps_d$ phase diagrams of Figure \ref{fig:T0002-butterfly}. Looking ahead to our DMFT progress, our goal is to enhance and extend the algorithm for the study of TBG. However, before developing a practical implementation, we acknowledge the necessity of comprehensively understanding the intrinsic properties of the system through a rigorous analysis of its symmetries.
 
 %%-----
 %% Referências bibliográficas
