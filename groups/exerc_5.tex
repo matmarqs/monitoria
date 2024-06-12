@@ -33,41 +33,39 @@
 \maketitle
 
 \section*{Ânion carbonato CO$_3^{2-}$}
-\begin{itemize}
-\item encontrar o grupo de simetria do íon carbonato CO$_3^{2-}$ (descrever ou desenhar todos os elementos de simetria); \textbf{OK, tem que fazer meu próprio desenho.}
-\item encontrar as representações irredutíveis associadas às translações, às rotações e às vibrações da molécula; \textbf{OK}
-\item tentar associar as representações irredutíveis vibracionais com os modos de vibração: stretching modes e bending modes;
-\item encontrar os modos ativos no infravermelho considerando que a absorção ocorre a partir do estado vibracional fundamental que pertence à representação irredutível totalmente simétrica;
-\item encontrar os modos ativos no Raman considerando que a transição entre estados vibracionais ocorra a partir do estado vibracional fundamental (pertencente à RI totalmente simétrica).
-\end{itemize}
 
-\n\n
-
-Vamos determinar o grupo do CO$_3^{-2}$:
+Vamos determinar o grupo do CO$_3^{2-}$:
 $$
 \text{não é linear} \implies \text{eixo }C_{3z} \implies
 \text{3 eixos }C_2 \perp C_{3z} \implies
 \sigma_h \perp C_{3z} \implies \boxed{ \text{grupo }D_{3h}. }
 $$
 
-Os elementos desenhados do grupo $D_{3h}$ estão na Figura \ref{fig:D3h}. \textbf{FAZER O MEU PRÓPRIO.}
+Os elementos desenhados do grupo $D_{3h}$ estão na Figura \ref{fig:D3h}.
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.6\linewidth]{fig/D3h.png}
+\includegraphics[height=0.32\linewidth]{fig/D3h_my.png}
 \caption{Elementos de simetria do grupo $D_{3h}$, correspondente ao ânion carbonato CO$_3^{2-}$.}
 \label{fig:D3h}
 \end{figure}
 
-Seja $\Gamma^0$ a representação do movimento atômico do ânion, seus caracteres são:
+\begin{figure}[H]
+\centering
+\includegraphics[height=0.32\linewidth]{fig/mov_atom.png}
+\caption{As 12 coordenadas do movimento atômico do ânion carbonato CO$_3^{2-}$.}
+\label{fig:mov_atom}
+\end{figure}
+
+Seja $\Gamma^0$ a representação do movimento atômico do ânion (dimensão 12), seus caracteres são:
 
 \begin{enumerate}
 \item $E \implies$ mantém todas as coordenadas. $\chi^{\Gamma^0}(E) = 12$.
 \item $2 C_3 \implies$ troca as coordenadas dos oxigênios, enquanto deixa o carbono no lugar.
 $$
 \begin{pmatrix}
-x_1' \\
-y_1' \\
-z_1' \\
+x_4' \\
+y_4' \\
+z_4' \\
 \end{pmatrix}
 =
 \begin{pmatrix}
@@ -76,19 +74,19 @@ z_1' \\
 0 & 0 & 1 \\
 \end{pmatrix}
 \begin{pmatrix}
-x_1 \\
-y_1 \\
-z_1 \\
+x_4 \\
+y_4 \\
+z_4 \\
 \end{pmatrix}
 \implies \chi^{\Gamma^0}(C_3) = 0.
 $$
-\item $3 C_2 \implies$ todos as coordenadas mudam, menos os eixos $z$ dos átomos C e O contidos no eixo $C_2$, que mudam de sinal, logo $\chi^{\Gamma^0}(C_2) = -2$.
-\item $\sigma_h \implies$ leva as coordenadas $z$ em $-z$, portanto $\chi^{\Gamma^0}(\sigma_h) = 4$.
-\item $2 S_3 \implies$ troca as coordenadas dos oxigênios, e mantém as do carbono. Temos duas coordenadas mudando de lugar.
+\item $3 C_2 \implies$ todas as coordenadas mudam, menos os eixos $z$ dos átomos C e O contidos no eixo $C_2$, que mudam de sinal, logo $\chi^{\Gamma^0}(C_2) = -2$.
+\item $\sigma_h \implies$ leva as coordenadas $x$ em $-x$, portanto $\chi^{\Gamma^0}(\sigma_h) = 4$.
+\item $2 S_3 \implies$ troca as coordenadas dos oxigênios, e mantém as do carbono.
 $$
 y_4 \to -y_4/2, \quad z_4 \to -z_4/2, \quad x_4 \to -x_4 \implies \mchi(S_3) = -2.
 $$
-\item $3 \sigma_v \implies$ todos os eixos saem do lugar, menos as coordenadas dos átomos C e O contidos no plano de $\sigma_v$.
+\item $3 \sigma_v \implies$ as coordenadas dos átomos C e O contidos no plano de $\sigma_v$ se transformam
 $$
 x_3 \to x_3, \quad y_3 \to -y_3, \quad z_3 \to z_3
 $$
@@ -113,7 +111,7 @@ $\c{\boxed{2\times A_2''}}$ & $\c{\p1}$ & $\c{\p1}$ & $\c{ -1}$ & $\c{ -1}$ & $\
 $\c{\boxed{E''}}$   & $\c{\p2}$ & $\c{ -1}$ & $\c{\p0}$ & $\c{ -2}$ & $\c{\p1}$ & $\c{\p0}$ & $\textcolor{blue}{(R_x,R_y)}$ & $(xz,yz)$ \\
 \hline
 \hline
-$\Gamma^0$ & $\p12$ & $\p0$ & $ -2$ & $\p4$ & $ -2$ & $\p2$ \\
+$\Gamma^0$ & $\p12$ & $\p0$ & $ -2$ & $\p4$ & $ -2$ & $\p2$ & & \\
 \hline
 \end{tabular}
 \label{tab:D3h}
@@ -124,7 +122,7 @@ $$
 \boxed{ \Gamma^0 = A_1' \oplus A_2' \oplus 3E' \oplus 2A_2'' \oplus E''. }
 $$
 
-Para obter os modos vibracionais, basta olhar na tabela \ref{tab:D3h} para saber quais são os de translação e rotação.
+Para obter os modos vibracionais, basta olhar na tabela \ref{tab:D3h} para saber quais são os de \textcolor{Orange}{translação (em laranja)} e \textcolor{blue}{rotação (em azul)}.
 $$
 \textcolor{blue}{\Gamma^{rot} = A_2' \oplus E''}
 $$
@@ -136,7 +134,69 @@ Como a representação $\Gamma^0$ é decomposta como $\Gamma^0 = \Gamma^{trans} 
 $$
 \boxed{\Gamma^{vib} = A_1' \oplus 2 E' \oplus A_2''.}
 $$
-<++>
+
+Para determinar as transições possíveis no espectro infravermelho, é necessário analisar como as vibrações do sistema alteram o momento de dipolo elétrico. O momento de dipolo é proporcional ao vetor posição, tornando as representações $E' \, (x,y)$ e $A_2'' \, (z)$ da Tabela \ref{tab:D3h} os modos ativos do infravermelho.
+$$
+\text{modos ativos no infravermelho} =
+E' \, (x,y) \text{ e } A_2'' \, (z).
+$$
+
+A regra de seleção que governa as transições observáveis no espectro infravermelho envolvendo os estados vibracionais $\psi_{v_i} \to \psi_{v_f}$ é a seguinte:
+$$
+\Gamma^{\psi_{v_i}} \otimes \Gamma^{\psi_{v_f}} \supset \Gamma^{(x,y)}, \quad
+\Gamma^{\psi_{v_i}} \otimes \Gamma^{\psi_{v_f}} \supset \Gamma^{(z)}.
+$$
+
+No caso, temos as representações
+$$
+\Gamma^{(x,y)} = E', \quad \Gamma^{(z)} = A_2''.
+$$
+
+O estado final deve corresponder a um dos estados vibracionais, enquanto o estado inicial considerado será o estado fundamental, que é totalmente simétrico no grupo. As únicas transições permitidas são
+\begin{figure}[H]
+\centering
+\includegraphics[height=0.15\linewidth]{fig/infravermelho_my.png}
+\caption{Transições permitidas no infravermelho.}
+\label{fig:infravermelho}
+\end{figure}
+
+Vamos analisar o espectro Raman. O efeito Raman envolve transições eletrônicas causadas por um campo elétrico externo, que induz uma polarização no material. Esta polarização está relacionada aos elementos do tensor de polarizabilidade, conforme indicado na tabela de caracteres. Esses elementos podem ser nulos ou não, dependendo dos termos quadráticos. Pelos termos quadráticos da Tabela \ref{tab:D3h}, os modos ativos no Raman são $A_1' (x+y^2, z^2)$ e $E' (x^2-y^2,xy)$.
+$$
+\text{modos ativos no Raman} = A_1' (x+y^2, z^2) \text{ e } E' (x^2-y^2,xy).
+$$
+
+Olhando a Tabela \ref{tab:D3h}, temos
+$$
+\Gamma^{(x^2+y^2)} = \Gamma^{(z^2)} = A_1', \quad
+\Gamma^{(x^2-y^2,xy)} = E', \quad
+\Gamma^{(xz,yz)} = E'', \quad
+$$
+
+Ao usar as representações das vibrações $\Gamma^{vib} = A_1' \oplus 2 E' \oplus A_2''$ em termos das representações irredutíveis do grupo, obtemos
+$$
+\underbrace{\Gamma^{vib} \subset \Gamma^{(x^2+y^2)} = \Gamma^{(z^2)} = A_1'}_{\text{permitido}}, \quad
+\underbrace{\Gamma^{vib} \subset \Gamma^{(x^2-y^2,xy)} = E'}_{\text{permitido}}, \quad
+\underbrace{\Gamma^{vib} \not\subset \Gamma^{(xz,yz)} = E''}_{\text{não permitido}}, \quad
+$$
+
+Finalmente, temos os seguintes diagramas para o Raman:
+\begin{figure}[H]
+\centering
+\includegraphics[height=0.15\linewidth]{fig/raman_my.png}
+\caption{Transições permitidas no Raman.}
+\label{fig:ramn}
+\end{figure}
+
+\n
+
+
+Como a molécula possui três ligações, existem três modos de stretching, e o restante será bending. Na Figura \ref{fig:stretch_bend} temos a esquematização desses modos
+\begin{figure}[H]
+\centering
+\includegraphics[height=0.4\linewidth]{fig/stretch_bend_my.png}
+\caption{Esquematização dos modos de stretching e bending do ânion carbonato.}
+\label{fig:stretch_bend}
+\end{figure}
 
 
 
