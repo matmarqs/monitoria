@@ -1,0 +1,142 @@
+%\documentclass[aspectratio=169]{beamer}
+\documentclass[10pt,aspectratio=169,xcolor={table,dvipsnames,usenames}]{beamer}
+\usefonttheme[onlymath]{serif}
+\usepackage[brazilian]{babel}
+
+
+\mode<presentation>
+{
+  \usetheme{Madrid}      % or try Darmstadt, Madrid, Warsaw, ...
+  \usecolortheme{dolphin} % or try albatross, beaver, crane, ...
+  \usefonttheme{default}  % or try serif, structurebold, ...
+  \setbeamertemplate{navigation symbols}{}
+  \setbeamertemplate{caption}[numbered]
+  \setbeamertemplate{headline}{}
+}
+
+\input{preamble-beamer}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title[Simetrias do Twisted Bilayer Graphene]{\LARGE{Simetrias do Twisted Bilayer Graphene}}
+\author[Mateus Marques]{
+\large{Mateus Marques
+}}
+\date{\today}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+
+\begin{frame}{Grafeno}
+
+O grafeno é derivado do grafite (do seu lápis). O grafite é composto por várias camadas de grafeno empilhadas. O grafeno é obtido ao isolar uma dessas camadas.
+
+Ele se trata de um cristal 2D de átomos de carbono dispostos em uma rede hexagonal. Devido às ligações covalentes entre os átomos de carbono, o grafeno é cerca de 200 vezes mais forte que o aço, ao mesmo tempo sendo incrivelmente leve e flexível. Além disso, ele conduz eletricidade melhor do que o cobre, dissipa calor de maneira extremamente eficiente e é quase completamente transparente.
+
+\begin{figure}[H]
+\centering
+\includegraphics[height=0.20\linewidth]{fig/graphene.png}
+\caption{Estrutura do grafeno. Figura retirada de \url{https://sitn.hms.harvard.edu/flash/2011/graphene-the-coolest-material-that-shouldnt-exist/}.}
+\label{fig:graphene}
+\end{figure}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Padrão de moiré}
+
+Quando empilhamos apenas duas camadas de grafeno, e giramos elas por um ângulo $\theta$, forma-se um padrão de interferência (de moiré).
+
+\begin{figure}[H]
+\centering
+\includegraphics[height=0.32\linewidth]{fig/moire.png}
+\caption{Padrão de moiré. Figura retirada de \url{https://arpitarora22.substack.com/p/artful-probe-for-quantum-magic-in}.}
+\label{fig:moire}
+\end{figure}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Super periodicidade}
+
+Para pequenos ângulos de torção, o padrão moiré produzido pela desorientação da rede entre as camadas bidimensionais de grafeno cria uma modulação de longo alcance da ordem de empilhamento. Temos uma matriz efetivamente periódica de regiões de empilhamento AA, formando uma rede hexagonal, e regiões de empilhamento AB e BA, formando uma rede em favo de mel, cuja periodicidade representa a nova escala de periodicidade do sistema.
+
+\begin{figure}[H]
+\centering
+\includegraphics[height=0.32\linewidth]{fig/moire.png}
+\caption{Padrão de moiré. Figura retirada de \url{https://arpitarora22.substack.com/p/artful-probe-for-quantum-magic-in}.}
+\label{fig:moire}
+\end{figure}
+
+
+O número de átomos de carbono na célula unitária da estrutura periódica gerada aumenta com a diminuição do ângulo de torção; para $\theta=1.1^\circ$, há aproximadamente 11000 átomos [6]. Quando o ângulo de torção do grafeno bicamada torcido (TBG) está próximo do ``ângulo mágico'' teoricamente previsto, a hibridização entre camadas induz quatro quase bandas planas de baixa energia. Estas exibem estados isolantes em meio preenchimento, que não são esperados na ausência de correlações entre elétrons, o que pode ser.
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Objetivos}
+
+\begin{itemize}
+\item Passar uma ideia introdutória de como generalizar a teoria BCS para estudar a \textbf{fenomenologia} da supercondutividade não-convencional.
+
+\n\n
+
+\item A inclusão de interações repulsivas e magnéticas causam anisotropia na função de gap.
+
+\n\n
+
+\item Entender a distinção básica das diferentes simetrias (jargão) s, p, d, f-wave.
+
+\n\n
+
+\item Existem mecanismos além dos fônons que geram interações atrativas?
+
+\n\n
+
+\item Foco específico nos cupratos e na simetria d-wave.
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Referências}
+
+\footnotesize
+
+\begin{thebibliography}{10}
+\bibitem{coleman}
+\alert{P. Coleman.}
+\newblock {Introduction to Many-Body Physics.}
+\newblock {Cambridge University Press, 2015.}
+
+\bibitem{timm}
+\alert{Carsten Timm.}
+\newblock {Theory of Superconductivity.}
+\newblock {Version: March 24, 2023.}
+
+\bibitem{tsuei}
+\alert{C. C. Tsuei and J. R. Kirtley}
+\newblock {Pairing symmetry in cuprate superconductors.}
+\newblock {\textit{Rev. Mod. Phys.}, 72, 969, October 2000.}
+
+\bibitem{wiki-cuprate}
+\alert{Wikipédia contributors.}
+\newblock {Cuprate superconductor - Wikipédia}
+\newblock {\url{https://en.wikipedia.org/wiki/Cuprate_superconductor}.}
+
+\end{thebibliography}
+
+
+\end{frame}
+
+\end{document}
