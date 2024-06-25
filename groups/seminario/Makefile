@@ -10,6 +10,7 @@ clean:
 	rm -rf *.blg
 	rm -rf *.dvi
 	rm -rf *.fls
+	rm -rf *.toc
 	rm -rf *.log
 	rm -rf *.listing
 	rm -rf *.out
