@@ -61,8 +61,6 @@
 %%------
 \input{comandos}
 \input{preamble}
-\input{preamble_tbg}
-\input{preamble_groups}
 %
 %%-----
 %% Página de título
@@ -178,7 +176,7 @@ This Master's project focuses on the Magic-Angle Twisted Bilayer Graphene (MATBG
 \item developing a mapping of the Bistritzer-MacDonald model to a THF model in the low-energy regime.
 \end{enumerate}
 
-For objective (a), Section \ref{sec:tbg} details our progress in understanding group and representation theory and their application to Topological Quantum Chemistry (TQC) \cite{topological_quantum_chemistry2017, building_blocks2018}. TQC provides a framework to identify topological properties of band structures based on symmetry and real-space considerations. A crucial concept here is the Wannier obstruction \cite{zou2018}, which arises from the non-trivial topology of the bands. This obstruction reflects the inability to construct exponentially localized Wannier functions that preserve all symmetries of the band structure.
+For objective (a), Sections \ref{sec:grouptheory} and \ref{sec:topological_quantum_chemistry} details our progress in understanding group and representation theory and their application to Topological Quantum Chemistry (TQC) \cite{topological_quantum_chemistry2017}. TQC provides a framework to identify topological properties of band structures based on symmetry and real-space considerations. A crucial concept here is the Wannier obstruction \cite{zou2018}, which arises from the non-trivial topology of the bands. This obstruction reflects the inability to construct exponentially localized Wannier functions that preserve all symmetries of the band structure.
 
 Objective (b) addresses resolving the Wannier obstruction identified in (a). The THF model provides a fully symmetric approach, reformulating and mapping the interacting MATBG system as a topological heavy fermion system \cite{topoheavyfermion2022}. This involves using the Bilbao Crystallographic Server \cite{bilbao_1, bilbao_2} to compute the Elementary Band Representations (EBRs) for the space group \( P6'2'2 \) (\#177.151 in the International Table) of the Bistritzer-MacDonald model. By comparing these EBRs with the model's representations at high-symmetry points, we aim to develop a mapping that preserves all symmetries, establishes a Wannier basis, and facilitates the formulation of an interacting model analogous to heavy fermions coupled with nearly free electrons.
 
@@ -187,361 +185,1007 @@ Objective (b) addresses resolving the Wannier obstruction identified in (a). The
 
 \chapter{Accomplishments in the period} \label{chp:accomplishments}
 
-Throughout the period covered in this report, our progress focused on three main activities: delving into advanced concepts of Group and Representation Theory, establishing a foundational understanding of Topological Quantum Chemistry, and investigating the Topological Heavy Fermion (THF) model through both analytical and numerical approaches.
+Throughout the period covered in this report, our work advanced in three main areas: deepening our understanding of advanced Group and Representation Theory concepts, establishing a foundation in Topological Quantum Chemistry, and applying these frameworks to analyze the Topological Heavy Fermion (THF) model. The key developments are summarized as follows:
 
 \begin{itemize}
-\item We carefully studied: <++>
+\item \textit{Group and Representation Theory}:
+We studied references \cite{dresselhaus, evarestov, barata_representacoes, magnetic_structures2012, michael_glazer2012_space_groups, thesis_rennella} to enhance our knowledge of group theory. This included the process of \textit{induction of representations}, which is crucial for mathematically defining topological bands, and the concept of \textit{magnetic space groups} -- space groups incorporating the time-reversal symmetry. These studies are particularly relevant since the Bistritzer-Macdonald (BM) model is associated with the magnetic space group \( P6'2'2 \).
 
-\item We initiated our exploration of the MATBG theory with reference to \cite{handbook2019}, aiming primarily to comprehend the Moiré pattern geometry and the Bistritzer-MacDonald continuous model \cite{macdonald2011}. Subsequently, our focus shifted to analyzing the system's symmetries \cite{thesis_rennella}, which are pivotal, with implications such as the Wannier obstruction \cite{zou2018}. In Section \ref{sec:tbg}, we elucidate our studies.
+\item \textit{Topological Quantum Chemistry (TQC)}:
+We explored the fundamentals of TQC as outlined in \cite{topological_quantum_chemistry2017, building_blocks2018, lectures_tms2017}, focusing on understanding Wannier obstruction. This involves applying coset decompositions of the full space group into site-symmetry groups corresponding to Wyckoff positions. Starting with a representation \( \rho \) of the site-symmetry group \( G_\q \), we construct an induced representation \( \rho_G = \rho \uparrow G \), known as a \textit{band representation}. TQC allows the classification of materials by determining if their bands are direct sums of elementary band representations (EBRs). If not, the system is identified as topological.
 
-\item While our initial intention was to utilize the Hubbard model only for benchmarking DMFT, our endeavor led us to a comprehensive exploration of the Mott transition within this system, yielding original findings. In Section \ref{sec:hubbard}, we describe the techniques and concepts intrinsic to the DMFT framework, presenting our results on the Metal-Insulator (Mott) transition. Additionally, the student enrolled in the supplementary course titled ``Strong coupling theories for metal-insulator transitions: DMFT and beyond'' at USP during the first semester of 2023. This course proved invaluable, offering insights into extending DMFT to complex systems.
+\item \textit{Topological Heavy Fermion (THF) model}:
+We applied the TQC framework to analyze the MATBG system. For the BM model, the high-symmetry point representations of the bands are \( \Gamma_1 \oplus \Gamma_2 \), \( M_1 \oplus M_2 \), and \( K_2 K_3 \) \cite{all_magic_angles, bernevig_II_2021} at points \( \Gamma \), \( M \), and \( K \), respectively. Comparing these with the EBR tables for the space group \( P6'2'2 \) confirms that the system is topological and exhibits a Wannier obstruction. To address this issue, we studied the THF model \cite{topoheavyfermion2022}, which maps the low-energy bands of MATBG into a heavy fermion problem. This model resolves the Wannier obstruction by coupling \( f \)-electrons (flat bands, heavy) with \( c \)-electrons (nearly free), providing a complete description that includes all emergent symmetries.
 \end{itemize}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Group and Representation Theory} \label{sec:grouptheory}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Twisted Bilayer Graphene} \label{sec:tbg}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Induction and Subduction of Representations} \label{subsec:induction_subduction}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{Commensurate structures} \label{sec:tbg_geom}
+\begin{definition}[\textbf{Subduction}] \label{def:subduction_defi}
+Let $H \subseteq G$ be a subgroup and $\Pi: G \to \GL(V)$ a representation of $G$. We can naturally construct of a representation $\rho: H \to \GL(V)$ of $H$ on $V$ by restricting $\Pi$ to elements of $H$:
+\begin{equation} \label{eq:subduction_defi}
+\rho(h) = \Pi(h), \quad \forall \, h \in H \subseteq G.
+\end{equation}
+We denote $\rho = \Pi \downarrow H$ and is called the \textit{subduction} of $\Pi$ to the subgroup $H$.
+\end{definition}
 
-Twisted bilayer graphene (TBG) is characterized by a rotation angle $\theta$ between the two stacked layers of graphene. The slightly misaligned layers create an interference Moiré pattern, which can be either commensurate (forming a superlattice) or incommensurate. Figure \ref{fig:moireD6} shows this Moiré pattern for a commensurate structure with $D_6$ point group symmetry. The AA, AB, and BA regions indicate whether $A$ or $B$ carbon atoms from the layers are stacked on top of each other.
 
-Generally, a commensurate structure can have different symmetry groups depending on the choice of origin, but the largest point symmetry group it can have is $D_6$, due to its underlying honeycomb Bravais lattice. In the commensurate case, one can define the primitive lattice vectors $\vb{L}_1$ and $\vb{L}_2$ as the least common multiples of the unit vectors of the monolayers. Figure \ref{fig:latvec} illustrates an example where $\theta = 21.8^\circ$.
+%\begin{example} \label{ex:C3_D3_subduction_example}
+%$H = \{E, \Ct, \Ctn{2}\} \subseteq G = D_3$ and $\Pi = \Gamma_2$ as defined in Example \ref{ex:2x2_rep}. The subduced representation $\rho = \Pi \downarrow H$ is obtained by using the matrices $\Pi(h)$, for $h = E, \Ct, \Ctn{2}$.
+%\begin{equation} \label{eq:rho_subduced_C3_D3_subduction_example}
+%\rho(E) =
+%\begin{pmatrix}
+%1 & 0 \\
+%0 & 1
+%\end{pmatrix},
+%\quad
+%\rho(\Ct) =
+%\begin{pmatrix}
+%\cos(\frac{2\pi}{3}) & \sin(\frac{2\pi}{3}) \\
+%-\sin(\frac{2\pi}{3}) & \cos(\frac{2\pi}{3})
+%\end{pmatrix},
+%\quad
+%\rho(\Ctn{2}) =
+%\begin{pmatrix}
+%\cos(\frac{4\pi}{3}) & \sin(\frac{4\pi}{3}) \\
+%-\sin(\frac{4\pi}{3}) & \cos(\frac{4\pi}{3})
+%\end{pmatrix}.
+%\end{equation}
+%
+%The original representation \(\Pi\) includes additional matrices not present in \(\rho\):
+%\begin{equation} \label{eq:Pi_C3_D3_subduction_example}
+%\Pi(\sv) =
+%\begin{pmatrix}
+%1 & 0 \\
+%0 & 1
+%\end{pmatrix},
+%\;
+%\Pi(\svp) = \Pi(\sv \Ct) =
+%\begin{pmatrix}
+%-\frac{1}{2} & \frac{\sqrt{3}}{2} \\
+%\frac{\sqrt{3}}{2} & \frac{1}{2}
+%\end{pmatrix},
+%\;
+%\Pi(\svpp) = \Pi(\sv \Ctn{2}) =
+%\begin{pmatrix}
+%-\frac{1}{2} & -\frac{\sqrt{3}}{2} \\
+%-\frac{\sqrt{3}}{2} & \frac{1}{2}
+%\end{pmatrix},
+%\end{equation}
+%As discussed in Example \ref{ex:irrep_Gamma12_example}, \(\Pi = \Gamma_2\) is irreducible because its six matrices cannot be transformed into block diagonal form through any conjugate transformation \(A \Pi(g) A^{-1}\), \(\forall g \in D_3\).
+%
+%However, if we consider only the three matrices in Equation \ref{eq:rho_subduced_C3_D3_subduction_example}, they can be transformed into block diagonal form through the following conjugation by \(A\):
+%\begin{equation} \label{eq:subduction_can_be_reducible_example}
+%\rho(E) =
+%A
+%\begin{pmatrix}
+%1 & 0 \\
+%0 & 1
+%\end{pmatrix}
+%A^{-1},
+%\quad
+%\rho(\Ct) =
+%A
+%\begin{pmatrix}
+%e^{-\frac{2\pi i}{3}} & 0 \\
+%0 & e^{\frac{2\pi i}{3}}
+%\end{pmatrix}
+%A^{-1},
+%\quad
+%\rho(\Ctn{2}) =
+%A
+%\begin{pmatrix}
+%e^{-\frac{4\pi i}{3}} & 0 \\
+%0 & e^{\frac{4\pi i}{3}}
+%\end{pmatrix}
+%A^{-1},
+%\quad
+%\end{equation}
+%\begin{equation} \label{eq:A_matrix_that_diagonalizes}
+%A =
+%\begin{pmatrix}
+%i & -i \\
+%1 & 1
+%\end{pmatrix}.
+%\end{equation}
+%Therefore, we can assert that \(\rho\) is a direct sum of two one-dimensional representations, \(\{1, e^{-\frac{2\pi i}{3}}, e^{-\frac{4\pi i}{3}}\}\) and \(\{1, e^{\frac{2\pi i}{3}}, e^{\frac{4\pi i}{3}}\}\), making it reducible. This demonstrates that the subduction of an irreducible representation can result in a reducible one.
+%\end{example}
+
+
+
+\begin{definition}[\textbf{Induction}] \label{def:induction_defi}
+Let $H$ be a subgroup of a finite group $G$ and $\Pi: H \to \GL(V)$ be a representation of $H$ on a $n$-dimensional vector space $V$. Let $R = \{g_1, \ldots, g_m\} \subseteq G$ be a full set of representatives of the left cosets in $G/H$, where $m = \abs{G/H}$. Consider the following $(m\cdot n)$-dimensional vector space
+\begin{equation} \label{eq:W_vectorspace_induction_copies}
+W = \bigoplus_{i=1}^m g_i V = \qty{w = \bigoplus_{i=1}^n (g_i, v_i) \;\bigg|\; v_i \in V_i},
+\end{equation}
+where each $g_i V$ is an isomorphic labelled copy of $V$, defined by
+\begin{equation} \label{eq:giV_vectorspace_labelled_copy}
+g_i V = \{ (g_i, v) \mid g_i \in G, v \in V\}, \quad
+\alpha (g_i, u) + \beta (g_i, v) = (g_i, \alpha u + \beta v).
+\end{equation}
+
+For each $g \in G$ and $g_i \in R$ there is an $h_i \in H$ and a permutation index $j(i) \in \{1, \ldots, m\}$ such that $g g_i = g_{j(i)} h_i$. The \textit{induced} representation $\rho: G \to \GL(W)$, denoted by $\rho = \Pi \uparrow G$, is defined by the action on an element $w = \bigoplus_{i=1}^{m} (g_i, v_i) \in W$:
+\begin{equation} \label{eq:induced_rep_action_defi}
+\rho(g) w = \bigoplus_{i=1}^{m} \qty(g_{j(i)}, \Pi(h_i) v_i) \in W.
+\end{equation}
+\end{definition}
+
+
+%\begin{example} \label{ex:induced_rep_D3D6}
+%Take $G = D_6$, $H = D_3$ and $\Pi = \Gamma_2: H \to \GL(\mathbb{R}^2)$ from Example \ref{ex:2x2_rep}. Using the coset decomposition of $D_6$ from Example \ref{ex:coset_decomp_D3D6}, we obtain the set of coset representatives $R = \{g_1=E, g_2=\sd\}$. Let us calculate the actions of $\rho = \Pi \uparrow G$ for the generators $\{\Cs, \sd, \sv\}$.
+%
+%\n
+%
+%$g = \Cs$:
+%
+%$g_1 = E \implies g g_1 = \Cs E = \Cs = \sd \svpp = g_2 h_1$, where $j(1) = 2$ and $h_1 = \svpp$.
+%
+%$g_2 = \sd \implies g g_2 = \Cs \sd = \svp = E \svp = g_1 h_2$, where $j(2) = 1$ and $h_2 = \svp$.
+%
+%\begin{equation} \label{eq:Pi_h1_Pi_h2_example_inducedrep_D6}
+%\Pi(h_1) = \Pi(\sv) \Pi(\Ctn{2}) =
+%\begin{pmatrix}
+%-\frac{1}{2} & -\frac{\sqrt{3}}{2} \\
+%-\frac{\sqrt{3}}{2} & \frac{1}{2}
+%\end{pmatrix},
+%\quad
+%\Pi(h_2) = \Pi(\sv) \Pi(\Ct) =
+%\begin{pmatrix}
+%-\frac{1}{2} & \frac{\sqrt{3}}{2} \\
+%\frac{\sqrt{3}}{2} & \frac{1}{2}
+%\end{pmatrix}.
+%\end{equation}
+%
+%On the basis $(w_{11}, w_{12}, w_{21}, w_{22})$, where $w_{ij} = (g_i, e_j)$ and $(e_1, e_2)$ is a basis of $\mathbb{R}^2$, we have
+%\begin{equation} \label{eq:rhoC6_w11_example_inducedrep_D6}
+%\rho(\Cs) w_{11} = (g_{j(1)}, \Pi(h_1) e_1) = \qty(g_2, -\frac{1}{2}e_1 - \frac{\sqrt{3}}{2}e_2)
+%= -\frac{1}{2} w_{21} - \frac{\sqrt{3}}{2} w_{22},
+%\end{equation}
+%
+%\begin{equation} \label{eq:rhoC6_w12_example_inducedrep_D6}
+%\rho(\Cs) w_{12} = (g_{j(1)}, \Pi(h_1) e_2) = \qty(g_2, -\frac{\sqrt{3}}{2}e_1 + \frac{1}{2}e_2)
+%= -\frac{\sqrt{3}}{2} w_{21} + \frac{1}{2} w_{22},
+%\end{equation}
+%
+%\begin{equation} \label{eq:rhoC6_w21_example_inducedrep_D6}
+%\rho(\Cs) w_{21} = (g_{j(2)}, \Pi(h_2) e_1) = \qty(g_1, -\frac{1}{2}e_1 + \frac{\sqrt{3}}{2}e_2)
+%= -\frac{1}{2} w_{11} + \frac{\sqrt{3}}{2}w_{12},
+%\end{equation}
+%
+%\begin{equation} \label{eq:rhoC6_w22_example_inducedrep_D6}
+%\rho(\Cs) w_{22} = (g_{j(2)}, \Pi(h_2) e_2) = \qty(g_1, \frac{\sqrt{3}}{2}e_1 + \frac{1}{2}e_2)
+%= \frac{\sqrt{3}}{2} w_{11} + \frac{1}{2}w_{12},
+%\end{equation}
+%
+%\begin{equation} \label{eq:rhoC6_matrix_example_inducedrep_D6}
+%\rho(\Cs) =
+%\begin{pmatrix}
+%\rho_{1111} & \rho_{1112} & \rho_{1211} & \rho_{1212} \\
+%\rho_{1121} & \rho_{1122} & \rho_{1221} & \rho_{1222} \\
+%\rho_{2111} & \rho_{2112} & \rho_{2211} & \rho_{2212} \\
+%\rho_{2121} & \rho_{2122} & \rho_{2221} & \rho_{2222} \\
+%\end{pmatrix}
+%=
+%\begin{pmatrix}
+%0                   & 0                   & -\frac{1}{2}       & \frac{\sqrt{3}}{2} \\
+%0                   & 0                   & \frac{\sqrt{3}}{2} & \frac{1}{2}        \\
+%-\frac{1}{2}        & -\frac{\sqrt{3}}{2} & 0                  & 0                  \\
+%-\frac{\sqrt{3}}{2} & \frac{1}{2}         & 0                  & 0                  \\
+%\end{pmatrix}
+%=
+%\begin{pmatrix}
+%0 & \Pi(h_2) \\
+%\Pi(h_1) & 0
+%\end{pmatrix}.
+%\end{equation}
+%
+%\n
+%
+%$g = \sd$:
+%
+%$g_1 = E \implies g g_1 = \sd E = g_2 h_1$, where $j(1) = 2$ and $h_1 = E$.
+%
+%$g_2 = \sd \implies g g_2 = E = E E = g_1 h_2$, where $j(2) = 1$ and $h_2 = E$.
+%\begin{equation} \label{eq:rhosd_matrix_example_inducedrep_D6}
+%\rho(\sd) =
+%\begin{pmatrix}
+%0 & \Pi(h_2) \\
+%\Pi(h_1) & 0
+%\end{pmatrix}
+%=
+%\begin{pmatrix}
+%0 & 0 & 1 & 0 \\
+%0 & 0 & 0 & 1 \\
+%1 & 0 & 0 & 0 \\
+%0 & 1 & 0 & 0 \\
+%\end{pmatrix}.
+%\end{equation}
+%
+%\n
+%
+%$g = \sv$:
+%
+%$g_1 = E \implies g g_1 = E \sv = g_1 h_1$, where $j(1) = 1$ and $h_1 = \sv$.
+%
+%$g_2 = \sd \implies g g_2 = \sv \sd = C_2 = \sd \sv = g_2 h_2$, where $j(2) = 2$ and $h_2 = \sv$.
+%\begin{equation} \label{eq:rhosv_matrix_example_inducedrep_D6}
+%\rho(\sv) =
+%\begin{pmatrix}
+%\Pi(h_1) & 0 \\
+%0 & \Pi(h_2)
+%\end{pmatrix}
+%=
+%\begin{pmatrix}
+%1 & 0  & 0 &  0 \\
+%0 & -1 & 0 &  0 \\
+%0 & 0  & 1 &  0 \\
+%0 & 0  & 0 & -1 \\
+%\end{pmatrix}.
+%\end{equation}
+%
+%\end{example}
+
+\begin{lemma} \label{lemma:induced_rep_matrix_i'j'ij_block}
+Let $H$ be a subgroup and $\Pi$ a representation of a group $G$ on a $n$-dimensional vector space $V$. On the basis $\{w_{ij} = (g_i, e_j)\}$ of $W = \bigoplus_{i=1}^{\abs{G/H}} g_i V$, where $(e_j)_{j=1}^n$ is a basis of $V$, the induced representation $\Pi \uparrow G$ has matrix elements
+\begin{align} \label{eq:induced_rep_matrix_i'j'ij_block}
+(\Pi \uparrow G)_{i'j'ij}(g) =
+\begin{cases}
+\; \Pi_{i'i}(g_{j'}^{-1} g g_j), \quad & g_{j'}^{-1} g g_j \in H, \\
+\; 0,  & g_{j'}^{-1} g g_j \notin H.
+\end{cases}
+\end{align}
+\end{lemma}
+
+Taking the trace of Equation \ref{eq:induced_rep_matrix_i'j'ij_block} leads us to
+
+\begin{corollary} \label{coro:character_of_induced_rep}
+The characters of the induced representation are given by
+\begin{equation} \label{eq:character_induced_rep}
+\chi^{(\Pi \uparrow G)}(g) = \sum_{\substack{j=1 \\ g_j^{-1} g g_j \in H}}^{\abs{G/H}} \chi^{(\Pi)} (g_j^{-1} g g_j),
+\end{equation}
+where the sum is performed only on the elements $g_j^{-1} g g_j$ that belong to the subgroup $H$.
+\end{corollary}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Magnetic Groups} \label{subsec:magnetic_groups}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+To analyze the symmetries of magnetic configurations, we introduce the time reversal operator, denoted by \(T\) or \(1'\). In the context of magnetic systems, this operator acts on magnetic moments \cite{magnetic_structures2012}, which are ``classical axial vectors.'' The time reversal operator reverses the direction of the electrical current, which effectively inverts the magnetic moment, as shown in Figure \ref{fig:timerev_axialvec}.
+
 \begin{figure}[H]
 \centering
-\includegraphics[height=.32\columnwidth]{fig/moireD6.png}
-\caption{Commensurate $D_6$-type structure obtained by twisting the two layers from the initial AA stacking configuration, with the origin chosen as the center of the hexagons. Figure taken from \cite{thesis_rennella}.}
-\label{fig:moireD6}
-\end{figure}
-
-\begin{figure}[H]
-\centering
-\begin{subfigure}{.5\textwidth}
+\begin{subfigure}{.4\textwidth}
   \centering
-  \includegraphics[height=.6\linewidth]{fig/latvec.png}
-  \caption{}
-  \label{fig:latvec}
-\end{subfigure}%
-\begin{subfigure}{.5\textwidth}
+  \includegraphics[height=0.6\linewidth]{fig/timerev.png}
+  \caption{The time reversal operator $T = 1'$ reverses the electrical current, which inverts the magnetic moment.}
+  \label{fig:timerev_a}
+\end{subfigure} \hfill
+\begin{subfigure}{.55\textwidth}
   \centering
-  \includegraphics[height=.6\linewidth]{fig/bzminibz.png}
-  \caption{}
-  \label{fig:bzminibz}
+  \includegraphics[width=\linewidth]{fig/axialvec.png}
+  \caption{Comparison between a vector (electrical dipole) and an axial vector (magnetic dipole) under a reflection.}
+  \label{fig:axialvec_b}
 \end{subfigure}
-\caption{(a) Commensurate structure and lattice vectors $\vb{L}_1$, $\vb{L}_2$. (b) Monolayers (red and green) and mini BZ's with $(m,n) = (1,2)$ and $\theta = 21.8^\circ$. Figures taken from \cite{koshino2012}.}
-\label{fig:geometry}
+\caption{The action of the time reversal operator. Figures taken from \cite{magnetic_structures2012}.}
+\label{fig:timerev_axialvec}
 \end{figure}
 
-%As drawn in Figure \ref{fig:latvec}, we have
-%\begin{align}
-%\label{eq:scalarprods1}
-%\vb{a}_1^{(1)} \vdot \vb{a}_2^{(1)} &= a^2 \cos(60^\circ) = a^2/2; \\
-%\label{eq:scalarprods2}
-%\vb{a}_1^{(1)} \vdot \vb{a}_1^{(2)} &= a^2 \cos\theta; \\
-%\label{eq:scalarprods3}
-%\vb{a}_1^{(1)} \vdot \vb{a}_2^{(2)} &= a^2 \cos(60^\circ + \theta); \\
-%\label{eq:scalarprods4}
-%\vb{a}_1^{(2)} \vdot \vb{a}_2^{(1)} &= a^2 \cos(60^\circ - \theta).
+Although initially motivated by magnetic systems, the magnetic groups can be understood more abstractly as a mathematical construct: a tensor product with the group of two elements, \(\mathcal{T} = \{1, 1'\}\). In this view, time reversal is treated as an abstract operator, extending beyond its physical origins. %For instance, in the context of TBG, the time-reversal operator can be interpreted as \textbf{swapping the sublattice types \(A\) and \(B\) (ISSO ESTÁ ERRADOOOO, TALVEZ EU FALE DE TIME-REVERSAL IN SPINLESS SYSTEMS)}.
+
+Let \(G\) be a group that does not include the time-reversal operator. A \textit{magnetic group} is then defined as a subgroup of the tensor product \(G \otimes \mathcal{T}\), where its elements can be ``painted black, white, or grey,'' reflecting the interplay between time-reversal and spatial symmetries.
+
+\begin{definition}[\textbf{Magnetic group}] \label{def:magnetic_group}
+Any magnetic group \( M \) can be expressed as a subgroup of the external direct product of \( \mathcal{T} = \{1, 1'\}\) with another group \( G \) (excluding \( 1' \)), such that \( M \subseteq G \otimes \mathcal{T} \). A magnetic group $M$ is defeined to be only one of three types:
+\begin{enumerate}
+\item \textbf{Colorless}: These are magnetic groups of the form \(M =  G \otimes \{1\} \).
+
+\item \textbf{Grey (Paramagnetic)}: These are the full direct product \(M = G \otimes \{1, 1'\} \).
+
+\item \textbf{Black-and-White}: If \( H \) is a subgroup of \( G \) with \hyperref[def:left_cosets]{index} \(2\), then \( M \) is constructed as
+\begin{equation} \label{eq:magnetic_black_white_def}
+M = H \otimes 1 \; \cup \; (G - H) \otimes 1'.
+\end{equation}
+\end{enumerate}
+\end{definition}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\linewidth]{fig/622_magnetic.png}
+\caption{Representation of the magnetic point group $6'2'2$. \textbf{A FIGURA ESTÁ COM UM ERRO}, no South-East tá trocado $+$ e $-$.}
+\label{fig:622_magnetic}
+\end{figure}
+
+\begin{example} \label{ex:magnetic_group_tbg_6'2'2}
+The magnetic point group of the BM model of TBG is $6'2'2$ in Hermann-Mauguin notation. According to the notation, we can choose its generators to be $C_{6z} T$, $C_{2y} T$ and $C_{2x}$.
+\end{example}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Topological Quantum Chemistry} \label{sec:topological_quantum_chemistry}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%We are following the references \cite{lectures_tms2017, building_blocks2018}.
+
+In this chapter we will introduce the formalism of Topological Quantum Chemistry (TQC) \cite{topological_quantum_chemistry2017, building_blocks2018, lectures_tms2017}. Among many things, this theory mathematically defines when a electronic band is topological, which is a concept intrinsically associated to the construction of Wannier orbitals for a tight-binding model. The application of these concepts play a major role to motivate and construct a fully symmetric interacting MATBG model.
+
+%Since this theory involves numerous mathematical definitions and concepts, we will consistently use the example of monolayer graphene, which belongs to wallpaper group \#17 and the corresponding space group $P6mm$ ($\#183$ in international tables).
+
+%\begin{figure}[H]
+%\centering
+%\includegraphics[width=0.32\linewidth]{fig/honeycomb_C3.png}\hfill
+%\includegraphics[width=0.32\linewidth]{fig/honeycomb_C2.png}\hfill
+%\includegraphics[width=0.32\linewidth]{fig/honeycomb_sigma.png}
+%\caption{Generators of the point group \(\{C_3, C_2, m_{1\bar{1}}\}\) for the space group \(P6mm\) of the honeycomb lattice, with the coordinate system origin $O$ located at a hexagon's center. \textbf{CORRIGIR} $\sigma_{1\cc{1}} = m_{1\cc{1}}$.}
+%\label{fig:generators_P6mm}
+%\end{figure}
+%
+%Following Figure \ref{fig:generators_P6mm}, we use the basis $\mathcal{B} = \{\a_1 = a \vu{x}, \a_2 = \frac{a}{2} \vu{x} + \frac{a\sqrt{3}}{2} \vu{y}\}$. In this basis, the generators \(\{C_3, C_2, m_{1\bar{1}}\}\) for the point group $6mm$ act like:
+%\begin{equation} \label{eq:generators_P6mm}
+%\begin{cases}
+%\; C_3 \a_1 = -\a_1+\a_2 \\
+%\; C_3 \a_2 = -\a_1
+%\end{cases}
+%\quad
+%\begin{cases}
+%\; C_2\a_1 = -\a_1 \\
+%\; C_2\a_2 = -\a_2
+%\end{cases}
+%\quad
+%\begin{cases}
+%\; m_{1\bar{1}} \a_1 = \a_2 \\
+%\; m_{1\bar{1}} \a_2 = \a_1
+%\end{cases}
+%\end{equation}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Definitions} \label{subsec:tqc_definitions}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{definition}[\textbf{Orbit}] \label{def:orbit_q}
+Given a point \(\q\), the \textit{orbit} of \(\q\) is the set of all points \textbf{within the same unit cell} that are related to \(\q\) by symmetry elements of the space group \(G\), i.e.,
+\begin{equation} \label{eq:orbit_of_q}
+\text{Orb}(\q) = G \q = \{g \q \mid g \in G\}.
+\end{equation}
+\end{definition}
+
+%\begin{example} \label{ex:orbit_1a2b3c}
+%In Figure \ref{fig:unitcell_q1q2q3q4q5}, using the basis $\mathcal{B} = \{\a_1, \a_2\}$, consider the points \(\textcolor{red}{\varhexagonblack} = \q_1 = (0,0)\), \(\textcolor{blue}{\mdblksquare} = \q_2 = \qty(\frac{1}{3}, \frac{1}{3})\), \(\textcolor{green}{\bigstar} = \q_3 = \qty(\frac{1}{2}, 0)\), \(\textcolor{magenta}{\varheartsuit} = \q_4 = \qty(\frac{1}{6}, \frac{1}{6})\), and \(\textcolor{orange}{\spadesuit} = \q_5 = \qty(\frac{1}{4}, 0)\).
+%
+%Note that the unit cell, as shown in Figure \ref{fig:unitcell_limit}, excludes points that are equivalent under translations by Bravais lattice vectors. By applying all symmetry elements of \(G\) to the points \(\q_1, \q_2, \q_3, \q_4, \q_5\) and retaining only those that lie within the same unit cell, the resulting orbits are represented by the symbols \(\textcolor{red}{\varhexagonblack}\), \(\textcolor{blue}{\mdblksquare}\), \(\textcolor{green}{\bigstar}\), \(\textcolor{magenta}{\varheartsuit}\), and \(\textcolor{orange}{\spadesuit}\), as shown in Figure \ref{fig:unitcell_orbitsymbols}.
+%\end{example}
+%
+%\begin{figure}[H]
+%\centering
+%\begin{subfigure}{.3\textwidth}
+%  \centering
+%  \includegraphics[width=\linewidth]{fig/unitcell_q1q2q3q4q5.png}
+%  \caption{Points $\q_1,\q_2,\q_3,\q_4,\q_5$}
+%  \label{fig:unitcell_q1q2q3q4q5}
+%\end{subfigure}
+%\hfill
+%\begin{subfigure}{.3\textwidth}
+%  \centering
+%  \includegraphics[width=\linewidth]{fig/unitcell_orbitsymbols.png}
+%  \caption{Orbits and Wyckoff letters}
+%  \label{fig:unitcell_orbitsymbols}
+%\end{subfigure}
+%\hfill
+%\begin{subfigure}{.235\textwidth}
+%  \centering
+%  \includegraphics[width=\linewidth]{fig/unitcell_limit.png}
+%  \caption{Unit cell choice}
+%  \label{fig:unitcell_limit}
+%\end{subfigure}
+%\caption{Unit cell and orbits.}
+%\label{fig:unitcell_orbits}
+%\end{figure}
+
+
+\begin{definition}[\textbf{Site-symmetry group / Stabilizer group}] \label{def:sitesym}
+The site-symmetry group of a position $\q$ is the subgroup of operations $g \in G$ that leave $\q$ fixed.
+\begin{equation} \label{eq:site-symmetry_def}
+G_\q = \{g \mid g \q = \q\} \subseteq G.
+\end{equation}
+\end{definition}
+
+%\textit{Remarks:}
+%\begin{itemize}
+%\item The site-symmetry group \( G_\q \) may include elements \(\{R \mid \r\}\) with \(\r \neq \0\).
+%\item Since any site-symmetry group leaves a point invariant, it is isomorphic to one of the crystallographic point groups: $32$ in three dimensions and $10$ in two dimensions.
+%\end{itemize}
+
+%\begin{example} \label{ex:site-symmetry_groups_p6mm}
+%Let us identify the site-symmetry groups of points $\q_1$, $\q_2$, $\q_3$, $\q_4$ and $\q_5$.
+%
+%\begin{itemize}
+%\item The point $\textcolor{orange}{\spadesuit} = \q_5 = \qty(\frac{1}{4}, 0)$ has a site-symmetry group \(G_{\q_5}\) with only the identity $\{E \mid 0\}$ and $\{m_{x} \mid 0\}$ (reflection by the $x$-axis) as symmetry elements. This makes $G_{\q_5}$ isomorphic to $D_1$.
+%\begin{equation} \label{eq:site-symmetry-q5}
+%\{m_{x} \mid 0\} \q_3 = m_x \qty(\frac{1}{4} \a_1) = m_x \qty(\frac{a}{4} \vu{x}) = \frac{a}{4} \vu{x} = \frac{1}{4} \a_1 = \q_5.
+%\end{equation}
+%
+%
+%\item The point \(\textcolor{magenta}{\varheartsuit} = \q_4 = \qty(\frac{1}{6}, \frac{1}{6})\) has a site-symmetry group \(G_{\q_4}\) with only the identity $\{E \mid 0\}$ and $\{m_{1\cc{1}} \mid 0\}$ as symmetry elements. This also makes $G_{\q_4}$ isomorphic to $D_1$.
+%\begin{align} \label{eq:site-symmetry-q4}
+%\{m_{1\cc{1}} \mid 0\} \q_4 &= m_{1\cc{1}}\qty(\frac{1}{6} \a_1 + \frac{1}{6} \a_2) = \frac{1}{6} \a_2 + \frac{1}{6} \a_1 = \q_4.
 %\end{align}
+%
+%\item The point \(\textcolor{green}{\bigstar} = \q_3 = \qty(\frac{1}{2}, 0)\) has a site-symmetry group \(G_{\q_3}\), which is isomorphic to \(D_2\). We can choose its generators to be $\{C_2 \mid \a_1\}$ and $\{m_{x}\mid 0\}$.
+%\begin{align} \label{eq:site-symmetry-q3}
+%\{C_2 \mid \a_1\} \q_3 &= C_2 \q_3 + \a_1 = -\q_3 + \a_1 = -\frac{1}{2} \a_1 + \a_1 = \q_3, \\
+%\{m_{x} \mid 0\} \q_3 &= m_x \qty(\frac{1}{2} \a_1) = m_x \qty(\frac{a}{2} \vu{x}) = \frac{1}{2} \a_1 = \q_3.
+%\end{align}
+%
+%\item The point $\textcolor{blue}{\mdblksquare} = \q_2 = \qty(\frac{1}{3}, \frac{1}{3})$ has site-symmetry group $G_{\q_2}$ isomorphic to $D_3$, and its generators are $\{C_3 \mid \a_1\}$ and $\{m_{1\cc{1}} \mid 0\}$.
+%\begin{align} \label{eq:site-symmetry-q2}
+%\{C_3 \mid \a_1\} \q_2 &= C_3 \qty(\frac{1}{3} \a_1 + \frac{1}{3} \a_2) + \a_1 = \frac{1}{3} \qty(-2\a_1 + \a_2) + \a_1 =
+%\frac{1}{3} (\a_1 + \a_2) = \q_2, \\
+%\{m_{1\cc{1}} \mid 0\} \q_2 &= m_{1\cc{1}} \qty(\frac{1}{3} \a_1 + \frac{1}{3} \a_2) =
+%\frac{1}{3} \a_2 + \frac{1}{3} \a_1 = \q_2.
+%\end{align}
+%
+%\item The point \(\textcolor{red}{\varhexagonblack} = \q_1 = (0,0)\) has a site-symmetry group \(G_{\q_1}\) isomorphic to \(D_6\), with generators \(\{C_3 \mid 0\}\), \(\{C_2 \mid 0\}\), and \(\{m_{1\cc{1}} \mid 0\}\). Since \(\q_1 = \0\) is the origin, it is evident that the action of any generator \(g\) on \(\q_1\) leaves it unchanged:
+%\begin{equation} \label{eq:site-symmetry-q1}
+%g \q_1 = \0 = \q_1, \quad \text{for all } g \in G_{\q_1}.
+%\end{equation}
+%\end{itemize}
+%
+%\end{example}
 
-The superlattice vectors $\vb{L}_1$, $\vb{L}_2$ are related by a $60^\circ$ rotation. In general, because $\vb{L}_1$ belongs to the lattices of both layers, it can be parameterized by integers $m,n,m',n'$ as
-\begin{equation} \label{eq:L1}
-\vb{L}_1 = m\vb{a}_1^{(1)} + n\vb{a}_2^{(1)} = m'\vb{a}_1^{(2)} + n'\vb{a}_2^{(2)},
-\end{equation}
-where $\vb{a}_j^{(\ell)}$ is the $j$-th unit vector of layer $\ell$.
+\begin{definition}[\textbf{Wyckoff position}] \label{def:wyckpos}
+A \textit{Wyckoff position} \( \q \) refers to any position within the unit cell of the crystal. Some Wyckoff positions are \textit{special}, meaning they are left invariant by certain symmetry operations (other than the identity $\{E \mid 0\}$). The \textit{multiplicity} $n$ of a Wyckoff position is the number of distinct positions in its orbit within the same unit cell, $n = \abs{\text{Orb}(q)}$. A Wyckoff position is generally denoted as \( n\ell \), where \( \ell \) is an alphabetical label that designates the increasing size of the site-symmetry group associated with the position.
+\end{definition}
 
-There is an appropriate choice of vectors $\vb{a}_i^{(\ell)}$ such that the indices $(m',n')$ are equal to $(n,m)$ \cite{koshino2012}. With this choice, one obtains the condition of commensurability
-\begin{equation} \label{eq:costheta}
-\cos\theta = \frac{m^2 + n^2 + 4mn}{2(m^2 + n^2 + mn)} = \frac{3 m^2 + 3mr + r^2/2}{3m^2 + 3mr + r^2},
+%\begin{example} \label{ex:wyckpos_q1q2q3q4q5}
+%The Wyckoff positions \( \q_1 = \textcolor{red}{\varhexagonblack} \), \( \q_2 = \textcolor{blue}{\mdblksquare} \), \( \q_3 = \textcolor{green}{\bigstar} \), \( \q_4 = \textcolor{magenta}{\varheartsuit} \), and \( \q_5 = \textcolor{orange}{\spadesuit} \) are respectively labeled as \( \textcolor{red}{1a} \), \( \textcolor{blue}{2b} \), \( \textcolor{green}{3c} \), \( \textcolor{magenta}{6d} \), and \( \textcolor{orange}{6e} \), as shown in Figure \ref{fig:unitcell_orbitsymbols}.
+%\end{example}
+
+\begin{definition}[\textbf{Coset representatives}] \label{def:cosetrep_wyckoff}
+The \textit{coset representatives} of the site-symmetry group are the elements \( g_\alpha \) that generate the orbit of a Wyckoff position \( \q \), with each element in the orbit given by \( \q_\alpha = g_\alpha \q \). The number of coset representatives corresponds to the multiplicity of the Wyckoff position.
+\end{definition}
+
+%\begin{example} \label{ex:coset_representatives_q1q2q3q4q5}
+%For the points $\q_1 = \textcolor{red}{\varhexagonblack}$, $\q_2 = \textcolor{blue}{\mdblksquare}$, $\q_3 = \textcolor{green}{\bigstar}$, $\q_4 = \textcolor{magenta}{\varheartsuit}$ and $\q_5 = \textcolor{orange}{\spadesuit}$, we can choose coset representatives as
+%\begin{align}
+%\text{Orb}(\q_1) &= \qty{\{E\mid 0\} \q_1}, \label{eq:orbit_q1} \\
+%\text{Orb}(\q_2) &= \qty{\{E\mid 0\} \q_2, \{C_6\mid 0\} \q_2}, \label{eq:orbit_q2} \\
+%\text{Orb}(\q_3) &= \qty{\{E\mid 0\} \q_3, \{C_6\mid 0\} \q_3, \{C_6^2\mid 0\} \q_3}, \label{eq:orbit_q3} \\
+%\text{Orb}(\q_4) &= \qty{\{E\mid 0\} \q_4, \{C_6\mid 0\} \q_4, \{C_6^2\mid 0\} \q_4, \{C_6^3\mid 0\} \q_4, \{C_6^4\mid 0\} \q_4, \{C_6^5\mid 0\} \q_4}, \label{eq:orbit_q4} \\
+%\text{Orb}(\q_5) &= \qty{\{E\mid 0\} \q_5, \{C_6\mid 0\} \q_5, \{C_6^2\mid 0\} \q_5, \{C_6^3\mid 0\} \q_5, \{C_6^4\mid 0\} \q_5, \{C_6^5\mid 0\} \q_5}, \label{eq:orbit_q5}
+%\end{align}
+%For example, in Equation \ref{eq:orbit_q3}, the coset representatives of $G_{\q_3}$ are $g_1 = \{E\mid 0\}$, $g_2 = \{C_6\mid 0\}$, and $g_3 = \{C_6^2\mid 0\}$.
+%\end{example}
+
+\begin{lemma}[\textbf{Coset decomposition}] \label{lemma:cosetdecomp_wyckoff}
+Let \( \q \) be a Wyckoff position in a space group \( G \). The coset decomposition of \( G \) with respect to \( \q \) is given by:
+\begin{equation} \label{eq:coset_decomp_wyckoff}
+G = \bigcup_\alpha g_\alpha (G_{\q} \ltimes \Z^d),
 \end{equation}
-where $r = n-m$, and $\gcd(m,n) = \gcd(m,r)=1$. By taking the norm of $\vb{L}_1$ from Eq. \eqref{eq:L1} and using the angle relation in Eq. \eqref{eq:costheta}, the superlattice constant $L = \abs{\vb{L}_1} = \abs{\vb{L}_2}$ is given by
-\begin{equation} \label{eq:commensurate-constant}
-L(\theta) = a\sqrt{m^2 + n^2 + mn} = \frac{\abs{m-n}}{2 \sin(\theta/2)} \, a.
+where \( \Z^d \) represents the group of lattice translations, \(\{E\mid \t\}\), with \(\t = \sum_{i=1}^d n_i \a_i\), where \( n_i \in \Z \) and \(\{\a_i\}\) are the primitive lattice vectors in \( d \) dimensions.
+
+In practice, this decomposition means that for any \( g \in G \), we can write \( g = \{E \mid \t\} g_\alpha h \), for some translation \(\t\), coset representative \( g_\alpha \), and \( h \in G_\q \). Applying \( \q \) to both sides:
+\begin{equation} \label{eq:coset_decomp_translation_t_step1}
+g \q = \{E \mid \t\} g_\alpha h \q = \{E \mid \t\} g_\alpha \q = \{E \mid \t\} \q_\alpha = \q_\alpha + \t,
+\end{equation}
+which leads to
+\begin{equation} \label{eq:coset_decomp_translation_t}
+\t = g \q - \q_\alpha.
+\end{equation}
+\end{lemma}
+
+%\begin{lemma}[\textbf{Conjugate site-symmetry groups}] \label{lemma:conjugate_group_G_qalpha}
+%Positions \(\q\) and \(\q_\alpha\) on the same orbit are connected by the relation \(\q_\alpha = g_\alpha \q\), where \(g_\alpha\) is a coset representative. For \(h \in G_\q\), the following holds:
+%\begin{equation} \label{eq:conjugate_group_qalpha}
+%h \q = \q \implies h g_\alpha^{-1} \q_\alpha = g_\alpha^{-1} \q_\alpha \implies
+%\qty(g_\alpha h g_\alpha^{-1}) \q_\alpha = \q_\alpha \implies
+%g_\alpha h g_\alpha^{-1} \in G_{\q_\alpha}.
+%\end{equation}
+%Consequently, the site-symmetry groups of points on the same orbit are conjugates of each other, satisfying \(G_{\q_\alpha} = g_\alpha G_\q g_\alpha^{-1}\).
+%\end{lemma}
+
+
+%\begin{definition}[\textbf{Maximal Wyckoff position}] \label{def:maximal_wyckpos}
+%A site-symmetry group is \textit{non-maximal} if there exists a finite group $H \neq G_\q$, such that $G_\q \subseteq H \subseteq G$. A site-symmetry group that is not non-maximal is \textit{maximal}. A Wyckoff position $\q$ is said to be \textit{maximal} if its site-symmetry group $G_\q$ is maximal.
+%\end{definition}
+
+%\begin{example} \label{ex:maximal_wyckpos_example}
+%We have $G_{\q_4} \subset G_{\q_2}$ and $G_{\q_5} \subset G_{\q_3}$, therefore $\q_4$ and $\q_5$ are non-maximal Wyckoff positions. On the other hand, the Wyckoff positions $\q_1$, $\q_2$, $\q_3$ are maximal. \textbf{Do I prove this?}
+%\end{example}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Band Representations} \label{subsec:band_reps}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Consider a site \(\q\) within a Wyckoff position of multiplicity \(n\), hosting \(n_q\) orbitals. The corresponding wavefunctions, denoted as \(W_{i1}(\r)\) for \(i = 1, \ldots, n_q\), transform under an \(n_q\)-dimensional representation \(\rho\) of the site-symmetry group \(G_\q\):
+\begin{equation} \label{eq:gWi1_nq_rep}
+h W_{i1}(\r) = W_{i1}(h^{-1} \r) = \sum_{j} [\rho(h)]_{ij} W_{j1}(\r), \quad h \in G_\q.
 \end{equation}
 
-The area of an unit cell of the superlattice is $A = \frac{\sqrt{3}}{2} L^2 = (m^2 + n^2 + mn) \, A_1$, where $A_1 = \frac{\sqrt{3}}{2} \, a^2$ is the area of unit cell of monolayer graphene. Considering the Brillouin Zone area (BZ), we have
-\begin{equation} \label{eq:bz-volume}
-\Omega = \frac{\Omega_1}{m^2 + n^2 + mn},
+Without loss of generality, let the equivalent sites \(\q_\alpha = g_{\alpha} \q\) be in the same unit cell as \(\q\). The orbitals at \(\q_\alpha\) transform under the conjugate representation \(\rho_\alpha(h) = \rho(g_\alpha^{-1} h g_\alpha)\), where \(h \in G_{\q_\alpha}\) and \(g_\alpha^{-1} h g_\alpha \in G_\q\). The wavefunctions localized at \(\q_\alpha\) are then given by
+\begin{equation} \label{eq:Wialpha_galpha_action}
+W_{i\alpha}(\r) = g_\alpha W_{i1}(\r) = W_{i1}(g_\alpha^{-1} \r),
 \end{equation}
-where $\Omega_1 = (2\pi)^2/A$ is the monolayer's BZ area and $\Omega$ is the area of the moiré mini BZ. As an example, for $(m,n) = (1,2)$ we have $\theta = 21.8^\circ$ and $m^2 + n^2 + mn = 7$, therefore the monolayer BZ fits 7 mini BZ's in its area, as we see in Figure \ref{fig:bzminibz}.
+where \(\alpha = 1, \ldots, n\) indexes the equivalent sites that belong to the Wyckoff position of multiplicity \(n\). The wavefunctions on other unit cells are obtained by applying a translation operator, such that:
+\begin{equation} \label{eq:translated_Wialpha}
+\sg{E}{\t_\mu} W_{i\alpha}(\r) = W_{i\alpha}(\r-\t_\mu),
+\end{equation}
+where $\t_\mu$ is a Bravais lattice vector.
+
+There are \(n \times n_\q \times N\) wavefunctions \(W_{i\alpha}(\r - \t_\mu)\), where \(N \to \infty\) is the number of unit cells in the system. To determine their transformation properties under an arbitrary space group element \(g = \sg{R}{\t} \in G\), we derive the band representation \(\rho_G = \rho \uparrow G\) induced from the representation \(\rho\) of the site-symmetry group \(G_\q\), as in Definition \ref{def:induction_defi}.
+\begin{equation} \label{eq:induced_rho_G_wannier_step1}
+\rho_G(g) W_{i\alpha}(\r-\t_\mu) =
+\underbrace{g \sg{E}{\t_\mu}}_{= \sg{E}{R\t_\mu} g} W_{i\alpha} (\r) =
+\sg{E}{R\t_\mu} g W_{i\alpha} (\r) =
+\sg{E}{R\t_\mu} \, (g g_\alpha) \, W_{i1} (\r).
+\end{equation}
+
+Applying Lemma \ref{lemma:cosetdecomp_wyckoff} for the element $g g_\alpha \in G$, we write $g g_\alpha = \sg{E}{\t_{\beta\alpha}} g_\beta h$, for some $h \in G_\q$, coset representative $g_\beta$ and a Bravais lattice vector $\t_{\beta\alpha}$ given by
+\begin{equation} \label{eq:t_betaalpha}
+\t_{\beta\alpha} = gg_\alpha \q - \q_\beta = g \q_\alpha - \q_\beta, \quad
+h = g_\beta^{-1} \{E\mid -\t_{\beta\alpha}\} g g_\alpha.
+\end{equation}
+
+Following the derivation from Equation \ref{eq:induced_rho_G_wannier_step1}:
+$$
+\rho_G(g) W_{i\alpha}(\r-\t_\mu) =
+\sg{E}{R\t_\mu} \qty(\sg{E}{\t_{\beta\alpha}} g_\beta h) W_{i1}(\r) =
+\sg{E}{R\t_\mu + \t_{\beta\alpha}} g_\beta \sum_{j} [\rho(h)]_{ij} W_{j1}(\r) =
+$$
+$$
+= \sum_{j} \sg{E}{R\t_\mu + \t_{\beta\alpha}} [\rho(h)]_{ij} W_{j\beta}(\r) \implies
+$$
+\begin{equation} \label{eq:wannier_rep}
+\rho_G(g) W_{i\alpha}(\r-\t_\mu) = \sum_{j} [\rho(h)]_{ij} W_{j\beta}(\r - R\t_\mu - \t_{\beta\alpha}).
+\end{equation}
 
 \n
 
-From the discussion above, one would conclude that a commensurate TBG system should have a translational symmetry with lattice constant $L(\theta)$ given by Eq. \eqref{eq:commensurate-constant}. However, as discussed in \cite{zou2018}, scanning tunneling microscopy (STM) experiments actually observe a moiré lattice constant
-\begin{equation} \label{eq:STM-constant}
-L'(\theta) = \frac{a}{2 \sin(\theta/2)} \leq L(\theta).
+Now define the Bloch functions:
+\begin{equation} \label{eq:bloch_functions}
+a_{i\alpha}(\k, \r) = \sum_{\mu} e^{i\k\vdot\t_\mu} W_{i\alpha}(\r-\t_\mu).
 \end{equation}
 
-This can be interpreted as MATBG exhibiting an approximate translational symmetry with superlattice constant $L'(\theta)$, despite optionally possessing an exact translational symmetry with $L(\theta)$ in the commensurate case. The Bistritzer-MacDonald (also known as continuum theory) to be derived in Section \ref{sec:BM-model} incorporates this translational symmetry and others ``good'' emergent symmetries that MATBG displays in experiments.
-
-
-\subsection{Bistritzer-MacDonald model} \label{sec:BM-model}
-
-The atoms positions of each layer are given by
-\begin{equation} \label{eq:position-atoms-tbg}
-\r = n_1 \a_{\ell,1} + n_2 \a_{\ell,2} + \vtau_{\ell,\alpha},
+Using Equation \ref{eq:wannier_rep}, the Bloch functions transform as
+$$
+\rho_G(g) a_{i\alpha}(\k,\r) =
+\rho_G(g) \sum_{\mu} e^{i\k\vdot\t_\mu} W_{i\alpha}(\r-\t_\mu) =
+\sum_{j} \sum_{\mu} e^{i\k\vdot\t_\mu} [\rho(h)]_{ij} W_{j\beta}(\r-R\t_\mu-\t_{\beta\alpha}) =
+$$
+$$
+= e^{-i(R\k)\vdot\t_{\beta\alpha}} \sum_{j} [\rho(h)]_{ji} \sum_{\mu} e^{i(R\k)\vdot(R\t_\mu+\t_{\beta\alpha})} W_{j\beta}(\r-R\t_\mu-\t_{\beta\alpha}) \implies
+$$
+\begin{equation} \label{eq:bloch_rep}
+(\rho_G(g) a)_{i\alpha}(\k,\r) = e^{-i(R\k)\vdot\t_{\beta\alpha}} \sum_{j} [\rho(h)]_{ji} \, a_{j\beta}(R\k, \r),
 \end{equation}
-where $\alpha = A,B$ indexes the site type, and $\tau_{\ell,\alpha}$ are basis vectors. The lattice vectors are the rotated $\a_{j}^{(\ell)} = R_{\theta_\ell} \a_{j}$, where
-\begin{equation} \label{eq:rotation-matrix}
+where $h$ and $\t_{\beta\alpha}$ are determined by Equation \ref{eq:t_betaalpha}. The choice of representatives $g_\alpha$ must be kept fixed through the construction.
+
+Observe that $\rho_G(g)$ in its matrix form consists of infinitely many $(n\cdot n_q)\times (n\cdot n_q)$ block, where each one is labelled by a $(\k', \k)$ pair, that correspond to Bloch functions labelled by $\k', \k$. For a given $g = \sg{R}{\t} \in G$ and each set of columns corresponding to $\k$, there is exactly one non-zero block, identified by $\k' = R\k$. Denoting this block by $\rho_G^\k(g)$, its matrix elements are given by
+$$
+\qty[\rho_G^\k(g)]_{j\beta,i\alpha} = e^{-i(R\k)\vdot\t_{\beta\alpha}}\rho_{ij}(g_\beta^{-1}\sg{E}{-\t_{\beta\alpha}}gg_\alpha).
+$$
+
+The full set of matrices $\rho_G^\k(g)$, for each $\k$ in the first BZ, contain all the non-zero elements of $\rho_G(g)$.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\subsection{Momentum space}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{definition}[\textbf{Little group}]
+Two reciprocal space vectors $\k_1$ and $\k_2$ are said to be equivalent, $\k_1 \equiv \k_2$, if $\k_2 - \k_1$ is a reciprocal lattice vector. The \textit{little group} $G_\k$ of a vector $\k$ in reciprocal space is the set of elements $g \in G$ such that $g \k \equiv \k$. Remember that the action of space group elements on reciprocal space is defined by
+$$
+g\k = \sg{R}{\t}\k = R\k.
+$$
+For each $\k$, notice that $G_\k$ is infinite because if $h \in G_\k$, the operation of $h$ followed by any Bravais lattice translation also belongs to $G_\k$.
+\end{definition}
+
+\n
+
+The set \(\{\rho_G^\k(g) \mid g \in G_\k\}\) forms an \((n \cdot n_q) \times (n \cdot n_q)\) representation of the little group \(G_\k\), referred to as \(\rho_G \downarrow G_\k\). This subduction of \(\rho_G\) onto \(G_\k\) is projected onto the Wannier functions at \(\k\). Despite \(G_\k\) being infinite, the representations of two space group operations, \(\sg{R}{\t}\) and \(\sg{R}{\t + \t_1}\), where \(\t_1\) is a Bravais lattice translation, differ only by an overall phase factor \(e^{-i(R\k) \vdot \t_1} = e^{i\k \vdot \t_1}\) within \(\rho_G \downarrow G_\k\).
+
+The characters of \(\rho_G^\k = \rho_G \downarrow G_\k\), analogous to the expression for induced representations' characters, are given for \(g \in G_\k\) as:
+
+\begin{equation} \label{eq:}
+\rho_G^\k(g) =
+\sum_{\substack{\alpha=1 \\ g_\alpha^{-1}\sg{E}{-\t_{\alpha\alpha}}g g_\alpha \in G_\q}}^n e^{-i(R\k)\vdot\t_{\alpha\alpha}}
+\chi^{(\rho)}\qty(g_\alpha^{-1}\sg{E}{-\t_{\alpha\alpha}}g g_\alpha),
+\end{equation}
+where \(\chi^{(\rho)}\) represents the character of the site-symmetry representation \(\rho\).
+
+To determine the number of times each irrep \(\sigma_i^\k\) of \(G_\k\) appears in the representation \(\rho_G \downarrow G_\k\), denoted by \(r_i^\k\), we use the decomposition:
+
+\begin{equation} \label{eq:induce_subduce}
+(\rho \uparrow G) \downarrow G_\k \equiv \bigoplus_i r_i^\k \sigma_i^\k,
+\end{equation}
+where \(\equiv\) signifies the equivalence of representations. The multiplicities \(r_i^\k\) are computed using the \textit{Reduction Formula} \cite{dresselhaus}:
+
+\begin{theorem}[\textbf{Reduction formula}] \label{th:reduction_formula}
+Any unitary representation $\Gamma$ is a direct sum of irreps
+\begin{equation} \label{eq:Gamma_direct_sum_of_irreps}
+\Gamma \equiv \bigoplus_j r_j \, \Gamma_j,
+\end{equation}
+where the coefficients $r_j \in \N_{>0}$ denote the number of times the irrep $\Gamma_j$ appears in the decomposition of $\Gamma$. The coefficients $r_j$ are given by the \textit{reduction formula}
+\begin{equation} \label{eq:reduction_formula}
+r_j =
+\frac{1}{\abs{G}} \sum_{g \in G} \chi^{(\Gamma)}(g) \chi^{(\Gamma_j)}(g)^* =
+\frac{1}{\abs{G}} \sum_{S} \abs{S} \, \chi^{(\Gamma)}_S \qty[\chi^{(\Gamma_j)}_S]^*.
+\end{equation}
+\end{theorem}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Elementary Band Representations} \label{subsec:elementary_band_reps}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Two band representations are considered equivalent if they can be continuously deformed into each other without closing energy gaps or breaking symmetries, similar to the concept of homotopy in topology. This notion of equivalence is essential for classifying electronic band structures in terms of their topological properties. By treating equivalence in this way, we can systematically identify whether a material exhibits non-trivial topological phases, such as those found in topological insulators, based purely on its symmetry and band structure.
+
+\begin{definition}[\textbf{Equivalence between band representations}] \label{def:equiv_bandrep}
+Two band representations $\rho_G$ and $\sigma_G$ are equivalent iff there exists a unitary matrix-valued function $S(\k,t,g)$ smooth in $\k$ and continuous in $t$ such that, for all $g \in G$
+\begin{enumerate}
+\item $S(\k, t, g)$ defines a band representation according to Equation \ref{eq:bloch_rep} for all $t \in [0,1]$;
+\item $S(\k, 0, g) = \rho_G^\k(g)$;
+\item $S(\k, 1, g) = \sigma_G^\k(g)$.
+\end{enumerate}
+\end{definition}
+
+\begin{definition}[\textbf{Elementary band representation}]
+A band representation is called \textbf{composite} if it is equivalent to the direct sum of other band representations. A band representation that is not composite is called \textbf{elementary}.
+\end{definition}
+
+%\begin{theorem}[\textbf{Properties of band representations}]
+%Some properties of band representations are:
+%\begin{enumerate}
+%\item Because induction commutes with direct sums
+%$$
+%(\rho_1 \oplus \rho_2) \uparrow G = (\rho_1 \uparrow G) \oplus (\rho_2 \uparrow G),
+%$$
+%reducible representations of $G_\q$ induce composite band representations.
+%
+%\item Given subgroups $K \subset H \subset G$, and a representation $\rho$ of $K$, because induction is transitive it follows that
+%$$
+%(\rho \uparrow H) \uparrow G = \rho \uparrow G.
+%$$
+%From this we conclude that all EBRs can be induced from irreps of the maximal site symmetry groups.
+%\end{enumerate}
+%\end{theorem}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\subsection{Exceptions}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%There are exceptions where an irrep of the site symmetry group of a maximal Wyckoff position induces a composite band representation.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Topological Systems} \label{subsec:topological_systems}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+The \textit{atomic limit} refers to bands that can be constructed from localized orbitals situated on atomic sites while fully preserving the crystal's symmetry. These bands represent tightly bound electrons and lack any global topological properties. In contrast, \textit{topological bands} cannot be derived from such localized orbitals without violating symmetry or continuity. Their wavefunctions exhibit a global ``twisting'' that fundamentally sets them apart from the atomic case. Based on this concept, we define the following \cite{building_blocks2018}:
+
+\begin{definition}[\textbf{Topological band}]
+A set of bands are in the \textbf{atomic limit} of a space group if they can be induced from localized Wannier functions consistent with the crystalline symmetry of that space group. Otherwise, they are \textbf{topological}.
+\end{definition}
+
+Band representations describe a system in the atomic limit. Topological band must be groups of bands that satisfy the crystal symmetry in momentum space, but nevertheless do not transform as a band representation. In other words, they cannot be induced from localized Wannier orbitals that obey the crystal symmetry.
+
+\begin{theorem} \label{th:topo_insul}
+Any isolated set of bands that is not equivalent to a band representation (composite or elementary) gives a strong, weak, or crystalline topological insulator.
+\end{theorem}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\subsection{How to determine if a set of bands is topological}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%As said in \cite{building_blocks2018}: \textbf{ESSA SEÇÃO EU COPIEI}
+%
+%A practical route to determining whether a set of bands $\mathcal{B}$ is \textbf{not} a band representation is as follows: first, enumerate all EBRs for the particular space group and list the irreps that appear in each EBR at each high symmetry point. Next, compute the irreps at each high-symmetry point for the bands in $\mathcal{B}$. If the set of irreps that have been computed for the bands in $\mathcal{B}$ cannot be obtained from a linear combination of the EBRs in the space group, then the bands in $\mathcal{B}$ do not comprise a band representation and, by Theorem \ref{th:topo_insul}, are topological.
+%
+%If the irreps that appear in $\mathcal{B}$ can be obtained from a linear combination of the EBRs of the space group, then one must compute symmetric and localized Wannier functions for the bands in $\mathcal{B}$ to confirm that they are equivalent to the atomic limit defined by the linear combination of EBRs or compute a Berry phase that will distinguish the two. This is because, it is possible for two distinct groups of bands to have the exact same irreps at all high-symmetry points, but different Berry phases (recall, this is exactly why we require the homotopic notion of equivalence, as in Definition \ref{def:equiv_bandrep}.)
+
+
+To determine whether a set of bands \(\mathcal{B}\) does \textbf{not} form a band representation, a systematic approach can be followed: first, identify all elementary band representations (EBRs) for the relevant space group and catalog the irreducible representations (irreps) that appear at each high-symmetry point for these EBRs. Then, calculate the irreps associated with the bands in \(\mathcal{B}\) at the high-symmetry points. If the irreps corresponding to \(\mathcal{B}\) cannot be expressed as a linear combination of the irreps from the EBRs, the bands do not form a band representation. According to Theorem \ref{th:topo_insul}, this indicates that the bands are topological.
+
+If the irreps of \(\mathcal{B}\) can be written as a linear combination of EBRs, further analysis is required. One must either construct symmetric, localized Wannier functions to verify that the bands correspond to the atomic limit implied by the linear combination of EBRs, or calculate a Berry phase to distinguish between the two cases. This additional step is necessary because distinct sets of bands can share identical irreps at all high-symmetry points while differing in their Berry phases, reflecting the need for the homotopic equivalence notion described in Definition \ref{def:equiv_bandrep}.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Topological Heavy Fermion Model} \label{sec:topo_heavy_fermion}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+As proved in \cite{all_magic_angles}, when one includes the emergent particle-hole symmetry, the middle two flat bands in each valley must form the irreducible co-representations (dubbed as irreps) (\textbf{Lowest TBG Bands set by PH})
+\begin{equation} \label{eq:matbg-irreps}
+\Gamma_1 \oplus \Gamma_2; \; M_1 \oplus M_2; \; K_2 K_3
+\end{equation}
+of the magnetic space group $P6'2'2$. Comparing this irreps with the EBRs \cite{topological_quantum_chemistry2017}, we get the Table \ref{tab:matbg-irreps}. We see that the irreps at Equation \ref{eq:matbg-irreps} do not correspond to any of the local orbitals at \ref{tab:matbg-irreps}. In order to resolve the Wannier obstruction, we add the closest higher energy bands, which have the $\Gamma_3$ irrep at the $\Gamma_m$ point. These higher energy bands hybridize with the two middle ones, and we extract the trivial bands that form the band representation
+\begin{equation} \label{eq:trivial-irreps}
+[E]_a \uparrow G: \quad \Gamma_3; \; M_1 \oplus M_2; \; K_2 K_3,
+\end{equation}
+where $[E]_a$ is forme by $p_x, p_y$-like orbitals at the $1a$ Wyckoff position.
+
+\begin{table}[H]
+\tiny
+\caption{Elementary band representations of the magnetic space group $P6'2'2$.}
+\centering
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|}
+\hline
+Wyckoff & \multicolumn{3}{c|}{$1a$} & \multicolumn{3}{c|}{$2c$} & \multicolumn{2}{c|}{$3f$} \\
+\cline{1-9}
+Site sym. & \multicolumn{3}{c|}{$6'2'2$, $32$} & \multicolumn{3}{c|}{$32$, $32$} & \multicolumn{2}{c|}{$2'2'2$, $2$} \\
+\cline{1-9}
+EBR & $G_{A_1}^{1a}(1)$ & $G_{A_2}^{1a}(1)$ & $G_{E}^{1a}(2)$ & $G_{A_1}^{2c}(2)$ & $G_{A_2}^{2c}(2)$ & $G_{E}^{2c}(4)$   & $G_{A}^{3f}(3)$ & $G_{B}^{3f}(3)$ \\
+\hline
+$\Gamma$ & $\Gamma_1(1)$ & $\Gamma_2(1)$ & $\Gamma_3(1)$ & $2\Gamma_1(1)$ & $2\Gamma_2(1)$ & $2\Gamma_3(2)$ & $\Gamma_1(1)+\Gamma_3(2)$ & $\Gamma_2(1)+\Gamma_3(2)$ \\
+\hline
+$K$ & $K_1(1)$ & $K_1(1)$ & $K_2 K_3(2)$ & $K_2 K_3(2)$ & $K_2 K_3(2)$ & $2K_1(1) + K_2 K_3(2)$ & $K_1(1)+K_2 K_3(2)$ & $K_1(1)+K_2 K_3(2)$ \\
+\hline
+$M$ & $M_1(1)$ & $M_2(1)$ & $M_1(1)+M_2(1)$ & $2M_1(1)$ & $2M_2(1)$ & $2M_1(1)+2M_2(1)$ & $2M_1(1)+M_2(1)$ & $M_1(1)+2M_2(2)$ \\
+\hline
+\end{tabular}
+\label{tab:matbg-irreps}
+\end{table}
+
+\begin{table}[H]
+\caption{Character table of irreps at high symmetry momenta in magnetic space group $P6'2'2$.}
+\centering
+\begin{tabular} { c c c c | c c c | c c c }
+\cline{1-10}
+$\P$ & $\P \Gamma_1$ & $\P \Gamma_2$ & $\P \Gamma_3$ & $\P$ & $\P M_1$ & $\P M_2$ & $\P$ & $\P K_1$ & $\P K_2K_3$ \\
+\cline{1-10}
+$E$ & $\P1$ & $\P1$ & $\P2$ & $\P E$ & $\P1$ & $\P1$ & $\P E$ & $\P1$ & $\P2$ \\
+$2 C_3$ & $\P1$ & $\P1$ & $ -1$ & $\P C_2'$ & $\P1$ & $ -1$ & $\P C_3$ & $\P1$ & $ -1$ \\
+$3 C_2'$ & $\P1$ & $ -1$ & $\P0$ & $\P$ & $\P$ & $\P$ & $\P C_3^{-1}$ & $\P1$ & $-1$ \\
+\cline{1-10}
+\end{tabular}
+\label{tab:P6'2'2}
+\end{table}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Monolayer}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Considering only nearest-neighbors, the hamiltonian of a single unrotated layer of graphene is given by
+$$
+H_{\text{mono}}(\k) = -t
+\begin{pmatrix}
+0 & f(\k) \\
+f^*(\k) & 0
+\end{pmatrix}
+, \quad \ell = 1, 2,
+$$
+where $f = \sum_{i=1}^{3} e^{i \k \vdot \bm{\delta}}$, and $\bm{\delta}$ are the three nearest-neighbor vectors from a site $A$ of the honeycomb lattice.
+
+Expanding in first-order $\k = \K + \q$, where $\K = \frac{4\pi}{3a} (1, 0)$ is the Dirac point of the unrotated layer, we have
+$$
+H_{\text{mono}}(\K + \q) \approx v_F \, \q \vdot \bm{\sigma}.
+$$
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{BM model review}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+The hamiltonian of the BM model is given by
+$$
+H = H_1 + H_2 + V + V^\dagger,
+$$
+where $H_1$ and $H_2$ correspond to the layers 1 and 2, and $V$ is the hybridization between them.
+
+\n
+
+For this discussion, we use the reference frame where layer 1 is unrotated and layer 2 is rotated counter-clockwise by an angle $\theta$. Therefore, we have
+$$
+H_1(\k) = H_{\text{mono}}(\k), \quad H_2(\k) = H_1(R_\theta^{-1}\k),
+$$
+$$
 R_\theta =
 \begin{pmatrix}
 \cos\theta & -\sin\theta \\
 \sin\theta & \cos\theta
-\end{pmatrix},
-\end{equation}
-is the rotation matrix by an angle $\theta$ and we use the reference frame which $\theta_1 = -\theta/2$ and $\theta_2 = +\theta/2$. We shall consider AB-stacking as the starting position ($\theta=0$), because this is the most stable configuration for bilayer graphene \cite{handbook2019}. In this case, the translation vectors are given by
-\begin{align}
-\tau_{1,A} &= R_{-\theta/2}(0,0), \quad \tau_{2,A} = R_{\theta/2} [(0,-d) + \vtau_0], \label{eq:tauA} \\
-\tau_{1,B} &= R_{-\theta/2}(0,d), \quad \tau_{2,B} = R_{\theta/2} [(0,0) + \vtau_0], \label{eq:tauB}
-\end{align}
-where $\vtau_0$ is an arbitrary translation. For example, $\vtau_0 = (0,0)$ corresponds to AB-stacking and $\vtau_0 = (0, d)$ corresponds to AA-stacking.
+\end{pmatrix}.
+$$
 
-Defining the wave vectors $\vb{G}_{\ell,1} = \vb{b}_{\ell,1}$, $\vb{G}_{\ell,2} = \vb{b}_{\ell,2}$ and $\vb{G}_{\ell,3} = \vb{b}_{\ell,1} - \vb{b}_{\ell,2}$, the moiré pattern can be interpreted by an beat effect with periodicity $\vb{b}_k^{\text{m}} = \vb{G}_{1,k} - \vb{G}_{2,k}$, \cite{handbook2019}:
-\begin{equation} \label{eq:moire-bvecs}
-\vb{b}_1^{\text{m}} = \sqrt{3} \abs{\Delta \K} \qty( \frac{1}{2}, -\frac{\sqrt{3}}{2}), \quad
-\vb{b}_2^{\text{m}} = \sqrt{3} \abs{\Delta \K} \qty( \frac{1}{2},  \frac{\sqrt{3}}{2}),
-\end{equation}
-where $\K$ is a Dirac point of an unrotated monolayer, and $\Delta\K = \K_1-\K_2$ with $\abs{\Delta \K} = 2 \abs{\K} \sin(\theta/2)$.
+Also, the Dirac points of each layer are
+$$
+\K_1 = \K = \frac{4\pi}{3a} (1, 0), \quad \K_2 = R_\theta \K_1 = R_\theta \K,
+$$
+$$
+$$
 
-\n
+Therefore, expanding around the Dirac points $\K_1$ and $\K_2$, respectively:
+$$
+H_1(\K_1 + \q) \approx v_F \, \q \vdot \bm{\sigma}.
+$$
+$$
+\boxed{ H_2(\K_2 + \q) = H_2(R_\theta \K_1 + \q) = H_1(\K_1 + R_\theta^{-1}\q) \approx v_F \, (R_\theta^{-1}\q) \vdot \bm{\sigma} \approx v_F \, (1 - i \theta \sigma_y ) \, \q \vdot \bm{\sigma}. }
+$$
 
-The Hamiltonian $H$ of the model comes from a tight-binding approach $H = H_1 + H_2 + H_{\perp}$, where $H_\ell$ is the Hamiltonian of the layer $\ell$, and $H_\perp = V_{12} + V_{12}^\d$ describes the interlayer hybridization. We write this Hamiltonian in terms of Bloch waves
-\begin{equation} \label{eq:BM-blochwave}
-\ket{\psi_{\ell, \k, \alpha}} = \frac{1}{\sqrt{N_\ell}} \sum_{\R_\ell} e^{i \k \vdot (\R_\ell + \vtau_{\ell,\alpha})} \ket{\ell, R_\ell, \alpha},
-\end{equation}
-where $\ell$ labels the layer, $N_\ell$ is the number of unit cells, $\R_\ell$ are the positions of the underlying Bravais lattice, $\vtau_{\ell,\alpha}$ are the orbital centers (of sublattice $\alpha = A,B$) in the unit cell, and $\ket{\ell,\R_\ell,\alpha}$ are localized Wannier states. In this basis, considering only nearest-neighbor intralayer hopping, the low-energy Hamiltonian of each layer is
-\begin{equation} \label{eq:blg-eachlayer-hamil-lowenergy}
-H^{\pm \K}(\q) = \hbar v_F \abs{\q}
-\begin{pmatrix}
-0 & e^{\mp i (\theta_\q - \theta_\ell)} \\
-e^{\pm i (\theta_\q - \theta_\ell)} & 0
-\end{pmatrix},
-\end{equation}
-where we expanded $\k = \pm \K_\ell + \q$ to first-order in $\q$.
+If we \textbf{neglect the $\theta$-dependence on $H_2$}, our BM model will be \textbf{particle-hole symmetric}, as defined by Bernevig.
 
 \n
 
-The interlayer Hamiltonian in second quantization reads
-\begin{equation} \label{eq:interlayer-hopping}
-V_{12} = \sum_{\R_1,\alpha,\R_2,\beta} c_{1,\alpha}^\d t_{12}^{\alpha\beta}(\R_1,\R_2) c_{2,\beta}(\R_2), \quad
-t_{12}^{\alpha\beta}(\R_1,\R_2) =
-\mel{1,\R_1,\alpha}{V_{12}}{2,\R_2,\beta}.
-\end{equation}
+Of course, the more difficult part is due to the hybridization term $V$. It is written on the Bloch basis $\ket{\ell, \alpha, \p}$, where $\ell = 1, 2$ is the layer index, $\alpha = A, B$ is the sublattice index, and $\p$ is the momentum.
+We have
+$$
+V_{\alpha\beta}(\p, \p') = \bra{1, \alpha, \p} H \ket{2, \beta, \p'}.
+$$
 
-Performing the Fourier transformation
-\begin{equation} \label{eq:blg-fourier}
-c_{\ell,\alpha}^\d(\R_\ell) = \frac{1}{\sqrt{N_\ell}} \sum_{\k_\ell}
-e^{-i\k_\ell \vdot (\R_\ell + \vtau_{\ell,\alpha})} c_{\ell,\alpha}^\d(\k_\ell),
-\end{equation}
-with the sum of $\k_\ell$ over the BZ of layer $\ell$, we have
-\begin{equation} \label{eq:interlayer-hopping-kspace}
-V_{12} = \sum_{\k_1,\alpha,\k_2,\beta} c_{1,\alpha}^\d(\k_1) T_{12}^{\alpha\beta}(\k_1,\k_2) c_{2,\beta}(\k_2),
-\end{equation}
-\begin{equation} \label{eq:interlayer-hopping-Tkspace}
-T_{12}^{\alpha\beta}(\k_1,\k_2) =
-\frac{1}{\sqrt{N_1 N_2}} \sum_{\R_1,\R_2} e^{-i\k_1\vdot(\R_1+\vtau_{1,\alpha})}
-t_{12}^{\alpha\beta}(\R_1,\R_2) e^{i\k_2\vdot(\R_2+\vtau_{2,\beta})}.
-\end{equation}
-
-Assuming the interlayer hopping $t_{12}^{\alpha\beta}(\R_1,\R_2)$ is only a function of the separation between the centers of the two orbitals, we can apply a Fourier transformation
-\begin{equation} \label{eq:interlayer-hopping-fourier}
-t_{12}^{\alpha\beta}(\R_1,\R_2) = t_{12}^{\alpha\beta}(\R_1+\vtau_{1,\alpha}-\R_2-\vtau_{2,\beta}) =
-\int \frac{\dd[2]{\p}}{(2\pi)^2} e^{i \p \vdot (\R_1+\vtau_{1,\alpha}-\R_2-\vtau_{2,\beta})} t_{12}^{\alpha\beta}(\p).
-\end{equation}
-
-Plugging Eq. \eqref{eq:interlayer-hopping-fourier} in Eq. \eqref{eq:interlayer-hopping-Tkspace}, we obtain
-\begin{equation} \label{eq:interlayer-hopping-simplified}
-T_{12}^{\alpha\beta}(\k_1,\k_2) = \frac{1}{A_1}
-\sum_{\G_1, \G_2} e^{i\G_1\vdot\vtau_{1,\alpha}} t_{12}^{\alpha\beta}(\p)
-e^{-i\G_2\vdot\vtau_{2,\beta}} \delta_{\k_1+\G_1, \k_2+\G_2},
-\end{equation}
-where the crystal momentum coupling $\k_1 + \G_1 = \k_2 + \G_2$ is known as generalized umklapp condition.
+When we expand both $\p = \K_1 + \q$ and $\p' = \K_2 + \q'$, \textbf{after the BM considerations}, we get
+$$
+V_{\alpha\beta}(\K + \q, R_\theta \K + \q') \approx
+w \sum_{j=1}^{3} \delta_{\q, \q' + \q_j} T_{\alpha\beta}^j,
+$$
+where $\q_1, \q_2, \q_3$ are the moiré momentum vectors, with absolute value $k_D = 2 \sin(\theta/2) \abs{\K}$. The matrices $T^j_{\alpha\beta}$ are
+$$
+T_1 = \sigma_0 + \sigma_x
+$$
+$$
+T_2 = \sigma_0 + \cos(\frac{2\pi}{3}) \sigma_x + \sin(\frac{2\pi}{3}) \sigma_y
+$$
+$$
+T_3 = \sigma_0 + \cos(\frac{2\pi}{3}) \sigma_x - \sin(\frac{2\pi}{3}) \sigma_y
+$$
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\linewidth]{fig/moire-vectors.png}
+\end{figure}
 
 \n
 
-Equation \eqref{eq:interlayer-hopping-simplified} relies on the functional form of $t_{12}^{\alpha\beta}(\mathbf{p})$. In order to make further progress, we introduce additional assumptions. Given that both $A$ and $B$ sites of graphene correspond to a $p_z$ orbital of carbon atoms, we assume that $t_{12}^{\alpha\beta}(\r) = t_\perp(\r)$ does not depend on $\alpha$ or $\beta$. In \cite{tperp-laissardiere2012}, the authors characterize the behavior of $t_\perp(\r)$ using Slater-Koster parameters and numerically evaluate $t_\perp(\mathbf{p})$ through Eq. \eqref{eq:interlayer-hopping-fourier}. They establish that $t_\perp(\p)$ is solely a function of $\abs{\p}$ with rapid decay. This has significant implications, as only a few umklapp processes contribute to the coupling in Eq. \eqref{eq:interlayer-hopping-simplified}.
+This \textbf{BM model} is called \textbf{MBM-1V (Moiré Band Model - One Valley)} by Bernevig. If we decompose $\q = \k - \Q$, $\q'=\k-\Q'$, where $\Q$ and $\Q'$ belong to the hexagonal lattice formed by adding $\q_{1,2,3}$ iteratively, we can rewrite the hamiltonian as
+$$
+\boxed{
+H_{\Q, \Q'}^{(\text{MBM-1V})}(\k) =
+\delta_{\Q,\Q'} v_F (\k-\Q) \vdot \bm{\sigma}
++ w \sum_{j=1}^{3} (\delta_{\Q'-\Q, \q_j} + \delta_{\Q-\Q', \q_j}) T^j.
+}
+$$
 
-\n
-
-In the small angle limit $\theta \lesssim 10^\circ$, we can expand $\k_\ell = \K_\ell + \q_\ell$ around the Dirac points of each layer, with $\abs{\q_\ell} \sim \abs{\Delta \K} \ll \abs{\K}$. Approximating $t_\perp(\K_1+\q_1+\G_1) \approx t_\perp(\K_1+\G_1)$, the interlayer coupling becomes
-\begin{equation} \label{eq:interlayer-hopping-truncation}
-T_{12}^{\alpha\beta}(\q_1,\q_2) = \frac{1}{A_{1}} \sum_{\G_1,\G_2} e^{i\G_1\vdot\vtau_{1,\alpha}}
-t_{12}^{\alpha\beta}(\K_1+\G_1) e^{-i\G_2\vdot\vtau_{2,\beta}}
-\delta_{\K_1+\q_1+\G_1,\K_2+\q_2+\G_2}.
-\end{equation}
-
-As $t_\perp(\p)$ rapidly decays with $\abs{\p}$, we truncate $t_\perp(\p) \approx 0$ for $\abs{\p} > \abs{\K}$. This leaves us with only three options for $\G_\ell$, where it can be either $\g_{\ell 1} = 0$, $\g_{\ell 2} = \b_{\ell 2}$, or $\g_{\ell 3} = -\b_{\ell 1}$. These options correspond to the three equivalent Dirac points on the monolayer Brillouin zone. Therefore, the crucial quantity becomes $t\perp(\abs{\K})$. This truncation leaves us with the term
-\begin{equation} \label{eq:delta-term}
-\delta_{\K_1+\q_1+\G_1,\K_2+\q_2+\G_2} = \delta_{\q_2-\q_1,\K_1-\K_2+\G_1-\G_2}.
-\end{equation}
-
-Since $\abs{\q_\ell} \ll \abs{\K}$, we find that the condition $\q_2-\q_1 = \K_1-\K_2+\G_1-\G_2$ is true only when $\G_1 = \g_{1n}$ and $\G_2 = \g_{2n}$ have the same index $n$. Consequently, we encounter three possibilities of momentum transfer:
-\begin{equation} \label{eq:qb}
-\q_\text{b} = \K_1 - \K_2 = \abs{\Delta \K} \, \qty(0, -1),
-\end{equation}
-\begin{equation} \label{eq:qtr}
-\q_\text{tr} = (\K_1 - \K_2) + (\g_{12} - \g_{22}) = \abs{\Delta \K} \, \qty(\frac{\sqrt{3}}{2}, \frac{1}{2}),
-\end{equation}
-\begin{equation} \label{eq:qtl}
-\q_\text{tl} = (\K_1 - \K_2) + (\g_{13} - \g_{23}) = \abs{\Delta \K} \, \qty(-\frac{\sqrt{3}}{2}, \frac{1}{2}),
-\end{equation}
-
-Finally, the interlayer coupling ends up with only three terms
-\begin{equation} \label{eq:interlayer-3terms}
-T_{12}^{\alpha\beta}(\q_1,\q_2) =
-T^{\alpha\beta}_{\q_\text{b}} \delta_{\q_1-\q_2, \q_\text{b}} +
-T^{\alpha\beta}_{\q_\text{tr}} \delta_{\q_1-\q_2, -\q_\text{tr}} +
-T^{\alpha\beta}_{\q_\text{tl}} \delta_{\q_1-\q_2, -\q_\text{tl}},
-\end{equation}
-where
-\begin{equation} \label{eq:interlayer-tensor}
-T^{\alpha\beta}_{\q_n} = \frac{t_\perp(\abs{\K})}{A_{\text{u.c.}}} e^{i \g_{1n} \vdot \bm{\tau}_{1\alpha}}
-e^{-i \g_{2n} \vdot \bm{\tau}_{2\beta}}.
-\end{equation}
-
-Writing matrices in the $A, B$ basis we get
-\begin{equation} \label{eq:T-qb}
-T_{\q_\text{b}} = \frac{t_\perp(\abs{\K})}{A_{\text{u.c.}}}
-\begin{pmatrix}
-1 & 1 \\
-1 & 1
-\end{pmatrix},
-\end{equation}
-\begin{equation} \label{eq:T-qtr}
-T_{\q_\text{tr}} = \frac{t_\perp(\abs{\K})}{A_{\text{u.c.}}} e^{-i \g_{12} \vdot \vtau_0}
-\begin{pmatrix}
-e^{i\phi} & 1 \\
-e^{-i\phi} & e^{i\phi}
-\end{pmatrix},
-\end{equation}
-\begin{equation} \label{eq:T-qtl}
-T_{\q_\text{tl}} = \frac{t_\perp(\abs{\K})}{A_{\text{u.c.}}} e^{-i \g_{13} \vdot \vtau_0}
-\begin{pmatrix}
-e^{-i\phi} & 1 \\
-e^{i\phi} & e^{-i\phi}
-\end{pmatrix},
-\end{equation}
-where $\phi = 2\pi/3$.
-
-
-\subsection{Aspects of Group Theory applied to MATBG} \label{sec:grouptheory}
-
-As discussed in \cite{zou2018}, at currently accessible energy scales, experiments indicate that MATBG exhibits some approximate symmetries. These include translational symmetry characterized by the constant $L' = a / (2 \sin\theta/2)$, valley symmetry $U_v(1)$, $C_{2z} \mathcal{T}$, and $D_6$ point group symmetry, which are not fully captured by a generic commensurate structure described in Section \ref{sec:tbg_geom}. The continuum model outlined in Section \ref{sec:BM-model} incorporates all these ``good'' symmetries. In this section, we will explore group theory concepts that will later be applied to understand the Wannier Obstruction \cite{zou2018} and the Topological Heavy Fermion model of MATBG \cite{topoheavyfermion2022}.
-
-\subsubsection{Space groups} \label{sec:spacegroups}
-
-The concept \textit{space group} refers to the spatial symmetries that preserve a crystal's structure. We denote an element of a space group $G$ as $\sg{R_\alpha}{\vtau}$, where $R_\alpha$ represents a point group operation such as rotations, reflections, inversions, or improper rotations, and $\vtau$ is a translation. A useful matrix representation for $G$ is:
-\begin{equation} \label{eq:spacegroup-rep}
-\sg{R_\alpha}{\vtau} =
-\begin{pmatrix}
-1 & 0 \\
-\vtau & R_\alpha
-\end{pmatrix},
-\end{equation}
-where $0$ is a row of three zeros, $\vtau$ is a column vector and $R_\alpha$ is $3\times 3$ rotation matrix.
-
-In this representation, the product of two elements can be evaluated by multiplying the corresponding matrices:
-\begin{align}
-\begin{split}
-\sg{R_\beta}{\vtau_2} \sg{R_\alpha}{\vtau_1} &=
-\begin{pmatrix}
-1 & 0 \\
-\vtau_2 & R_\beta
-\end{pmatrix}
-\begin{pmatrix}
-1 & 0 \\
-\vtau_1 & R_\alpha
-\end{pmatrix} \\
-&= \begin{pmatrix}
-1 & 0 \\
-R_\beta \vtau_1 + \vtau_2 & R_\beta R_\alpha
-\end{pmatrix}
-= \sg{R_\beta R_\alpha}{R_\beta \vtau_1 + \vtau_2}.
-\end{split}
-\end{align}
-
-The inverse of an element is given by
-\begin{equation} \label{eq:inv-spacegroup}
-\sg{R_\alpha}{\vtau}^{-1} =
-\begin{pmatrix}
-1 & 0 \\
--R_\alpha^{-1}\vtau & R_\alpha^{-1}
-\end{pmatrix} =
-\sg{R_\alpha^{-1}}{-R_\alpha^{-1}\vtau}.
-\end{equation}
-
-The pure translations and point group symmetries are the most evident, but a space group can also include compound operations, adding further complexity. The presence of these compound operations leads to the classification of space groups into \textit{symmorphic} or \textit{non-symmorphic}. We say that $G$ is symmorphic if, with a suitable choice of origin, all its elements can be decomposed in the form $\sg{R_\alpha}{\vtau} = \sg{1}{\R} \sg{R_\alpha}{0}$, where $\R$ is a Bravais lattice vector. In other words, $G$ is said to be symmorphic if it is a semi-direct product of the translation and point groups. For our purposes, the MATBG system exhibits emergent symmetries compatible with the $P622$ space group \cite{thesis_rennella}, which is symmorphic and associated with the $D_6$ point group.
+\begin{itemize}
+\item This model is \textbf{topological} and is what we have been discussing the whole time.
+\item The tables of Bernevig apply to this model, where we consider the Wyckoff position 1a within the THF approach to solve the topological obstruction.
+\item Its magnetic space group is $P6'2'2$. Generators: $C_{6z} T$, $C_{2y} T$, $C_{2x}$.
+\end{itemize}
 
 \begin{table}[H]
-\caption{Character table of point group $D_6$.}
+\scriptsize
+\caption{Elementary band representations of the magnetic space group $P6'2'2$.}
 \centering
-\begin{tabular} { c c c c c c c  }
-\specialrule{0.05em}{0em}{0.2em}
-$\P$ & $\P E$ & $\P C_2$ & $\P2C_3$ & $\P2C_6$ & $\P3C_2'$ & $\P3C_2''$ \\
-\specialrule{0.01em}{0.2em}{0.2em}
-$A_1$ & $\P1$ & $\P1$ & $\P1$ & $\P1$ & $\P1$ & $\P1$ \\
-\specialrule{0.01em}{0.2em}{0.2em}
-$A_2$ & $\P1$ & $\P1$ & $\P1$ & $\P1$ & $ -1$ & $ -1$ \\
-\specialrule{0.01em}{0.2em}{0.2em}
-$B_1$ & $\P1$ & $ -1$ & $\P1$ & $ -1$ & $\P1$ & $ -1$ \\
-\specialrule{0.01em}{0.2em}{0.2em}
-$B_2$ & $\P1$ & $ -1$ & $\P1$ & $ -1$ & $ -1$ & $\P1$ \\
-\specialrule{0.01em}{0.2em}{0.2em}
-$E_1$ & $\P2$ & $ -2$ & $ -1$ & $\P1$ & $\P0$ & $\P0$ \\
-\specialrule{0.01em}{0.2em}{0.2em}
-$E_1$ & $\P2$ & $\P2$ & $ -1$ & $ -1$ & $\P0$ & $\P0$ \\
-\specialrule{0.05em}{0.2em}{0em}
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|}
+\hline
+Wyckoff & \multicolumn{3}{c|}{$1a$} & \multicolumn{3}{c|}{$2c$} & \multicolumn{2}{c|}{$3f$} \\
+\cline{1-9}
+Site sym. & \multicolumn{3}{c|}{$6'2'2$, $32$} & \multicolumn{3}{c|}{$32$, $32$} & \multicolumn{2}{c|}{$2'2'2$, $2$} \\
+\cline{1-9}
+EBR & $G_{A_1}^{1a}(1)$ & $G_{A_2}^{1a}(1)$ & $G_{E}^{1a}(2)$ & $G_{A_1}^{2c}(2)$ & $G_{A_2}^{2c}(2)$ & $G_{E}^{2c}(4)$   & $G_{A}^{3f}(3)$ & $G_{B}^{3f}(3)$ \\
+\hline
+$\Gamma$ & $\Gamma_1(1)$ & $\Gamma_2(1)$ & $\Gamma_3(1)$ & $2\Gamma_1(1)$ & $2\Gamma_2(1)$ & $2\Gamma_3(2)$ & $\Gamma_1(1)+\Gamma_3(2)$ & $\Gamma_2(1)+\Gamma_3(2)$ \\
+\hline
+$K$ & $K_1(1)$ & $K_1(1)$ & $K_2 K_3(2)$ & $K_2 K_3(2)$ & $K_2 K_3(2)$ & $2K_1(1) + K_2 K_3(2)$ & $K_1(1)+K_2 K_3(2)$ & $K_1(1)+K_2 K_3(2)$ \\
+\hline
+$M$ & $M_1(1)$ & $M_2(1)$ & $M_1(1)+M_2(1)$ & $2M_1(1)$ & $2M_2(1)$ & $2M_1(1)+2M_2(1)$ & $2M_1(1)+M_2(1)$ & $M_1(1)+2M_2(2)$ \\
+\hline
 \end{tabular}
-\label{tab:D6}
+\label{tab:ebr-P6'2'2}
 \end{table}
 
-Although the continuum model incorporates the point group $D_6$, the regions of interest for localizing Wannier orbitals are the AB and BA regions of Figure \ref{fig:moireD6} as they are the most stable. These regions share certain symmetry properties, which can be described by the concept of \textit{Wyckoff position}, to be defined in the following section \ref{sec:wyckoff}. Once these concepts are understood, we can utilize the character table \ref{tab:D6} and its irreducible representations to construct Wannier orbitals centered at AB and BA regions.
+\begin{table}[H]
+\caption{Character table of irreps at high symmetry momenta in magnetic space group $P6'2'2$.}
+\centering
+\begin{tabular} { c c c c | c c c | c c c }
+\cline{1-10}
+$\P$ & $\P \Gamma_1$ & $\P \Gamma_2$ & $\P \Gamma_3$ & $\P$ & $\P M_1$ & $\P M_2$ & $\P$ & $\P K_1$ & $\P K_2K_3$ \\
+\cline{1-10}
+$E$ & $\P1$ & $\P1$ & $\P2$ & $\P E$ & $\P1$ & $\P1$ & $\P E$ & $\P1$ & $\P2$ \\
+$2 C_3$ & $\P1$ & $\P1$ & $ -1$ & $\P C_2'$ & $\P1$ & $ -1$ & $\P C_3$ & $\P1$ & $ -1$ \\
+$3 C_2'$ & $\P1$ & $ -1$ & $\P0$ & $\P$ & $\P$ & $\P$ & $\P C_3^{-1}$ & $\P1$ & $-1$ \\
+\cline{1-10}
+\end{tabular}
+\label{tab:char-P6'2'2}
+\end{table}
 
-\subsubsection{Site-symmetry group and Wyckoff positions} \label{sec:wyckoff}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\section{There exists another model}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%According to Bernevig: ``The MBM-1V is half of the TBG system, with similar physics taking place in the electron states around $\K'$''. A model with the two valleys can be written as
+%$$
+%\boxed{
+%H_{\Q, \Q'}^{(\text{MBM-2V})}(\k) =
+%\delta_{\Q,\Q'} v_F (\k-\Q) \vdot \bm{\sigma} \otimes \tau_z
+%+ w \sum_{j=1}^{3} (\delta_{\Q'-\Q, \q_j} + \delta_{\Q-\Q', \q_j}) T^j \otimes \tau_0.
+%}
+%$$
+%
+%Here $\tau_z$ and $\tau_0$ are the Pauli and identity matrix representing the valley degree of freedom.
+%
+%\begin{itemize}
+%\item This model is \textbf{apparently different} from the latter, and \textbf{is not topological}. You can decompose it in EBR's as $G_{A_1}^{2c} + G_{A_2}^{2c}$.
+%\item The tables of Rennella apply to this model. There the authors (Vafek, Rennella, Angeli, Koshino, etc) consider Wyckoff position 2c, because these positions really correspond to symmetry-adapted exponentially localized Wannier functions.
+%\item The magnetic space group is $P6221'$. Generators: $C_{6z}$, $C_{2y}$, $C_{2x}$, $T$.
+%\end{itemize}
+%
+%\begin{table}[H]
+%\caption{Elementary band representations generated from Wyckoff position $2c$ of the space group $P622$.}
+%\centering
+%\begin{tabular}{|c|c|c|c|}
+%\hline
+%Wyckoff & \multicolumn{3}{c|}{$2c$} \\
+%\cline{1-4}
+%Site sym. & \multicolumn{3}{c|}{$32$} \\
+%\cline{1-4}
+%EBR & $G_{A_1}^{2c}(2)$ & $G_{A_2}^{2c}(2)$ & $G_{E}^{2c}(4)$  \\
+%\hline
+%$\Gamma$ & $\Gamma_1(1) + \Gamma_4(1)$ & $\Gamma_2(1) + \Gamma_3(1)$ & $\Gamma_5(2) + \Gamma_6(2)$ \\
+%\hline
+%$K$ & $K_3(2)$ & $K_3(2)$ & $K_1(1) + K_2(1) + K_3(2)$ \\
+%\hline
+%$M$ & $M_1(1) + M_4(1)$ & $M_2(1) + M_3(1)$ & $M_1(1) + M_2(1) + M_3(1) + M_4(1)$ \\
+%\hline
+%\end{tabular}
+%\label{tab:ebr-P622}
+%\end{table}
+%
+%\begin{table}[H]
+%\caption{Character table of irreps at high symmetry momenta in space group $P622$.}
+%\scriptsize
+%\centering
+%\begin{tabular} { c c c c c c c | c c c c c | c c c c }
+%\cline{1-16}
+%$\P$ & $\P \Gamma_1$ & $\P \Gamma_2$ & $\P \Gamma_3$ & $\P \Gamma_4$ & $\P \Gamma_5$ & $\P \Gamma_6$ & $\P$ & $\P M_1$ & $\P M_2$ & $\P M_3$ & $\P M_4$ & $\P$ & $\P K_1$ & $\P K_2$ & $\P K_3$\\
+%\cline{1-16}
+%$E$      & $\P1$ & $\P1$ & $\P1$ & $\P1$ & $\P2$ & $\P2$ & $E$     & $\P1$ & $\P1$  & $\P1$ & $\P1$ & $E$      & $\P1$ & $\P1$ & $\P2$ \\
+%$2C_6$   & $\P1$ & $\P1$ & $ -1$ & $ -1$ & $ -1$ & $\P1$ & $C_2$   & $\P1$ & $\P1$  & $ -1$ & $ -1$ & $C_3$    & $\P1$ & $\P1$ & $ -1$ \\
+%$2C_3$   & $\P1$ & $\P1$ & $\P1$ & $\P1$ & $ -1$ & $ -1$ & $C_2'$  & $\P1$ & $ -1$  & $ -1$ & $\P1$ & $3C_2''$ & $\P1$ & $ -1$ & $\P0$ \\
+%$C_2$    & $\P1$ & $\P1$ & $ -1$ & $ -1$ & $\P2$ & $ -2$ & $C_2''$ & $\P1$ & $ -1$  & $\P1$ & $ -1$ &          &       &       &       \\
+%$3C_2'$  & $\P1$ & $ -1$ & $ -1$ & $\P1$ & $\P0$ & $\P0$ &         &       &        &       &       &          &       &       &       \\
+%$3C_2''$ & $\P1$ & $ -1$ & $\P1$ & $ -1$ & $\P0$ & $\P0$ &         &       &        &       &       &          &       &       &       \\
+%\cline{1-16}
+%\end{tabular}
+%\label{tab:char-P622}
+%\end{table}
+%
+%Compare tables \ref{tab:ebr-P622} and \ref{tab:char-P622} with tables 2.5 and (2.1, 2.3) of Rennella \cite{thesis_rennella}, respectively.
 
-Let $G$ be a space group associated with its corresponding lattice and choice of origin. The subgroup of all symmetry operations of $G$ that leave a point $P$ in real space invariant is called the \textit{site-symmetry group} of $P$. This point $P$ is called \textit{of special position} with respect to $G$ if there is at least one non-trivial (not the identity) symmetry operation of $G$ that leaves $P$ invariant.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Numerical Results}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-For a general operation $g$ of $G$, the point $P$ will be mapped to some other point $Q = g P$. If $P$ is of special position with site-symmetry group $G_P$, then $Q$ will also be of special position, and its site-symmetry group $G_Q$ will be a conjugate group of $G_P$, namely $G_Q = g G_P g^{-1}$. In fact, we have:
-\begin{equation} \label{eq:special-position}
-G_Q Q = g G_P g^{-1} Q = g G_P P = g P = Q.
-\end{equation}
+\begin{figure}[H]
+\centering
+\includegraphics[height=0.35\linewidth]{fig/thf-correct_params.png}
+\includegraphics[height=0.35\linewidth]{fig/thf-no_M_no_gamma.png}
+%\caption{}
+\label{fig:thf-correct_params}
+\end{figure}
 
-When we apply all operations of $G$ to $P$, we obtain the \textit{crystallographic orbit} of $P$, which is the set of points $Q$ with site-symmetry groups conjugate to $G_P$. If $P$ is of special position, we call its crystallographic orbit a \textit{Wyckoff position} of the space group $G$. Therefore, the concept of a Wyckoff position refers to a set of points of special position with site-symmetry groups that are conjugates of each other.
-
-\n
-
-For TBG, we focus on the Wyckoff position $2c$, corresponding to the AB and BA regions of interest in Figure \ref{fig:moireD6}. The site-symmetry groups of these regions are all isomorphic to the point group $D_3$, a subgroup of $D_6$. In contrast, the $AA$ regions belong to Wyckoff position $1a$, and their site-symmetry groups have higher symmetry $D_6$.
-
-Our next step will involve studying how to find the set of Wannier orbitals centered on the $2c$ Wyckoff position of the Moiré pattern and implementing a corresponding tight-binding model \cite{thesis_rennella}.
-
-
-
-
-
-\pagebreak
+\begin{figure}[H]
+\centering
+\includegraphics[height=0.35\linewidth]{fig/thf-no_M.png}
+\includegraphics[height=0.35\linewidth]{fig/thf-no_coupling.png}
+%\caption{}
+\label{fig:thf-exploration}
+\end{figure}
 
 
 \chapter{Evaluation of the Institutional Support received during the period} \label{chp:apoioInst}
 %\chapter{Description and evaluation of the Institutional Support received during the period} \label{chp:apoioInst}
 
-During the period covered by this report, the student used the Research Overhead to acquire the Acer Nitro 5 AN515-58-58W3 laptop, which was extensively used for the heavy DMFT calculations in Section \ref{sec:results}.
+During the period covered by this report, the student used the research overhead to reimburse the remaining cost of the Acer Nitro 5 AN515-58-58W3 laptop. This laptop was originally purchased during the first year of the FAPESP project, but the funds available at that time were insufficient to cover the full amount. The laptop has been extensively used for project-related work and numerical calculations.
+
 
 
 \chapter{Participation in scientific events} \label{chp:particEvento}
 
-The student participated in the following scientific events/courses:
-
-\begin{itemize}
-\item Attended as a listener at the \href{https://www.ictp-saifr.org/apsmarch23/}{APS/ICTP-SAIFR Satellite March Meeting} held on March 20-22, 2023, at ICTP-SAIFR.
-\item Attended as a listener at the \href{https://www.ictp-saifr.org/qm2023/}{Workshop on Strong Electron Correlations in Quantum Materials: Inhomogeneities, Frustration, and Topology} held on June 19-23, 2023, at ICTP-SAIFR.
-\item Participated in Luis Gregório G. V. Dias da Silva's research group Journal Club during 2023 and 2024 at USP.
-\item Presented the results from Section \ref{sec:results} in a poster entitled ``Charge density signatures of the Mott transition in the particle-hole asymmetric Hubbard model at finite temperatures'' at the \href{https://www1.fisica.org.br/~eosbf/2024/index.php/en/}{2024 Autumn Meeting of the Brazilian Physical Society} held on May 19-23, 2024, at UFSC, Florianópolis - SC.
-\end{itemize}
+During the period covered by this report, the student did not participate in any formal scientific events. However, the student attended Luis Gregorio Dias' group meetings and a meeting with collaborators from Eduardo Miranda's group (IFGW-Unicamp), associated with the Thematic Project ``Correlated Quantum Materials'' (\#\texttt{2022/15453-0}).
 
 
 \chapter{Conclusions and Future Activities} \label{chp:conclusions}
 
-In Section \ref{sec:tbg}, we presented our research on TBG theory. We derived the Bistritzer-MacDonald model \cite{macdonald2011} in Section \ref{sec:BM-model}. Our intention is to utilize this knowledge to develop our own code for analyzing the electronic properties of the system. The BM model is advantageous as it is independent of whether a configuration of TBG is commensurate or not, and it also incorporates all the emergent symmetries observed in experiments \cite{zou2018}. In order to construct the Wannier orbitals localized on the AB and BA regions of interest, we recognized the necessity of thoroughly reviewing concepts of group theory in Section \ref{sec:grouptheory}. Our studies will enable us to employ group theory to elucidate the Wannier Obstruction \cite{zou2018} and the Topological Heavy Fermion model \cite{topoheavyfermion2022}.
-
-In Section \ref{sec:hubbard}, we established a fully operational DMFT algorithm and extensively explored the phase diagrams for the Metal-Insulator transition. In Figure \ref{fig:UxT-rho0}(a), we successfully replicated a known result from the literature for $\eps_d = U/2$ \cite{georges1996}. Additionally, we conducted a thorough investigation of the asymmetric case, which has received comparatively less attention in the literature. Notably, we analyzed the expansion of the coexistence region as we deviated from the particle-hole symmetric (PHS) case and observed the distinctive ``smile'' pattern in the $U \times \eps_d$ phase diagrams of Figure \ref{fig:T0002-butterfly}. Looking ahead to our DMFT progress, our goal is to enhance and extend the algorithm for the study of TBG. However, before developing a practical implementation, we acknowledge the necessity of comprehensively understanding the intrinsic properties of the system through a rigorous analysis of its symmetries.
+%In Section \ref{sec:tbg}, we presented our research on TBG theory. We derived the Bistritzer-MacDonald model \cite{macdonald2011} in Section \ref{sec:BM-model}. Our intention is to utilize this knowledge to develop our own code for analyzing the electronic properties of the system. The BM model is advantageous as it is independent of whether a configuration of TBG is commensurate or not, and it also incorporates all the emergent symmetries observed in experiments \cite{zou2018}. In order to construct the Wannier orbitals localized on the AB and BA regions of interest, we recognized the necessity of thoroughly reviewing concepts of group theory in Section \ref{sec:grouptheory}. Our studies will enable us to employ group theory to elucidate the Wannier Obstruction \cite{zou2018} and the Topological Heavy Fermion model \cite{topoheavyfermion2022}.
+%
+%In Section \ref{sec:hubbard}, we established a fully operational DMFT algorithm and extensively explored the phase diagrams for the Metal-Insulator transition. In Figure \ref{fig:UxT-rho0}(a), we successfully replicated a known result from the literature for $\eps_d = U/2$ \cite{georges1996}. Additionally, we conducted a thorough investigation of the asymmetric case, which has received comparatively less attention in the literature. Notably, we analyzed the expansion of the coexistence region as we deviated from the particle-hole symmetric (PHS) case and observed the distinctive ``smile'' pattern in the $U \times \eps_d$ phase diagrams of Figure \ref{fig:T0002-butterfly}. Looking ahead to our DMFT progress, our goal is to enhance and extend the algorithm for the study of TBG. However, before developing a practical implementation, we acknowledge the necessity of comprehensively understanding the intrinsic properties of the system through a rigorous analysis of its symmetries.
 
 %%-----
 %% Referências bibliográficas
