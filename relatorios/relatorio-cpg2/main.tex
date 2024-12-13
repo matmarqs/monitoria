@@ -867,7 +867,7 @@ The \textit{atomic limit} refers to bands that can be constructed from localized
 A set of bands are in the \textbf{atomic limit} of a space group if they can be induced from localized Wannier functions consistent with the crystalline symmetry of that space group. Otherwise, they are \textbf{topological}.
 \end{definition}
 
-Band representations describe a system in the atomic limit. Topological band must be groups of bands that satisfy the crystal symmetry in momentum space, but nevertheless do not transform as a band representation. In other words, they cannot be induced from localized Wannier orbitals that obey the crystal symmetry.
+Band representations describe systems in the atomic limit, where bands can be derived from localized Wannier orbitals that respect the crystal's symmetry. In contrast, topological bands are groups of bands that adhere to the crystal symmetry in momentum space but cannot be expressed as a band representation. This means they cannot be induced from symmetry-preserving localized Wannier orbitals. This inability is referred to as a \textit{Wannier obstruction} \cite{FragileTopology_Po2018, building_blocks2018}.
 
 \begin{theorem} \label{th:topo_insul}
 Any isolated set of bands that is not equivalent to a band representation (composite or elementary) gives a strong, weak, or crystalline topological insulator.
@@ -895,37 +895,7 @@ If the irreps of \(\mathcal{B}\) can be written as a linear combination of EBRs,
 \section{Topological Heavy Fermion Model} \label{sec:topo_heavy_fermion}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-As proved in \cite{all_magic_angles}, when one includes the emergent particle-hole symmetry, the middle two flat bands in each valley must form the irreducible co-representations (dubbed as irreps) (\textbf{Lowest TBG Bands set by PH})
-\begin{equation} \label{eq:matbg-irreps}
-\Gamma_1 \oplus \Gamma_2; \; M_1 \oplus M_2; \; K_2 K_3
-\end{equation}
-of the magnetic space group $P6'2'2$. Comparing this irreps with the EBRs \cite{topological_quantum_chemistry2017}, we get the Table \ref{tab:matbg-irreps}. We see that the irreps at Equation \ref{eq:matbg-irreps} do not correspond to any of the local orbitals at \ref{tab:matbg-irreps}. In order to resolve the Wannier obstruction, we add the closest higher energy bands, which have the $\Gamma_3$ irrep at the $\Gamma_m$ point. These higher energy bands hybridize with the two middle ones, and we extract the trivial bands that form the band representation
-\begin{equation} \label{eq:trivial-irreps}
-[E]_a \uparrow G: \quad \Gamma_3; \; M_1 \oplus M_2; \; K_2 K_3,
-\end{equation}
-where $[E]_a$ is forme by $p_x, p_y$-like orbitals at the $1a$ Wyckoff position.
-
-\begin{table}[H]
-\tiny
-\caption{Elementary band representations of the magnetic space group $P6'2'2$.}
-\centering
-\begin{tabular}{|c|c|c|c|c|c|c|c|c|}
-\hline
-Wyckoff & \multicolumn{3}{c|}{$1a$} & \multicolumn{3}{c|}{$2c$} & \multicolumn{2}{c|}{$3f$} \\
-\cline{1-9}
-Site sym. & \multicolumn{3}{c|}{$6'2'2$, $32$} & \multicolumn{3}{c|}{$32$, $32$} & \multicolumn{2}{c|}{$2'2'2$, $2$} \\
-\cline{1-9}
-EBR & $G_{A_1}^{1a}(1)$ & $G_{A_2}^{1a}(1)$ & $G_{E}^{1a}(2)$ & $G_{A_1}^{2c}(2)$ & $G_{A_2}^{2c}(2)$ & $G_{E}^{2c}(4)$   & $G_{A}^{3f}(3)$ & $G_{B}^{3f}(3)$ \\
-\hline
-$\Gamma$ & $\Gamma_1(1)$ & $\Gamma_2(1)$ & $\Gamma_3(1)$ & $2\Gamma_1(1)$ & $2\Gamma_2(1)$ & $2\Gamma_3(2)$ & $\Gamma_1(1)+\Gamma_3(2)$ & $\Gamma_2(1)+\Gamma_3(2)$ \\
-\hline
-$K$ & $K_1(1)$ & $K_1(1)$ & $K_2 K_3(2)$ & $K_2 K_3(2)$ & $K_2 K_3(2)$ & $2K_1(1) + K_2 K_3(2)$ & $K_1(1)+K_2 K_3(2)$ & $K_1(1)+K_2 K_3(2)$ \\
-\hline
-$M$ & $M_1(1)$ & $M_2(1)$ & $M_1(1)+M_2(1)$ & $2M_1(1)$ & $2M_2(1)$ & $2M_1(1)+2M_2(1)$ & $2M_1(1)+M_2(1)$ & $M_1(1)+2M_2(2)$ \\
-\hline
-\end{tabular}
-\label{tab:matbg-irreps}
-\end{table}
+The representations and Elementary Band Representations (EBRs) for a given (magnetic) space group, such as \( P6'2'2 \), can be conveniently obtained from the Bilbao Crystallographic Server \cite{bilbao_1, bilbao_2}.
 
 \begin{table}[H]
 \caption{Character table of irreps at high symmetry momenta in magnetic space group $P6'2'2$.}
@@ -942,114 +912,8 @@ $3 C_2'$ & $\P1$ & $ -1$ & $\P0$ & $\P$ & $\P$ & $\P$ & $\P C_3^{-1}$ & $\P1$ & 
 \label{tab:P6'2'2}
 \end{table}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Monolayer}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-Considering only nearest-neighbors, the hamiltonian of a single unrotated layer of graphene is given by
-$$
-H_{\text{mono}}(\k) = -t
-\begin{pmatrix}
-0 & f(\k) \\
-f^*(\k) & 0
-\end{pmatrix}
-, \quad \ell = 1, 2,
-$$
-where $f = \sum_{i=1}^{3} e^{i \k \vdot \bm{\delta}}$, and $\bm{\delta}$ are the three nearest-neighbor vectors from a site $A$ of the honeycomb lattice.
-
-Expanding in first-order $\k = \K + \q$, where $\K = \frac{4\pi}{3a} (1, 0)$ is the Dirac point of the unrotated layer, we have
-$$
-H_{\text{mono}}(\K + \q) \approx v_F \, \q \vdot \bm{\sigma}.
-$$
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{BM model review}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-The hamiltonian of the BM model is given by
-$$
-H = H_1 + H_2 + V + V^\dagger,
-$$
-where $H_1$ and $H_2$ correspond to the layers 1 and 2, and $V$ is the hybridization between them.
-
-\n
-
-For this discussion, we use the reference frame where layer 1 is unrotated and layer 2 is rotated counter-clockwise by an angle $\theta$. Therefore, we have
-$$
-H_1(\k) = H_{\text{mono}}(\k), \quad H_2(\k) = H_1(R_\theta^{-1}\k),
-$$
-$$
-R_\theta =
-\begin{pmatrix}
-\cos\theta & -\sin\theta \\
-\sin\theta & \cos\theta
-\end{pmatrix}.
-$$
-
-Also, the Dirac points of each layer are
-$$
-\K_1 = \K = \frac{4\pi}{3a} (1, 0), \quad \K_2 = R_\theta \K_1 = R_\theta \K,
-$$
-$$
-$$
-
-Therefore, expanding around the Dirac points $\K_1$ and $\K_2$, respectively:
-$$
-H_1(\K_1 + \q) \approx v_F \, \q \vdot \bm{\sigma}.
-$$
-$$
-\boxed{ H_2(\K_2 + \q) = H_2(R_\theta \K_1 + \q) = H_1(\K_1 + R_\theta^{-1}\q) \approx v_F \, (R_\theta^{-1}\q) \vdot \bm{\sigma} \approx v_F \, (1 - i \theta \sigma_y ) \, \q \vdot \bm{\sigma}. }
-$$
-
-If we \textbf{neglect the $\theta$-dependence on $H_2$}, our BM model will be \textbf{particle-hole symmetric}, as defined by Bernevig.
-
-\n
-
-Of course, the more difficult part is due to the hybridization term $V$. It is written on the Bloch basis $\ket{\ell, \alpha, \p}$, where $\ell = 1, 2$ is the layer index, $\alpha = A, B$ is the sublattice index, and $\p$ is the momentum.
-We have
-$$
-V_{\alpha\beta}(\p, \p') = \bra{1, \alpha, \p} H \ket{2, \beta, \p'}.
-$$
-
-When we expand both $\p = \K_1 + \q$ and $\p' = \K_2 + \q'$, \textbf{after the BM considerations}, we get
-$$
-V_{\alpha\beta}(\K + \q, R_\theta \K + \q') \approx
-w \sum_{j=1}^{3} \delta_{\q, \q' + \q_j} T_{\alpha\beta}^j,
-$$
-where $\q_1, \q_2, \q_3$ are the moiré momentum vectors, with absolute value $k_D = 2 \sin(\theta/2) \abs{\K}$. The matrices $T^j_{\alpha\beta}$ are
-$$
-T_1 = \sigma_0 + \sigma_x
-$$
-$$
-T_2 = \sigma_0 + \cos(\frac{2\pi}{3}) \sigma_x + \sin(\frac{2\pi}{3}) \sigma_y
-$$
-$$
-T_3 = \sigma_0 + \cos(\frac{2\pi}{3}) \sigma_x - \sin(\frac{2\pi}{3}) \sigma_y
-$$
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.8\linewidth]{fig/moire-vectors.png}
-\end{figure}
-
-\n
-
-This \textbf{BM model} is called \textbf{MBM-1V (Moiré Band Model - One Valley)} by Bernevig. If we decompose $\q = \k - \Q$, $\q'=\k-\Q'$, where $\Q$ and $\Q'$ belong to the hexagonal lattice formed by adding $\q_{1,2,3}$ iteratively, we can rewrite the hamiltonian as
-$$
-\boxed{
-H_{\Q, \Q'}^{(\text{MBM-1V})}(\k) =
-\delta_{\Q,\Q'} v_F (\k-\Q) \vdot \bm{\sigma}
-+ w \sum_{j=1}^{3} (\delta_{\Q'-\Q, \q_j} + \delta_{\Q-\Q', \q_j}) T^j.
-}
-$$
-
-\begin{itemize}
-\item This model is \textbf{topological} and is what we have been discussing the whole time.
-\item The tables of Bernevig apply to this model, where we consider the Wyckoff position 1a within the THF approach to solve the topological obstruction.
-\item Its magnetic space group is $P6'2'2$. Generators: $C_{6z} T$, $C_{2y} T$, $C_{2x}$.
-\end{itemize}
-
 \begin{table}[H]
-\scriptsize
+\footnotesize
 \caption{Elementary band representations of the magnetic space group $P6'2'2$.}
 \centering
 \begin{tabular}{|c|c|c|c|c|c|c|c|c|}
@@ -1060,30 +924,249 @@ Site sym. & \multicolumn{3}{c|}{$6'2'2$, $32$} & \multicolumn{3}{c|}{$32$, $32$}
 \cline{1-9}
 EBR & $G_{A_1}^{1a}(1)$ & $G_{A_2}^{1a}(1)$ & $G_{E}^{1a}(2)$ & $G_{A_1}^{2c}(2)$ & $G_{A_2}^{2c}(2)$ & $G_{E}^{2c}(4)$   & $G_{A}^{3f}(3)$ & $G_{B}^{3f}(3)$ \\
 \hline
-$\Gamma$ & $\Gamma_1(1)$ & $\Gamma_2(1)$ & $\Gamma_3(1)$ & $2\Gamma_1(1)$ & $2\Gamma_2(1)$ & $2\Gamma_3(2)$ & $\Gamma_1(1)+\Gamma_3(2)$ & $\Gamma_2(1)+\Gamma_3(2)$ \\
+$\Gamma$ & $\Gamma_1$ & $\Gamma_2$ & $\Gamma_3$ & $2\Gamma_1$ & $2\Gamma_2$ & $2\Gamma_3$ & $\Gamma_1+\Gamma_3$ & $\Gamma_2+\Gamma_3$ \\
 \hline
-$K$ & $K_1(1)$ & $K_1(1)$ & $K_2 K_3(2)$ & $K_2 K_3(2)$ & $K_2 K_3(2)$ & $2K_1(1) + K_2 K_3(2)$ & $K_1(1)+K_2 K_3(2)$ & $K_1(1)+K_2 K_3(2)$ \\
+$K$ & $K_1$ & $K_1$ & $K_2 K_3$ & $K_2 K_3$ & $K_2 K_3$ & $2K_1 + K_2 K_3$ & $K_1+K_2 K_3$ & $K_1+K_2 K_3$ \\
 \hline
-$M$ & $M_1(1)$ & $M_2(1)$ & $M_1(1)+M_2(1)$ & $2M_1(1)$ & $2M_2(1)$ & $2M_1(1)+2M_2(1)$ & $2M_1(1)+M_2(1)$ & $M_1(1)+2M_2(2)$ \\
+$M$ & $M_1$ & $M_2$ & $M_1+M_2$ & $2M_1$ & $2M_2$ & $2M_1+2M_2$ & $2M_1+M_2$ & $M_1+2M_2$ \\
 \hline
 \end{tabular}
-\label{tab:ebr-P6'2'2}
+\label{tab:matbg-irreps}
 \end{table}
 
-\begin{table}[H]
-\caption{Character table of irreps at high symmetry momenta in magnetic space group $P6'2'2$.}
+As demonstrated in \cite{all_magic_angles}, incorporating the emergent particle-hole symmetry within the One Valley BM model ensures that the middle two flat bands in each valley align with the irreducible co-representations (irreps):
+\begin{equation} \label{eq:matbg-irreps}
+\Gamma_1(1) \oplus \Gamma_2(1); \; M_1(1) \oplus M_2(1); \; K_2 K_3(2),
+\end{equation}
+associated with the magnetic space group \( P6'2'2 \). The characters for each of these irreps, referenced in Equation \ref{eq:matbg-irreps}, are presented in Table \ref{tab:P6'2'2}.
+
+
+By comparing the irreps in Equation \ref{eq:matbg-irreps} with the EBRs in Table \ref{tab:matbg-irreps}, we observe that the irreps in Equation \ref{eq:matbg-irreps} cannot be expressed as a direct sum of the local orbitals listed in Table \ref{tab:matbg-irreps}. In fact, if we permit negative coefficients, the irreps can only be expressed as the linear combination \( G_{A_1}^{2c} + G_{A_2}^{1a} - G_{A_1}^{1a} \). The presence of a negative coefficient indicates that the two flat bands must host at least a fragile topological phase \cite{FragileTopology_Po2018}, leading to a Wannier obstruction.
+
+To resolve this Wannier obstruction, we incorporate the nearest higher-energy bands, which are characterized by the \(\Gamma_3\) irrep at the \(\Gamma_M\) point \cite{topoheavyfermion2022}. These higher-energy bands hybridize with the two middle bands, allowing us to isolate the trivial bands. These trivial bands form the band representation:
+\begin{equation} \label{eq:trivial-irreps}
+G_E^{1a}(2) = [E]_{1a} \uparrow G: \quad \Gamma_3(2); \; M_1(1) \oplus M_2(1); \; K_2 K_3(2),
+\end{equation}
+where \([E]_{1a}\) corresponds to \(p_x \pm i p_y\)-like orbitals at the \(1a\) Wyckoff position.
+
+We ``borrow'' a $\Gamma_3$ irrep from these higher-energy bands to replace the $\Gamma_1 \oplus \Gamma_2$ states. The resulting irreps $\Gamma_3$, $M_1 \oplus M_2$, $K_2 K_3$ are consistent with $p_x \pm i p_y$ orbitals on a triangular lattice. To model this, Gaussian Wannier functions (WFs) that transform as $p_x \pm i p_y$ under the crystal symmetries are introduced.
+
+Using the maximal localization procedure \cite{maxlocalWFs_marzari2012, wannier90}, we find that these WFs are highly localized, supported by flat band states away from $\Gamma_M$, and by low-energy states near $\Gamma_M$. However, to fully account for the superconducting properties, it is crucial to include the remaining states. To achieve this, we define projectors $\bP$ (onto the WFs) and $\I$ (onto the lowest six bands per spin-valley), and decompose the BM Hamiltonian $H_\text{BM}$ into the following components:
+\begin{equation} \label{eq:projected_hamiltonians_WFs_PQ}
+H^{(f)} = \bP H_\text{BM} \bP, \quad H^{(c)} = \bQ H_\text{BM} \bQ, \quad H^{(fc)} = \bP H_\text{BM} \bQ, \quad H^{(cf)} = H^{(fc)\dagger},
+\end{equation}
+where $\bQ = \I - \bP$. Since the coupling between WFs is extremely weak, the approximation $H^{(f)} \approx 0$ proves to be highly accurate.
+
+The two states in $\bP$ form $\Gamma_3$ at $\Gamma_M$, while the four states in $\bQ$ form $\Gamma_3 \oplus \Gamma_1 \oplus \Gamma_2$. The remaining Hamiltonian $H^{(c)}$ in valley $\eta$ is expressed as:
+\begin{equation} \label{eq:H(c)_topoheavyfermion}
+H^{(c, \eta)}(\k) =
+\begin{pmatrix}
+0_{2\times 2} & v_* (\eta k_x \sigma_0 + i k_y \sigma_z) \\
+v_* (\eta k_x \sigma_0 - i k_y \sigma_z) & M \sigma_x
+\end{pmatrix}.
+\end{equation}
+
+The coupling $H^{(fc)}$ takes the form:
+\begin{equation} \label{eq:H(fc)_topoheavyfermion}
+H^{(fc, \eta)}(\k) =
+\begin{pmatrix}
+\gamma \sigma_0 + v'_* (\eta k_x \sigma_x + k_y \sigma_y) & 0_{2\times 2}
+\end{pmatrix},
+\end{equation}
+which introduces a gap in $H^{(c, \eta)}$, establishing the flat band topology of the BM model.
+
+Using standard parameters for MATBG, this mapping provides the parameter values:
+\begin{equation} \label{eq:paramaters_topoheavyfermion}
+v^\star = -4.303 \, \text{eV} \cdot \AA, \quad M = 3.697 \, \text{meV}, \quad \gamma = -24.75 \, \text{meV}, \quad v'^\star = 1.622 \, \text{eV} \cdot \AA.
+\end{equation}
+
+By diagonalizing the resulting 6-band model for the valley $\eta = +$, constructed from the Hamiltonians $H^{(c,\eta)}$ and $H^{(fc,\eta)}$, we obtain the results shown in Figure \ref{fig:thf-exploration}. We analyze the cases where certain parameters are set to zero to study the model's behavior.
+
+\begin{figure}[H]
 \centering
-\begin{tabular} { c c c c | c c c | c c c }
-\cline{1-10}
-$\P$ & $\P \Gamma_1$ & $\P \Gamma_2$ & $\P \Gamma_3$ & $\P$ & $\P M_1$ & $\P M_2$ & $\P$ & $\P K_1$ & $\P K_2K_3$ \\
-\cline{1-10}
-$E$ & $\P1$ & $\P1$ & $\P2$ & $\P E$ & $\P1$ & $\P1$ & $\P E$ & $\P1$ & $\P2$ \\
-$2 C_3$ & $\P1$ & $\P1$ & $ -1$ & $\P C_2'$ & $\P1$ & $ -1$ & $\P C_3$ & $\P1$ & $ -1$ \\
-$3 C_2'$ & $\P1$ & $ -1$ & $\P0$ & $\P$ & $\P$ & $\P$ & $\P C_3^{-1}$ & $\P1$ & $-1$ \\
-\cline{1-10}
-\end{tabular}
-\label{tab:char-P6'2'2}
-\end{table}
+\includegraphics[height=0.35\linewidth]{fig/thf-correct_params.png}
+\includegraphics[height=0.35\linewidth]{fig/thf-no_M_no_gamma.png}
+%%\caption{}
+%\label{fig:thf-correct_params}
+%\end{figure}
+%\begin{figure}[H]
+%\centering
+\includegraphics[height=0.35\linewidth]{fig/thf-no_M.png}
+\includegraphics[height=0.35\linewidth]{fig/thf-no_coupling.png}
+\caption{Band structures for the 6-band non-interacting Topological Heavy Fermion model.}
+\label{fig:thf-exploration}
+\end{figure}
+
+
+
+%\begin{table}[H]
+%\tiny
+%\caption{Elementary band representations of the magnetic space group $P6'2'2$.}
+%\centering
+%\begin{tabular}{|c|c|c|c|c|c|c|c|c|}
+%\hline
+%Wyckoff & \multicolumn{3}{c|}{$1a$} & \multicolumn{3}{c|}{$2c$} & \multicolumn{2}{c|}{$3f$} \\
+%\cline{1-9}
+%Site sym. & \multicolumn{3}{c|}{$6'2'2$, $32$} & \multicolumn{3}{c|}{$32$, $32$} & \multicolumn{2}{c|}{$2'2'2$, $2$} \\
+%\cline{1-9}
+%EBR & $G_{A_1}^{1a}(1)$ & $G_{A_2}^{1a}(1)$ & $G_{E}^{1a}(2)$ & $G_{A_1}^{2c}(2)$ & $G_{A_2}^{2c}(2)$ & $G_{E}^{2c}(4)$   & $G_{A}^{3f}(3)$ & $G_{B}^{3f}(3)$ \\
+%\hline
+%$\Gamma$ & $\Gamma_1(1)$ & $\Gamma_2(1)$ & $\Gamma_3(1)$ & $2\Gamma_1(1)$ & $2\Gamma_2(1)$ & $2\Gamma_3(2)$ & $\Gamma_1(1)+\Gamma_3(2)$ & $\Gamma_2(1)+\Gamma_3(2)$ \\
+%\hline
+%$K$ & $K_1(1)$ & $K_1(1)$ & $K_2 K_3(2)$ & $K_2 K_3(2)$ & $K_2 K_3(2)$ & $2K_1(1) + K_2 K_3(2)$ & $K_1(1)+K_2 K_3(2)$ & $K_1(1)+K_2 K_3(2)$ \\
+%\hline
+%$M$ & $M_1(1)$ & $M_2(1)$ & $M_1(1)+M_2(1)$ & $2M_1(1)$ & $2M_2(1)$ & $2M_1(1)+2M_2(1)$ & $2M_1(1)+M_2(1)$ & $M_1(1)+2M_2(2)$ \\
+%\hline
+%\end{tabular}
+%\label{tab:matbg-irreps}
+%\end{table}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\section{Monolayer}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%Considering only nearest-neighbors, the hamiltonian of a single unrotated layer of graphene is given by
+%$$
+%H_{\text{mono}}(\k) = -t
+%\begin{pmatrix}
+%0 & f(\k) \\
+%f^*(\k) & 0
+%\end{pmatrix}
+%, \quad \ell = 1, 2,
+%$$
+%where $f = \sum_{i=1}^{3} e^{i \k \vdot \bm{\delta}}$, and $\bm{\delta}$ are the three nearest-neighbor vectors from a site $A$ of the honeycomb lattice.
+%
+%Expanding in first-order $\k = \K + \q$, where $\K = \frac{4\pi}{3a} (1, 0)$ is the Dirac point of the unrotated layer, we have
+%$$
+%H_{\text{mono}}(\K + \q) \approx v_F \, \q \vdot \bm{\sigma}.
+%$$
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\section{BM model review}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%The hamiltonian of the BM model is given by
+%$$
+%H = H_1 + H_2 + V + V^\dagger,
+%$$
+%where $H_1$ and $H_2$ correspond to the layers 1 and 2, and $V$ is the hybridization between them.
+%
+%\n
+%
+%For this discussion, we use the reference frame where layer 1 is unrotated and layer 2 is rotated counter-clockwise by an angle $\theta$. Therefore, we have
+%$$
+%H_1(\k) = H_{\text{mono}}(\k), \quad H_2(\k) = H_1(R_\theta^{-1}\k),
+%$$
+%$$
+%R_\theta =
+%\begin{pmatrix}
+%\cos\theta & -\sin\theta \\
+%\sin\theta & \cos\theta
+%\end{pmatrix}.
+%$$
+%
+%Also, the Dirac points of each layer are
+%$$
+%\K_1 = \K = \frac{4\pi}{3a} (1, 0), \quad \K_2 = R_\theta \K_1 = R_\theta \K,
+%$$
+%$$
+%$$
+%
+%Therefore, expanding around the Dirac points $\K_1$ and $\K_2$, respectively:
+%$$
+%H_1(\K_1 + \q) \approx v_F \, \q \vdot \bm{\sigma}.
+%$$
+%$$
+%\boxed{ H_2(\K_2 + \q) = H_2(R_\theta \K_1 + \q) = H_1(\K_1 + R_\theta^{-1}\q) \approx v_F \, (R_\theta^{-1}\q) \vdot \bm{\sigma} \approx v_F \, (1 - i \theta \sigma_y ) \, \q \vdot \bm{\sigma}. }
+%$$
+%
+%If we \textbf{neglect the $\theta$-dependence on $H_2$}, our BM model will be \textbf{particle-hole symmetric}, as defined by Bernevig.
+%
+%\n
+%
+%Of course, the more difficult part is due to the hybridization term $V$. It is written on the Bloch basis $\ket{\ell, \alpha, \p}$, where $\ell = 1, 2$ is the layer index, $\alpha = A, B$ is the sublattice index, and $\p$ is the momentum.
+%We have
+%$$
+%V_{\alpha\beta}(\p, \p') = \bra{1, \alpha, \p} H \ket{2, \beta, \p'}.
+%$$
+%
+%When we expand both $\p = \K_1 + \q$ and $\p' = \K_2 + \q'$, \textbf{after the BM considerations}, we get
+%$$
+%V_{\alpha\beta}(\K + \q, R_\theta \K + \q') \approx
+%w \sum_{j=1}^{3} \delta_{\q, \q' + \q_j} T_{\alpha\beta}^j,
+%$$
+%where $\q_1, \q_2, \q_3$ are the moiré momentum vectors, with absolute value $k_D = 2 \sin(\theta/2) \abs{\K}$. The matrices $T^j_{\alpha\beta}$ are
+%$$
+%T_1 = \sigma_0 + \sigma_x
+%$$
+%$$
+%T_2 = \sigma_0 + \cos(\frac{2\pi}{3}) \sigma_x + \sin(\frac{2\pi}{3}) \sigma_y
+%$$
+%$$
+%T_3 = \sigma_0 + \cos(\frac{2\pi}{3}) \sigma_x - \sin(\frac{2\pi}{3}) \sigma_y
+%$$
+%\begin{figure}[H]
+%\centering
+%\includegraphics[width=0.8\linewidth]{fig/moire-vectors.png}
+%\end{figure}
+%
+%\n
+%
+%This \textbf{BM model} is called \textbf{MBM-1V (Moiré Band Model - One Valley)} by Bernevig. If we decompose $\q = \k - \Q$, $\q'=\k-\Q'$, where $\Q$ and $\Q'$ belong to the hexagonal lattice formed by adding $\q_{1,2,3}$ iteratively, we can rewrite the hamiltonian as
+%$$
+%\boxed{
+%H_{\Q, \Q'}^{(\text{MBM-1V})}(\k) =
+%\delta_{\Q,\Q'} v_F (\k-\Q) \vdot \bm{\sigma}
+%+ w \sum_{j=1}^{3} (\delta_{\Q'-\Q, \q_j} + \delta_{\Q-\Q', \q_j}) T^j.
+%}
+%$$
+%
+%\begin{itemize}
+%\item This model is \textbf{topological} and is what we have been discussing the whole time.
+%\item The tables of Bernevig apply to this model, where we consider the Wyckoff position 1a within the THF approach to solve the topological obstruction.
+%\item Its magnetic space group is $P6'2'2$. Generators: $C_{6z} T$, $C_{2y} T$, $C_{2x}$.
+%\end{itemize}
+%
+%\begin{table}[H]
+%\scriptsize
+%\caption{Elementary band representations of the magnetic space group $P6'2'2$.}
+%\centering
+%\begin{tabular}{|c|c|c|c|c|c|c|c|c|}
+%\hline
+%Wyckoff & \multicolumn{3}{c|}{$1a$} & \multicolumn{3}{c|}{$2c$} & \multicolumn{2}{c|}{$3f$} \\
+%\cline{1-9}
+%Site sym. & \multicolumn{3}{c|}{$6'2'2$, $32$} & \multicolumn{3}{c|}{$32$, $32$} & \multicolumn{2}{c|}{$2'2'2$, $2$} \\
+%\cline{1-9}
+%EBR & $G_{A_1}^{1a}(1)$ & $G_{A_2}^{1a}(1)$ & $G_{E}^{1a}(2)$ & $G_{A_1}^{2c}(2)$ & $G_{A_2}^{2c}(2)$ & $G_{E}^{2c}(4)$   & $G_{A}^{3f}(3)$ & $G_{B}^{3f}(3)$ \\
+%\hline
+%$\Gamma$ & $\Gamma_1(1)$ & $\Gamma_2(1)$ & $\Gamma_3(1)$ & $2\Gamma_1(1)$ & $2\Gamma_2(1)$ & $2\Gamma_3(2)$ & $\Gamma_1(1)+\Gamma_3(2)$ & $\Gamma_2(1)+\Gamma_3(2)$ \\
+%\hline
+%$K$ & $K_1(1)$ & $K_1(1)$ & $K_2 K_3(2)$ & $K_2 K_3(2)$ & $K_2 K_3(2)$ & $2K_1(1) + K_2 K_3(2)$ & $K_1(1)+K_2 K_3(2)$ & $K_1(1)+K_2 K_3(2)$ \\
+%\hline
+%$M$ & $M_1(1)$ & $M_2(1)$ & $M_1(1)+M_2(1)$ & $2M_1(1)$ & $2M_2(1)$ & $2M_1(1)+2M_2(1)$ & $2M_1(1)+M_2(1)$ & $M_1(1)+2M_2(2)$ \\
+%\hline
+%\end{tabular}
+%\label{tab:ebr-P6'2'2}
+%\end{table}
+%
+%\begin{table}[H]
+%\caption{Character table of irreps at high symmetry momenta in magnetic space group $P6'2'2$.}
+%\centering
+%\begin{tabular} { c c c c | c c c | c c c }
+%\cline{1-10}
+%$\P$ & $\P \Gamma_1$ & $\P \Gamma_2$ & $\P \Gamma_3$ & $\P$ & $\P M_1$ & $\P M_2$ & $\P$ & $\P K_1$ & $\P K_2K_3$ \\
+%\cline{1-10}
+%$E$ & $\P1$ & $\P1$ & $\P2$ & $\P E$ & $\P1$ & $\P1$ & $\P E$ & $\P1$ & $\P2$ \\
+%$2 C_3$ & $\P1$ & $\P1$ & $ -1$ & $\P C_2'$ & $\P1$ & $ -1$ & $\P C_3$ & $\P1$ & $ -1$ \\
+%$3 C_2'$ & $\P1$ & $ -1$ & $\P0$ & $\P$ & $\P$ & $\P$ & $\P C_3^{-1}$ & $\P1$ & $-1$ \\
+%\cline{1-10}
+%\end{tabular}
+%\label{tab:char-P6'2'2}
+%\end{table}
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %\section{There exists another model}
@@ -1147,27 +1230,6 @@ $3 C_2'$ & $\P1$ & $ -1$ & $\P0$ & $\P$ & $\P$ & $\P$ & $\P C_3^{-1}$ & $\P1$ & 
 %\end{table}
 %
 %Compare tables \ref{tab:ebr-P622} and \ref{tab:char-P622} with tables 2.5 and (2.1, 2.3) of Rennella \cite{thesis_rennella}, respectively.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Numerical Results}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{figure}[H]
-\centering
-\includegraphics[height=0.35\linewidth]{fig/thf-correct_params.png}
-\includegraphics[height=0.35\linewidth]{fig/thf-no_M_no_gamma.png}
-%\caption{}
-\label{fig:thf-correct_params}
-\end{figure}
-
-\begin{figure}[H]
-\centering
-\includegraphics[height=0.35\linewidth]{fig/thf-no_M.png}
-\includegraphics[height=0.35\linewidth]{fig/thf-no_coupling.png}
-%\caption{}
-\label{fig:thf-exploration}
-\end{figure}
-
 
 \chapter{Evaluation of the Institutional Support received during the period} \label{chp:apoioInst}
 %\chapter{Description and evaluation of the Institutional Support received during the period} \label{chp:apoioInst}
