@@ -178,7 +178,7 @@ This Master's project focuses on the Magic-Angle Twisted Bilayer Graphene (MATBG
 
 For objective (a), Sections \ref{sec:grouptheory} and \ref{sec:topological_quantum_chemistry} details our progress in understanding group and representation theory and their application to Topological Quantum Chemistry (TQC) \cite{topological_quantum_chemistry2017}. TQC provides a framework to identify topological properties of band structures based on symmetry and real-space considerations. A crucial concept here is the Wannier obstruction \cite{zou2018}, which arises from the non-trivial topology of the bands. This obstruction reflects the inability to construct exponentially localized Wannier functions that preserve all symmetries of the band structure.
 
-Objective (b) addresses resolving the Wannier obstruction identified in (a). The THF model provides a fully symmetric approach, reformulating and mapping the interacting MATBG system as a topological heavy fermion system \cite{topoheavyfermion2022}. This involves using the Bilbao Crystallographic Server \cite{bilbao_1, bilbao_2} to compute the Elementary Band Representations (EBRs) for the space group \( P6'2'2 \) (\#177.151 in the International Table) of the Bistritzer-MacDonald model. By comparing these EBRs with the model's representations at high-symmetry points, we aim to develop a mapping that preserves all symmetries, establishes a Wannier basis, and facilitates the formulation of an interacting model analogous to heavy fermions coupled with nearly free electrons.
+Objective (b) addresses resolving the Wannier obstruction identified in (a). The THF model provides a fully symmetric approach, reformulating and mapping the interacting MATBG system as a topological heavy fermion system \cite{topoheavyfermion2022}. This involves using the Bilbao Crystallographic Server \cite{bilbao_1, bilbao_2} to compute the Elementary Band Representations (EBRs) for the space group \( P6'2'2 \) (\#177.151 in the International Table) of the Bistritzer-MacDonald model. By comparing these EBRs with the model's representations at high-symmetry points, we work on a mapping that preserves all symmetries, establishes a Wannier basis, and facilitates the formulation of an interacting model analogous to heavy fermions coupled with nearly free electrons.
 
 \pagebreak
 
@@ -215,89 +215,6 @@ We denote $\rho = \Pi \downarrow H$ and is called the \textit{subduction} of $\P
 \end{definition}
 
 
-%\begin{example} \label{ex:C3_D3_subduction_example}
-%$H = \{E, \Ct, \Ctn{2}\} \subseteq G = D_3$ and $\Pi = \Gamma_2$ as defined in Example \ref{ex:2x2_rep}. The subduced representation $\rho = \Pi \downarrow H$ is obtained by using the matrices $\Pi(h)$, for $h = E, \Ct, \Ctn{2}$.
-%\begin{equation} \label{eq:rho_subduced_C3_D3_subduction_example}
-%\rho(E) =
-%\begin{pmatrix}
-%1 & 0 \\
-%0 & 1
-%\end{pmatrix},
-%\quad
-%\rho(\Ct) =
-%\begin{pmatrix}
-%\cos(\frac{2\pi}{3}) & \sin(\frac{2\pi}{3}) \\
-%-\sin(\frac{2\pi}{3}) & \cos(\frac{2\pi}{3})
-%\end{pmatrix},
-%\quad
-%\rho(\Ctn{2}) =
-%\begin{pmatrix}
-%\cos(\frac{4\pi}{3}) & \sin(\frac{4\pi}{3}) \\
-%-\sin(\frac{4\pi}{3}) & \cos(\frac{4\pi}{3})
-%\end{pmatrix}.
-%\end{equation}
-%
-%The original representation \(\Pi\) includes additional matrices not present in \(\rho\):
-%\begin{equation} \label{eq:Pi_C3_D3_subduction_example}
-%\Pi(\sv) =
-%\begin{pmatrix}
-%1 & 0 \\
-%0 & 1
-%\end{pmatrix},
-%\;
-%\Pi(\svp) = \Pi(\sv \Ct) =
-%\begin{pmatrix}
-%-\frac{1}{2} & \frac{\sqrt{3}}{2} \\
-%\frac{\sqrt{3}}{2} & \frac{1}{2}
-%\end{pmatrix},
-%\;
-%\Pi(\svpp) = \Pi(\sv \Ctn{2}) =
-%\begin{pmatrix}
-%-\frac{1}{2} & -\frac{\sqrt{3}}{2} \\
-%-\frac{\sqrt{3}}{2} & \frac{1}{2}
-%\end{pmatrix},
-%\end{equation}
-%As discussed in Example \ref{ex:irrep_Gamma12_example}, \(\Pi = \Gamma_2\) is irreducible because its six matrices cannot be transformed into block diagonal form through any conjugate transformation \(A \Pi(g) A^{-1}\), \(\forall g \in D_3\).
-%
-%However, if we consider only the three matrices in Equation \ref{eq:rho_subduced_C3_D3_subduction_example}, they can be transformed into block diagonal form through the following conjugation by \(A\):
-%\begin{equation} \label{eq:subduction_can_be_reducible_example}
-%\rho(E) =
-%A
-%\begin{pmatrix}
-%1 & 0 \\
-%0 & 1
-%\end{pmatrix}
-%A^{-1},
-%\quad
-%\rho(\Ct) =
-%A
-%\begin{pmatrix}
-%e^{-\frac{2\pi i}{3}} & 0 \\
-%0 & e^{\frac{2\pi i}{3}}
-%\end{pmatrix}
-%A^{-1},
-%\quad
-%\rho(\Ctn{2}) =
-%A
-%\begin{pmatrix}
-%e^{-\frac{4\pi i}{3}} & 0 \\
-%0 & e^{\frac{4\pi i}{3}}
-%\end{pmatrix}
-%A^{-1},
-%\quad
-%\end{equation}
-%\begin{equation} \label{eq:A_matrix_that_diagonalizes}
-%A =
-%\begin{pmatrix}
-%i & -i \\
-%1 & 1
-%\end{pmatrix}.
-%\end{equation}
-%Therefore, we can assert that \(\rho\) is a direct sum of two one-dimensional representations, \(\{1, e^{-\frac{2\pi i}{3}}, e^{-\frac{4\pi i}{3}}\}\) and \(\{1, e^{\frac{2\pi i}{3}}, e^{\frac{4\pi i}{3}}\}\), making it reducible. This demonstrates that the subduction of an irreducible representation can result in a reducible one.
-%\end{example}
-
-
-
 \begin{definition}[\textbf{Induction}] \label{def:induction_defi}
 Let $H$ be a subgroup of a finite group $G$ and $\Pi: H \to \GL(V)$ be a representation of $H$ on a $n$-dimensional vector space $V$. Let $R = \{g_1, \ldots, g_m\} \subseteq G$ be a full set of representatives of the left cosets in $G/H$, where $m = \abs{G/H}$. Consider the following $(m\cdot n)$-dimensional vector space
 \begin{equation} \label{eq:W_vectorspace_induction_copies}
@@ -315,120 +232,6 @@ For each $g \in G$ and $g_i \in R$ there is an $h_i \in H$ and a permutation ind
 \end{equation}
 \end{definition}
 
-
-%\begin{example} \label{ex:induced_rep_D3D6}
-%Take $G = D_6$, $H = D_3$ and $\Pi = \Gamma_2: H \to \GL(\mathbb{R}^2)$ from Example \ref{ex:2x2_rep}. Using the coset decomposition of $D_6$ from Example \ref{ex:coset_decomp_D3D6}, we obtain the set of coset representatives $R = \{g_1=E, g_2=\sd\}$. Let us calculate the actions of $\rho = \Pi \uparrow G$ for the generators $\{\Cs, \sd, \sv\}$.
-%
-%\n
-%
-%$g = \Cs$:
-%
-%$g_1 = E \implies g g_1 = \Cs E = \Cs = \sd \svpp = g_2 h_1$, where $j(1) = 2$ and $h_1 = \svpp$.
-%
-%$g_2 = \sd \implies g g_2 = \Cs \sd = \svp = E \svp = g_1 h_2$, where $j(2) = 1$ and $h_2 = \svp$.
-%
-%\begin{equation} \label{eq:Pi_h1_Pi_h2_example_inducedrep_D6}
-%\Pi(h_1) = \Pi(\sv) \Pi(\Ctn{2}) =
-%\begin{pmatrix}
-%-\frac{1}{2} & -\frac{\sqrt{3}}{2} \\
-%-\frac{\sqrt{3}}{2} & \frac{1}{2}
-%\end{pmatrix},
-%\quad
-%\Pi(h_2) = \Pi(\sv) \Pi(\Ct) =
-%\begin{pmatrix}
-%-\frac{1}{2} & \frac{\sqrt{3}}{2} \\
-%\frac{\sqrt{3}}{2} & \frac{1}{2}
-%\end{pmatrix}.
-%\end{equation}
-%
-%On the basis $(w_{11}, w_{12}, w_{21}, w_{22})$, where $w_{ij} = (g_i, e_j)$ and $(e_1, e_2)$ is a basis of $\mathbb{R}^2$, we have
-%\begin{equation} \label{eq:rhoC6_w11_example_inducedrep_D6}
-%\rho(\Cs) w_{11} = (g_{j(1)}, \Pi(h_1) e_1) = \qty(g_2, -\frac{1}{2}e_1 - \frac{\sqrt{3}}{2}e_2)
-%= -\frac{1}{2} w_{21} - \frac{\sqrt{3}}{2} w_{22},
-%\end{equation}
-%
-%\begin{equation} \label{eq:rhoC6_w12_example_inducedrep_D6}
-%\rho(\Cs) w_{12} = (g_{j(1)}, \Pi(h_1) e_2) = \qty(g_2, -\frac{\sqrt{3}}{2}e_1 + \frac{1}{2}e_2)
-%= -\frac{\sqrt{3}}{2} w_{21} + \frac{1}{2} w_{22},
-%\end{equation}
-%
-%\begin{equation} \label{eq:rhoC6_w21_example_inducedrep_D6}
-%\rho(\Cs) w_{21} = (g_{j(2)}, \Pi(h_2) e_1) = \qty(g_1, -\frac{1}{2}e_1 + \frac{\sqrt{3}}{2}e_2)
-%= -\frac{1}{2} w_{11} + \frac{\sqrt{3}}{2}w_{12},
-%\end{equation}
-%
-%\begin{equation} \label{eq:rhoC6_w22_example_inducedrep_D6}
-%\rho(\Cs) w_{22} = (g_{j(2)}, \Pi(h_2) e_2) = \qty(g_1, \frac{\sqrt{3}}{2}e_1 + \frac{1}{2}e_2)
-%= \frac{\sqrt{3}}{2} w_{11} + \frac{1}{2}w_{12},
-%\end{equation}
-%
-%\begin{equation} \label{eq:rhoC6_matrix_example_inducedrep_D6}
-%\rho(\Cs) =
-%\begin{pmatrix}
-%\rho_{1111} & \rho_{1112} & \rho_{1211} & \rho_{1212} \\
-%\rho_{1121} & \rho_{1122} & \rho_{1221} & \rho_{1222} \\
-%\rho_{2111} & \rho_{2112} & \rho_{2211} & \rho_{2212} \\
-%\rho_{2121} & \rho_{2122} & \rho_{2221} & \rho_{2222} \\
-%\end{pmatrix}
-%=
-%\begin{pmatrix}
-%0                   & 0                   & -\frac{1}{2}       & \frac{\sqrt{3}}{2} \\
-%0                   & 0                   & \frac{\sqrt{3}}{2} & \frac{1}{2}        \\
-%-\frac{1}{2}        & -\frac{\sqrt{3}}{2} & 0                  & 0                  \\
-%-\frac{\sqrt{3}}{2} & \frac{1}{2}         & 0                  & 0                  \\
-%\end{pmatrix}
-%=
-%\begin{pmatrix}
-%0 & \Pi(h_2) \\
-%\Pi(h_1) & 0
-%\end{pmatrix}.
-%\end{equation}
-%
-%\n
-%
-%$g = \sd$:
-%
-%$g_1 = E \implies g g_1 = \sd E = g_2 h_1$, where $j(1) = 2$ and $h_1 = E$.
-%
-%$g_2 = \sd \implies g g_2 = E = E E = g_1 h_2$, where $j(2) = 1$ and $h_2 = E$.
-%\begin{equation} \label{eq:rhosd_matrix_example_inducedrep_D6}
-%\rho(\sd) =
-%\begin{pmatrix}
-%0 & \Pi(h_2) \\
-%\Pi(h_1) & 0
-%\end{pmatrix}
-%=
-%\begin{pmatrix}
-%0 & 0 & 1 & 0 \\
-%0 & 0 & 0 & 1 \\
-%1 & 0 & 0 & 0 \\
-%0 & 1 & 0 & 0 \\
-%\end{pmatrix}.
-%\end{equation}
-%
-%\n
-%
-%$g = \sv$:
-%
-%$g_1 = E \implies g g_1 = E \sv = g_1 h_1$, where $j(1) = 1$ and $h_1 = \sv$.
-%
-%$g_2 = \sd \implies g g_2 = \sv \sd = C_2 = \sd \sv = g_2 h_2$, where $j(2) = 2$ and $h_2 = \sv$.
-%\begin{equation} \label{eq:rhosv_matrix_example_inducedrep_D6}
-%\rho(\sv) =
-%\begin{pmatrix}
-%\Pi(h_1) & 0 \\
-%0 & \Pi(h_2)
-%\end{pmatrix}
-%=
-%\begin{pmatrix}
-%1 & 0  & 0 &  0 \\
-%0 & -1 & 0 &  0 \\
-%0 & 0  & 1 &  0 \\
-%0 & 0  & 0 & -1 \\
-%\end{pmatrix}.
-%\end{equation}
-%
-%\end{example}
 
 \begin{lemma} \label{lemma:induced_rep_matrix_i'j'ij_block}
 Let $H$ be a subgroup and $\Pi$ a representation of a group $G$ on a $n$-dimensional vector space $V$. On the basis $\{w_{ij} = (g_i, e_j)\}$ of $W = \bigoplus_{i=1}^{\abs{G/H}} g_i V$, where $(e_j)_{j=1}^n$ is a basis of $V$, the induced representation $\Pi \uparrow G$ has matrix elements
@@ -475,7 +278,7 @@ To analyze the symmetries of magnetic configurations, we introduce the time reve
 \label{fig:timerev_axialvec}
 \end{figure}
 
-Although initially motivated by magnetic systems, the magnetic groups can be understood more abstractly as a mathematical construct: a tensor product with the group of two elements, \(\mathcal{T} = \{1, 1'\}\). In this view, time reversal is treated as an abstract operator, extending beyond its physical origins. %For instance, in the context of TBG, the time-reversal operator can be interpreted as \textbf{swapping the sublattice types \(A\) and \(B\) (ISSO ESTÁ ERRADOOOO, TALVEZ EU FALE DE TIME-REVERSAL IN SPINLESS SYSTEMS)}.
+Although initially motivated by magnetic systems, the magnetic groups can be understood more abstractly as a mathematical construct: a tensor product with the group of two elements, \(\mathcal{T} = \{1, 1'\}\). In this view, time reversal is treated as an abstract operator, extending beyond its physical origins.
 
 Let \(G\) be a group that does not include the time-reversal operator. A \textit{magnetic group} is then defined as a subgroup of the tensor product \(G \otimes \mathcal{T}\), where its elements can be ``painted black, white, or grey,'' reflecting the interplay between time-reversal and spatial symmetries.
 
@@ -493,53 +296,23 @@ M = H \otimes 1 \; \cup \; (G - H) \otimes 1'.
 \end{enumerate}
 \end{definition}
 
+The magnetic point group of the BM model of TBG is \(6'2'2\) in Hermann-Mauguin notation. In this notation, the generators of the symmetry group can be chosen as \(C_{6z} T\), \(C_{2y} T\), and \(C_{2x}\). This magnetic point group corresponds to the magnetic space group \(P6'2'2\). Understanding the symmetry operations within \(P6'2'2\) is crucial for modeling an interacting model for twisted bilayer graphene and exploring the topological phases that emerge in the system.
+
+Figure \ref{fig:622_magnetic} illustrates the symmetries of the \(6'2'2\) magnetic point group. The black and white circles represent objects with distinct time-reversal properties, with \(+\) and \(-\) indicating the top and bottom layers, respectively. The dashed red lines indicate the \(C_2 T\) axes, which invert both the sign and the color of the circles. When \(C_{6z} T\) is applied, the circles are rotated by \(60^\circ\) around the $z$ axis, and their color is inverted as well, showcasing the combined effect of the sixfold rotation and time-reversal symmetry.
+
+
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.5\linewidth]{fig/622_magnetic.png}
-\caption{Representation of the magnetic point group $6'2'2$. \textbf{A FIGURA ESTÁ COM UM ERRO}, no South-East tá trocado $+$ e $-$.}
+\caption{Illustration of the magnetic point group \(6'2'2\), where black and white represent time-reversal symmetry, and \(+\) and \(-\) denote different layers.}
 \label{fig:622_magnetic}
 \end{figure}
-
-\begin{example} \label{ex:magnetic_group_tbg_6'2'2}
-The magnetic point group of the BM model of TBG is $6'2'2$ in Hermann-Mauguin notation. According to the notation, we can choose its generators to be $C_{6z} T$, $C_{2y} T$ and $C_{2x}$.
-\end{example}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Topological Quantum Chemistry} \label{sec:topological_quantum_chemistry}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%We are following the references \cite{lectures_tms2017, building_blocks2018}.
-
 In this chapter we will introduce the formalism of Topological Quantum Chemistry (TQC) \cite{topological_quantum_chemistry2017, building_blocks2018, lectures_tms2017}. Among many things, this theory mathematically defines when a electronic band is topological, which is a concept intrinsically associated to the construction of Wannier orbitals for a tight-binding model. The application of these concepts play a major role to motivate and construct a fully symmetric interacting MATBG model.
-
-%Since this theory involves numerous mathematical definitions and concepts, we will consistently use the example of monolayer graphene, which belongs to wallpaper group \#17 and the corresponding space group $P6mm$ ($\#183$ in international tables).
-
-%\begin{figure}[H]
-%\centering
-%\includegraphics[width=0.32\linewidth]{fig/honeycomb_C3.png}\hfill
-%\includegraphics[width=0.32\linewidth]{fig/honeycomb_C2.png}\hfill
-%\includegraphics[width=0.32\linewidth]{fig/honeycomb_sigma.png}
-%\caption{Generators of the point group \(\{C_3, C_2, m_{1\bar{1}}\}\) for the space group \(P6mm\) of the honeycomb lattice, with the coordinate system origin $O$ located at a hexagon's center. \textbf{CORRIGIR} $\sigma_{1\cc{1}} = m_{1\cc{1}}$.}
-%\label{fig:generators_P6mm}
-%\end{figure}
-%
-%Following Figure \ref{fig:generators_P6mm}, we use the basis $\mathcal{B} = \{\a_1 = a \vu{x}, \a_2 = \frac{a}{2} \vu{x} + \frac{a\sqrt{3}}{2} \vu{y}\}$. In this basis, the generators \(\{C_3, C_2, m_{1\bar{1}}\}\) for the point group $6mm$ act like:
-%\begin{equation} \label{eq:generators_P6mm}
-%\begin{cases}
-%\; C_3 \a_1 = -\a_1+\a_2 \\
-%\; C_3 \a_2 = -\a_1
-%\end{cases}
-%\quad
-%\begin{cases}
-%\; C_2\a_1 = -\a_1 \\
-%\; C_2\a_2 = -\a_2
-%\end{cases}
-%\quad
-%\begin{cases}
-%\; m_{1\bar{1}} \a_1 = \a_2 \\
-%\; m_{1\bar{1}} \a_2 = \a_1
-%\end{cases}
-%\end{equation}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Definitions} \label{subsec:tqc_definitions}
@@ -553,39 +326,6 @@ Given a point \(\q\), the \textit{orbit} of \(\q\) is the set of all points \tex
 \end{equation}
 \end{definition}
 
-%\begin{example} \label{ex:orbit_1a2b3c}
-%In Figure \ref{fig:unitcell_q1q2q3q4q5}, using the basis $\mathcal{B} = \{\a_1, \a_2\}$, consider the points \(\textcolor{red}{\varhexagonblack} = \q_1 = (0,0)\), \(\textcolor{blue}{\mdblksquare} = \q_2 = \qty(\frac{1}{3}, \frac{1}{3})\), \(\textcolor{green}{\bigstar} = \q_3 = \qty(\frac{1}{2}, 0)\), \(\textcolor{magenta}{\varheartsuit} = \q_4 = \qty(\frac{1}{6}, \frac{1}{6})\), and \(\textcolor{orange}{\spadesuit} = \q_5 = \qty(\frac{1}{4}, 0)\).
-%
-%Note that the unit cell, as shown in Figure \ref{fig:unitcell_limit}, excludes points that are equivalent under translations by Bravais lattice vectors. By applying all symmetry elements of \(G\) to the points \(\q_1, \q_2, \q_3, \q_4, \q_5\) and retaining only those that lie within the same unit cell, the resulting orbits are represented by the symbols \(\textcolor{red}{\varhexagonblack}\), \(\textcolor{blue}{\mdblksquare}\), \(\textcolor{green}{\bigstar}\), \(\textcolor{magenta}{\varheartsuit}\), and \(\textcolor{orange}{\spadesuit}\), as shown in Figure \ref{fig:unitcell_orbitsymbols}.
-%\end{example}
-%
-%\begin{figure}[H]
-%\centering
-%\begin{subfigure}{.3\textwidth}
-%  \centering
-%  \includegraphics[width=\linewidth]{fig/unitcell_q1q2q3q4q5.png}
-%  \caption{Points $\q_1,\q_2,\q_3,\q_4,\q_5$}
-%  \label{fig:unitcell_q1q2q3q4q5}
-%\end{subfigure}
-%\hfill
-%\begin{subfigure}{.3\textwidth}
-%  \centering
-%  \includegraphics[width=\linewidth]{fig/unitcell_orbitsymbols.png}
-%  \caption{Orbits and Wyckoff letters}
-%  \label{fig:unitcell_orbitsymbols}
-%\end{subfigure}
-%\hfill
-%\begin{subfigure}{.235\textwidth}
-%  \centering
-%  \includegraphics[width=\linewidth]{fig/unitcell_limit.png}
-%  \caption{Unit cell choice}
-%  \label{fig:unitcell_limit}
-%\end{subfigure}
-%\caption{Unit cell and orbits.}
-%\label{fig:unitcell_orbits}
-%\end{figure}
-
-
 \begin{definition}[\textbf{Site-symmetry group / Stabilizer group}] \label{def:sitesym}
 The site-symmetry group of a position $\q$ is the subgroup of operations $g \in G$ that leave $\q$ fixed.
 \begin{equation} \label{eq:site-symmetry_def}
@@ -593,72 +333,13 @@ G_\q = \{g \mid g \q = \q\} \subseteq G.
 \end{equation}
 \end{definition}
 
-%\textit{Remarks:}
-%\begin{itemize}
-%\item The site-symmetry group \( G_\q \) may include elements \(\{R \mid \r\}\) with \(\r \neq \0\).
-%\item Since any site-symmetry group leaves a point invariant, it is isomorphic to one of the crystallographic point groups: $32$ in three dimensions and $10$ in two dimensions.
-%\end{itemize}
-
-%\begin{example} \label{ex:site-symmetry_groups_p6mm}
-%Let us identify the site-symmetry groups of points $\q_1$, $\q_2$, $\q_3$, $\q_4$ and $\q_5$.
-%
-%\begin{itemize}
-%\item The point $\textcolor{orange}{\spadesuit} = \q_5 = \qty(\frac{1}{4}, 0)$ has a site-symmetry group \(G_{\q_5}\) with only the identity $\{E \mid 0\}$ and $\{m_{x} \mid 0\}$ (reflection by the $x$-axis) as symmetry elements. This makes $G_{\q_5}$ isomorphic to $D_1$.
-%\begin{equation} \label{eq:site-symmetry-q5}
-%\{m_{x} \mid 0\} \q_3 = m_x \qty(\frac{1}{4} \a_1) = m_x \qty(\frac{a}{4} \vu{x}) = \frac{a}{4} \vu{x} = \frac{1}{4} \a_1 = \q_5.
-%\end{equation}
-%
-%
-%\item The point \(\textcolor{magenta}{\varheartsuit} = \q_4 = \qty(\frac{1}{6}, \frac{1}{6})\) has a site-symmetry group \(G_{\q_4}\) with only the identity $\{E \mid 0\}$ and $\{m_{1\cc{1}} \mid 0\}$ as symmetry elements. This also makes $G_{\q_4}$ isomorphic to $D_1$.
-%\begin{align} \label{eq:site-symmetry-q4}
-%\{m_{1\cc{1}} \mid 0\} \q_4 &= m_{1\cc{1}}\qty(\frac{1}{6} \a_1 + \frac{1}{6} \a_2) = \frac{1}{6} \a_2 + \frac{1}{6} \a_1 = \q_4.
-%\end{align}
-%
-%\item The point \(\textcolor{green}{\bigstar} = \q_3 = \qty(\frac{1}{2}, 0)\) has a site-symmetry group \(G_{\q_3}\), which is isomorphic to \(D_2\). We can choose its generators to be $\{C_2 \mid \a_1\}$ and $\{m_{x}\mid 0\}$.
-%\begin{align} \label{eq:site-symmetry-q3}
-%\{C_2 \mid \a_1\} \q_3 &= C_2 \q_3 + \a_1 = -\q_3 + \a_1 = -\frac{1}{2} \a_1 + \a_1 = \q_3, \\
-%\{m_{x} \mid 0\} \q_3 &= m_x \qty(\frac{1}{2} \a_1) = m_x \qty(\frac{a}{2} \vu{x}) = \frac{1}{2} \a_1 = \q_3.
-%\end{align}
-%
-%\item The point $\textcolor{blue}{\mdblksquare} = \q_2 = \qty(\frac{1}{3}, \frac{1}{3})$ has site-symmetry group $G_{\q_2}$ isomorphic to $D_3$, and its generators are $\{C_3 \mid \a_1\}$ and $\{m_{1\cc{1}} \mid 0\}$.
-%\begin{align} \label{eq:site-symmetry-q2}
-%\{C_3 \mid \a_1\} \q_2 &= C_3 \qty(\frac{1}{3} \a_1 + \frac{1}{3} \a_2) + \a_1 = \frac{1}{3} \qty(-2\a_1 + \a_2) + \a_1 =
-%\frac{1}{3} (\a_1 + \a_2) = \q_2, \\
-%\{m_{1\cc{1}} \mid 0\} \q_2 &= m_{1\cc{1}} \qty(\frac{1}{3} \a_1 + \frac{1}{3} \a_2) =
-%\frac{1}{3} \a_2 + \frac{1}{3} \a_1 = \q_2.
-%\end{align}
-%
-%\item The point \(\textcolor{red}{\varhexagonblack} = \q_1 = (0,0)\) has a site-symmetry group \(G_{\q_1}\) isomorphic to \(D_6\), with generators \(\{C_3 \mid 0\}\), \(\{C_2 \mid 0\}\), and \(\{m_{1\cc{1}} \mid 0\}\). Since \(\q_1 = \0\) is the origin, it is evident that the action of any generator \(g\) on \(\q_1\) leaves it unchanged:
-%\begin{equation} \label{eq:site-symmetry-q1}
-%g \q_1 = \0 = \q_1, \quad \text{for all } g \in G_{\q_1}.
-%\end{equation}
-%\end{itemize}
-%
-%\end{example}
-
 \begin{definition}[\textbf{Wyckoff position}] \label{def:wyckpos}
 A \textit{Wyckoff position} \( \q \) refers to any position within the unit cell of the crystal. Some Wyckoff positions are \textit{special}, meaning they are left invariant by certain symmetry operations (other than the identity $\{E \mid 0\}$). The \textit{multiplicity} $n$ of a Wyckoff position is the number of distinct positions in its orbit within the same unit cell, $n = \abs{\text{Orb}(q)}$. A Wyckoff position is generally denoted as \( n\ell \), where \( \ell \) is an alphabetical label that designates the increasing size of the site-symmetry group associated with the position.
 \end{definition}
 
-%\begin{example} \label{ex:wyckpos_q1q2q3q4q5}
-%The Wyckoff positions \( \q_1 = \textcolor{red}{\varhexagonblack} \), \( \q_2 = \textcolor{blue}{\mdblksquare} \), \( \q_3 = \textcolor{green}{\bigstar} \), \( \q_4 = \textcolor{magenta}{\varheartsuit} \), and \( \q_5 = \textcolor{orange}{\spadesuit} \) are respectively labeled as \( \textcolor{red}{1a} \), \( \textcolor{blue}{2b} \), \( \textcolor{green}{3c} \), \( \textcolor{magenta}{6d} \), and \( \textcolor{orange}{6e} \), as shown in Figure \ref{fig:unitcell_orbitsymbols}.
-%\end{example}
-
 \begin{definition}[\textbf{Coset representatives}] \label{def:cosetrep_wyckoff}
 The \textit{coset representatives} of the site-symmetry group are the elements \( g_\alpha \) that generate the orbit of a Wyckoff position \( \q \), with each element in the orbit given by \( \q_\alpha = g_\alpha \q \). The number of coset representatives corresponds to the multiplicity of the Wyckoff position.
 \end{definition}
-
-%\begin{example} \label{ex:coset_representatives_q1q2q3q4q5}
-%For the points $\q_1 = \textcolor{red}{\varhexagonblack}$, $\q_2 = \textcolor{blue}{\mdblksquare}$, $\q_3 = \textcolor{green}{\bigstar}$, $\q_4 = \textcolor{magenta}{\varheartsuit}$ and $\q_5 = \textcolor{orange}{\spadesuit}$, we can choose coset representatives as
-%\begin{align}
-%\text{Orb}(\q_1) &= \qty{\{E\mid 0\} \q_1}, \label{eq:orbit_q1} \\
-%\text{Orb}(\q_2) &= \qty{\{E\mid 0\} \q_2, \{C_6\mid 0\} \q_2}, \label{eq:orbit_q2} \\
-%\text{Orb}(\q_3) &= \qty{\{E\mid 0\} \q_3, \{C_6\mid 0\} \q_3, \{C_6^2\mid 0\} \q_3}, \label{eq:orbit_q3} \\
-%\text{Orb}(\q_4) &= \qty{\{E\mid 0\} \q_4, \{C_6\mid 0\} \q_4, \{C_6^2\mid 0\} \q_4, \{C_6^3\mid 0\} \q_4, \{C_6^4\mid 0\} \q_4, \{C_6^5\mid 0\} \q_4}, \label{eq:orbit_q4} \\
-%\text{Orb}(\q_5) &= \qty{\{E\mid 0\} \q_5, \{C_6\mid 0\} \q_5, \{C_6^2\mid 0\} \q_5, \{C_6^3\mid 0\} \q_5, \{C_6^4\mid 0\} \q_5, \{C_6^5\mid 0\} \q_5}, \label{eq:orbit_q5}
-%\end{align}
-%For example, in Equation \ref{eq:orbit_q3}, the coset representatives of $G_{\q_3}$ are $g_1 = \{E\mid 0\}$, $g_2 = \{C_6\mid 0\}$, and $g_3 = \{C_6^2\mid 0\}$.
-%\end{example}
 
 \begin{lemma}[\textbf{Coset decomposition}] \label{lemma:cosetdecomp_wyckoff}
 Let \( \q \) be a Wyckoff position in a space group \( G \). The coset decomposition of \( G \) with respect to \( \q \) is given by:
@@ -676,25 +357,6 @@ which leads to
 \t = g \q - \q_\alpha.
 \end{equation}
 \end{lemma}
-
-%\begin{lemma}[\textbf{Conjugate site-symmetry groups}] \label{lemma:conjugate_group_G_qalpha}
-%Positions \(\q\) and \(\q_\alpha\) on the same orbit are connected by the relation \(\q_\alpha = g_\alpha \q\), where \(g_\alpha\) is a coset representative. For \(h \in G_\q\), the following holds:
-%\begin{equation} \label{eq:conjugate_group_qalpha}
-%h \q = \q \implies h g_\alpha^{-1} \q_\alpha = g_\alpha^{-1} \q_\alpha \implies
-%\qty(g_\alpha h g_\alpha^{-1}) \q_\alpha = \q_\alpha \implies
-%g_\alpha h g_\alpha^{-1} \in G_{\q_\alpha}.
-%\end{equation}
-%Consequently, the site-symmetry groups of points on the same orbit are conjugates of each other, satisfying \(G_{\q_\alpha} = g_\alpha G_\q g_\alpha^{-1}\).
-%\end{lemma}
-
-
-%\begin{definition}[\textbf{Maximal Wyckoff position}] \label{def:maximal_wyckpos}
-%A site-symmetry group is \textit{non-maximal} if there exists a finite group $H \neq G_\q$, such that $G_\q \subseteq H \subseteq G$. A site-symmetry group that is not non-maximal is \textit{maximal}. A Wyckoff position $\q$ is said to be \textit{maximal} if its site-symmetry group $G_\q$ is maximal.
-%\end{definition}
-
-%\begin{example} \label{ex:maximal_wyckpos_example}
-%We have $G_{\q_4} \subset G_{\q_2}$ and $G_{\q_5} \subset G_{\q_3}$, therefore $\q_4$ and $\q_5$ are non-maximal Wyckoff positions. On the other hand, the Wyckoff positions $\q_1$, $\q_2$, $\q_3$ are maximal. \textbf{Do I prove this?}
-%\end{example}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Band Representations} \label{subsec:band_reps}
@@ -834,29 +496,6 @@ Two band representations $\rho_G$ and $\sigma_G$ are equivalent iff there exists
 A band representation is called \textbf{composite} if it is equivalent to the direct sum of other band representations. A band representation that is not composite is called \textbf{elementary}.
 \end{definition}
 
-%\begin{theorem}[\textbf{Properties of band representations}]
-%Some properties of band representations are:
-%\begin{enumerate}
-%\item Because induction commutes with direct sums
-%$$
-%(\rho_1 \oplus \rho_2) \uparrow G = (\rho_1 \uparrow G) \oplus (\rho_2 \uparrow G),
-%$$
-%reducible representations of $G_\q$ induce composite band representations.
-%
-%\item Given subgroups $K \subset H \subset G$, and a representation $\rho$ of $K$, because induction is transitive it follows that
-%$$
-%(\rho \uparrow H) \uparrow G = \rho \uparrow G.
-%$$
-%From this we conclude that all EBRs can be induced from irreps of the maximal site symmetry groups.
-%\end{enumerate}
-%\end{theorem}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\subsection{Exceptions}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-%There are exceptions where an irrep of the site symmetry group of a maximal Wyckoff position induces a composite band representation.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Topological Systems} \label{subsec:topological_systems}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -872,17 +511,6 @@ Band representations describe systems in the atomic limit, where bands can be de
 \begin{theorem} \label{th:topo_insul}
 Any isolated set of bands that is not equivalent to a band representation (composite or elementary) gives a strong, weak, or crystalline topological insulator.
 \end{theorem}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\subsection{How to determine if a set of bands is topological}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-%As said in \cite{building_blocks2018}: \textbf{ESSA SEÇÃO EU COPIEI}
-%
-%A practical route to determining whether a set of bands $\mathcal{B}$ is \textbf{not} a band representation is as follows: first, enumerate all EBRs for the particular space group and list the irreps that appear in each EBR at each high symmetry point. Next, compute the irreps at each high-symmetry point for the bands in $\mathcal{B}$. If the set of irreps that have been computed for the bands in $\mathcal{B}$ cannot be obtained from a linear combination of the EBRs in the space group, then the bands in $\mathcal{B}$ do not comprise a band representation and, by Theorem \ref{th:topo_insul}, are topological.
-%
-%If the irreps that appear in $\mathcal{B}$ can be obtained from a linear combination of the EBRs of the space group, then one must compute symmetric and localized Wannier functions for the bands in $\mathcal{B}$ to confirm that they are equivalent to the atomic limit defined by the linear combination of EBRs or compute a Berry phase that will distinguish the two. This is because, it is possible for two distinct groups of bands to have the exact same irreps at all high-symmetry points, but different Berry phases (recall, this is exactly why we require the homotopic notion of equivalence, as in Definition \ref{def:equiv_bandrep}.)
 
 
 To determine whether a set of bands \(\mathcal{B}\) does \textbf{not} form a band representation, a systematic approach can be followed: first, identify all elementary band representations (EBRs) for the relevant space group and catalog the irreducible representations (irreps) that appear at each high-symmetry point for these EBRs. Then, calculate the irreps associated with the bands in \(\mathcal{B}\) at the high-symmetry points. If the irreps corresponding to \(\mathcal{B}\) cannot be expressed as a linear combination of the irreps from the EBRs, the bands do not form a band representation. According to Theorem \ref{th:topo_insul}, this indicates that the bands are topological.
@@ -993,243 +621,10 @@ By diagonalizing the resulting 6-band model for the valley $\eta = +$, construct
 %\centering
 \includegraphics[height=0.35\linewidth]{fig/thf-no_M.png}
 \includegraphics[height=0.35\linewidth]{fig/thf-no_coupling.png}
-\caption{Band structures for the 6-band non-interacting Topological Heavy Fermion model.}
+\caption{Band structures for the 6-band non-interacting Topological Heavy Fermion model, showing the effect of different parameters on the electronic states. Each panel illustrates a variation of the model with certain parameters set to zero.}
 \label{fig:thf-exploration}
 \end{figure}
 
-
-
-%\begin{table}[H]
-%\tiny
-%\caption{Elementary band representations of the magnetic space group $P6'2'2$.}
-%\centering
-%\begin{tabular}{|c|c|c|c|c|c|c|c|c|}
-%\hline
-%Wyckoff & \multicolumn{3}{c|}{$1a$} & \multicolumn{3}{c|}{$2c$} & \multicolumn{2}{c|}{$3f$} \\
-%\cline{1-9}
-%Site sym. & \multicolumn{3}{c|}{$6'2'2$, $32$} & \multicolumn{3}{c|}{$32$, $32$} & \multicolumn{2}{c|}{$2'2'2$, $2$} \\
-%\cline{1-9}
-%EBR & $G_{A_1}^{1a}(1)$ & $G_{A_2}^{1a}(1)$ & $G_{E}^{1a}(2)$ & $G_{A_1}^{2c}(2)$ & $G_{A_2}^{2c}(2)$ & $G_{E}^{2c}(4)$   & $G_{A}^{3f}(3)$ & $G_{B}^{3f}(3)$ \\
-%\hline
-%$\Gamma$ & $\Gamma_1(1)$ & $\Gamma_2(1)$ & $\Gamma_3(1)$ & $2\Gamma_1(1)$ & $2\Gamma_2(1)$ & $2\Gamma_3(2)$ & $\Gamma_1(1)+\Gamma_3(2)$ & $\Gamma_2(1)+\Gamma_3(2)$ \\
-%\hline
-%$K$ & $K_1(1)$ & $K_1(1)$ & $K_2 K_3(2)$ & $K_2 K_3(2)$ & $K_2 K_3(2)$ & $2K_1(1) + K_2 K_3(2)$ & $K_1(1)+K_2 K_3(2)$ & $K_1(1)+K_2 K_3(2)$ \\
-%\hline
-%$M$ & $M_1(1)$ & $M_2(1)$ & $M_1(1)+M_2(1)$ & $2M_1(1)$ & $2M_2(1)$ & $2M_1(1)+2M_2(1)$ & $2M_1(1)+M_2(1)$ & $M_1(1)+2M_2(2)$ \\
-%\hline
-%\end{tabular}
-%\label{tab:matbg-irreps}
-%\end{table}
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\section{Monolayer}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-%Considering only nearest-neighbors, the hamiltonian of a single unrotated layer of graphene is given by
-%$$
-%H_{\text{mono}}(\k) = -t
-%\begin{pmatrix}
-%0 & f(\k) \\
-%f^*(\k) & 0
-%\end{pmatrix}
-%, \quad \ell = 1, 2,
-%$$
-%where $f = \sum_{i=1}^{3} e^{i \k \vdot \bm{\delta}}$, and $\bm{\delta}$ are the three nearest-neighbor vectors from a site $A$ of the honeycomb lattice.
-%
-%Expanding in first-order $\k = \K + \q$, where $\K = \frac{4\pi}{3a} (1, 0)$ is the Dirac point of the unrotated layer, we have
-%$$
-%H_{\text{mono}}(\K + \q) \approx v_F \, \q \vdot \bm{\sigma}.
-%$$
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\section{BM model review}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-%The hamiltonian of the BM model is given by
-%$$
-%H = H_1 + H_2 + V + V^\dagger,
-%$$
-%where $H_1$ and $H_2$ correspond to the layers 1 and 2, and $V$ is the hybridization between them.
-%
-%\n
-%
-%For this discussion, we use the reference frame where layer 1 is unrotated and layer 2 is rotated counter-clockwise by an angle $\theta$. Therefore, we have
-%$$
-%H_1(\k) = H_{\text{mono}}(\k), \quad H_2(\k) = H_1(R_\theta^{-1}\k),
-%$$
-%$$
-%R_\theta =
-%\begin{pmatrix}
-%\cos\theta & -\sin\theta \\
-%\sin\theta & \cos\theta
-%\end{pmatrix}.
-%$$
-%
-%Also, the Dirac points of each layer are
-%$$
-%\K_1 = \K = \frac{4\pi}{3a} (1, 0), \quad \K_2 = R_\theta \K_1 = R_\theta \K,
-%$$
-%$$
-%$$
-%
-%Therefore, expanding around the Dirac points $\K_1$ and $\K_2$, respectively:
-%$$
-%H_1(\K_1 + \q) \approx v_F \, \q \vdot \bm{\sigma}.
-%$$
-%$$
-%\boxed{ H_2(\K_2 + \q) = H_2(R_\theta \K_1 + \q) = H_1(\K_1 + R_\theta^{-1}\q) \approx v_F \, (R_\theta^{-1}\q) \vdot \bm{\sigma} \approx v_F \, (1 - i \theta \sigma_y ) \, \q \vdot \bm{\sigma}. }
-%$$
-%
-%If we \textbf{neglect the $\theta$-dependence on $H_2$}, our BM model will be \textbf{particle-hole symmetric}, as defined by Bernevig.
-%
-%\n
-%
-%Of course, the more difficult part is due to the hybridization term $V$. It is written on the Bloch basis $\ket{\ell, \alpha, \p}$, where $\ell = 1, 2$ is the layer index, $\alpha = A, B$ is the sublattice index, and $\p$ is the momentum.
-%We have
-%$$
-%V_{\alpha\beta}(\p, \p') = \bra{1, \alpha, \p} H \ket{2, \beta, \p'}.
-%$$
-%
-%When we expand both $\p = \K_1 + \q$ and $\p' = \K_2 + \q'$, \textbf{after the BM considerations}, we get
-%$$
-%V_{\alpha\beta}(\K + \q, R_\theta \K + \q') \approx
-%w \sum_{j=1}^{3} \delta_{\q, \q' + \q_j} T_{\alpha\beta}^j,
-%$$
-%where $\q_1, \q_2, \q_3$ are the moiré momentum vectors, with absolute value $k_D = 2 \sin(\theta/2) \abs{\K}$. The matrices $T^j_{\alpha\beta}$ are
-%$$
-%T_1 = \sigma_0 + \sigma_x
-%$$
-%$$
-%T_2 = \sigma_0 + \cos(\frac{2\pi}{3}) \sigma_x + \sin(\frac{2\pi}{3}) \sigma_y
-%$$
-%$$
-%T_3 = \sigma_0 + \cos(\frac{2\pi}{3}) \sigma_x - \sin(\frac{2\pi}{3}) \sigma_y
-%$$
-%\begin{figure}[H]
-%\centering
-%\includegraphics[width=0.8\linewidth]{fig/moire-vectors.png}
-%\end{figure}
-%
-%\n
-%
-%This \textbf{BM model} is called \textbf{MBM-1V (Moiré Band Model - One Valley)} by Bernevig. If we decompose $\q = \k - \Q$, $\q'=\k-\Q'$, where $\Q$ and $\Q'$ belong to the hexagonal lattice formed by adding $\q_{1,2,3}$ iteratively, we can rewrite the hamiltonian as
-%$$
-%\boxed{
-%H_{\Q, \Q'}^{(\text{MBM-1V})}(\k) =
-%\delta_{\Q,\Q'} v_F (\k-\Q) \vdot \bm{\sigma}
-%+ w \sum_{j=1}^{3} (\delta_{\Q'-\Q, \q_j} + \delta_{\Q-\Q', \q_j}) T^j.
-%}
-%$$
-%
-%\begin{itemize}
-%\item This model is \textbf{topological} and is what we have been discussing the whole time.
-%\item The tables of Bernevig apply to this model, where we consider the Wyckoff position 1a within the THF approach to solve the topological obstruction.
-%\item Its magnetic space group is $P6'2'2$. Generators: $C_{6z} T$, $C_{2y} T$, $C_{2x}$.
-%\end{itemize}
-%
-%\begin{table}[H]
-%\scriptsize
-%\caption{Elementary band representations of the magnetic space group $P6'2'2$.}
-%\centering
-%\begin{tabular}{|c|c|c|c|c|c|c|c|c|}
-%\hline
-%Wyckoff & \multicolumn{3}{c|}{$1a$} & \multicolumn{3}{c|}{$2c$} & \multicolumn{2}{c|}{$3f$} \\
-%\cline{1-9}
-%Site sym. & \multicolumn{3}{c|}{$6'2'2$, $32$} & \multicolumn{3}{c|}{$32$, $32$} & \multicolumn{2}{c|}{$2'2'2$, $2$} \\
-%\cline{1-9}
-%EBR & $G_{A_1}^{1a}(1)$ & $G_{A_2}^{1a}(1)$ & $G_{E}^{1a}(2)$ & $G_{A_1}^{2c}(2)$ & $G_{A_2}^{2c}(2)$ & $G_{E}^{2c}(4)$   & $G_{A}^{3f}(3)$ & $G_{B}^{3f}(3)$ \\
-%\hline
-%$\Gamma$ & $\Gamma_1(1)$ & $\Gamma_2(1)$ & $\Gamma_3(1)$ & $2\Gamma_1(1)$ & $2\Gamma_2(1)$ & $2\Gamma_3(2)$ & $\Gamma_1(1)+\Gamma_3(2)$ & $\Gamma_2(1)+\Gamma_3(2)$ \\
-%\hline
-%$K$ & $K_1(1)$ & $K_1(1)$ & $K_2 K_3(2)$ & $K_2 K_3(2)$ & $K_2 K_3(2)$ & $2K_1(1) + K_2 K_3(2)$ & $K_1(1)+K_2 K_3(2)$ & $K_1(1)+K_2 K_3(2)$ \\
-%\hline
-%$M$ & $M_1(1)$ & $M_2(1)$ & $M_1(1)+M_2(1)$ & $2M_1(1)$ & $2M_2(1)$ & $2M_1(1)+2M_2(1)$ & $2M_1(1)+M_2(1)$ & $M_1(1)+2M_2(2)$ \\
-%\hline
-%\end{tabular}
-%\label{tab:ebr-P6'2'2}
-%\end{table}
-%
-%\begin{table}[H]
-%\caption{Character table of irreps at high symmetry momenta in magnetic space group $P6'2'2$.}
-%\centering
-%\begin{tabular} { c c c c | c c c | c c c }
-%\cline{1-10}
-%$\P$ & $\P \Gamma_1$ & $\P \Gamma_2$ & $\P \Gamma_3$ & $\P$ & $\P M_1$ & $\P M_2$ & $\P$ & $\P K_1$ & $\P K_2K_3$ \\
-%\cline{1-10}
-%$E$ & $\P1$ & $\P1$ & $\P2$ & $\P E$ & $\P1$ & $\P1$ & $\P E$ & $\P1$ & $\P2$ \\
-%$2 C_3$ & $\P1$ & $\P1$ & $ -1$ & $\P C_2'$ & $\P1$ & $ -1$ & $\P C_3$ & $\P1$ & $ -1$ \\
-%$3 C_2'$ & $\P1$ & $ -1$ & $\P0$ & $\P$ & $\P$ & $\P$ & $\P C_3^{-1}$ & $\P1$ & $-1$ \\
-%\cline{1-10}
-%\end{tabular}
-%\label{tab:char-P6'2'2}
-%\end{table}
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\section{There exists another model}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-%According to Bernevig: ``The MBM-1V is half of the TBG system, with similar physics taking place in the electron states around $\K'$''. A model with the two valleys can be written as
-%$$
-%\boxed{
-%H_{\Q, \Q'}^{(\text{MBM-2V})}(\k) =
-%\delta_{\Q,\Q'} v_F (\k-\Q) \vdot \bm{\sigma} \otimes \tau_z
-%+ w \sum_{j=1}^{3} (\delta_{\Q'-\Q, \q_j} + \delta_{\Q-\Q', \q_j}) T^j \otimes \tau_0.
-%}
-%$$
-%
-%Here $\tau_z$ and $\tau_0$ are the Pauli and identity matrix representing the valley degree of freedom.
-%
-%\begin{itemize}
-%\item This model is \textbf{apparently different} from the latter, and \textbf{is not topological}. You can decompose it in EBR's as $G_{A_1}^{2c} + G_{A_2}^{2c}$.
-%\item The tables of Rennella apply to this model. There the authors (Vafek, Rennella, Angeli, Koshino, etc) consider Wyckoff position 2c, because these positions really correspond to symmetry-adapted exponentially localized Wannier functions.
-%\item The magnetic space group is $P6221'$. Generators: $C_{6z}$, $C_{2y}$, $C_{2x}$, $T$.
-%\end{itemize}
-%
-%\begin{table}[H]
-%\caption{Elementary band representations generated from Wyckoff position $2c$ of the space group $P622$.}
-%\centering
-%\begin{tabular}{|c|c|c|c|}
-%\hline
-%Wyckoff & \multicolumn{3}{c|}{$2c$} \\
-%\cline{1-4}
-%Site sym. & \multicolumn{3}{c|}{$32$} \\
-%\cline{1-4}
-%EBR & $G_{A_1}^{2c}(2)$ & $G_{A_2}^{2c}(2)$ & $G_{E}^{2c}(4)$  \\
-%\hline
-%$\Gamma$ & $\Gamma_1(1) + \Gamma_4(1)$ & $\Gamma_2(1) + \Gamma_3(1)$ & $\Gamma_5(2) + \Gamma_6(2)$ \\
-%\hline
-%$K$ & $K_3(2)$ & $K_3(2)$ & $K_1(1) + K_2(1) + K_3(2)$ \\
-%\hline
-%$M$ & $M_1(1) + M_4(1)$ & $M_2(1) + M_3(1)$ & $M_1(1) + M_2(1) + M_3(1) + M_4(1)$ \\
-%\hline
-%\end{tabular}
-%\label{tab:ebr-P622}
-%\end{table}
-%
-%\begin{table}[H]
-%\caption{Character table of irreps at high symmetry momenta in space group $P622$.}
-%\scriptsize
-%\centering
-%\begin{tabular} { c c c c c c c | c c c c c | c c c c }
-%\cline{1-16}
-%$\P$ & $\P \Gamma_1$ & $\P \Gamma_2$ & $\P \Gamma_3$ & $\P \Gamma_4$ & $\P \Gamma_5$ & $\P \Gamma_6$ & $\P$ & $\P M_1$ & $\P M_2$ & $\P M_3$ & $\P M_4$ & $\P$ & $\P K_1$ & $\P K_2$ & $\P K_3$\\
-%\cline{1-16}
-%$E$      & $\P1$ & $\P1$ & $\P1$ & $\P1$ & $\P2$ & $\P2$ & $E$     & $\P1$ & $\P1$  & $\P1$ & $\P1$ & $E$      & $\P1$ & $\P1$ & $\P2$ \\
-%$2C_6$   & $\P1$ & $\P1$ & $ -1$ & $ -1$ & $ -1$ & $\P1$ & $C_2$   & $\P1$ & $\P1$  & $ -1$ & $ -1$ & $C_3$    & $\P1$ & $\P1$ & $ -1$ \\
-%$2C_3$   & $\P1$ & $\P1$ & $\P1$ & $\P1$ & $ -1$ & $ -1$ & $C_2'$  & $\P1$ & $ -1$  & $ -1$ & $\P1$ & $3C_2''$ & $\P1$ & $ -1$ & $\P0$ \\
-%$C_2$    & $\P1$ & $\P1$ & $ -1$ & $ -1$ & $\P2$ & $ -2$ & $C_2''$ & $\P1$ & $ -1$  & $\P1$ & $ -1$ &          &       &       &       \\
-%$3C_2'$  & $\P1$ & $ -1$ & $ -1$ & $\P1$ & $\P0$ & $\P0$ &         &       &        &       &       &          &       &       &       \\
-%$3C_2''$ & $\P1$ & $ -1$ & $\P1$ & $ -1$ & $\P0$ & $\P0$ &         &       &        &       &       &          &       &       &       \\
-%\cline{1-16}
-%\end{tabular}
-%\label{tab:char-P622}
-%\end{table}
-%
-%Compare tables \ref{tab:ebr-P622} and \ref{tab:char-P622} with tables 2.5 and (2.1, 2.3) of Rennella \cite{thesis_rennella}, respectively.
 
 \chapter{Evaluation of the Institutional Support received during the period} \label{chp:apoioInst}
 %\chapter{Description and evaluation of the Institutional Support received during the period} \label{chp:apoioInst}
@@ -1245,6 +640,21 @@ During the period covered by this report, the student did not participate in any
 
 \chapter{Conclusions and Future Activities} \label{chp:conclusions}
 
+%%% ISOLATED PARAGRAPHS
+%In this section, we explored fundamental concepts in group and representation theory, focusing on the induction and subduction of representations, and extended the discussion to magnetic groups. Subduction simplifies representations of a group by restricting them to a subgroup, while induction constructs higher-dimensional representations of a group from those of its subgroups. These concepts were supported by explicit definitions, matrix representations, and character formulas. We then examined magnetic groups, which incorporate time-reversal symmetry as an abstract operator, classifying them into colorless, grey (paramagnetic), and black-and-white types. These classifications provide a framework for understanding symmetry in magnetic systems, with specific examples like the magnetic point group $6'2'2$ for TBG illustrating their application in condensed matter physics.
+%
+%In this section, we introduced the core principles of Topological Quantum Chemistry (TQC), a framework that rigorously defines the topological nature of electronic bands by leveraging the symmetry properties of crystalline structures and the Wannier orbital formalism. We explored foundational definitions, such as orbits, site-symmetry groups, Wyckoff positions, and their coset decompositions, which establish the groundwork for understanding the symmetries of band representations. Additionally, we discussed the transformation properties of Bloch and Wannier functions under space group operations, as well as the induction and subduction of representations to identify the irreducible components of bands. Lastly, we distinguished between elementary and composite band representations, emphasizing the topological implications of bands that deviate from the atomic limit. This framework is essential for analyzing and designing materials with topological phases, such as topological insulators and semimetals, while preserving the underlying symmetry constraints.
+%
+%In conclusion, the Topological Heavy Fermion (THF) model incorporates complex band structure features arising from the interplay of magnetic space group symmetries, emergent particle-hole symmetry, and the hybridization of higher-energy bands with flat bands. The inclusion of fragile topological phases and Wannier obstructions, resolved through the incorporation of higher-energy bands and Gaussian Wannier functions, is critical to understanding the superconducting properties of the model. The projected Hamiltonian approach successfully isolates the topological characteristics of the system, revealing the flat band topology and providing insights into the behavior of the non-interacting 6-band model. This formalism lays the groundwork for further exploration of topological phases in twisted bilayer systems, such as MATBG.
+%
+%The student pretends to defend his thesis at February, 2025. In our future activities, we will be focusing on finishing writing the Master thesis. A incomplete version, work in progress, version of the thesis is attached to the report form.
+
+\textbf{CORRIGIR E POLIR A CONCLUSÃO ABAIXO GERADA POR IA}
+
+In this report, we began by examining fundamental concepts in group and representation theory, focusing on the induction and subduction of representations, and extending these ideas to magnetic groups. These tools allow for the simplification and construction of higher-dimensional representations by analyzing the symmetries of subgroups and their parent groups, with applications such as the magnetic point group \( 6'2'2 \) for TBG. We then introduced the framework of Topological Quantum Chemistry (TQC), which rigorously defines the topological nature of electronic bands by leveraging the symmetries of crystalline structures and Wannier orbital formalism. This approach involves studying Wyckoff positions, coset decompositions, and the induction and subduction of representations to identify the irreducible components of bands, all of which are key to understanding the topological implications of materials with non-atomic limit behavior. TQC provides an essential foundation for exploring topological phases in materials like topological insulators and semimetals. The main focus of this report, however, is on the Topological Heavy Fermion (THF) model, which we applied to Magic-Angle Twisted Bilayer Graphene (MATBG). By incorporating magnetic space group symmetries, emergent particle-hole symmetry, and the hybridization of higher-energy bands with flat bands, the THF model offers insights into the superconducting properties of MATBG. The inclusion of fragile topological phases and Wannier obstructions, resolved through Gaussian Wannier functions and the incorporation of higher-energy bands, is crucial for understanding the topological characteristics of this system. This formalism sets the stage for further exploration of topological phases in MATBG, and our ongoing research will focus on refining and completing the analysis of this model, with the final goal of advancing our understanding of topological phenomena in twisted bilayer graphene systems. Moving forward, the focus will shift to completing the Master's thesis, with a work-in-progress version attached to the report.
+
+
+% CONCLUSAO ANTIGA
 %In Section \ref{sec:tbg}, we presented our research on TBG theory. We derived the Bistritzer-MacDonald model \cite{macdonald2011} in Section \ref{sec:BM-model}. Our intention is to utilize this knowledge to develop our own code for analyzing the electronic properties of the system. The BM model is advantageous as it is independent of whether a configuration of TBG is commensurate or not, and it also incorporates all the emergent symmetries observed in experiments \cite{zou2018}. In order to construct the Wannier orbitals localized on the AB and BA regions of interest, we recognized the necessity of thoroughly reviewing concepts of group theory in Section \ref{sec:grouptheory}. Our studies will enable us to employ group theory to elucidate the Wannier Obstruction \cite{zou2018} and the Topological Heavy Fermion model \cite{topoheavyfermion2022}.
 %
 %In Section \ref{sec:hubbard}, we established a fully operational DMFT algorithm and extensively explored the phase diagrams for the Metal-Insulator transition. In Figure \ref{fig:UxT-rho0}(a), we successfully replicated a known result from the literature for $\eps_d = U/2$ \cite{georges1996}. Additionally, we conducted a thorough investigation of the asymmetric case, which has received comparatively less attention in the literature. Notably, we analyzed the expansion of the coexistence region as we deviated from the particle-hole symmetric (PHS) case and observed the distinctive ``smile'' pattern in the $U \times \eps_d$ phase diagrams of Figure \ref{fig:T0002-butterfly}. Looking ahead to our DMFT progress, our goal is to enhance and extend the algorithm for the study of TBG. However, before developing a practical implementation, we acknowledge the necessity of comprehensively understanding the intrinsic properties of the system through a rigorous analysis of its symmetries.
