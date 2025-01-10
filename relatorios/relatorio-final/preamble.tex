@@ -1,0 +1,198 @@
+%\usepackage{mathtools}
+\usepackage{amsthm}     % for definitions and theorems
+\usepackage[many]{tcolorbox}    % boxes around definitions and theorems
+%\usepackage{amsmath}
+%\usepackage{nccmath}
+\usepackage{amssymb}    % \ltimes, semi-direct product
+%\usepackage{etoolbox}   % for start of Chapter
+%\usepackage{amsfonts}
+\usepackage{physics}    % for all Physics related
+\usepackage{dsfont}     % for the identity matrix symbol \1
+%\usepackage{mathrsfs}
+\usepackage[notextcomp]{stix}   % font package and some symbols like filled square
+%\usepackage{MnSymbol}   % symbols font package
+
+\usepackage{titling}
+\usepackage{indentfirst}
+
+\usepackage{bm}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{cancel}
+\usepackage{enumitem}
+
+\usepackage{xurl}
+%\usepackage[colorlinks=true]{hyperref} % links have colors
+\usepackage{hyperref}  % no colors
+
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{subcaption}
+%\usepackage{tikz}
+
+\usepackage{ctable}     % tabelas
+\renewcommand{\P}{\phantom{+}}  % empty space to indent things
+\usepackage{multirow}
+\usepackage{tabulary}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\eps}{\epsilon}
+\newcommand{\vphi}{\varphi}
+\newcommand{\cte}{\text{cte}}
+
+\newcommand{\N}{{\mathbb{N}}}
+\newcommand{\Z}{{\mathbb{Z}}}
+%\newcommand{\Q}{{\mathbb{Q}}}
+\newcommand{\C}{{\mathbb{C}}}
+\renewcommand{\S}{{\hat{S}}}
+%\renewcommand{\H}{\s{H}}
+
+\renewcommand{\a}{{\vb{a}}}
+\renewcommand{\b}{{\vb{b}}}
+\renewcommand{\d}{{\dagger}}
+\newcommand{\up}{{\uparrow}}
+\newcommand{\down}{{\downarrow}}
+\newcommand{\hc}{{\text{h.c.}}}
+
+\newcommand{\ihat}{\bm{\hat{\imath}}}
+\newcommand{\jhat}{\bm{\hat{\jmath}}}
+\newcommand{\khat}{\bm{\hat{k}}}
+
+\newcommand{\0}{{\vb{0}}}
+\newcommand{\1}{\mathds{1}}
+\newcommand{\E}{{\vb{E}}}
+\newcommand{\B}{{\vb{B}}}
+\renewcommand{\u}{{\vb{u}}}
+\renewcommand{\v}{{\vb{v}}}
+\renewcommand{\r}{{\vb{r}}}
+\newcommand{\R}{{\vb{R}}}
+\newcommand{\Q}{{\vb{Q}}}
+\newcommand{\G}{{\vb{G}}}
+\newcommand{\g}{{\vb{g}}}
+\renewcommand{\k}{{\vb{k}}}
+\newcommand{\K}{{\vb{K}}}
+\newcommand{\p}{{\vb{p}}}
+\newcommand{\q}{{\vb{q}}}
+\newcommand{\F}{{\vb{F}}}
+\renewcommand{\t}{{\vb{t}}}
+\newcommand{\vtau}{{\bm{\tau}}}
+\newcommand{\vdelta}{{\bm{\delta}}}
+
+% COLORED SYMMETRY ELEMENTS
+\newcommand{\Ct}{{\textcolor{Cyan}{C_3}}}
+\newcommand{\Ctn}[1]{{\textcolor{Cyan}{C_3^{\textcolor{black}{#1}}}}}
+\newcommand{\Cs}{{\textcolor{ForestGreen}{C_6}}}
+\newcommand{\Csn}[1]{{\textcolor{ForestGreen}{C_6^{\textcolor{black}{#1}}}}}
+\newcommand{\sd}{{\textcolor{RoyalBlue}{\sigma_d}}}
+\newcommand{\sdn}[1]{{\textcolor{RoyalBlue}{\sigma_d^{\textcolor{black}{#1}}}}}
+\newcommand{\sdp}{{\textcolor{RoyalBlue}{\sigma_d'}}}
+\newcommand{\sdpp}{{\textcolor{RoyalBlue}{\sigma_d''}}}
+\newcommand{\sv}{{\textcolor{Orange}{\sigma_v}}}
+\newcommand{\svn}[1]{{\textcolor{Orange}{\sigma_v^{\textcolor{black}{#1}}}}}
+\newcommand{\svp}{{\textcolor{Orange}{\sigma_v'}}}
+\newcommand{\svpp}{{\textcolor{Orange}{\sigma_v''}}}
+
+\newcommand{\GL}{{\text{GL}}}
+\newcommand{\U}{{\text{U}}}
+
+\newcommand{\s}{\sigma}
+%\newcommand{\prodint}[2]{\left\langle #1 , #2 \right\rangle}
+\newcommand{\cc}[1]{\overline{#1}}
+\newcommand{\Eval}[3]{\eval{\left( #1 \right)}_{#2}^{#3}}
+\newcommand{\sg}[2]{\{ #1 \mid #2 \}}
+\renewcommand{\AA}{{\mathring{\text{A}}}}
+\newcommand{\I}{{\mathbb{I}}}
+\newcommand{\bP}{{\mathbb{P}}}
+\newcommand{\bQ}{{\mathbb{Q}}}
+
+\newcommand{\unit}[1]{\; \mathrm{#1}}
+
+\newcommand{\n}{\medskip}
+\newcommand{\e}{\quad \mathrm{and} \quad}
+\newcommand{\ou}{\quad \mathrm{or} \quad}
+\newcommand{\virg}{\, , \;}
+\newcommand{\ptodo}{\forall \,}
+\renewcommand{\implies}{\; \Rightarrow \;}
+%\newcommand{\eqname}[1]{\tag*{#1}} % Tag equation with name
+
+%\setlength{\droptitle}{-7em}   % título um pouco mais em cima na página
+%\makeatletter
+%\patchcmd{\chapter}{\if@openright\cleardoublepage\else\clearpage\fi}{}{}{}  % start 'Chapter' at the same page. needs package etoolbox
+%\makeatother
+
+%% Theorems, definitions, proofs
+\theoremstyle{definition}
+
+%%% defining my own colors %%%
+\definecolor{my-blue}{HTML}{f2f4ff}
+\definecolor{my-green}{HTML}{f5fcf6}    % a little better: green!5!white
+\definecolor{my-cyan}{HTML}{f2fffe}
+\definecolor{my-yellow}{HTML}{fffbed}
+\definecolor{my-green2}{HTML}{efffdb}
+
+%%% alternative colors %%%
+\definecolor{my-pink}{HTML}{fff2f7}
+\definecolor{my-teal}{HTML}{ebfffc}
+
+\newtheorem{definition}{Definition}[section]
+\tcolorboxenvironment{definition}{
+  colback=my-blue,
+  %colback=blue!5!white,
+  boxrule=0.1pt,
+  boxsep=1pt,
+  left=2pt,right=2pt,top=2pt,bottom=2pt,
+  oversize=2pt,
+  sharp corners,
+  before skip=\topsep,
+  after skip=\topsep,
+}
+
+\newtheorem{theorem}{Theorem}[section]
+\tcolorboxenvironment{theorem}{
+  colback=my-yellow,
+  %colback=yellow!22!white!95!black,
+  boxrule=0.1pt,
+  boxsep=1pt,
+  left=2pt,right=2pt,top=2pt,bottom=2pt,
+  oversize=2pt,
+  sharp corners,
+  before skip=\topsep,
+  after skip=\topsep,
+}
+
+\newtheorem{corollary}{Corollary}[section]
+\tcolorboxenvironment{corollary}{
+  colback=my-green2,
+  boxrule=0.1pt,
+  boxsep=1pt,
+  left=2pt,right=2pt,top=2pt,bottom=2pt,
+  oversize=2pt,
+  sharp corners,
+  before skip=\topsep,
+  after skip=\topsep,
+}
+
+\newtheorem{lemma}{Lemma}[section]
+\tcolorboxenvironment{lemma}{
+  colback=my-cyan,
+  boxrule=0.1pt,
+  boxsep=1pt,
+  left=2pt,right=2pt,top=2pt,bottom=2pt,
+  oversize=2pt,
+  sharp corners,
+  before skip=\topsep,
+  after skip=\topsep,
+}
+
+\newtheorem{example}{Example}[section]
+\tcolorboxenvironment{example}{
+  %colback=my-green,
+  colback=green!5!white,
+  boxrule=0.1pt,
+  boxsep=1pt,
+  left=2pt,right=2pt,top=2pt,bottom=2pt,
+  oversize=2pt,
+  sharp corners,
+  before skip=\topsep,
+  after skip=\topsep,
+}
